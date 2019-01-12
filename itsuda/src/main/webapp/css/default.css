@@ -1,0 +1,150 @@
+
+@charset "UTF-8";
+body{
+	background-color:#fcfcfc;
+}
+
+
+/**
+ * 작성자 : 황유미
+ * 작성일 : 2018-07-06
+ * 최종수정일 : 2018-07-06
+ * 기능 : 부트스트랩 css 커스터마이징 및 개발에 따른 스타일 속성 추가
+ */
+
+/* 부트스트랩 css 커스터마이징 */
+/*
+@media (max-width: 768px){
+	.navbar-nav{ margin: 0px -15px; }
+	.nav>li{ border-bottom:1px solid #f1f1f1; }
+}
+
+.navbar-header button,
+.modal-content button.close{ width:auto; }
+.navbar-default{
+	background-color:transparent; 
+	box-shadow: 0px 0px 3px #e5e5e5; }
+.navbar-default .navbar-nav>.active>a, 
+.navbar-default .navbar-nav>.active>a:focus, 
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-nav .open .dropdown-menu{ 
+	background-color:#f7f7f7;
+	min-width:120px; }
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:focus, 
+.navbar-default .navbar-nav>.open>a:hover{ background-color:transparent; }
+.navbar-default .navbar-toggle .icon-bar{ background-color:#868686; }
+.navbar-brand{ margin:0 auto; }
+.navbar-right{ text-align:right; }
+.nav>li{ min-width:120px; }
+.dropdown-toggle > *{ color:#27afe9; }
+
+.panel-success{ 
+	border-color:#e5e5e5;
+	box-shadow: 0px 0px 3px #f1f1f1; }
+.panel-success .panel-footer{
+	border-top:none;
+	background-color:#fcfcfc; }
+.btn-success, .btn-success.active, .btn-success.focus, .btn-success:active, 
+.btn-success:focus, .btn-success:hover, .open>.dropdown-toggle.btn-success{
+	color:#fff !important;
+	background-color: #27afe9;
+	border-color: #27afe9; }
+
+.form-group label{
+	margin-bottom:0px;    
+	text-align: right;
+    line-height: 34px; }
+.form-control { color:#333; }
+.form-control[disabled], 
+.form-control[readonly], 
+fieldset[disabled] .form-control{
+	color:#666;
+    box-shadow: none;
+	background-color:#fff;
+    border: 1px solid #f1f1f1; }
+    
+
+.modal-body{ padding: 20px 50px; }
+.modal-content{ overflow:hidden; }
+.modal-content .custom-modal-body{ padding:20px 0px 0px; }
+.modal-content .custom-modal-body .row{ margin:0px; }
+.modal-content .custom-modal-body btn{ border-radius:0px; }
+*/
+/* itsuda css */
+/*
+span, p, a{ color:#666; }
+button, img{ width:100%; }
+.footer{ text-align:center; }
+.title{
+	font-size:16px;
+    line-height:25px;
+	width:250px;
+	white-space:nowrap; 
+    overflow:hidden;
+    text-overflow:ellipsis; }
+    
+.formContainer{
+	padding:20px; 
+	border-radius:5px; 
+	border:1px solid #e5e5e5; 
+	background-color:#fff; }
+.formContainer .textarea{
+	margin-top:0px;
+    padding:10px;
+    border:1px solid #f1f1f1;
+    min-height:200px;
+    background-color:#fff;
+    border-radius:5px;
+}
+    
+.library_edit_common{
+	float:right;
+    font-size:22px;
+    color:#000;
+    opacity:.3; }
+.library_edit_common:hover{
+	opacity:.6;
+	color:#000; }
+.detail_link{
+	z-index:99; 
+	position:absolute; 
+	top:10px; 
+	right:70px; }
+.del_link{z-index:99; 
+	position:absolute; 
+	top:10px; 
+	right:35px; }
+	
+.library_info { margin-bottom:20px; }
+.library_info img {
+	height:225px; 
+	width:100%; 
+	display:block; }
+.library_info > span {
+	margin-top: 20px;
+	width:100%;
+	min-height:58px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	word-wrap:break-word;
+	margin-bottom:20px;
+	white-space:normal;
+	text-align:left;
+	display: -webkit-box !important;
+	-webkit-line-clamp:3;
+	-webkit-box-orient:vertical; }
+	
+.library_rank {
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	white-space:nowrap; }
+.library_rank span{ line-height: 25px; }
+.library_rank > div{
+	width:142px; 
+	display:inline-block; 
+	float:right; }
+.library_rank > div > img{
+	width:25px; 
+	height:25px; }
+	*/

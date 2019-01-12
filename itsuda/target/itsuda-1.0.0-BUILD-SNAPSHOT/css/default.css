@@ -1,0 +1,69 @@
+@charset "UTF-8";
+body{background-color:#f7f7f7;}
+@media (max-width: 768px)
+{
+	.navbar-nav{margin: 0px -15px;}
+}
+.navbar-default{background-color:#f5f5f5; box-shadow: 0px 1px 5px #e5e5e5;}
+.navbar-default .navbar-nav>.active>a, 
+.navbar-default .navbar-nav>.active>a:focus, 
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-nav .open .dropdown-menu{background-color:#f1f1f1;}
+.navbar-default .navbar-toggle .icon-bar{background-color:#868686;}
+.navbar-brand{margin:0 auto;}
+.dropdown-toggle > *{color:#27afe9;}
+.nav>li{border-bottom:1px solid #f1f1f1;}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{border-bottom:1px solid #27afe9;}
+.panel-success{border-color:#e5e5e5;}
+.btn-success, .btn-success.active, .btn-success.focus, .btn-success:active, 
+.btn-success:focus, .btn-success:hover, .open>.dropdown-toggle.btn-success{
+	background-color: #27afe9;
+	border-color: #27afe9;
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+	background-color:#f7f7f7;
+    border: 1px solid #f1f1f1;
+}
+
+span, p, a{color:#666;}
+img{width:100%;}
+.formContainer{padding:20px; border-radius:5px; border:1px solid #e5e5e5; background-color:#fff;}
+.formContainer .textarea{
+    padding: 0 20px;
+    border: 1px solid #ccc;
+    min-height: 200px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+}
+.footer{text-align: center;}
+.test{color: red;}
+.title{font-size: 16px;
+    line-height: 25px;
+	width:250px;
+	white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;}
+.library_edit_common{float: right;
+    font-size: 22px;
+    color: #000;
+    opacity: .3;}
+.library_edit_common:hover{opacity: .6;color: #000;}
+.detail_link{z-index:99; position:absolute; top:10px; right:70px;}
+.del_link{z-index:99; position:absolute; top:10px; right:35px;}
+.library_info {margin-bottom: 20px;}
+.library_info img {height: 225px; width: 100%; display: block;}
+.library_info > span {margin-top: 20px;
+	width: 100%;
+	min-height:58px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	margin-bottom: 20px;
+	white-space: normal;
+	text-align: left;
+	display: -webkit-box !important;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;}
+.library_rank {overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.library_rank > div{width:142px; display:inline-block; float:right;}
+.library_rank > div > img{width:25px; height:25px;}

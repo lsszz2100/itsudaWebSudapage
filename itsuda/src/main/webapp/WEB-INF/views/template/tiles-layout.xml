@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="defaultLayout" template="/WEB-INF/views/template/defaultTemplate.jsp" />
+
+	<!-- 로그인 화면(최초 접근 페이지) -->
+	<definition name="index" extends="defaultLayout"> 
+		<put-attribute name="header"		value="/WEB-INF/views/common/index/header.jsp" />
+		<put-attribute name="body"			value="/WEB-INF/views/common/index/login.jsp" />
+		<put-attribute name="footer"		value="/WEB-INF/views/common/index/footer.jsp" />
+	</definition>
+	
+	<!-- 로그인 성공 화면(메인 페이지) -->
+	<definition name="main" extends="defaultLayout"> 
+		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+		<put-attribute name="body"			value="/WEB-INF/views/common/main/body.jsp" />
+	</definition>
+
+	<!-- 회원정보 수정 -->
+	<definition name="modifyMember" extends="main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/default/main/modifyForm.jsp" />
+	</definition>
+	
+	<!-- 관리자 페이지 > 팀원 등록 -->
+	<definition name="registerMember" extends="main">
+		<put-attribute name="body"			value="/WEB-INF/views/admin/registerForm.jsp" />
+	</definition>
+
+	<!-- 조회 -->
+	<definition name="showLinks" extends="main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/library/showLinks.jsp" />
+	</definition>
+	<!-- 조회 - 스크롤 -->
+	<definition name="selectLinkAjax" extends="main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/library/showLinks.jsp" />
+	</definition>
+	<!-- 추가 -->
+	<definition name="addLink" extends="main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/library/addLink.jsp" />
+	</definition>
+	<!-- 상세 -->
+	<definition name="detailLink" extends="main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/library/detailLink.jsp" />
+	</definition>			
+	<!-- 수정 -->
+	<definition name="editLink" extends="main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/library/editLink.jsp" />
+	</definition>
+	<!-- 라이브러리 관련 페이지 정의 끝 -->
+
+</tiles-definitions>
