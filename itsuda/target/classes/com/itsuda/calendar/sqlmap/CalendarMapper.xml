@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding ="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace ="itsuda.calendar">
-
+<!--<mapper namespace ="itsuda_test.TB_CALENDAR">-->
 	<select id ="getTime" resultType="string">
 		SELECT SYSDATE()
 	</select>
+
+    <insert id="insertSchedule" parameterType="HashMap" useGeneratedKeys="true" keyProperty="id">
+	INSERT INTO TB_CALENDAR
+	(TITLE, START, END, ALLDAY, TYPE, COLOR,WRITER) 
+	VALUES
+	(#{schedule.title}
+	,#{schedule.start}
+	,#{schedule.end}
+	,#{schedule.allDay}
+	,#{schedule.type}
+	,#{schedule.color}
+	,#{schedule.writer}
+	)
+	</insert>
+
 	<!-- 현재 시간(용도 확인 필요) -->
 	<!--
 	<select id ="getTime" resultType="string">

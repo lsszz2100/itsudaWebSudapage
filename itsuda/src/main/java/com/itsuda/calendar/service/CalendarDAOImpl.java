@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.itsuda.calendar.vo.CalendarVO;
 import com.itsuda.library.vo.LibraryVO;
 
 @Repository
@@ -28,8 +29,26 @@ public class CalendarDAOImpl implements CalendarDAO{
 		return null;
 	}
 
+	
+	/*
+	 *	작성자 : 홍민석
+	 *	작성일 : 2019-01-21
+	 *  TODO : 
+	 *  DONE : 
+	 */
+	
 	@Override
-	public List<LibraryVO> selectLink(int seq, String team) throws Exception {
+	public boolean insertSchedule(CalendarVO vo) throws Exception {
+		Map<String, Object> param=new HashMap<String,Object>();
+		param.put("schedule", vo);
+		
+		sqlSession.insert(namespace+".insertSchedule",param);
+		
+		return false;
+	}
+	
+	@Override
+	public List<CalendarVO> selectLink(int seq, String team) throws Exception {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("mode", team.toUpperCase());
 		param.put("seq", String.valueOf(seq));
@@ -40,7 +59,7 @@ public class CalendarDAOImpl implements CalendarDAO{
 	
 
 	@Override
-	public List<LibraryVO> selectLinkAjax(int seq, String team, int amount) throws Exception {
+	public List<CalendarVO> selectLinkAjax(int seq, String team, int amount) throws Exception {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("mode", team.toUpperCase());
 		param.put("seq", String.valueOf(seq));
@@ -50,15 +69,25 @@ public class CalendarDAOImpl implements CalendarDAO{
 		return null;
 	}
 	@Override
-	public int insertLink(LibraryVO vo, String team) {
+	public int insertLink(CalendarVO vo, String team) {
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("mode",team.toUpperCase());
+		param.put("lib",vo);
+		
+		return 0;
+		
+		/* 
+		 * 이전 작업물
+		 * 
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("mode",team.toUpperCase());
 		param.put("lib",vo);
 
 //		int num = sqlSession.insert(namespace+".insertLink", param);
-
+W
 //		return num;
 		return 0;
+		*/
 	}
 
 	@Override
@@ -71,7 +100,7 @@ public class CalendarDAOImpl implements CalendarDAO{
 	}
 
 	@Override
-	public LibraryVO editLink(int seq, String team) throws Exception {
+	public CalendarVO editLink(int seq, String team) throws Exception {
 		LibraryVO vo = null;
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("mode",team.toUpperCase());
@@ -84,7 +113,7 @@ public class CalendarDAOImpl implements CalendarDAO{
 	}
 
 	@Override
-	public int updateLink(LibraryVO vo, String team) throws Exception {
+	public int updateLink(CalendarVO vo, String team) throws Exception {
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("mode",team.toUpperCase());
 		param.put("lib",vo);
@@ -108,14 +137,15 @@ public class CalendarDAOImpl implements CalendarDAO{
 	 *  TODO : 필터링 구현 필요 (조건 : 검색값, 작성자)
 	 */
 	@Override
-	public LibraryVO readLinkbyHashlink(String Hashlink) throws Exception {
+	public CalendarVO readLinkbyHashlink(String Hashlink) throws Exception {
 		return null;
 	}
 
 	@Override
-	public LibraryVO readLinkbyAuthor(String Author) throws Exception {
+	public CalendarVO readLinkbyAuthor(String Author) throws Exception {
 		return null;
 	}
+
 	
 	
 

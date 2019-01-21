@@ -3,14 +3,19 @@
 <%@ include file="/WEB-INF/views/default/include/include.jsp" %>
 
 <!-- calender event처리 script -->
+<!-- src='/static/js/fullcalendar/locale/ko.js' 한글 패치 소스코드 입니다. -->
+
+
 <script>
 var date = new Date();
 var d = date.getDate();
 var m = date.getMonth();
 var y = date.getFullYear();
 var day = y + '-' + m+1 + '-' + d;
-
+var id;
+var once=0;
 $(document).ready(function() {
+
 	// 달력
 	$('#calendar').fullCalendar({
       defaultDate: day,
@@ -20,62 +25,47 @@ $(document).ready(function() {
           left: 'title',
           right: 'prev,next today'
         },
-      
-      events: [
-        { title: 'All Day Event',
-          start: '2019-01-01'
+
+      dayClick: function() {//날짜 클릭시 반응하는 Event Handler
+	      $('#calender-input-form').dialog({
+	    	  title : '추가할 일정을 입력해주세요.',
+	    	  width	: 300,
+	    	  height : 300,
+	    	  modal : true,
+	      })
         },
-        { title: 'Long Event',
-          start: '2019-01-07',
-          end: '2019-01-10'
-        },
-        { id: 999,
-          title: 'Repeating Event',
-          start: '2019-01-09T16:00:00'
-        },
-        { id: 999,
-          title: 'Repeating Event',
-          start: '2019-01-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2019-01-11',
-          end: '2019-01-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2019-01-12T10:30:00',
-          end: '2019-01-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2019-01-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2019-01-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2019-01-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2019-01-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2019-01-13T07:00:00',
-          end: '2019-01-15T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2019-01-28'
-        }
-      ]
-    });
+      eventClick: function(event,element){
+    	  $('#modify-words').text(event.title);
+    	  $('#schedule-id').val(event.id);
+    	  $('#calender-remove-form').dialog({
+	    	  title : '일정을 수정하거나 삭제 할 수 있습니다.',
+	    	  width	: 500,
+	    	  height : 390,
+	    	  modal : true,
+	      })
+    	  //$('#calendar').fullCalendar('removeEvents')
+      },
+   	  events: "../calendar/ajaxLoad.json"    
+   	  });
 	
+	/*function(start,end,callback){
+	console.log("ajax 작동");
+		$.ajax({ //AJAX 소스코드. Asynchronous Javascript And Xml.
+			type: "GET",
+			url: '../calendar/ajaxLoad.json',
+			contentType:'application/json',
+			dataType: 'json',
+			//data:'CalendarInfo',
+			success : function(data,text,request){//it is a function that processes the json data received from the Server
+				var events=[];
+				events=eval(data);
+				callback(events);
+			}
+			
+		});
+	  }*/
+	
+
 	// 달력(리스트)
 	$('#calendar-list').fullCalendar({
 		header: {
@@ -86,70 +76,36 @@ $(document).ready(function() {
 
 
 	      defaultView: 'listDay',
-	      defaultDate: '2018-03-12',
+	      defaultDate: day,//'2018-03-12',
 	      navLinks: true, // can click day/week names to navigate views
 	      editable: true,
 	      eventLimit: true, // allow "more" link when too many events
-	      events: [
-	        {
-	          title: 'All Day Event',
-	          start: '2018-03-01'
-	        },
-	        {
-	          title: 'Long Event',
-	          start: '2018-03-07',
-	          end: '2018-03-10'
-	        },
-	        {
-	          id: 999,
-	          title: 'Repeating Event',
-	          start: '2018-03-09T16:00:00'
-	        },
-	        {
-	          id: 999,
-	          title: 'Repeating Event',
-	          start: '2018-03-16T16:00:00'
-	        },
-	        {
-	          title: 'Conference',
-	          start: '2018-03-11',
-	          end: '2018-03-13'
-	        },
-	        {
-	          title: 'Meeting',
-	          start: '2018-03-12T10:30:00',
-	          end: '2018-03-12T12:30:00'
-	        },
-	        {
-	          title: 'Lunch aaaaaaa...',
-	          start: '2018-03-12T12:00:00'
-	        },
-	        {
-	          title: 'Meeting',
-	          start: '2018-03-12T14:30:00'
-	        },
-	        {
-	          title: 'Happy Hour',
-	          start: '2018-03-12T17:30:00'
-	        },
-	        {
-	          title: 'Dinner',
-	          start: '2018-03-12T20:00:00'
-	        },
-	        {
-	          title: 'Birthday Party',
-	          start: '2018-03-13T07:00:00'
-	        },
-	        {
-	          title: 'Click for Google',
-	          url: 'http://google.com/',
-	          start: '2018-03-28'
-	        }
-	      ]
+	      events: "../calendar/ajaxLoad.json"//데이터 증가 많아지면 AJAX 필요.
 	    });
 	
-	
   });
+  
+
+$(function() {
+    //$.datepicker.setDefaults($.datepicker.regional['ko']); //datepicker 한국어로 사용하기 위한 언어설정
+    $('#add-start-day').datetimepicker({
+    	format:'Y-m-d H:i',
+    	lang:'kr'
+    });
+    $('#add-end-day').datetimepicker({
+    	format:'Y-m-d H:i',
+    	lang:'kr'
+    });
+    $('#modify-start-day').datetimepicker({
+    	format:'Y-m-d H:i',
+    	lang:'kr'
+    });
+    $('#modify-end-day').datetimepicker({
+    	format:'Y-m-d H:i',
+    	lang:'kr'
+    });
+  });
+
 </script>
 <!-- TODO : CSS 통합 -->
 <style type="text/css">
@@ -206,6 +162,76 @@ $(document).ready(function() {
 	<div class="main-grid-1">
 		<!-- 달력 -->
 		<div id="calendar"></div>
+		<!-- 달력 일정 입력 -->
+		<div id="calender-input-form" style="display:none;">
+			<form method="POST" action="/itsuda/calendar/insertInd">
+			  <div class="form-group">
+			    <input type="text" class="form-control" id="title" name="title" placeholder="일정을 입력하세요.">
+			  </div>
+			  <div class="form-group">
+			  	<input type="text" class="form-control" id="add-start-day" name="start-day" placeholder="시작하는 날을 입력하세요.">
+			  </div>
+			  <div class="form-group">
+			    <input type="text" class="form-control" id="add-end-day" name="end-day" placeholder="끝나는 날을 입력하세요.">
+			  </div>
+			  <div class="checkbox">
+			    <label>
+			      <input checked="checked" type="radio" name="type" value="private"> Private 
+			    </label>
+			    <label>
+			      <input type="radio" name="type" value="public"> Public 
+			    </label>
+			  </div>
+			  <button type="submit" class="btn btn-information">일정 추가하기</button>
+			</form>
+		</div>
+		<!-- 달력 일정 컨트롤-->
+		<div id="calender-remove-form" style="display:none;">
+			<nav class="nav-notice">
+			  <div class="nav nav-tabs nav-tabs-notice" id="nav-tab" role="tablist">
+			    <a class="nav-item nav-link active" id="nav-modify-tab" data-toggle="tab" href="#nav-modify" role="tab" aria-controls="nav-modify" aria-selected="true">일정 수정</a>
+			    <a class="nav-item nav-link" onclick="AppendID()" id="nav-remove-tab" data-toggle="tab" href="#nav-remove" role="tab" aria-controls="nav-remove" aria-selected="false">일정 삭제</a>
+			  </div>
+			</nav>
+			<!-- 일정 수정 란 -->
+			<div class="tab-content tab-content-notice" id="nav-tabContent">
+			  <div class="tab-pane fade show active" id="nav-modify" role="tabpanel" aria-labelledby="nav-home-tab">
+			    <p><b id="modify-words"></b>일정에 대한 수정사항을 입력해주세요.</p>
+			  	<form method="POST" action="/itsuda/calendar/insertInd">
+				  <div class="form-group">
+				    <input type="text" class="form-control" id="title" name="title" placeholder="일정을 입력하세요.">
+				  </div>
+				  <div class="form-group">
+				  	<input type="text" class="form-control" id="modify-start-day" name="start-day" placeholder="시작하는 날을 입력하세요.">
+				  </div>
+				  <div class="form-group">
+				    <input type="text" class="form-control" id="modify-end-day" name="end-day" placeholder="끝나는 날을 입력하세요.">
+				  </div>
+				  <div class="checkbox">
+				    <label>
+				      <input type="radio" checked="checked" name="type" value="private"> Private 
+				    </label>
+				    <label>
+				      <input type="radio" name="type" value="public"> Public 
+				    </label>
+				  </div>
+				  <button type="submit" class="btn btn-information">일정 추가하기</button>
+				</form>
+			  </div>
+			  
+			  <!-- 일정 삭제 란 -->
+			  <div class="tab-pane fade" id="nav-remove" role="tabpanel" aria-labelledby="nav-profile-tab">
+			  	<form action="../calendar/deleteInd" method="POST">
+				  	<input type="hidden" id="schedule-id" name="scheduleID" value="null">
+				  	<div>
+					 <p>삭제한 일정은 복구할 수 없습니다.</p>
+					 <p>정말 삭제하시겠습니까?</p>
+					 </div>
+				  	 <input type="submit" value="삭제하기">
+			  	 </form>
+			  </div>
+			</div>
+		</div>
 		<!-- 공지사항 시작 -->
 		<div class="notice-grid">
 			<nav class="nav-notice">

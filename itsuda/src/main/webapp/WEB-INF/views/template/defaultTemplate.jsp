@@ -32,8 +32,20 @@
 		<link rel="stylesheet" type="text/css" href="/itsuda/css/calendar/fullcalendar.min.css" />
 		<link rel="stylesheet" type="text/css" href="/itsuda/css/calendar/fullcalendar.print.min.css" media='print' />
 		
+		<!-- JQUERY-UI CDN-->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<!-- DatePicker -->
+		<link rel="stylesheet" type="text/css" href="/itsuda/css/datepicker/jquery.datetimepicker.css"/>
+		
+		<!-- JQUERY-UI CDN-->
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		
 		<script type="text/javascript" src="/itsuda/js/moment/moment.js"></script>
 		<script type="text/javascript" src="/itsuda/js/calendar/fullcalendar.min.js"></script>
+		
+		<!-- DatePicker -->
+		<script type="text/javascript" src="/itsuda/js/datepicker/jquery.datetimepicker.js"></script>
+		<script type="text/javascript" src="/itsuda/js/build/datepicker/jquery.datetimepicker.full.min.js"></script>
 		
 		
 		<title>ItSuda</title>

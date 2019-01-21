@@ -33,7 +33,7 @@ public class MemberDAO implements MemberDAOImp{
 	 */
 	@Override
 	public MemberVO selectLogin(MemberVO vo) throws Exception {
-		log.debug("Start : selectLogin");
+		//log.debug("Start : selectLogin");
 		// TODO(황준영) : 로그인 관련  SP작성 
 		return sqlSession.selectOne(namespace+".selectLogin",vo);
 	}
