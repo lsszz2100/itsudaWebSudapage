@@ -25,42 +25,18 @@ public class CalendarController {
 	@RequestMapping(value="ajaxLoad.json", method=RequestMethod.GET)
 	public @ResponseBody List<CalendarVO> AjaxView(){
 		List<CalendarVO> scheduler = new ArrayList<CalendarVO>();
-		//dao   //Service에서  DB처리
-		CalendarVO calendar = new CalendarVO();
-		calendar.setId("1");
-		calendar.setTitle("Hi");
-		calendar.setStart("2019-01-19");
-		calendar.setEnd("2019-01-24");
-		calendar.setAllDay(false);
-		calendar.setColor("red");
-		scheduler.add(calendar);
+		try {
+			scheduler=dao.selectSchJson("0");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return scheduler;
 		
 		
 	}
 
-	/* HttpServletResponse 방식
-	@RequestMapping(value="ajaxLoad.json", method=RequestMethod.GET)
-	public void AjaxView(HttpServletResponse response){
-		String CalendarInfo;
-		CalendarInfo="["+"{\"title\":\""+"allDay"
-					+"\",\"start\":\""+"2019-01-19"
-					+"\",\"end\":\""+"2019-02-01"+"\"}"+","
-					+"{\"title\":\""+"reservation1"
-					+"\",\"start\":\""+"2019-01-19"
-					+"\",\"end\":\""+"2019-01-24"+"\"}"+","
-					+"{\"title\":\""+"reservation2"
-					+"\",\"start\":\""+"2019-01-19"
-					+"\",\"end\":\""+"2019-01-23"+"\"}"+"]";
-				
-		try {
-			response.getWriter().print(CalendarInfo);
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
 	// main페이지 기본 표출 데이터
 	@RequestMapping(value = "default", method = RequestMethod.GET)
 	public Model Main(Model model, @RequestParam("mode") String mode)
@@ -75,8 +51,8 @@ public class CalendarController {
 	
 	// 개인 스케줄 등록
 	@RequestMapping(value = "insertInd", method = RequestMethod.POST)
-	public String InsertInd(Model model, @RequestParam("title") String title, @RequestParam("start-day") String startDay, 
-			@RequestParam("end-day") String endDay, @RequestParam("type") String type)
+	public String InsertInd(Model model, @RequestParam("title") String title, @RequestParam("add-start-day") String startDay, 
+			@RequestParam("add-end-day") String endDay, @RequestParam("type") String type)
 	{	
 		/* 
 		 * TODO: 
@@ -88,20 +64,31 @@ public class CalendarController {
 		 * 
 		*/
 		CalendarVO calendar = new CalendarVO();
+		String color;
+		boolean allDay;
 		
-		
-		if(type.equals("public"))
+		if(type.equals("public")) {
 			type="pub";
-		else
+			color="red";
+		}
+		else {
 			type="pri";
+			color="blue";
+		}
+		
+		allDay=IsAllDay(startDay,endDay);
+		
+		startDay=DateTimeConvert(startDay);
+		endDay=DateTimeConvert(endDay);
 		
 		calendar.setTitle(title);
 		calendar.setStart(startDay);
 		calendar.setEnd(endDay);
 		calendar.setType(type);
-		calendar.setAllDay(true);
-		calendar.setColor("blue");
+		calendar.setAllDay(allDay);
+		calendar.setColor(color);
 		calendar.setWriter("hjo0045@naver.com");
+		
 		try {
 			dao.insertSchedule(calendar);
 		} catch (Exception e) {
@@ -111,28 +98,91 @@ public class CalendarController {
 		return "main";
 	}
 	
+	private boolean IsAllDay(String Date1, String Date2) {
+		String pieces1[],pieces2[];
+		pieces1=Date1.split(" ");
+		pieces2=Date2.split(" ");
+		if(pieces1[0].equals(pieces2[0])&&pieces1.length!=1 && pieces2.length!=1) {
+			return false;
+		}
+		
+		if(pieces1.length==1 && pieces2.length==1) {
+			return true;
+		}
+		return false;
+	}
+	
+	private String DateTimeConvert(String Date) {
+		String pieces[];
+		pieces=Date.split(" ");
+		Date=pieces[0]+"T"+pieces[1];
+		
+		
+		return Date;
+	}
+	
 	// 개인 스케줄 삭제
 	@RequestMapping(value = "deleteInd", method = RequestMethod.POST)
 	public String DeleteInd(Model model, @RequestParam("scheduleID") String id)
 	{	
 		/* 
-		 * TODO: 
-		 * 1. DAO로 넘겨서 해당 ID를 가진 DB값 제거 후 리셋하기.
 		 * DONE:
 		 * 1. FORM에서 일정 ID값 받아오기 성공.
+		 * 2. DAO로 넘겨서 해당 ID를 가진 DB값 제거 성공.
 		 */
+		
+		try {
+			dao.deleteSchedule(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return "main";
 	}
 
 	// 개인 스케줄 수정
 	@RequestMapping(value = "modifyInd", method = RequestMethod.POST)
-	public String ModifyInd(Model model, @RequestParam("mode") String mode)
+	public String ModifyInd(Model model, @RequestParam("title") String title, @RequestParam("modify-start-day") String startDay, 
+			@RequestParam("modify-end-day") String endDay, @RequestParam("type") String type, @RequestParam("scheduleID") String id)
 	{	
 		/* 
 		 * TODO: 
 		 * 1. 개인 스케줄 수정
 		 */
+		CalendarVO calendar = new CalendarVO();
+		String color;
+		boolean allDay;
+		
+		if(type.equals("public")) {
+			type="pub";
+			color="red";
+		}
+		else {
+			type="pri";
+			color="blue";
+		}
+		
+		allDay=IsAllDay(startDay,endDay);
+		
+		startDay=DateTimeConvert(startDay);
+		endDay=DateTimeConvert(endDay);
+		
+		calendar.setId(id);
+		calendar.setTitle(title);
+		calendar.setStart(startDay);
+		calendar.setEnd(endDay);
+		calendar.setType(type);
+		calendar.setAllDay(allDay);
+		calendar.setColor(color);
+		calendar.setWriter("hjo0045@naver.com");
+		
+		try {
+			dao.updateSchedule(calendar);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		return "main";
 	}
 	

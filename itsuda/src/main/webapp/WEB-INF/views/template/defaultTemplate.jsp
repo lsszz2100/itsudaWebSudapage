@@ -42,6 +42,9 @@
 		
 		<script type="text/javascript" src="/itsuda/js/moment/moment.js"></script>
 		<script type="text/javascript" src="/itsuda/js/calendar/fullcalendar.min.js"></script>
+		<!-- 캘린더 한글팩  무료?유료?--> 
+		<script type="text/javascript" src="/itsuda/js/calendar/locales-all.js" charset="euc-kr"></script>
+		<script type="text/javascript" src="/itsuda/js/calendar/locales/ko.js" charset="euc-kr"></script>
 		
 		<!-- DatePicker -->
 		<script type="text/javascript" src="/itsuda/js/datepicker/jquery.datetimepicker.js"></script>

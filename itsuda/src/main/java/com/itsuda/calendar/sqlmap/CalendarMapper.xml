@@ -20,6 +20,33 @@
 	)
 	</insert>
 
+	<select id ="selectSchJson" parameterType="Map" resultType="com.itsuda.calendar.vo.CalendarVO">	
+	SELECT 
+		* 
+	FROM TB_CALENDAR
+	</select>
+
+    <update id="deleteSchedule" parameterType="HashMap" useGeneratedKeys="true" keyProperty="id">
+	DELETE FROM TB_CALENDAR WHERE ID=#{id}
+	</update>
+	
+
+    <update id="updateSchByID" parameterType="HashMap" useGeneratedKeys="true" keyProperty="id">
+	UPDATE 
+    TB_CALENDAR
+	SET 
+        TITLE= #{schedule.title},
+        START= #{schedule.start},
+        END= #{schedule.end},
+        ALLDAY= #{schedule.allDay},
+        TYPE= #{schedule.type},
+        COLOR= #{schedule.color},
+        WRITER= #{schedule.writer}
+
+	WHERE 
+		ID = #{schedule.id}
+	</update>
+
 	<!-- 현재 시간(용도 확인 필요) -->
 	<!--
 	<select id ="getTime" resultType="string">

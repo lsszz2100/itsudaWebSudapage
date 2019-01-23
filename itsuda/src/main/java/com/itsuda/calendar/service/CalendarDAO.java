@@ -13,8 +13,9 @@ public interface CalendarDAO {
 	 * 
 	 */
 	public boolean insertSchedule(CalendarVO vo) throws Exception;
-	
-	
+	public List<CalendarVO> selectSchJson(String id) throws Exception;
+	public int deleteSchedule(String id) throws Exception;
+	public int updateSchedule(CalendarVO vo) throws Exception;
 	
 	
 	

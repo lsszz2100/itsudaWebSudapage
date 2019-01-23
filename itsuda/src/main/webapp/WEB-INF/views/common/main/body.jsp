@@ -6,7 +6,7 @@
 <!-- src='/static/js/fullcalendar/locale/ko.js' 한글 패치 소스코드 입니다. -->
 
 
-<script>
+<script type="text/javascript">
 var date = new Date();
 var d = date.getDate();
 var m = date.getMonth();
@@ -18,71 +18,69 @@ $(document).ready(function() {
 
 	// 달력
 	$('#calendar').fullCalendar({
-      defaultDate: day,
-      editable: true,
-      eventLimit: true, // allow "more" link when too many events
-      header: {
-          left: 'title',
-          right: 'prev,next today'
-        },
-
-      dayClick: function() {//날짜 클릭시 반응하는 Event Handler
-	      $('#calender-input-form').dialog({
-	    	  title : '추가할 일정을 입력해주세요.',
-	    	  width	: 300,
-	    	  height : 300,
-	    	  modal : true,
-	      })
-        },
-      eventClick: function(event,element){
-    	  $('#modify-words').text(event.title);
-    	  $('#schedule-id').val(event.id);
-    	  $('#calender-remove-form').dialog({
-	    	  title : '일정을 수정하거나 삭제 할 수 있습니다.',
-	    	  width	: 500,
-	    	  height : 390,
-	    	  modal : true,
-	      })
-    	  //$('#calendar').fullCalendar('removeEvents')
-      },
-   	  events: "../calendar/ajaxLoad.json"    
-   	  });
-	
-	/*function(start,end,callback){
-	console.log("ajax 작동");
-		$.ajax({ //AJAX 소스코드. Asynchronous Javascript And Xml.
-			type: "GET",
-			url: '../calendar/ajaxLoad.json',
-			contentType:'application/json',
-			dataType: 'json',
-			//data:'CalendarInfo',
-			success : function(data,text,request){//it is a function that processes the json data received from the Server
-				var events=[];
-				events=eval(data);
-				callback(events);
-			}
-			
-		});
-	  }*/
-	
-
-	// 달력(리스트)
-	$('#calendar-list').fullCalendar({
-		header: {
-	        left: 'title', 
-	        center: '',
-	        right: 'prev,next today'
-	      },
-
-
-	      defaultView: 'listDay',
-	      defaultDate: day,//'2018-03-12',
-	      navLinks: true, // can click day/week names to navigate views
+	      defaultDate: day,
 	      editable: true,
 	      eventLimit: true, // allow "more" link when too many events
-	      events: "../calendar/ajaxLoad.json"//데이터 증가 많아지면 AJAX 필요.
-	    });
+	      header: {
+          left: 'title',
+          right: 'prev,next today'
+	        },	  
+	      dayClick: function() {//날짜 클릭시 반응하는 Event Handler
+		      $('#calender-input-form').dialog({
+		    	  title : '추가할 일정을 입력해주세요.',
+		    	  width	: 300,
+		    	  height : 300,
+		    	  modal : true,
+		      })
+	        },
+	      eventClick: function(event,element){
+	    	  $('#modify-words').text(event.title);
+	    	  $('#schedule-id1').val(event.id);
+	    	  $('#schedule-id2').val(event.id);
+	    	  $('#calender-remove-form').dialog({
+		    	  title : '일정을 수정하거나 삭제 할 수 있습니다.',
+		    	  width	: 500,
+		    	  height : 390,
+		    	  modal : true,
+		      })
+	    	  //$('#calendar').fullCalendar('removeEvents')
+	      },
+	   	  events: "../calendar/ajaxLoad.json"    
+	   	  });
+		
+		/*function(start,end,callback){
+		console.log("ajax 작동");
+			$.ajax({ //AJAX 소스코드. Asynchronous Javascript And Xml.
+				type: "GET",
+				url: '../calendar/ajaxLoad.json',
+				contentType:'application/json',
+				dataType: 'json',
+				//data:'CalendarInfo',
+				success : function(data,text,request){//it is a function that processes the json data received from the Server
+					var events=[];
+					events=eval(data);
+					callback(events);
+				}
+				
+			});
+		  }*/
+		
 	
+		// 달력(리스트)
+		$('#calendar-list').fullCalendar({
+			header: {
+		        left: 'title', 
+		        center: '',
+		        right: 'prev,next today'
+		      },
+			defaultView: 'listDay',
+			defaultDate: day,//'2018-03-12',
+			navLinks: true, // can click day/week names to navigate views
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			events: "../calendar/ajaxLoad.json"//데이터 증가 많아지면 AJAX 필요.
+		});
+		
   });
   
 
@@ -169,10 +167,10 @@ $(function() {
 			    <input type="text" class="form-control" id="title" name="title" placeholder="일정을 입력하세요.">
 			  </div>
 			  <div class="form-group">
-			  	<input type="text" class="form-control" id="add-start-day" name="start-day" placeholder="시작하는 날을 입력하세요.">
+			  	<input type="text" class="form-control" id="add-start-day" name="add-start-day" placeholder="시작하는 날을 입력하세요.">
 			  </div>
 			  <div class="form-group">
-			    <input type="text" class="form-control" id="add-end-day" name="end-day" placeholder="끝나는 날을 입력하세요.">
+			    <input type="text" class="form-control" id="add-end-day" name="add-end-day" placeholder="끝나는 날을 입력하세요.">
 			  </div>
 			  <div class="checkbox">
 			    <label>
@@ -182,7 +180,7 @@ $(function() {
 			      <input type="radio" name="type" value="public"> Public 
 			    </label>
 			  </div>
-			  <button type="submit" class="btn btn-information">일정 추가하기</button>
+			  <button type="submit" class="btn btn-warning">일정 추가하기</button>
 			</form>
 		</div>
 		<!-- 달력 일정 컨트롤-->
@@ -197,15 +195,16 @@ $(function() {
 			<div class="tab-content tab-content-notice" id="nav-tabContent">
 			  <div class="tab-pane fade show active" id="nav-modify" role="tabpanel" aria-labelledby="nav-home-tab">
 			    <p><b id="modify-words"></b>일정에 대한 수정사항을 입력해주세요.</p>
-			  	<form method="POST" action="/itsuda/calendar/insertInd">
+			  	<form method="POST" action="/itsuda/calendar/modifyInd">
+				  <input type="hidden" id="schedule-id1" name="scheduleID" value="null">
 				  <div class="form-group">
 				    <input type="text" class="form-control" id="title" name="title" placeholder="일정을 입력하세요.">
 				  </div>
 				  <div class="form-group">
-				  	<input type="text" class="form-control" id="modify-start-day" name="start-day" placeholder="시작하는 날을 입력하세요.">
+				  	<input type="text" class="form-control" id="modify-start-day" name="modify-start-day" placeholder="시작하는 날을 입력하세요.">
 				  </div>
 				  <div class="form-group">
-				    <input type="text" class="form-control" id="modify-end-day" name="end-day" placeholder="끝나는 날을 입력하세요.">
+				    <input type="text" class="form-control" id="modify-end-day" name="modify-end-day" placeholder="끝나는 날을 입력하세요.">
 				  </div>
 				  <div class="checkbox">
 				    <label>
@@ -215,19 +214,19 @@ $(function() {
 				      <input type="radio" name="type" value="public"> Public 
 				    </label>
 				  </div>
-				  <button type="submit" class="btn btn-information">일정 추가하기</button>
+				  <button type="submit" class="btn btn-warning">일정 수정하기</button>
 				</form>
 			  </div>
 			  
 			  <!-- 일정 삭제 란 -->
 			  <div class="tab-pane fade" id="nav-remove" role="tabpanel" aria-labelledby="nav-profile-tab">
 			  	<form action="../calendar/deleteInd" method="POST">
-				  	<input type="hidden" id="schedule-id" name="scheduleID" value="null">
+				  	<input type="hidden" id="schedule-id2" name="scheduleID" value="null">
 				  	<div>
 					 <p>삭제한 일정은 복구할 수 없습니다.</p>
 					 <p>정말 삭제하시겠습니까?</p>
 					 </div>
-				  	 <input type="submit" value="삭제하기">
+				  	 <input type="submit" class="btn btn-warning" value="삭제하기">
 			  	 </form>
 			  </div>
 			</div>
