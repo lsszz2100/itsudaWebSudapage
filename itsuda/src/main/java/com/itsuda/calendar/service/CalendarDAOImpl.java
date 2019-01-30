@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itsuda.calendar.vo.CalendarVO;
-import com.itsuda.library.vo.LibraryVO;
+//import com.itsuda.library.vo.LibraryVO;
 
 @Repository
 public class CalendarDAOImpl implements CalendarDAO{
@@ -129,7 +129,7 @@ W
 
 	@Override
 	public CalendarVO editLink(int seq, String team) throws Exception {
-		LibraryVO vo = null;
+//		LibraryVO vo = null;
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("mode",team.toUpperCase());
 		param.put("seq",seq);

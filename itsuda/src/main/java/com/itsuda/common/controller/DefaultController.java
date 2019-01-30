@@ -17,17 +17,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.itsuda.member.service.MemberDAO;
 import com.itsuda.common.utility.CommonUtil;
 import com.itsuda.common.utility.MemberUtil;
+import com.itsuda.common.utility.UriMap;
 import com.itsuda.member.vo.MemberVO;
 
+import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 
+@Log4j
 @Controller
-public class DefaultController {
+public class DefaultController extends UriMap {
 	
 	@Resource
 	private MemberDAO memberDao;
 	
-	 
 	
 	/**
 	 * 최초 접근 page
@@ -39,7 +41,7 @@ public class DefaultController {
 	public String root(Model model,HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception
 	{
 		// TODO : 사용자 세션 확인 부분 인터럽트 등록(
-
+		log.info("start_pjt");
 		// 비 로그인 상태
 		if(session.getAttribute("userInfo") == null) {
 			// 사용자 쿠키 확인
@@ -53,24 +55,24 @@ public class DefaultController {
 						vo.setPassword(map.get("cPw"));
 						vo = memberDao.selectLogin(vo);
 						session.setAttribute("userInfo",vo);
-						return "main";
+						return URI_DEFAULT_MAIN;
 					}
 					else {
 						MemberUtil.delLoginInfo(session, req);
-						return "index";
+						return URI_DEFAULT_INDEX;
 					}
 				}
 				else {
 					MemberUtil.delLoginInfo(session, req);
-					return "index";
+					return URI_DEFAULT_INDEX;
 				}
 				
 			}
-			return "main";
+			return URI_DEFAULT_MAIN;
 		}
 		// 로그인 상태
 		else {
-			return "main";
+			return URI_DEFAULT_MAIN;
 		}
 		
 	}

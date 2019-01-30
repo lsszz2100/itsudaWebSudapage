@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.itsuda.member.vo.MemberVO;
-import com.itsuda.library.vo.LibraryVO;
+//import com.itsuda.library.vo.LibraryVO;
 
 public class CommonUtil {
 	
@@ -84,7 +84,7 @@ public class CommonUtil {
 	 * 최종 수정일 : 2018-07-05
 	 * 설명  : 단일 이미지 파일 업로드 구현
 	 */
-	public static LibraryVO FileUpload(LibraryVO vo, HttpServletRequest req, String team){
+/*	public static LibraryVO FileUpload(LibraryVO vo, HttpServletRequest req, String team){
 		
 		String root_path = req.getSession().getServletContext().getRealPath("/");  
 	    String attach_path = "resources/upload/"+team+"/";
@@ -123,5 +123,5 @@ public class CommonUtil {
 		}
 		
 		return vo;
-	}
+	}*/
 }

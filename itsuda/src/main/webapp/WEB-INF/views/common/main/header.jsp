@@ -32,7 +32,7 @@
 <div class="container">
 <nav class="navbar navbar-expand-md navbar-light bg-light nav-header fixed-top">
   <!-- 메인페이지 이동 -->
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="../index">
   	<!-- TODO : 아이콘 변경 필요 -->
   	<img  class="d-inline-block align-top" alt="" src="../image/ci.png" style="height: 32px; width: 32px;">
   	ITsuda
@@ -59,7 +59,7 @@
 	      </div>
 	    </li>
 	  <li class="dropdown">
-	      <a class="nav-link" href="#"><b>공지사항</b></a>
+	      <a class="nav-link" href="../notice/main"><b>공지사항</b></a>
 	  </li>
 	  <li class="nav-item header-logout-list">
 	  	  <a class="nav-link" href="#"><b>로그아웃</b></a>
@@ -67,7 +67,7 @@
 	</ul>
 	</div>
 	<a class="navbar-brand header-logout-icon" href="#" id=#navbarNavDropdown role="button" aria-haspopup="true" aria-expanded="false">
-  		<img alt="" src="/itsuda/image/logout.png">
+  		<img alt="" src="../image/logout.png">
   	</a>
 	
 	

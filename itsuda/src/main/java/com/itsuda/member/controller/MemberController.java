@@ -90,7 +90,7 @@ public class MemberController {
 //			return "index";
 //		}
 		
-		return "main";
+		return "default.main";
 	}
 	
 	

@@ -1,11 +1,11 @@
-package com.itsuda.library.vo;
+package com.itsuda.notice.vo;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-public class LibraryVO {
+public class NoticeVO {
 	@Getter @Setter private int 	seq;
 	@Getter @Setter private String	author;
 	@Getter @Setter private int 	rank;
