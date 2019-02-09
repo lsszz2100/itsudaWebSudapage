@@ -11,4 +11,64 @@
 		AND PASSWORD = #{password}
 	</select>
 
+	<!-- SHOW MEMBER -->
+	<select id ="showMember" resultType="com.itsuda.member.vo.MemberVO">
+		SELECT EMAIL, NAME, GRADE, TEAM
+		FROM TB_USER
+	</select>
+
+    <!-- UPDATE MEMBER -->
+	<update id ="updateMember" parameterType="com.itsuda.member.vo.MemberVO">
+		UPDATE TB_USER 
+        SET 
+        NAME = #{name},
+        TEAM = #{team},
+        GRADE = #{grade}
+        WHERE 
+        EMAIL = #{email}
+	</update>
+
+    <!-- INIT MEMBER PW-->
+	<update id ="initPW" parameterType="com.itsuda.member.vo.MemberVO">
+		UPDATE TB_USER 
+        SET 
+        PASSWORD = #{password}
+        WHERE 
+        EMAIL = #{email}
+	</update>
+
+    <!-- SEARCH MEMBER BY EMAIL-->
+	<select id ="searchMemberByEmail" resultType="com.itsuda.member.vo.MemberVO" parameterType="com.itsuda.member.vo.MemberVO">
+		SELECT EMAIL, NAME, GRADE, TEAM
+		FROM TB_USER
+        WHERE 
+        EMAIL = #{email}
+	</select>
+
+    
+    <!-- SEARCH MEMBER BY NAME-->
+	<select id ="searchMemberByName" resultType="com.itsuda.member.vo.MemberVO" parameterType="com.itsuda.member.vo.MemberVO">
+		SELECT EMAIL, NAME, GRADE, TEAM
+		FROM TB_USER
+        WHERE 
+        NAME = #{name}
+	</select>
+
+    
+    <!-- SEARCH MEMBER BY GRADE-->
+	<select id ="searchMemberByGrade" resultType="com.itsuda.member.vo.MemberVO" parameterType="com.itsuda.member.vo.MemberVO">
+		SELECT EMAIL, NAME, GRADE, TEAM
+		FROM TB_USER
+        WHERE 
+        GRADE = #{grade}
+	</select>
+
+
+    <!-- SEARCH MEMBER BY TEAM-->
+	<select id ="searchMemberByTeam" resultType="com.itsuda.member.vo.MemberVO" parameterType="com.itsuda.member.vo.MemberVO">
+		SELECT EMAIL, NAME, GRADE, TEAM
+		FROM TB_USER
+        WHERE 
+        TEAM = #{team}
+	</select>
 </mapper>

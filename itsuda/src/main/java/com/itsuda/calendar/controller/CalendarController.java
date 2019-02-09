@@ -13,13 +13,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itsuda.calendar.service.CalendarDAOImpl;
 import com.itsuda.calendar.vo.CalendarVO;
+import com.itsuda.common.utility.UriMap;
 
 @Controller
 @RequestMapping("/calendar/*")
-public class CalendarController {
+public class CalendarController extends UriMap{
 	
 	@Resource
 	private CalendarDAOImpl dao;
+	private String publicColor="#FF5A5A";//연한 빨강색
+	private String privateColor="#65FF5E";//연한 초록색
+	
 	
 	//Calendar에 뿌려줄 데이터 호출
 	@RequestMapping(value="ajaxLoad.json", method=RequestMethod.GET)
@@ -52,7 +56,7 @@ public class CalendarController {
 	// 개인 스케줄 등록
 	@RequestMapping(value = "insertInd", method = RequestMethod.POST)
 	public String InsertInd(Model model, @RequestParam("title") String title, @RequestParam("add-start-day") String startDay, 
-			@RequestParam("add-end-day") String endDay, @RequestParam("type") String type)
+			@RequestParam("add-end-day") String endDay, @RequestParam("type") String type, @RequestParam(value="schAllDay",defaultValue="false") String pAllDay)
 	{	
 		/* 
 		 * TODO: 
@@ -68,16 +72,17 @@ public class CalendarController {
 		boolean allDay;
 		
 		if(type.equals("public")) {
-			type="pub";
-			color="red";
+			color=publicColor;
 		}
 		else {
-			type="pri";
-			color="blue";
+			color=privateColor;
 		}
 		
-		allDay=IsAllDay(startDay,endDay);
-		
+		if(pAllDay.equals("true")) {
+			allDay=true;
+		}else {
+			allDay=false;
+		}
 		startDay=DateTimeConvert(startDay);
 		endDay=DateTimeConvert(endDay);
 		
@@ -95,9 +100,10 @@ public class CalendarController {
 			e.printStackTrace();
 		}
 		
-		return "main";
+		return URI_DEFAULT_MAIN;
 	}
 	
+	/*
 	private boolean IsAllDay(String Date1, String Date2) {
 		String pieces1[],pieces2[];
 		pieces1=Date1.split(" ");
@@ -111,7 +117,7 @@ public class CalendarController {
 		}
 		return false;
 	}
-	
+	*/
 	private String DateTimeConvert(String Date) {
 		String pieces[];
 		pieces=Date.split(" ");
@@ -137,13 +143,14 @@ public class CalendarController {
 			e.printStackTrace();
 		}
 		
-		return "main";
+		return URI_DEFAULT_MAIN;
 	}
 
 	// 개인 스케줄 수정
 	@RequestMapping(value = "modifyInd", method = RequestMethod.POST)
 	public String ModifyInd(Model model, @RequestParam("title") String title, @RequestParam("modify-start-day") String startDay, 
-			@RequestParam("modify-end-day") String endDay, @RequestParam("type") String type, @RequestParam("scheduleID") String id)
+			@RequestParam("modify-end-day") String endDay, @RequestParam("type") String type, @RequestParam("scheduleID") String id,
+			@RequestParam(value="schAllDay",defaultValue="false") String pAllDay)
 	{	
 		/* 
 		 * TODO: 
@@ -154,15 +161,17 @@ public class CalendarController {
 		boolean allDay;
 		
 		if(type.equals("public")) {
-			type="pub";
-			color="red";
+			color=publicColor;
 		}
 		else {
-			type="pri";
-			color="blue";
+			color=privateColor;
 		}
 		
-		allDay=IsAllDay(startDay,endDay);
+		if(pAllDay.equals("true")) {
+			allDay=true;
+		}else {
+			allDay=false;
+		}
 		
 		startDay=DateTimeConvert(startDay);
 		endDay=DateTimeConvert(endDay);
@@ -183,7 +192,7 @@ public class CalendarController {
 		}
 		
 		
-		return "main";
+		return URI_DEFAULT_MAIN;
 	}
 	
 	

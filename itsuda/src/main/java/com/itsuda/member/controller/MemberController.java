@@ -1,6 +1,9 @@
 package com.itsuda.member.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +30,6 @@ public class MemberController {
 	
 	@Resource
 	private MemberDAO dao;
-	
 	
 	/**
 	 * 로그인 - 기능 동작
@@ -93,6 +95,27 @@ public class MemberController {
 		return "default.main";
 	}
 	
+	/*
+	 * 작성자: 홍민석
+	 * 작성일 : 2019-02-06
+	 * 기능: 회원관리 기능을 제공합니다.
+	 * views/admin/manageMeber.jsp페이지에 출력합니다.
+	 */
+	@RequestMapping(value="manage" ,method=RequestMethod.GET)
+	public String manageMember(Model model, @RequestParam(value="dType", required=false) String dataType, 
+			@RequestParam(value="search", required=false) String search) throws Exception {
+		List<MemberVO> members=new ArrayList<MemberVO>();
+		
+		if(dataType!=null && search!=null) {
+			members=dao.searchMember(dataType,search);
+		}else {
+			members=dao.showMember(10);
+		}
+		
+		model.addAttribute("members",members);
+		
+		return "manageMember";
+	}
 	
 	
 
@@ -157,6 +180,55 @@ public class MemberController {
 		Object info = session.getAttribute("userInfo");
 		model.addAttribute("info",info);
 		return "modifyMember";
+	}
+	
+
+	/**
+	 * 작성자: 홍민석 
+	 * 작성일: 2019-02-08 
+	 * 기능: 회원 정보를 수정합니다.
+	 * 
+	 */
+	@RequestMapping(value = "/modifyMemInfo", method = RequestMethod.POST)
+	public String ModifyMemberInfo(@RequestParam(name="selectedEmail") String email, 
+			@RequestParam(name="selectedName") String name,
+			@RequestParam(name="selectedTeam") String team,
+			@RequestParam(name="selectedGrade") String grade, Model model)throws Exception
+	{
+		List<MemberVO> members=new ArrayList<MemberVO>();
+		MemberVO vo= new MemberVO();
+		vo.setEmail(email);
+		vo.setName(name);
+		vo.setTeam(team);
+		vo.setGrade(grade);
+		
+		System.out.println(vo.getName()+" "+vo.getEmail()+" "+vo.getGrade()+" "+vo.getTeam());
+		
+		dao.updateMember(vo);
+
+		members=dao.showMember(10);
+		
+		model.addAttribute("members",members);
+		return "manageMember";
+	}
+	
+	/**
+	 * 작성자: 홍민석 
+	 * 작성일: 2019-02-08 
+	 * 기능: 비밀번호를 초기화합니다.
+	 * 
+	 */
+	@RequestMapping(value = "/initPW", method = RequestMethod.POST)
+	public String InitMemberPW(@RequestParam(name="selectedEmail") String email, Model model)throws Exception
+	{
+		List<MemberVO> members=new ArrayList<MemberVO>();
+		dao.updatePwDefault(email);
+
+		members=dao.showMember(10);
+		
+		model.addAttribute("members",members);
+		
+		return "manageMember";
 	}
 	
 	

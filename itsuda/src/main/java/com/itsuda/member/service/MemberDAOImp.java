@@ -1,5 +1,7 @@
 package com.itsuda.member.service;
 
+import java.util.List;
+
 import com.itsuda.member.vo.MemberVO;
 
 public interface MemberDAOImp {
@@ -18,5 +20,12 @@ public interface MemberDAOImp {
 	
 	// 비밀번호 초기화
 	public int updatePwDefault(String email) throws Exception;
+	
+	// 회원 목록 조회
+	public List<MemberVO> showMember(int unit) throws Exception;
+	
+	// 회원 검색
+	public List<MemberVO> searchMember(String dataType, String search) throws Exception;
+		
 	
 }

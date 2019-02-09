@@ -29,14 +29,22 @@
 	</definition>
 	
 	<!-- 관리자 페이지 > 팀원 등록 -->
-	<definition name="registerMember" extends="default.main">
+	<definition name="registerMember" extends="defaultLayout">
+		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
 		<put-attribute name="body"			value="/WEB-INF/views/admin/registerForm.jsp" />
 	</definition>
+
+    <!-- 관리자 페이지 > 팀원 관리 -->
+    <definition name="manageMember" extends="defaultLayout">
+		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+		<put-attribute name="body"			value="/WEB-INF/views/admin/manageMember.jsp" />
+    </definition> 
 
 	<!-- 조회 -->
 	<definition name="showLinks" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/library/showLinks.jsp" />
 	</definition>
+
 	<!-- 조회 - 스크롤 -->
 	<definition name="selectLinkAjax" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/library/showLinks.jsp" />

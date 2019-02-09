@@ -29,7 +29,7 @@ $(document).ready(function() {
 		      $('#calender-input-form').dialog({
 		    	  title : '추가할 일정을 입력해주세요.',
 		    	  width	: 300,
-		    	  height : 300,
+		    	  height : 335,
 		    	  modal : true,
 		      })
 	        },
@@ -40,10 +40,9 @@ $(document).ready(function() {
 	    	  $('#calender-remove-form').dialog({
 		    	  title : '일정을 수정하거나 삭제 할 수 있습니다.',
 		    	  width	: 500,
-		    	  height : 390,
+		    	  height : 420,
 		    	  modal : true,
 		      })
-	    	  //$('#calendar').fullCalendar('removeEvents')
 	      },
 	   	  events: "../calendar/ajaxLoad.json"    
 	   	  });
@@ -164,15 +163,20 @@ $(function() {
 		<div id="calender-input-form" style="display:none;">
 			<form method="POST" action="/itsuda/calendar/insertInd">
 			  <div class="form-group">
-			    <input type="text" class="form-control" id="title" name="title" placeholder="일정을 입력하세요.">
+			    <input type="text" class="form-control" id="title" name="title" placeholder="일정을 입력하세요." autocomplete="off">
 			  </div>
 			  <div class="form-group">
-			  	<input type="text" class="form-control" id="add-start-day" name="add-start-day" placeholder="시작하는 날을 입력하세요.">
+			  	<input type="text" class="form-control" id="add-start-day" name="add-start-day" placeholder="시작하는 날을 입력하세요." autocomplete="off">
 			  </div>
 			  <div class="form-group">
-			    <input type="text" class="form-control" id="add-end-day" name="add-end-day" placeholder="끝나는 날을 입력하세요.">
+			    <input type="text" class="form-control" id="add-end-day" name="add-end-day" placeholder="끝나는 날을 입력하세요." autocomplete="off">
 			  </div>
-			  <div class="checkbox">
+			  <div class="checkbox">    
+			    <label>
+			      <input type="checkbox" name="schAllDay" value="true"> 하루종일 
+			    </label>
+			   </div>
+			   <div class="radiobox">
 			    <label>
 			      <input checked="checked" type="radio" name="type" value="private"> Private 
 			    </label>
@@ -198,21 +202,27 @@ $(function() {
 			  	<form method="POST" action="/itsuda/calendar/modifyInd">
 				  <input type="hidden" id="schedule-id1" name="scheduleID" value="null">
 				  <div class="form-group">
-				    <input type="text" class="form-control" id="title" name="title" placeholder="일정을 입력하세요.">
+				    <input type="text" class="form-control" id="title" name="title" placeholder="일정을 입력하세요." autocomplete="off">
 				  </div>
 				  <div class="form-group">
-				  	<input type="text" class="form-control" id="modify-start-day" name="modify-start-day" placeholder="시작하는 날을 입력하세요.">
+				  	<input type="text" class="form-control" id="modify-start-day" name="modify-start-day" placeholder="시작하는 날을 입력하세요." autocomplete="off">
 				  </div>
 				  <div class="form-group">
-				    <input type="text" class="form-control" id="modify-end-day" name="modify-end-day" placeholder="끝나는 날을 입력하세요.">
+				    <input type="text" class="form-control" id="modify-end-day" name="modify-end-day" placeholder="끝나는 날을 입력하세요." autocomplete="off">
 				  </div>
 				  <div class="checkbox">
+				  	<label>
+				      <input type="checkbox" name="schAllDay" value="true"> 하루종일 
+				    </label>
+				  </div>
+				  <div class="radiobox">
 				    <label>
 				      <input type="radio" checked="checked" name="type" value="private"> Private 
 				    </label>
 				    <label>
 				      <input type="radio" name="type" value="public"> Public 
 				    </label>
+				    
 				  </div>
 				  <button type="submit" class="btn btn-warning">일정 수정하기</button>
 				</form>
