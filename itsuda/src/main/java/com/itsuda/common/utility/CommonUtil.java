@@ -13,49 +13,17 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.itsuda.common.vo.CodeVO;
 import com.itsuda.member.vo.MemberVO;
 //import com.itsuda.library.vo.LibraryVO;
 
 public class CommonUtil {
-	
-	final static private String TEAM_WEB				= "WEB";
-	final static private String TEAM_MOBILE				= "MOBILE";
-	final static private String TEAM_PLAN				= "PLAN";
-	final static private String TEAM_DESIGN				= "DESIGN";
 
-	final static private String GRADE_ADMIN				= "ADMIN";
-	final static private String GRADE_LEADER			= "LEADER";
-//	final static private String GRADE_MEMBER			= "MEMBER";
-	
-
-	/**
-	 * 작성자 : 황준영	
-	 * 작성일 : 2018-07-04	
-	 * 설명  : 사용자 등급에 따른 선택 가능 팀 목록(수정중)	
-	 * 최종 수정일 :	
-	 * 수정 내역 : 	
-	 * @param grade
-	 * @return
-	 */
-	public static List<String> regTeamList(String team, String grade){
-		if(grade != null) {
-			
-			List<String> teamList = new ArrayList<String>();
-			
-			switch (grade) {
-			case GRADE_ADMIN : 	teamList.add(TEAM_WEB);
-								teamList.add(TEAM_MOBILE);
-								teamList.add(TEAM_PLAN);
-								teamList.add(TEAM_DESIGN); break;
-			case GRADE_LEADER : teamList.add(team); break;
-			}
-			return teamList;
-		}
-		return null;
-	}
 	
 	/**
 	 * 작성자 : 황준영	
