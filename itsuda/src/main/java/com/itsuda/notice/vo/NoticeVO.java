@@ -6,21 +6,30 @@ import lombok.ToString;
 
 @ToString
 public class NoticeVO {
-	@Getter @Setter private int 	seq;
-	@Getter @Setter private String	author;
-	@Getter @Setter private int 	rank;
-	@Getter @Setter private String	url;
+//	@Getter @Setter private int 	seq;
+//	@Getter @Setter private String	author;
+//	@Getter @Setter private int 	rank;
+//	@Getter @Setter private String	url;
+//	
+//	@Getter @Setter private String	hash_link;
+//	@Getter @Setter private String	team;
+//	@Getter @Setter private String	title;
+//	
+//	@Getter @Setter private String	description;
+//	
+//
+//	@Getter @Setter private String	f_name;
+//	@Getter @Setter private String	org_f_name;
+//	@Getter @Setter private String	crt_dt;
+//	@Getter @Setter private String	last_dt;
 	
-	@Getter @Setter private String	hash_link;
-	@Getter @Setter private String	team;
-	@Getter @Setter private String	title;
+	@Getter @Setter private int 	no;
+	@Getter @Setter private int		board_no;
+	@Getter @Setter private String 	board_title;
+	@Getter @Setter private String 	board_date;
+	@Getter @Setter private String 	board_content;
+	@Getter @Setter private int 	board_viewcnt;
 	
-	@Getter @Setter private String	description;
 	
-
-	@Getter @Setter private String	f_name;
-	@Getter @Setter private String	org_f_name;
-	@Getter @Setter private String	crt_dt;
-	@Getter @Setter private String	last_dt;
 	
 }

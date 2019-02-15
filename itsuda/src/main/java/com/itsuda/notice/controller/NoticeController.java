@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.itsuda.common.utility.UriMap;
 import com.itsuda.notice.service.NoticeDAOImpl;
 
+import lombok.extern.log4j.Log4j;
+
+
+@Log4j
 @Controller
 @RequestMapping("/notice/*")
 public class NoticeController extends UriMap {
@@ -37,6 +41,8 @@ public class NoticeController extends UriMap {
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String Main(Model model)
 	{	
+		log.info("notice");
+		model.addAttribute("list", dao.getListBoard());
 		return URI_NOTICE_MAIN;
 	}
 
