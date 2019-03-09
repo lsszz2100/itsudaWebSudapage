@@ -1,5 +1,7 @@
 package com.itsuda.community.vo;
 
+import java.sql.Date; 
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,20 +9,12 @@ import lombok.ToString;
 @ToString
 public class CommunityVO {
 	@Getter @Setter private int 	seq;
-	@Getter @Setter private String	author;
-	@Getter @Setter private int 	rank;
-	@Getter @Setter private String	url;
-	
-	@Getter @Setter private String	hash_link;
-	@Getter @Setter private String	team;
-	@Getter @Setter private String	title;
-	
+	@Getter @Setter private int 	no;
+	@Getter @Setter private int 	teamSeq;
+	@Getter @Setter private String 	title;
+	@Getter @Setter private String	writer;
+	@Getter @Setter private Date	crtDt;
+	@Getter @Setter private int		viewCnt;
 	@Getter @Setter private String	description;
-	
-
-	@Getter @Setter private String	f_name;
-	@Getter @Setter private String	org_f_name;
-	@Getter @Setter private String	crt_dt;
-	@Getter @Setter private String	last_dt;
 	
 }
