@@ -5,16 +5,5 @@
 	<select id ="getTime" resultType="string">
 		SELECT SYSDATE()
 	</select>
-
-    <select id = "getListBoard" resultType="com.itsuda.notice.vo.NoticeVO"  >
-    SELECT 
-    @rownum:=@rownum+1 No,
-    BOARD_TITLE,
-    BOARD_CONTENT,
-    DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE,
-    BOARD_VIEWCNT
-    FROM itsuda_test.TB_BOARD,
-    (SELECT @rownum:=0) r
-    </select>
 	
 </mapper>

@@ -44,12 +44,12 @@
 	</bean>
 	
 	<!-- aop test -->
-	<!-- <bean id="logtest" class="com.itsuda.common.aop.LoginChk"></bean>
+	<bean id="logtest" class="com.itsuda.common.aop.LoginChk"></bean>
 	<aop:config>
 		<aop:pointcut expression="execution(* com.itsuda.common..*DAOImpl.*(..))" id="allPoint"/>
 		<aop:aspect ref="logtest">
 			<aop:before pointcut-ref="allPoint" method="loger"/>
 		</aop:aspect>
-	</aop:config> -->
+	</aop:config>
 	
 </beans>
