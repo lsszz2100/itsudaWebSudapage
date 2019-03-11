@@ -6,23 +6,32 @@
 	response.setHeader("Cache-Control","no-cache");
 	response.setHeader("Pragma","no-cache");
 	response.setHeader("ExPires","0");
+	
 %>
-<c:if test="${login eq 'FAIL'}">
-	<script>
-		alert("로그인 실패하였습니다.");
-		$("#loginModal").modal();
-	</script>
-</c:if>
-<c:if test="${login eq 'SUCCESS'}">
-	<script>
-		alert("로그인 성공하였습니다.");
-	</script>
-</c:if>
-<c:if test="${registered eq 'TRUE'}">
-	<script>
-		alert("회원가입이 완료되었습니다.");
-	</script>
-</c:if>
+<%!
+	// clientIP
+	String getClientIP(HttpServletRequest request) {
+	  String ip = request.getHeader("X-FORWARDED-FOR"); 
+	  if (ip == null || ip.length() == 0) {
+	    ip= request.getHeader("Proxy-Client-IP");
+	  }
+	  if (ip == null || ip.length() == 0) {
+	    ip= request.getHeader("WL-Proxy-Client-IP");  
+	  }
+	  if (ip == null || ip.length() == 0) {
+	    ip = request.getRemoteAddr();
+	  }
+	  return ip;
+	}
+%>
+<%!
+	// clientAgent
+	String getClientAgent(HttpServletRequest request) {
+	  String agent = request.getHeader("User-Agent"); 
+	  return agent;
+	}
+%>
+
 <script>
 	function login(){
 		// checkBox 값 전달 (hidden tag 이용)
@@ -48,7 +57,9 @@
 	    <div class="col-8 login-grid-form">
 			<div class="modal-content">
 		<div class="modal-body login-form">
-			<form role="form" action="/itsuda/member/login" method="post">
+			<form role="form" action="<c:url value='/member/login'/>" method="post">
+				 <input name = "clientIp" type="hidden" value="<%=getClientIP(request) %>"/>
+				 <input name = "clientAgent" type="hidden" value="<%=getClientAgent(request) %>"/>
 				 <div class="form-group">
 				 	<label for="email">이메일</label>
 				 	<input type="email" class="form-control" id="email" name="email" placeholder="이메일주소를 입력해주세요" value="hjo0045@naver.com"/>

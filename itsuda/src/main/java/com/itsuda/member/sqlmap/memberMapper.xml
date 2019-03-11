@@ -4,11 +4,7 @@
 	
 	<!-- LOGIN -->
 	<select id ="selectLogin" resultType="com.itsuda.member.vo.MemberVO" parameterType="com.itsuda.member.vo.MemberVO">
-		SELECT EMAIL, NAME, GRADE, TEAM
-		FROM TB_USER
-		WHERE 1=1
-		AND EMAIL = #{email}
-		AND PASSWORD = #{password}
+		CALL SP_LOGIN_CHK(#{email},#{password},#{userAgent})
 	</select>
 
 	<!-- SHOW MEMBER -->

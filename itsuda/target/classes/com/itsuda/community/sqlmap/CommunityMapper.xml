@@ -6,4 +6,46 @@
 		SELECT SYSDATE()
 	</select>
 	
+	
+	<select id ="getList" parameterType="map" resultType="com.itsuda.community.vo.CommunityVO">
+		SELECT
+		  @ROWNUM:=@ROWNUM+1 AS NO
+		  , A.SEQ
+		  , A.TEAM_SEQ
+		  , A.TITLE
+		  , A.WRITER
+		  , A.CRT_DT
+		  , A.VIEW_CNT
+		FROM TB_COMMUNITY A
+		, (SELECT @ROWNUM:=0) B
+		WHERE TEAM = ${team}
+		ORDER BY A.TEAM_SEQ DESC
+	</select>
+	
+	
+	<select id="detailBoard" parameterType="java.lang.Integer" resultType="com.itsuda.community.vo.CommunityVO">
+			SELECT 
+				SEQ
+				,TEAM_SEQ
+				,TITLE
+				,WRITER
+				,DESCRIPTION
+				,CRT_DT
+				,VIEW_CNT
+				,LAST_DT
+            FROM
+                TB_COMMUNITY
+            WHERE
+                SEQ = #{seq}
+	</select>
+	
+
+	<update id="updateViewCnt" parameterType="java.lang.Integer">
+		 	UPDATE
+		 		TB_COMMUNITY
+		 	SET
+		 	 	VIEW_CNT = VIEW_CNT + 1
+		 	 WHERE
+		 	 	SEQ = #{seq}
+	</update>
 </mapper>

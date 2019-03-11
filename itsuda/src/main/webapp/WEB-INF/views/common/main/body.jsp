@@ -15,7 +15,7 @@ var day = y + '-' + m+1 + '-' + d;
 var id;
 var once=0;
 $(document).ready(function() {
-
+	
 	// 달력
 	$('#calendar').fullCalendar({
 	      defaultDate: day,

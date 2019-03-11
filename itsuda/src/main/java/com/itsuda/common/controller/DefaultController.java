@@ -42,8 +42,18 @@ public class DefaultController extends UriMap {
 	{
 		// TODO : 사용자 세션 확인 부분 인터럽트 등록(
 		log.info("start_pjt");
-		// 비 로그인 상태
 		if(session.getAttribute("userInfo") == null) {
+			return URI_DEFAULT_INDEX;
+		}
+		else {
+			return URI_DEFAULT_MAIN;
+		}
+		
+		
+		
+		
+		// 비 로그인 상태
+		/*if(session.getAttribute("userInfo") == null) {
 			// 사용자 쿠키 확인
 			Map<String, String> map = new HashMap<String, String>();
 			if(req.getCookies() != null) {
@@ -73,7 +83,7 @@ public class DefaultController extends UriMap {
 		// 로그인 상태
 		else {
 			return URI_DEFAULT_MAIN;
-		}
+		}*/
 		
 	}
 }

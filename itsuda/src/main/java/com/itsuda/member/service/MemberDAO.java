@@ -30,14 +30,13 @@ public class MemberDAO implements MemberDAOImp{
 	 * 수정내역 : 
 	 * 
 	 * 2018.12.07		황준영	최초작성
+	 * 2019.03.12		황준영	쿼리 프로시저화
 	 * 
 	 * @param MemberVO
 	 * @return MemberVO
 	 */
 	@Override
 	public MemberVO selectLogin(MemberVO vo) throws Exception {
-		//log.debug("Start : selectLogin");
-		// TODO(황준영) : 로그인 관련  SP작성 
 		return sqlSession.selectOne(namespace+".selectLogin",vo);
 	}
 

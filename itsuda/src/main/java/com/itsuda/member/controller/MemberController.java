@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itsuda.common.utility.MemberUtil;
+import com.itsuda.common.utility.UriMap;
 import com.itsuda.member.service.MemberDAO;
 import com.itsuda.member.vo.MemberVO;
 
@@ -26,7 +27,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Controller
 @RequestMapping("/member/*")
-public class MemberController {
+public class MemberController extends UriMap {
 	
 	@Resource
 	private MemberDAO dao;
@@ -44,55 +45,74 @@ public class MemberController {
 			, @RequestParam(value="email")String email
 			, @RequestParam(value="password")String password
 			, @RequestParam(value="loginAuto")String loginAuto
+			, @RequestParam(value="clientIp")String ip
+			, @RequestParam(value="clientAgent")String agent
 			) throws Exception
 	{
-
-//		MemberVO vo = new MemberVO();
-//		vo.setEmail(email);
-//		vo.setPassword(MemberUtil.getSecPasswd(password));
-//		System.out.println(MemberUtil.getSecPasswd(password));
-//		System.out.println(email);
-//		vo = dao.selectLogin(vo);
-//		System.out.println(vo);
-//		// 로그인 성공
-//		if(vo != null) {
-//			System.out.println("t1");
-//			// TODO : Code 값에 따른 작업메소드 만들어야됨
-//			
-//			// login Success
-//			model.addAttribute("login", "SUCCESS");
-//			// 사용자 정보 session저장(email, name, mode, grade)
-//			req.getSession().setAttribute("userInfo", vo);
-//			
-//			// cookie 등록
-//			Cookie cAuto = new Cookie("cAuto", loginAuto);
-//			// TODO : 아이디 암호화 추가
-//			Cookie cEmail = new Cookie("cEmail",email);
-//			Cookie cPw = new Cookie("cPw", MemberUtil.getSecPasswd(password));
-//			res.addCookie(cAuto);
-//			res.addCookie(cEmail);
-//			res.addCookie(cPw);
-//			
-//			// 자동 로그인 여부에 따른 쿠키 기간 설정(30일/ 30분)
-//			if(loginAuto.equals("Y")) {
-//				cAuto.setMaxAge(2592000);
-//				cEmail.setMaxAge(2592000);
-//				cPw.setMaxAge(2592000);
-//			} else {
-//				cAuto.setMaxAge(1800);
-//				cEmail.setMaxAge(1800);
-//				cPw.setMaxAge(1800);
-//			}
-//			
-//			return "main";
-//		}
-//		else {
-//			// login Fail
-//			model.addAttribute("login", "FAIL");
-//			return "index";
-//		}
+		log.info("start_login");
 		
-		return "default.main";
+		if(session.getAttribute("userInfo") == null) {
+			MemberVO vo = new MemberVO();
+			vo.setEmail(email);
+			vo.setPassword(MemberUtil.getSecPasswd(password));
+			vo.setUserAgent(ip+"/"+agent);
+			
+			vo = dao.selectLogin(vo);
+			vo.setPassword(null);
+			
+			// 로그인 성공
+			if(vo.getErrorStr() == null) {
+				model.addAttribute("user",vo);
+				session.setAttribute("userInfo", vo);
+				return URI_DEFAULT_MAIN;
+			}
+			// 로그인 실패
+			else {
+				model.addAttribute("errorStr",vo.getErrorStr());
+				return URI_DEFAULT_INDEX;
+			}
+		}
+		else {
+			return URI_DEFAULT_MAIN;
+		}
+
+		/*// 로그인 성공
+		if(vo != null) {
+			System.out.println("t1");
+			// TODO : Code 값에 따른 작업메소드 만들어야됨
+			
+			// login Success
+			model.addAttribute("login", "SUCCESS");
+			// 사용자 정보 session저장(email, name, mode, grade)
+			req.getSession().setAttribute("userInfo", vo);
+			
+			// cookie 등록
+			Cookie cAuto = new Cookie("cAuto", loginAuto);
+			// TODO : 아이디 암호화 추가
+			Cookie cEmail = new Cookie("cEmail",email);
+			Cookie cPw = new Cookie("cPw", MemberUtil.getSecPasswd(password));
+			res.addCookie(cAuto);
+			res.addCookie(cEmail);
+			res.addCookie(cPw);
+			
+			// 자동 로그인 여부에 따른 쿠키 기간 설정(30일/ 30분)
+			if(loginAuto.equals("Y")) {
+				cAuto.setMaxAge(2592000);
+				cEmail.setMaxAge(2592000);
+				cPw.setMaxAge(2592000);
+			} else {
+				cAuto.setMaxAge(1800);
+				cEmail.setMaxAge(1800);
+				cPw.setMaxAge(1800);
+			}
+			
+			return "main";
+		}
+		else {
+			// login Fail
+			model.addAttribute("login", "FAIL");
+			return "index";
+		}*/
 	}
 	
 	/*
@@ -177,7 +197,7 @@ public class MemberController {
 		else{
 			model.addAttribute("status", "FAIL");
 		}
-		Object info = session.getAttribute("userInfo");
+		Object info = session.getAttribute("user");
 		model.addAttribute("info",info);
 		return "modifyMember";
 	}
@@ -237,11 +257,11 @@ public class MemberController {
 	 * @param session
 	 * @return
 	 */
-    @RequestMapping(value="logout")
+    @RequestMapping(value="logout", method = RequestMethod.GET)
     public String logout(HttpSession session, HttpServletResponse res, HttpServletRequest req) {
     	// 로그인 쿠키 및 세션 삭제
     	MemberUtil.delLoginInfo(session, req);
     	
-        return "index"; // 로그아웃 후 게시글 목록으로 이동하도록...함 -> 로그아웃 후 로그인 화면(최초 접근)으로 이동
+        return URI_DEFAULT_INDEX;
     }
 }

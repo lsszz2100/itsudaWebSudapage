@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ include file="/WEB-INF/views/default/include/include.jsp" %>
 <style type="text/css">
 	.nav-header > a{
 		margin-right: 10px;
@@ -14,27 +14,13 @@
 	}
 	
 </style>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#header-logout-icon ").click(function(){
-			alert('로그아웃');
-		});
-		/* $(".header-logout-list").click(function(){
-			alert('로그아웃');
-		}); */
-	});
-</script>
-
-
-
-
 
 <div class="container">
 <nav class="navbar navbar-expand-md navbar-light bg-light nav-header fixed-top">
   <!-- 메인페이지 이동 -->
-  <a class="navbar-brand" href="../index">
+  <a class="navbar-brand" href="<c:url value='/index'/>">
   	<!-- TODO : 아이콘 변경 필요 -->
-  	<img  class="d-inline-block align-top" alt="" src="../image/ci.png" style="height: 32px; width: 32px;">
+  	<img  class="d-inline-block align-top" alt="" src="<c:url value='/image/ci.png'/>" style="height: 32px; width: 32px;">
   	ITsuda
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,22 +38,22 @@
 	  <li class="dropdown">
 	      <a class="nav-link dropdown" href="#" id=navbarDropdownMenuLink role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>커뮤니티</b></a>
 	      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-	        <a class="dropdown-item" href="../community/main?team=1"><img  class="d-inline-block align-top" alt="" src="../image/icon_design.png" style="height: 32px; width: 32px;">DESIGN</a>
-	        <a class="dropdown-item" href="../community/main?team=2"><img  class="d-inline-block align-top" alt="" src="../image/icon_mobile.png" style="height: 32px; width: 32px;">MOBILE</a>
-	        <a class="dropdown-item" href="../community/main?team=3"><img  class="d-inline-block align-top" alt="" src="../image/icon_plan.png" style="height: 32px; width: 32px;">PLAN</a>
-	        <a class="dropdown-item" href="../community/main?team=4"><img  class="d-inline-block align-top" alt="" src="../image/icon_web.png" style="height: 32px; width: 32px;">WEB</a>
+	        <a class="dropdown-item" href="<c:url value='/community/main?team=1'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_design.png'/>" style="height: 32px; width: 32px;">DESIGN</a>
+	        <a class="dropdown-item" href="<c:url value='/community/main?team=2'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_mobile.png'/>" style="height: 32px; width: 32px;">MOBILE</a>
+	        <a class="dropdown-item" href="<c:url value='/community/main?team=3'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_plan.png'/>" style="height: 32px; width: 32px;">PLAN</a>
+	        <a class="dropdown-item" href="<c:url value='/community/main?team=4'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_web.png'/>" style="height: 32px; width: 32px;">WEB</a>
 	      </div>
 	    </li>
 	  <li class="dropdown">
-	      <a class="nav-link" href="../notice/main"><b>공지사항</b></a>
+	      <a class="nav-link" href="<c:url value='/notice/main'/>"><b>공지사항</b></a>
 	  </li>
 	  <li class="nav-item header-logout-list">
-	  	  <a class="nav-link" href="#"><b>로그아웃</b></a>
+	  	  <a class="nav-link" href="<c:url value ='/member/logout'/>"><b>로그아웃</b></a>
 	  </li>
 	</ul>
 	</div>
-	<a class="navbar-brand header-logout-icon" href="#" id=#navbarNavDropdown role="button" aria-haspopup="true" aria-expanded="false">
-  		<img alt="" src="../image/logout.png">
+	<a class="navbar-brand header-logout-icon" href="<c:url value ='/member/logout'/>" id=#navbarNavDropdown role="button" aria-haspopup="true" aria-expanded="false">
+  		<img alt="" src="<c:url value='/image/logout.png'/>">
   	</a>
 	
 	

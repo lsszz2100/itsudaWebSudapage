@@ -55,7 +55,7 @@ public class AdminController {
 			vo.setPassword(req.getParameter("password"));
 			vo.setEmail(req.getParameter("email"));
 			vo.setName(req.getParameter("name"));
-			vo.setChkPassword(req.getParameter("chkPassword"));
+			
 			/*vo.setMode("init"); // init,member,admin*/			
 			/*try {
 				dao.insertMember(vo);
