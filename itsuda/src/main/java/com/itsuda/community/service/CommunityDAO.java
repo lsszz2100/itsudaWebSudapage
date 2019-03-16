@@ -22,8 +22,18 @@ public interface CommunityDAO {
 	//글 상세 목록
 	public CommunityVO detailBoard(int seq);
 	
-	// 조회수 증가
+	//조회수 증가
 	public void updateViewCnt(int seq);
-
 	
+	//글 등록
+	public void insertBoard(CommunityVO communityVO) ;
+	
+	//글 수정 하기 전에 데이터 가져오기
+	public CommunityVO getBoard(int seq);
+	
+	//글 수정
+	public void updateBoard(CommunityVO communityVO);
+	
+	//글 삭제
+	public void deleteBoard(int seq) ;
 }

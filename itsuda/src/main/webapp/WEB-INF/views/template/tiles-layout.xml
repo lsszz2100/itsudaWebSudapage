@@ -13,11 +13,44 @@
 	</definition>
 	
 	<!-- 로그인 성공 화면(메인 페이지) -->
-	<definition name="default.main" extends="defaultLayout"> 
+	<definition name="default.main" extends="defaultLayout">  <!-- defaultLayout는 로그인 전 페이지 - 헤더에 아무 값도 없는 것 -->
 		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
 		<put-attribute name="body"			value="/WEB-INF/views/common/main/body.jsp" />
 	</definition>
+	
+	
+	
+	
+	<!-- 커튜니티 -->
+	
+	<!-- 커뮤니티 글 목록 화면 -->
+	<definition name="community.main" extends="default.main"> <!-- default.main는 로그인 후 페이지 -->
+		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+		<put-attribute name="body"			value="/WEB-INF/views/community/main.jsp" />
+	</definition>
+	
+	<!-- 커뮤니티 글 목록 상세 페이지 -->
+	<definition name="community.detail" extends="default.main"> 
+		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+		<put-attribute name="body"			value="/WEB-INF/views/community/detail.jsp" />
+	</definition>
 
+	<!-- 커뮤니티 글 수정 페이지-->
+	<definition name="community.modify" extends="default.main"> 
+		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+		<put-attribute name="body"			value="/WEB-INF/views/community/modify.jsp" />
+	</definition>
+	
+	<!-- 커뮤니티 글 등록 페이지-->
+	<definition name="community.insert" extends="default.main"> 
+		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+		<put-attribute name="body"			value="/WEB-INF/views/community/insert.jsp" />
+	</definition>
+	
+	
+	
+	
+	
     <!-- notice main -->
     <definition name="notice.main" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/notice/main.jsp" />

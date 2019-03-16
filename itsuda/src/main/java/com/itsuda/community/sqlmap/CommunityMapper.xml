@@ -11,22 +11,20 @@
 		SELECT
 		  @ROWNUM:=@ROWNUM+1 AS NO
 		  , A.SEQ
-		  , A.TEAM_SEQ
 		  , A.TITLE
 		  , A.WRITER
 		  , A.CRT_DT
 		  , A.VIEW_CNT
 		FROM TB_COMMUNITY A
 		, (SELECT @ROWNUM:=0) B
-		WHERE TEAM = ${team}
-		ORDER BY A.TEAM_SEQ DESC
+		WHERE TEAM = ${team} AND DELFLAG = 'N'
+		ORDER BY NO DESC
 	</select>
 	
 	
 	<select id="detailBoard" parameterType="java.lang.Integer" resultType="com.itsuda.community.vo.CommunityVO">
 			SELECT 
 				SEQ
-				,TEAM_SEQ
 				,TITLE
 				,WRITER
 				,DESCRIPTION
@@ -48,4 +46,54 @@
 		 	 WHERE
 		 	 	SEQ = #{seq}
 	</update>
+	
+	<insert id="insertBoard" parameterType="com.itsuda.community.vo.CommunityVO">
+		INSERT INTO TB_COMMUNITY (
+				WRITER
+				,TITLE
+				,GRADE
+				,DESCRIPTION
+				,TEAM
+				,LAST_DT
+		)
+		VALUES(
+		#{writer}
+		,#{title}
+		,'1'				
+		,#{description}
+		,#{team}
+		,now()
+		)	
+	</insert>
+	
+
+	<delete id="deleteBoard" parameterType="java.lang.Integer" >
+		UPDATE
+			TB_COMMUNITY
+		SET
+		DELFLAG = 'Y'
+		,LAST_DT = now()
+		WHERE SEQ = #{seq}
+	</delete>
+	
+	<select id="getBoard" parameterType="java.lang.Integer" resultType="com.itsuda.community.vo.CommunityVO">
+	SELECT 
+		TITLE
+		,WRITER
+		,DESCRIPTION
+	FROM
+		TB_COMMUNITY
+	WHERE SEQ = #{seq }
+	</select>
+	
+	<update id="updateBoard" parameterType="com.itsuda.community.vo.CommunityVO">
+	UPDATE 
+		TB_COMMUNITY
+	SET
+		TITLE = #{title }
+		,WRITER = #{writer }
+		,DESCRIPTION = #{description }
+	WHERE SEQ = #{seq }
+	</update>
+	
 </mapper>

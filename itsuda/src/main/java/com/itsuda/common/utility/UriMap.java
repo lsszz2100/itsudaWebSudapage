@@ -11,7 +11,7 @@ public class UriMap {
 	
 	
 	// 커뮤니티
-	public final static String URI_COMMUNITY_MAIN			= "community.main";  			// 메인 페이지
+	public final static String URI_COMMUNITY_MAIN		= "community.main";  			// 메인 페이지
 	public final static String URI_COMMUNITY_INSERT		= "community.insert";			// 등록 페이지
 	public final static String URI_COMMUNITY_MODIFY		= "community.modify";			// 수정 페이지
 	public final static String URI_COMMUNITY_DETAIL		= "community.detail";			// 상세 페이지
