@@ -2,11 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/default/include/include.jsp"%>
 
-<script type="text/javascript">
-	function detailView(seq) {
-		alert('글 상세 페이지 이동' + seq);
-	}
-</script>
+
 
 <div class="container" style="padding-top: 60px;">
 	<table class="table table-striped table-hover">
@@ -24,10 +20,10 @@
 			<c:forEach items ="${list }" var = "list">
 				<tr onclick="detailView('1')">
 					<th scope="row">${list.no }</th>
-					<td>${list.board_title } </td>
-					<td>테스트</td>
-					<td>${list.board_date } </td>
-					<td>${list.board_viewcnt } </td>
+					<td>${list.boardTitle } </td>
+					<td>${list.boardWriter }</td>
+					<td>${list.boardInsertd } </td>
+					<td>${list.boardViewcnt } </td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -55,7 +51,18 @@
 			<button type="button" class="btn btn-outline-secondary">&#62;</button>
 			<button type="button" class="btn btn-outline-secondary">&#62;&#62;</button>
 		</div>
-		<button type="button" class="btn btn-outline-secondary"
-			style="float: right; text-align: right;">글쓰기</button>
+		<button type="button" class="btn btn-outline-secondary" style="float: right; text-align: right;"
+			onclick="insert()">글쓰기</button>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+	function detailView(seq) {
+		alert('글 상세 페이지 이동' + seq);
+	}
+	
+	function insert(){
+		location.href = "../notice/insert"
+	}
+</script>

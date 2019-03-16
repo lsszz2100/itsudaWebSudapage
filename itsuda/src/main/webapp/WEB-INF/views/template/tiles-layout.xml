@@ -47,14 +47,22 @@
 		<put-attribute name="body"			value="/WEB-INF/views/community/insert.jsp" />
 	</definition>
 	
-	
-	
-	
+<!-- 	notice -->
+
+
+
 	
     <!-- notice main -->
     <definition name="notice.main" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/notice/main.jsp" />
 	</definition>
+	<!-- notice insert -->
+    <definition name="notice.insert" extends="default.main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/notice/insert.jsp" />
+	</definition>
+	
+	
+<!-- 	notice -->	
 
 	<!-- 회원정보 수정 -->
 	<definition name="modifyMember" extends="default.main"> 

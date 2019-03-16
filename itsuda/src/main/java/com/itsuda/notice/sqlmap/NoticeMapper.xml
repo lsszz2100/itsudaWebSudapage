@@ -2,8 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace ="itsuda.notice">
 
+
 	<select id ="getTime" resultType="string">
 		SELECT SYSDATE()
 	</select>
+
+	<select id ="getListBoard" resultType="com.itsuda.notice.vo.NoticeVO">
+	SELECT 
+					    @rownum:=@rownum+1 No,
+					    BOARD_TITLE,
+					    BOARD_CONTENT,
+					    DATE_FORMAT(BOARD_INSERTD, '%Y-%m-%d') AS BOARD_INSERTD,
+					    BOARD_MODIFYD,
+					    BOARD_VIEWCNT,
+					    BOARD_WRITER,
+					    BORAD_DELFLAG,
+					    BOARD_VIEWCNT
+    FROM 				TB_BOARD,
+    (SELECT @rownum:=0) r
+     WHERE 				BORAD_DELFLAG = 'N'
+	</select>
+	
+	
+	<insert id="insertBoard" parameterType="com.itsuda.notice.vo.NoticeVO">
+	
+	</insert >
 	
 </mapper>
