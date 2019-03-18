@@ -49,16 +49,25 @@
 	
 <!-- 	notice -->
 
-
-
 	
     <!-- notice main -->
     <definition name="notice.main" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/notice/main.jsp" />
 	</definition>
+	
 	<!-- notice insert -->
     <definition name="notice.insert" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/notice/insert.jsp" />
+	</definition>
+	
+	<!-- notice detail -->
+    <definition name="notice.detail" extends="default.main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/notice/detail.jsp" />
+	</definition>
+	
+	<!-- notice modify  -->
+    <definition name="notice.modify" extends="default.main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/notice/modify.jsp" />
 	</definition>
 	
 	

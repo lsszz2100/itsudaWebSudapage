@@ -42,7 +42,6 @@ public class NoticeController extends UriMap {
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String Main(Model model)
 	{	
-		log.info("notice");
 		model.addAttribute("list", dao.getListBoard());
 		return URI_NOTICE_MAIN;
 	}
@@ -58,8 +57,6 @@ public class NoticeController extends UriMap {
 	@RequestMapping("insert")
 	public String insert(Model model)
 	{	
-		log.info("insert");
-		
 		return URI_NOTICE_INSERT;
 	}
 
@@ -67,73 +64,89 @@ public class NoticeController extends UriMap {
 	 * 작성자		: 조준서
 	 * 기능명		: 공지사항 글 등록 
 	 * 최종 수정일 	: 03-17
-	 * 수정 이력	: 03-17
+	 * 수정 이력	: 03-19
+	 * 
+	 * noticeVO 이걸 쓰면 따로 받지 않아도 잘 실행 된다. 공부좀하자 준서야
 	 * 
 	 */
 	@RequestMapping(value = "insertPage", method = RequestMethod.POST)
-	public String InsertAction(Model model ,NoticeVO noticeVO,
-			@RequestParam("boardWriter") String boardWriter,  
-			@RequestParam("boardTitle") String boardTitle ,
-			@RequestParam("boardContent") String boardContent)
+	public String InsertAction(Model model ,NoticeVO noticeVO)
 	{	
-		log.info("insertPage");
-		System.out.println(boardWriter);
-		System.out.println(boardTitle);
-		System.out.println(boardContent);
+		if(dao.insertBoard(noticeVO) == 1)
+			return "redirect:/notice/main";
+		else
+			return URI_NOTICE_INSERT;
 		
-		return "redirect:/notice/main";
+
 		//"redirect:" + URI_NOTICE_MAIN; 리다이렉션이 먹지 않는다, 문의 필요!!!!!!!!!!!!! 		03-17
 	}
 
 	/**
 	 * 작성자		: 조준서
 	 * 기능명		: 공지사항 글 삭제 
-	 * 최종 수정일 	: 
-	 * 수정 이력	: 
+	 * 최종 수정일 	: 03-17
+	 * 수정 이력	: 03-17
 	 * 
 	 */
-	@RequestMapping(value = "delete", method = RequestMethod.POST)
-	public String delete(Model model, @RequestParam("item") String item)
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete(@RequestParam("boardNo") String boardNo)
 	{	
-		return URI_NOTICE_MAIN;
+		try {
+			dao.deleteBoard(Integer.parseInt(boardNo));
+			return "redirect:/notice/main";
+		} catch (Exception e) {
+			log.info(e.getMessage());
+		}
+		
+		return "redirect:/notice/detail?boardNo="+boardNo;
+		
+		
 	}
 
 	/**
 	 * 작성자		: 조준서
 	 * 기능명		: 공지사항 글 수정화면 이동
-	 * 최종 수정일 	: 
-	 * 수정 이력	: 
+	 * 최종 수정일 	: 03-19
+	 * 수정 이력	: 03-19
 	 * 
 	 */
-	@RequestMapping(value = "modifyPage", method = RequestMethod.GET)
-	public String modifyPage(Model model, @RequestParam("item") String item)
+	@RequestMapping(value = "modify", method = RequestMethod.GET)
+	public String modify(Model model,  @RequestParam("boardNo") String boardNo)
 	{	
+		
+		model.addAttribute("modify", dao.getOneBoard(Integer.parseInt(boardNo)));
+		
 		return URI_NOTICE_MODIFY;
 	}
 
 	/**
 	 * 작성자		: 조준서
 	 * 기능명		: 공지사항 글 수정
-	 * 최종 수정일 	: 
-	 * 수정 이력	: 
+	 * 최종 수정일 	: 03-18
+	 * 수정 이력	: 03-18
 	 * 
 	 */
-	@RequestMapping(value = "modifyAction", method = RequestMethod.POST)
-	public String modifyAction(Model model, @RequestParam("item") String item)
+	@RequestMapping(value = "modifyPage", method = RequestMethod.POST)
+	public String modifyPage(Model model,NoticeVO noticeVO)
 	{	
-		return URI_NOTICE_MAIN;
+		
+		if(dao.modifyBoard(noticeVO)==1)
+			return "redirect:/notice/main";
+		else
+			return "redirect:/notice/modify?boardNo="+noticeVO.getBoardNo();
 	}
 
 	/**
 	 * 작성자		: 조준서
 	 * 기능명		: 공지사항 글 상세정보 확인
-	 * 최종 수정일 	: 
-	 * 수정 이력	: 
+	 * 최종 수정일 	: 03-17
+	 * 수정 이력	: 03-17
 	 * 
 	 */
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public String detail(Model model, @RequestParam("item") String item)
+	public String detail(Model model, @RequestParam("boardNo") String boardNo)
 	{	
+		model.addAttribute("detail", dao.getOneBoard(Integer.parseInt(boardNo)));
 		return URI_NOTICE_DETAIL;
 	}
 	

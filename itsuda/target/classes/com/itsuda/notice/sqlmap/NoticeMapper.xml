@@ -10,6 +10,7 @@
 	<select id ="getListBoard" resultType="com.itsuda.notice.vo.NoticeVO">
 	SELECT 
 					    @rownum:=@rownum+1 No,
+					    BOARD_NO,
 					    BOARD_TITLE,
 					    BOARD_CONTENT,
 					    DATE_FORMAT(BOARD_INSERTD, '%Y-%m-%d') AS BOARD_INSERTD,
@@ -18,9 +19,61 @@
 					    BOARD_WRITER,
 					    BORAD_DELFLAG,
 					    BOARD_VIEWCNT
-    FROM 				TB_BOARD,
+    FROM 				
+    					TB_BOARD,
     (SELECT @rownum:=0) r
-     WHERE 				BORAD_DELFLAG = 'N'
+    WHERE 				BORAD_DELFLAG = 'N'
+    ORDER BY 			NO DESC
 	</select>
+	
+	
+	<insert id="insertBoard" parameterType="com.itsuda.notice.vo.NoticeVO">
+	INSERT INTO 		
+						TB_BOARD(BOARD_WRITER , BOARD_TITLE ,BOARD_CONTENT )
+	VALUES				
+						(#{boardWriter} , #{boardTitle} , #{boardContent})
+	</insert >
+	
+	
+	<select id="getOneBoard" parameterType="java.lang.Integer" resultType="com.itsuda.notice.vo.NoticeVO">
+	 select  
+						@rownum:=@rownum+1 No,
+					    BOARD_NO,
+					    BOARD_TITLE,
+					    BOARD_CONTENT,
+					    DATE_FORMAT(BOARD_INSERTD, '%Y-%m-%d') AS BOARD_INSERTD,
+					    BOARD_MODIFYD,
+					    BOARD_VIEWCNT,
+					    BOARD_WRITER,
+					    BORAD_DELFLAG,
+					    BOARD_VIEWCNT
+	from 
+						TB_BOARD
+	where 				
+						BOARD_NO = #{boardNo}
+	</select>
+	
+	<update id="deleteBoard" parameterType="java.lang.Integer">
+	UPDATE 				
+						TB_BOARD 
+	SET 
+						BORAD_DELFLAG = 'Y' 
+	WHERE 				
+						BOARD_NO=#{boardNo}
+	</update>
+	
+	
+	
+	<update id="modifyBoard" parameterType="com.itsuda.notice.vo.NoticeVO">
+
+	UPDATE 					TB_BOARD 
+	SET 
+							BOARD_TITLE = #{boardTitle},  
+							BOARD_CONTENT = #{boardContent} , 
+							BOARD_MODIFYD =  NOW()
+	WHERE 
+							BOARD_NO=#{boardNo}
+	
+	</update>
 	
 </mapper>

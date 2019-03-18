@@ -18,7 +18,7 @@
 		</thead>
 		<tbody>
 			<c:forEach items ="${list }" var = "list">
-				<tr onclick="detailView('1')">
+				<tr onclick="detailView('${list.boardNo}')">
 					<th scope="row">${list.no }</th>
 					<td>${list.boardTitle } </td>
 					<td>${list.boardWriter }</td>
@@ -58,11 +58,12 @@
 
 
 <script type="text/javascript">
-	function detailView(seq) {
-		alert('글 상세 페이지 이동' + seq);
+	function detailView(boardNo) {
+		alert('글 상세 페이지 이동' + boardNo);
+		location.href = "../notice/detail?boardNo="+boardNo;
 	}
 	
 	function insert(){
-		location.href = "../notice/insert"
+		location.href = "../notice/insert";
 	}
 </script>
