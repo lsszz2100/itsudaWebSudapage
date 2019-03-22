@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.itsuda.common.utility.UriMap;
 import com.itsuda.notice.service.NoticeDAOImpl;
 import com.itsuda.notice.vo.NoticeVO;
+import com.itsuda.notice.vo.PageMaker;
+import com.itsuda.notice.vo.SearchCriteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -37,12 +40,23 @@ public class NoticeController extends UriMap {
 	 * 기능명		: 공지사항 메인화면 이동 
 	 * 최종 수정일 	: 03-16
 	 * 수정 이력	: 03-16
+	 * @throws Exception 
 	 * 
 	 */
 	@RequestMapping(value = "main", method = RequestMethod.GET)
-	public String Main(Model model)
+	public String Main(Model model ,
+						@ModelAttribute("criteria") SearchCriteria criteria,
+						NoticeVO noticeVO) throws Exception
 	{	
-		model.addAttribute("list", dao.getListBoard());
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCriteria(criteria);
+		pageMaker.setTotalCount(dao.countBorad(criteria));
+		model.addAttribute("list", dao.getListBoard(criteria));
+		model.addAttribute("totalCount", dao.countBorad(criteria));
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("listNo", dao.selectBoard());
+		
 		return URI_NOTICE_MAIN;
 	}
 

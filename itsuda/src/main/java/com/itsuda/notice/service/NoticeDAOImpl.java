@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.itsuda.notice.vo.Criteria;
 import com.itsuda.notice.vo.NoticeVO;
+import com.itsuda.notice.vo.SearchCriteria;
 
 @Repository
 public class NoticeDAOImpl implements NoticeDAO {
@@ -24,8 +26,8 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public List<NoticeVO> getListBoard() {
-		return sqlSession.selectList(namespace + ".getListBoard");
+	public List<NoticeVO> getListBoard(Criteria criteria) throws Exception {
+		return sqlSession.selectList(namespace + ".getListBoard" ,criteria);
 	}
 
 	@Override
@@ -40,12 +42,22 @@ public class NoticeDAOImpl implements NoticeDAO {
 
 	@Override
 	public int deleteBoard(int boardNo) {
-		return sqlSession.update(namespace + ".deleteBoard" , boardNo);
+		return sqlSession.update(namespace + ".deleteBoard", boardNo);
 	}
 
 	@Override
 	public int modifyBoard(NoticeVO noticeVO) {
-		return sqlSession.update(namespace + ".modifyBoard" ,noticeVO );
+		return sqlSession.update(namespace + ".modifyBoard", noticeVO);
+	}
+
+	@Override
+	public List<NoticeVO> selectBoard() {
+		return sqlSession.selectList(namespace + ".selectBoard");
+	}
+
+	@Override
+	public int countBorad(SearchCriteria criteria) throws Exception {
+		return sqlSession.selectOne(namespace + ".countBorad", criteria);
 	}
 
 }

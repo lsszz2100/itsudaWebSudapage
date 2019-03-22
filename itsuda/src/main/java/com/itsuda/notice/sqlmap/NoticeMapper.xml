@@ -8,6 +8,7 @@
 	</select>
 
 	<select id ="getListBoard" resultType="com.itsuda.notice.vo.NoticeVO">
+	<![CDATA[
 	SELECT 
 					    @rownum:=@rownum+1 No,
 					    BOARD_NO,
@@ -21,9 +22,14 @@
 					    BOARD_VIEWCNT
     FROM 				
     					TB_BOARD,
-    (SELECT @rownum:=0) r
+    					(SELECT @rownum:=0) r
     WHERE 				BORAD_DELFLAG = 'N'
-    ORDER BY 			NO DESC
+    ]]>
+    <include refid="search"/>
+     <![CDATA[
+    ORDER BY BOARD_NO DESC, BOARD_INSERTD DESC,No
+    LIMIT #{pageStart}, #{perPageNum}
+     ]]>
 	</select>
 	
 	
@@ -42,7 +48,7 @@
 					    BOARD_TITLE,
 					    BOARD_CONTENT,
 					    DATE_FORMAT(BOARD_INSERTD, '%Y-%m-%d') AS BOARD_INSERTD,
-					    BOARD_MODIFYD,
+					   	DATE_FORMAT(BOARD_MODIFYD, '%Y-%m-%d') AS BOARD_MODIFYD,
 					    BOARD_VIEWCNT,
 					    BOARD_WRITER,
 					    BORAD_DELFLAG,
@@ -66,14 +72,49 @@
 	
 	<update id="modifyBoard" parameterType="com.itsuda.notice.vo.NoticeVO">
 
-	UPDATE 					TB_BOARD 
+	UPDATE 					
+							TB_BOARD 
 	SET 
 							BOARD_TITLE = #{boardTitle},  
 							BOARD_CONTENT = #{boardContent} , 
 							BOARD_MODIFYD =  NOW()
 	WHERE 
 							BOARD_NO=#{boardNo}
-	
 	</update>
+	
+	
+	<select id="countBorad" resultType="java.lang.Integer">
+	   <![CDATA[
+	 SELECT 
+	  					count(BOARD_NO) 
+     FROM 
+      					TB_BOARD
+     WHERE 
+	  					BOARD_NO > 0
+     AND 
+	  					BORAD_DELFLAG = 'N'
+	  ]]>
+        <include refid="search"/>
+	</select>
+	
+	<select id="selectBoard" resultType="com.itsuda.notice.vo.NoticeVO">
+	 SELECT 
+	 					@rownum:=@rownum+1 No
+	 FROM 
+	 					TB_BOARD,
+	 					(SELECT @rownum:=0) r
+	 WHERE
+	 					BOARD_DELFLAG = 'N'
+	</select>
+	
+	<sql id="search">
+		 AND (
+ 		   BOARD_TITLE LIKE CONCAT('%', #{keyword}, '%')
+ 		   OR BOARD_CONTENT LIKE CONCAT('%', #{keyword}, '%')
+ 		   OR BOARD_WRITER LIKE CONCAT('%', #{keyword}, '%')
+ 		   )
+    </sql>
+	
+	
 	
 </mapper>
