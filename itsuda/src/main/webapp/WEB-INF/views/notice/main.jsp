@@ -30,26 +30,32 @@
 	</table>
 
 	<div class="input-group input-group-sm mb-3">
-		<input type="text" class="form-control" placeholder="검색"
-			aria-label="Recipient's username" aria-describedby="button-addon2">
-		<div class="input-group-append">
-			<button class="btn btn-outline-secondary" type="button"
-				id="button-addon2">검색</button>
-		</div>
+		<input type="text" class="form-control" name="keyword" id="keywordInput" value="${criteria.keyword}" placeholder="검색어" >
+	 	<span class="input-group-appendn">
+			<button class="btn btn-outline-secondary" type="button" id="searchBtn"><i class="fa fa-search"></i>검색</button>
+		</span>				
 	</div>
 
 	<!-- 페이지 이동  -->
 	<div style="width: 100%; height: 150px;">
 		<div style="text-align: center; float: left;">
-			<button type="button" class="btn btn-outline-secondary">&#60;&#60;</button>
-			<button type="button" class="btn btn-outline-secondary">&#60;</button>
-			<button type="button" class="btn btn-outline-secondary">1</button>
-			<button type="button" class="btn btn-outline-secondary">2</button>
-			<button type="button" class="btn btn-outline-secondary">3</button>
-			<button type="button" class="btn btn-outline-secondary">4</button>
-			<button type="button" class="btn btn-outline-secondary">5</button>
-			<button type="button" class="btn btn-outline-secondary">&#62;</button>
-			<button type="button" class="btn btn-outline-secondary">&#62;&#62;</button>
+			<ul class="pagination">
+        <c:if test="${pageMaker.prev}">
+            <li>
+                <a href="../notice/main${pageMaker.makeSearch(pageMaker.startPage - 1)}">&laquo;</a>
+            </li>
+        </c:if>
+        <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+            <li <c:out value="${pageMaker.criteria.page == idx? 'class=active':''}"/>>
+                <a href="../notice/main${pageMaker.makeSearch(idx)}">${idx}</a>
+            </li>
+        </c:forEach>
+        <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+            <li>
+                <a href="../notice/main${pageMaker.makeSearch(pageMaker.endPage + 1)}">&raquo;</a>
+            </li>
+        </c:if>
+    </ul>
 		</div>
 		<button type="button" class="btn btn-outline-secondary" style="float: right; text-align: right;"
 			onclick="insert()">글쓰기</button>
@@ -66,4 +72,18 @@
 	function insert(){
 		location.href = "../notice/insert";
 	}
+	
+// 	 $(document).ready(function () {
+// 	        /*=================================== 게시글 페이지 이동 관련 / 등록,삭제 알림 ===================================*/
+// 	        let result = "${msg}";
+	        
+// 	        // 검색 버튼 클릭시
+// 	        $("#searchBtn").on("click", function () {
+// 	            self.location = "boardList${pageMaker.makeQuery(1)}"
+// 	                            + "&searchType=" + $("select option:selected").val()
+// 	                            + "&keyword=" + encodeURIComponent($("#keywordInput").val());
+// 	        });
+// 	    });
+	
+	
 </script>

@@ -15,15 +15,15 @@
 					    BOARD_TITLE,
 					    BOARD_CONTENT,
 					    DATE_FORMAT(BOARD_INSERTD, '%Y-%m-%d') AS BOARD_INSERTD,
-					    BOARD_MODIFYD,
+					    DATE_FORMAT(BOARD_MODIFYD, '%Y-%m-%d') AS BOARD_MODIFYD,
 					    BOARD_VIEWCNT,
 					    BOARD_WRITER,
-					    BORAD_DELFLAG,
+					    BOARD_DELFLAG,
 					    BOARD_VIEWCNT
     FROM 				
     					TB_BOARD,
     					(SELECT @rownum:=0) r
-    WHERE 				BORAD_DELFLAG = 'N'
+    WHERE 				BOARD_DELFLAG = 'N'
     ]]>
     <include refid="search"/>
      <![CDATA[
@@ -42,7 +42,7 @@
 	
 	
 	<select id="getOneBoard" parameterType="java.lang.Integer" resultType="com.itsuda.notice.vo.NoticeVO">
-	 select  
+	 SELECT  
 						@rownum:=@rownum+1 No,
 					    BOARD_NO,
 					    BOARD_TITLE,
@@ -51,11 +51,11 @@
 					   	DATE_FORMAT(BOARD_MODIFYD, '%Y-%m-%d') AS BOARD_MODIFYD,
 					    BOARD_VIEWCNT,
 					    BOARD_WRITER,
-					    BORAD_DELFLAG,
+					    BOARD_DELFLAG,
 					    BOARD_VIEWCNT
-	from 
+	FROM 
 						TB_BOARD
-	where 				
+	WHERE 				
 						BOARD_NO = #{boardNo}
 	</select>
 	
@@ -63,7 +63,7 @@
 	UPDATE 				
 						TB_BOARD 
 	SET 
-						BORAD_DELFLAG = 'Y' 
+						BOARD_DELFLAG = 'Y' 
 	WHERE 				
 						BOARD_NO=#{boardNo}
 	</update>
@@ -92,12 +92,12 @@
      WHERE 
 	  					BOARD_NO > 0
      AND 
-	  					BORAD_DELFLAG = 'N'
+	  					BOARD_DELFLAG = 'N'
 	  ]]>
         <include refid="search"/>
 	</select>
 	
-	<select id="selectBoard" resultType="com.itsuda.notice.vo.NoticeVO">
+	<select id ="selectNoBoard"  resultType ="com.itsuda.notice.vo.NoticeVO">
 	 SELECT 
 	 					@rownum:=@rownum+1 No
 	 FROM 
@@ -106,6 +106,7 @@
 	 WHERE
 	 					BOARD_DELFLAG = 'N'
 	</select>
+	
 	
 	<sql id="search">
 		 AND (

@@ -12,16 +12,16 @@ public interface NoticeDAO {
 	public String getTime();
 
 	public List<NoticeVO> getListBoard(Criteria criteria) throws Exception;
-	
+
 	public int insertBoard(NoticeVO noticeVO);
-	
+
 	public NoticeVO getOneBoard(int boardNo);
-	
+
 	public int deleteBoard(int boardNo);
-	
+
 	public int modifyBoard(NoticeVO noticeVO);
-	
-	public List<NoticeVO> selectBoard();
-	
+
 	public int countBorad(SearchCriteria criteria) throws Exception;
+	
+	public List<NoticeVO> selectNoBoard();
 }

@@ -44,18 +44,18 @@ public class NoticeController extends UriMap {
 	 * 
 	 */
 	@RequestMapping(value = "main", method = RequestMethod.GET)
-	public String Main(Model model ,
-						@ModelAttribute("criteria") SearchCriteria criteria,
-						NoticeVO noticeVO) throws Exception
+	public String Main(
+			Model model,
+			@ModelAttribute("criteria") SearchCriteria criteria,
+			NoticeVO noticeVO) throws Exception
 	{	
-		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCriteria(criteria);
 		pageMaker.setTotalCount(dao.countBorad(criteria));
 		model.addAttribute("list", dao.getListBoard(criteria));
 		model.addAttribute("totalCount", dao.countBorad(criteria));
 		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("listNo", dao.selectBoard());
+		model.addAttribute("listNo", dao.selectNoBoard());
 		
 		return URI_NOTICE_MAIN;
 	}

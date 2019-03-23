@@ -27,7 +27,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 
 	@Override
 	public List<NoticeVO> getListBoard(Criteria criteria) throws Exception {
-		return sqlSession.selectList(namespace + ".getListBoard" ,criteria);
+		return sqlSession.selectList(namespace + ".getListBoard", criteria);
 	}
 
 	@Override
@@ -51,13 +51,13 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public List<NoticeVO> selectBoard() {
-		return sqlSession.selectList(namespace + ".selectBoard");
+	public int countBorad(SearchCriteria criteria) throws Exception {
+		return sqlSession.selectOne(namespace + ".countBorad", criteria);
 	}
 
 	@Override
-	public int countBorad(SearchCriteria criteria) throws Exception {
-		return sqlSession.selectOne(namespace + ".countBorad", criteria);
+	public List<NoticeVO> selectNoBoard() {
+		return sqlSession.selectList(namespace + ".selectNoBoard");
 	}
 
 }
