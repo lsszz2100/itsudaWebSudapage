@@ -18,9 +18,14 @@ public class UriMap {
 	
 	
 	// 공지사항 
-	public final static String URI_NOTICE_MAIN				= "notice.main";  				// 메인 페이지
-	public final static String URI_NOTICE_INSERT			= "notice.insert";				// 등록 페이지
-	public final static String URI_NOTICE_MODIFY			= "notice.modify";				// 수정 페이지
-	public final static String URI_NOTICE_DETAIL			= "notice.detail";				// 상세 페이지
+	public final static String URI_NOTICE_MAIN				= "notice.main";  			// 메인 페이지
+	public final static String URI_NOTICE_INSERT			= "notice.insert";			// 등록 페이지
+	public final static String URI_NOTICE_MODIFY			= "notice.modify";			// 수정 페이지
+	public final static String URI_NOTICE_DETAIL			= "notice.detail";			// 상세 페이지
+	
+	
+	// 내정보
+	public final static String URI_MEMEBER_MAIN				= "member.main";  			// 메인 페이지
+	public final static String URI_MEMEBER_MODIFY			= "member.modify";  		// 메인 페이지
 	/*********************************************************************/
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/default/include/include.jsp" %>
+<%@ include file="/WEB-INF/views/common/include/directives.jsp"%>
 
 <!-- calender event처리 script -->
 <!-- src='/static/js/fullcalendar/locale/ko.js' 한글 패치 소스코드 입니다. -->

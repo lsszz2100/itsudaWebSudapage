@@ -25,7 +25,6 @@
 	
 	<!-- 커뮤니티 글 목록 화면 -->
 	<definition name="community.main" extends="default.main"> <!-- default.main는 로그인 후 페이지 -->
-		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
 		<put-attribute name="body"			value="/WEB-INF/views/community/main.jsp" />
 	</definition>
 	
@@ -73,44 +72,48 @@
 	
 <!-- 	notice -->	
 
-	<!-- 회원정보 수정 -->
-	<definition name="modifyMember" extends="default.main"> 
-		<put-attribute name="body"			value="/WEB-INF/views/default/main/modifyForm.jsp" />
+	<!-- member -->
+	<!-- 내정보(메인) -->
+	<definition name="member.main" extends="default.main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/member/main.jsp" />
+	</definition>
+	<!-- 내정보(회원정보 수정) -->
+	<definition name="member.modify" extends="default.main"> 
+		<put-attribute name="body"			value="/WEB-INF/views/member/modify.jsp" />
 	</definition>
 	
+	<!-- admin -->
 	<!-- 관리자 페이지 > 팀원 등록 -->
-	<definition name="registerMember" extends="defaultLayout">
-		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+	<definition name="admin.regMember" extends="default.main">
 		<put-attribute name="body"			value="/WEB-INF/views/admin/registerForm.jsp" />
 	</definition>
 
     <!-- 관리자 페이지 > 팀원 관리 -->
-    <definition name="manageMember" extends="defaultLayout">
-		<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+    <definition name="admin.manMember" extends="default.main">
 		<put-attribute name="body"			value="/WEB-INF/views/admin/manageMember.jsp" />
     </definition> 
 
 	<!-- 조회 -->
-	<definition name="showLinks" extends="default.main"> 
+	<!-- <definition name="showLinks" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/library/showLinks.jsp" />
-	</definition>
+	</definition> -->
 
 	<!-- 조회 - 스크롤 -->
-	<definition name="selectLinkAjax" extends="default.main"> 
+	<!-- <definition name="selectLinkAjax" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/library/showLinks.jsp" />
-	</definition>
+	</definition> -->
 	<!-- 추가 -->
-	<definition name="addLink" extends="default.main"> 
+	<!-- <definition name="addLink" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/library/addLink.jsp" />
-	</definition>
+	</definition> -->
 	<!-- 상세 -->
-	<definition name="detailLink" extends="default.main"> 
+	<!-- <definition name="detailLink" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/library/detailLink.jsp" />
-	</definition>			
+	</definition> -->			
 	<!-- 수정 -->
-	<definition name="editLink" extends="default.main"> 
+	<!-- <definition name="editLink" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/library/editLink.jsp" />
-	</definition>
-	<!-- 라이브러리 관련 페이지 정의 끝 -->
+	</definition> -->
+	
 
 </tiles-definitions>

@@ -115,6 +115,22 @@ public class MemberController extends UriMap {
 		}*/
 	}
 	
+	
+	/**
+	 * 내정보
+	 */
+	@RequestMapping(value = "mypage", method = RequestMethod.GET)
+	public String mypage(HttpSession session,HttpServletResponse res, HttpServletRequest req, Model model)
+	{
+		log.info("/member/mypage - start");
+		
+		MemberVO vo = (MemberVO)session.getAttribute("userInfo");
+		
+		vo.getEmail();
+		
+		return URI_MEMEBER_MAIN;
+	}
+	
 	/*
 	 * 작성자: 홍민석
 	 * 작성일 : 2019-02-06

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/default/include/include.jsp" %>
+<%@ include file="/WEB-INF/views/common/include/directives.jsp"%>
 <style type="text/css">
 	.nav-header > a{
 		margin-right: 10px;
@@ -18,23 +18,21 @@
 <div class="container">
 <nav class="navbar navbar-expand-md navbar-light bg-light nav-header fixed-top">
   <!-- 메인페이지 이동 -->
-  <a class="navbar-brand" href="<c:url value='/index'/>">
-  	<!-- TODO : 아이콘 변경 필요 -->
-  	<img  class="d-inline-block align-top" alt="" src="<c:url value='/image/ci.png'/>" style="height: 32px; width: 32px;">
-  	ITsuda
+  <a class="navbar-brand" href="<c:url value='/'/>" style="margin: 0; padding: 0;">
+  	<img  class="d-inline-block align-top" alt="" src="<c:url value='/image/sudapage.png'/>" style="height: 32px; width: 96px;">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
   	<ul class="nav navbar-nav">
-	  <li class="dropdown">
+	  <!-- <li class="dropdown">
 	      <a class="nav-link dropdown" href="#" id="navbarNavDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>프로젝트 관리</b></a>
 	      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 	        <a class="dropdown-item" href="#">프로젝트1번</a>
 	        <a class="dropdown-item" href="#">프로젝트2번</a>
 	      </div>
-	  </li>
+	  </li> -->
 	  <li class="dropdown">
 	      <a class="nav-link dropdown" href="#" id=navbarDropdownMenuLink role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>커뮤니티</b></a>
 	      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -47,6 +45,9 @@
 	  <li class="dropdown">
 	      <a class="nav-link" href="<c:url value='/notice/main'/>"><b>공지사항</b></a>
 	  </li>
+	  <li class="dropdown">
+	      <a class="nav-link" href="<c:url value='/member/mypage'/>"><b>내정보</b></a>
+	  </li>
 	  <li class="nav-item header-logout-list">
 	  	  <a class="nav-link" href="<c:url value ='/member/logout'/>"><b>로그아웃</b></a>
 	  </li>
@@ -55,8 +56,6 @@
 	<a class="navbar-brand header-logout-icon" href="<c:url value ='/member/logout'/>" id=#navbarNavDropdown role="button" aria-haspopup="true" aria-expanded="false">
   		<img alt="" src="<c:url value='/image/logout.png'/>">
   	</a>
-	
-	
 </nav>
 </div>
 
