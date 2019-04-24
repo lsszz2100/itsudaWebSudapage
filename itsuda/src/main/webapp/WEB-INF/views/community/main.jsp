@@ -199,55 +199,55 @@
 	</div>
 
 	<!-- 페이지 이동  -->
-	<div style="width: 100%; height: 150px;">
-		<div style="text-align: center; float: left;">
-			<button type="button" class="btn btn-outline-secondary">&#60;&#60;</button>
-			<button type="button" class="btn btn-outline-secondary">&#60;</button>
-			<button type="button" class="btn btn-outline-secondary">1</button>
-			<button type="button" class="btn btn-outline-secondary">2</button>
-			<button type="button" class="btn btn-outline-secondary">3</button>
-			<button type="button" class="btn btn-outline-secondary">4</button>
-			<button type="button" class="btn btn-outline-secondary">5</button>
-			<button type="button" class="btn btn-outline-secondary">&#62;</button>
-			<button type="button" class="btn btn-outline-secondary">&#62;&#62;</button>
-		</div>
-		
-	<!-- 글쓰기 버튼 -->
+<!-- 					<div class="box-footer"> -->
+<!-- 						<div class="text-center"> -->
+<!-- 						<ul class="pagination"> -->
+<%-- 							<c:if test="${pageMaker.prev }"> --%>
+<%-- 								<li><a href="../community/main${pageMaker.makeSearch(pageMaker.startPage - 1)}">Previous</a></li> --%>
+<%-- 							</c:if> --%>
+<%-- 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx"> --%>
+<%-- 										<li <c:out value="${searchCriteria.page == idx? 'class=active':''}"/>> --%>
+<%-- 											<a href="../community/main${pageMaker.makeSearch(idx)}">${idx}</a> --%>
+<!-- 										</li> -->
+<%-- 							</c:forEach> --%>
+<%-- 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}"> --%>
+<%-- 									<li><a href="../community/main${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li> --%>
+<%-- 							</c:if> --%>
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+
+					<nav aria-label="...">
+						<ul class="pagination">
+							<c:if test="${pageMaker.prev }">
+								<li class="page-item"><a class="page-link"
+									href="../community/main${pageMaker.makeSearch(pageMaker.startPage - 1)}&team=${param.team}">Next</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${pageMaker.startPage}"
+								end="${pageMaker.endPage}" var="idx">
+								<li
+									<c:out value="${searchCriteria.page == idx? 'class=page-item active':''}"/>>
+									<span class="page-link"> ${idx} <span class="sr-only">${idx}</span>
+								</span>
+								</li>
+							</c:forEach>
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li class="page-item"><a class="page-link"
+									href="../community/main${pageMaker.makeSearch(pageMaker.endPage + 1)}&team=${param.team}">Next</a>
+								</li>
+							</c:if>
+						</ul>
+					</nav>
+
+
+
+					<!-- 글쓰기 버튼 -->
 		<button type="button" class="btn btn-outline-secondary" 
 			style="float: right; text-align: right;" onclick="location.href='../community/insert?team='+${param.team}" >글쓰기</button>
 	</div>
-</div>
-                  
+          
 
-    </div>
-    <!-- /.content-wrapper -->
-
-  </div>
-  <!-- /#wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">Ã</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Bootstrap core JavaScript-->
   <script src="<c:url value="style/js/jquery.min.js" />"></script>

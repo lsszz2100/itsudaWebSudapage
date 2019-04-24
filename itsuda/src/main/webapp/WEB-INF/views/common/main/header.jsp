@@ -36,10 +36,10 @@
 	  <li class="dropdown">
 	      <a class="nav-link dropdown" href="#" id=navbarDropdownMenuLink role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>커뮤니티</b></a>
 	      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-	        <a class="dropdown-item" href="<c:url value='/community/main?team=1'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_design.png'/>" style="height: 32px; width: 32px;">DESIGN</a>
-	        <a class="dropdown-item" href="<c:url value='/community/main?team=2'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_mobile.png'/>" style="height: 32px; width: 32px;">MOBILE</a>
-	        <a class="dropdown-item" href="<c:url value='/community/main?team=3'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_plan.png'/>" style="height: 32px; width: 32px;">PLAN</a>
-	        <a class="dropdown-item" href="<c:url value='/community/main?team=4'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_web.png'/>" style="height: 32px; width: 32px;">WEB</a>
+	        <a class="dropdown-item" href="<c:url value='/community/main?page=1&perPageNum=10&keyword=&team=1'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_design.png'/>" style="height: 32px; width: 32px;">DESIGN</a>
+	        <a class="dropdown-item" href="<c:url value='/community/main?page=1&perPageNum=10&keyword=&team=2'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_mobile.png'/>" style="height: 32px; width: 32px;">MOBILE</a>
+	        <a class="dropdown-item" href="<c:url value='/community/main?page=1&perPageNum=10&keyword=&team=3'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_plan.png'/>" style="height: 32px; width: 32px;">PLAN</a>
+	        <a class="dropdown-item" href="<c:url value='/community/main?page=1&perPageNum=10&keyword=&team=4'/>"><img  class="d-inline-block align-top" alt="" src="<c:url value='/image/icon_web.png'/>" style="height: 32px; width: 32px;">WEB</a>
 	      </div>
 	    </li>
 	  <li class="dropdown">
