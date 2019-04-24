@@ -1,22 +1,22 @@
-// 1. 컨트롤러 2, 맵퍼 SQL문 , DAO 작성 완료, DOAIMPL 만들다 말았음, 
+// itsuda
 
 package com.itsuda.community.controller;
 
-import java.util.List;
+import java.util.List; 
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.itsuda.common.utility.UriMap;
 import com.itsuda.community.service.CommunityDAOImpl;
+import com.itsuda.community.service.PageMaker;
+import com.itsuda.community.service.SearchCriteria;
 import com.itsuda.community.vo.CommunityVO;
 import com.itsuda.member.vo.MemberVO;
 
@@ -30,10 +30,7 @@ public class CommunityController extends UriMap {
 	@Resource
 	private CommunityDAOImpl dao;
 	
-
-	
-	// 커뮤니티 페이지의 출력 단위
-	private int pageSize = 12;
+	PageMaker pageMaker = new PageMaker();
 
 	/**
 	 * 작성자 : 이건우 
@@ -43,16 +40,26 @@ public class CommunityController extends UriMap {
 	 * 
 	 */
 	@RequestMapping(value = "main", method = RequestMethod.GET)
-	public String Main(Model model, @RequestParam("team") String team) {
+	public String Main(Model model, @RequestParam("page") String page
+								  , @RequestParam("perPageNum") String perPageNum
+								  , @RequestParam("keyword") String keyword
+								  ,	@RequestParam("team") String team
+								  , SearchCriteria searchCriteria) throws Exception {
 		log.info("start community");
-		List<CommunityVO> list = dao.getList(team);
-
-		for (CommunityVO communityVO : list) {
-			log.info(communityVO);
-		}
-		model.addAttribute("list", list);
-		model.addAttribute("team", team);
-
+//		List<CommunityVO> list = dao.getList(team);
+//		model.addAttribute("list", list);
+//		model.addAttribute("team", team);
+		pageMaker.setCriteria(searchCriteria);
+		pageMaker.setTotalCount(dao.countPage(searchCriteria));
+		
+		searchCriteria.setKeyword(keyword);
+		searchCriteria.setTeam(team);
+		
+		model.addAttribute("list", dao.listSearch(searchCriteria));
+		model.addAttribute("pageMaker",pageMaker);
+		model.addAttribute("team",team);
+		
+		
 		return URI_COMMUNITY_MAIN;
 	}
 
@@ -64,7 +71,9 @@ public class CommunityController extends UriMap {
 	 * 
 	 */
 	@RequestMapping(value = "insert", method = RequestMethod.GET)  //뷰에서의 이름과 같게 해주어야한다.
-	public String InsertPage() {
+	public String InsertPage(Model model, SearchCriteria searchCriteria) throws Exception {
+		
+		pageMaker.setCriteria(searchCriteria);
 		return URI_COMMUNITY_INSERT;
 	}
 
@@ -76,11 +85,12 @@ public class CommunityController extends UriMap {
 	 * 
 	 */
 	@RequestMapping(value = "insertAction", method = RequestMethod.POST)
-	public String InsertAction(Model model, CommunityVO communityVO, 
-			@RequestParam("title") String title, @RequestParam("description") String description,
-			@RequestParam("team") String team,
-			HttpSession session)
-	{
+	public String InsertAction(Model model, CommunityVO communityVO
+										  , @RequestParam("title") String title
+										  , @RequestParam("description") String description
+										  , @RequestParam("team") String team
+										  , HttpSession session
+										  , SearchCriteria searchCriteria) throws Exception {
 		
 		communityVO.setTitle(title);
 		communityVO.setDescription(description);
@@ -91,9 +101,13 @@ public class CommunityController extends UriMap {
 		
 		dao.insertBoard(communityVO);
 		
+//		model.addAttribute("team",team);
+//		List<CommunityVO> list = dao.getList(team);
+//		model.addAttribute("list", list);
+		
+		model.addAttribute("list", dao.listSearch(searchCriteria));
+		model.addAttribute("pageMaker",pageMaker);
 		model.addAttribute("team",team);
-		List<CommunityVO> list = dao.getList(team);
-		model.addAttribute("list", list);
 		
 		return URI_COMMUNITY_MAIN;
 	}
@@ -107,7 +121,7 @@ public class CommunityController extends UriMap {
 	 * 
 	 */
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
-	public String delete(Model model, @RequestParam("seq") String seq, @RequestParam("team") String team) {
+	public String delete(Model model, @RequestParam("seq") String seq, @RequestParam("team") String team) throws Exception {
 		
 		dao.deleteBoard(Integer.parseInt(seq));
 		model.addAttribute("seq", seq);
@@ -127,7 +141,7 @@ public class CommunityController extends UriMap {
 	 * 
 	 */
 	@RequestMapping(value = "modify", method = RequestMethod.GET)
-	public String modifyPage(Model model, CommunityVO communityVO, @RequestParam("seq") String seq, @RequestParam("team") String team) {
+	public String modifyPage(Model model, CommunityVO communityVO, @RequestParam("seq") String seq, @RequestParam("team") String team) throws Exception{
 		log.info(seq);
 		log.info(team);
 		CommunityVO vo = dao.getBoard(Integer.parseInt(seq));
@@ -148,7 +162,7 @@ public class CommunityController extends UriMap {
 	public String modifyAction(Model model, CommunityVO communityVO, @RequestParam("seq") String seq,
 																		@RequestParam("title") String title,
 																		@RequestParam("description") String description,
-																		@RequestParam("team") String team) {
+																		@RequestParam("team") String team) throws Exception{
 		communityVO.setSeq(Integer.parseInt(seq));
 		communityVO.setTitle(title);
 		communityVO.setDescription(description);
@@ -171,15 +185,11 @@ public class CommunityController extends UriMap {
 	 * 
 	 */
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public String detail(Model model, CommunityVO communityVO, @RequestParam("seq") String seq) throws Exception {
+	public String detail(Model model, CommunityVO communityVO, @RequestParam("seq") String seq) throws Exception{ 
 		CommunityVO vo = dao.detailBoard(Integer.parseInt(seq));
 		dao.updateViewCnt(Integer.parseInt(seq));
-		log.info("여깁니다." + vo);
 		model.addAttribute("vo", vo);
 		return URI_COMMUNITY_DETAIL;
 
 	}
-	
-	
-
 }

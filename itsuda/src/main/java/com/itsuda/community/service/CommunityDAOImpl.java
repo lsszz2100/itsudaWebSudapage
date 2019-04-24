@@ -22,7 +22,41 @@ public class CommunityDAOImpl implements CommunityDAO{
 	public String getTime() {
 		return null;
 	}
+	
+	@Override
+	public List<CommunityVO> listSearch(SearchCriteria searchCriteria) throws Exception{
+		
+//		Map<String, Integer> map = new HashMap<String, Integer>();
+//		map.put("team", Integer.parseInt(searchCriteria.getTeam()));
+//		map.put("keyword", searchCriteria.getKeyword());
+//		map.put("pageStart", searchCriteria.getPageStart());
+//		map.put("endStart", searchCriteria.getPerPageNum());
+		return sql.selectList(namespace+".listSearch", searchCriteria);
+		
+	}
+	
+	
+	@Override
+	public int countPage(SearchCriteria searchCriteria) throws Exception {
+		
+//		Map<String, String> map = new HashMap<String, String>();
+//		map.put("team", searchCriteria.getTeam());
+//		map.put("keyword", searchCriteria.getKeyword());
+		return sql.selectOne(namespace+".countPage", searchCriteria);
+	}
 
+	@Override
+	public List<CommunityVO> listPaging(int page) {
+		
+		if(page <= 0) {
+			page = 1;
+		}
+		
+		page = (page - 1) * 10;
+		
+		return sql.selectList(namespace+".listPaging", page);
+	}
+	
 	//글 목록 
 	@Override
 	public List<CommunityVO> getList(String team) {

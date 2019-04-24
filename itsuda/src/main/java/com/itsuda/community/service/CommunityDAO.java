@@ -10,11 +10,12 @@ import com.itsuda.community.vo.CommunityVO;
 @Resource
 public interface CommunityDAO {
 	public String getTime();
-	/**
-	 * 최초 개시판 불러오기
-	 * @param team
-	 * @return
-	 */
+	
+	public List<CommunityVO> listSearch(SearchCriteria searchCriteria) throws Exception;
+	
+	public int countPage(SearchCriteria searchCriteria) throws Exception;
+	
+	public List<CommunityVO> listPaging(int page);
 	
 	//글 목록
 	public List<CommunityVO> getList(String team);

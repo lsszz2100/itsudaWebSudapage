@@ -6,6 +6,46 @@
 		SELECT SYSDATE()
 	</select>
 	
+	<select id ="listSearch" resultType="com.itsuda.community.vo.CommunityVO">
+	SELECT
+		@ROWNUM:=@ROWNUM+1 AS NO
+		, A.SEQ
+		, A.TITLE
+		, A.WRITER
+		, A.CRT_DT
+		, A.VIEW_CNT
+        ,TEAM
+		FROM TB_COMMUNITY A
+		, (SELECT @ROWNUM:=0) B
+		WHERE
+		TEAM = ${team} AND DELFLAG = 'N' AND (
+        title LIKE CONCAT('%', #{keyword}, '%') 
+		OR writer LIKE CONCAT('%', #{keyword}, '%')
+		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
+		LIMIT #{pageStart}, #{perPageNum}
+	</select>
+	
+	
+	
+	
+	<select id ="countPage" resultType="int">
+	SELECT
+	COUNT(SEQ)
+	FROM
+	TB_COMMUNITY
+	WHERE
+	SEQ> 0 AND DELFLAG = 'N' AND TEAM = ${team}
+	AND (
+		title LIKE CONCAT('%', #{keyword}, '%') 
+		OR writer LIKE CONCAT('%', #{keyword}, '%')
+		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%')
+		)
+	</select>
+	
+	
+	
+	
+	
 	
 	<select id ="getList" parameterType="map" resultType="com.itsuda.community.vo.CommunityVO">
 		SELECT
