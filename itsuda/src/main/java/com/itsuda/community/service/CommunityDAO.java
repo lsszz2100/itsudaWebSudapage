@@ -15,10 +15,10 @@ public interface CommunityDAO {
 	
 	public int countPage(SearchCriteria searchCriteria) throws Exception;
 	
-	public List<CommunityVO> listPaging(int page);
+//	public List<CommunityVO> listPaging(int page);
 	
-	//글 목록
-	public List<CommunityVO> getList(String team);
+//	//글 목록
+//	public List<CommunityVO> getList(String team);
 	
 	//글 상세 목록
 	public CommunityVO detailBoard(int seq);
@@ -37,4 +37,7 @@ public interface CommunityDAO {
 	
 	//글 삭제
 	public void deleteBoard(int seq) ;
+	
+	//최근 게시물 게수
+	public List<CommunityVO> lastestPageNum();
 }

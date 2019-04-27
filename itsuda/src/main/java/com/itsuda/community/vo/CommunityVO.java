@@ -18,10 +18,10 @@ public class CommunityVO {
 	@Getter @Setter private int		team;
 	@Getter @Setter private Date	crtDt;
 	@Getter @Setter private Date	lastDt;
-	@Getter @Setter private int	    no;					// 재정의한 팀 시퀀스
-	
-	
-	
+//	재정의한 팀 시퀀스
+	@Getter @Setter private int	    no;	
+//	최근 게시물 갯수 - 팀코드
+//	@Getter @Setter private String team_code;	
+//	최근 게시물 갯수 - 갯수 
+	@Getter @Setter private int	lastestPageNum;	
 }
-
-//NO, TEAM SEQ 삭제함

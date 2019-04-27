@@ -85,14 +85,15 @@
       <div class="container-fluid">
 
         <!-- Icon Cards-->
-        <div class="row">
+        <div class="row" > 
+        <c:forEach items="${list }" var="item">
           <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-primary o-hidden h-100">
               <div class="card-body">
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-comments"></i>
                 </div>
-                <div class="mr-5">26 NEW DISIGN</div>											<!-- DISIGN 새로운 글목록 수 기능 구현 예정 -->
+                <div class="mr-5">${item.lastestPageNum} NEW DISIGN</div>											<!-- DISIGN 새로운 글목록 수 기능 구현 예정 -->
               </div>
               <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=1">
                 <span class="float-left">DISIGN BOARD</span>
@@ -102,13 +103,14 @@
               </a>
             </div>
           </div>
+          
           <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-warning o-hidden h-100">
               <div class="card-body">
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-list"></i>
                 </div>
-                <div class="mr-5">11 NEW MOBILE</div>											<!-- MOBILE 새로운 글목록 수 기능 구현 예정 -->
+                <div class="mr-5">${item.lastestPageNum} NEW MOBILE</div>											<!-- MOBILE 새로운 글목록 수 기능 구현 예정 -->
               </div>
               <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=2">
                 <span class="float-left">MOBILE BOARD</span>
@@ -118,13 +120,14 @@
               </a>
             </div>
           </div>
+          
           <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-success o-hidden h-100">
               <div class="card-body">
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-shopping-cart"></i>
                 </div>
-                <div class="mr-5">123 New PLAN</div>											<!-- PLAN 새로운 글목록 수 기능 구현 예정 -->
+                <div class="mr-5">${item.lastestPageNum} New PLAN</div>											<!-- PLAN 새로운 글목록 수 기능 구현 예정 -->
               </div>
               <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=3">
                 <span class="float-left">PLAN BOARD</span>
@@ -134,13 +137,14 @@
               </a>
             </div>
           </div>
+          
           <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-danger o-hidden h-100">
               <div class="card-body">
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-life-ring"></i>
                 </div>
-                <div class="mr-5">13 New WEB</div>												<!-- WEB 새로운 글목록 수 기능 구현 예정 -->
+                <div class="mr-5">${item.lastestPageNum} New WEB</div>												<!-- WEB 새로운 글목록 수 기능 구현 예정 -->
               </div>
               <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=4">
                 <span class="float-left">WEB BOARD</span>
@@ -150,7 +154,9 @@
               </a>
             </div>
           </div>
+          </c:forEach>
         </div>
+       
 
 
 <div class="container" style="padding-top: 60px;">

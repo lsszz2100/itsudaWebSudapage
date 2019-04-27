@@ -59,6 +59,8 @@ public class CommunityController extends UriMap {
 		model.addAttribute("pageMaker",pageMaker);
 		model.addAttribute("team",team);
 		
+		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
+		model.addAttribute("lastestPageNum",lastestPageNum);
 		
 		return URI_COMMUNITY_MAIN;
 	}
@@ -206,6 +208,20 @@ public class CommunityController extends UriMap {
 		dao.updateViewCnt(Integer.parseInt(seq));
 		model.addAttribute("vo", vo);
 		return URI_COMMUNITY_DETAIL;
-
 	}
+	
+	/**
+	 * 작성자 : 이건우 
+	 * 기능명 : 커뮤니티 일주일간 최근 게시물 갯수
+	 * 최종 수정일 : 2019.04.27
+	 * 수정 이력 : 
+	 * 
+	 */
+//	@RequestMapping(value = "latestPage", method = RequestMethod.GET)
+//	public String delete(Model model, CommunityVO communityVO, @RequestParam("team") String team) throws Exception {
+//		
+//		int lastestPageNum= dao.lastestPageNum(Integer.parseInt(team));
+//		model.addAttribute("lastestPageNum", lastestPageNum);
+//		return URI_COMMUNITY_MAIN;
+//	}
 }

@@ -44,23 +44,19 @@
 	</select>
 	
 	
-	
-	
-	
-	
-	<select id ="getList" parameterType="map" resultType="com.itsuda.community.vo.CommunityVO">
-		SELECT
-		  @ROWNUM:=@ROWNUM+1 AS NO
-		  , A.SEQ
-		  , A.TITLE
-		  , A.WRITER
-		  , A.CRT_DT
-		  , A.VIEW_CNT
-		FROM TB_COMMUNITY A
-		, (SELECT @ROWNUM:=0) B
-		WHERE TEAM = ${team} AND DELFLAG = 'N'
-		ORDER BY NO DESC
-	</select>
+<!-- 	<select id ="getList" parameterType="map" resultType="com.itsuda.community.vo.CommunityVO"> -->
+<!-- 		SELECT -->
+<!-- 		  @ROWNUM:=@ROWNUM+1 AS NO -->
+<!-- 		  , A.SEQ -->
+<!-- 		  , A.TITLE -->
+<!-- 		  , A.WRITER -->
+<!-- 		  , A.CRT_DT -->
+<!-- 		  , A.VIEW_CNT -->
+<!-- 		FROM TB_COMMUNITY A -->
+<!-- 		, (SELECT @ROWNUM:=0) B -->
+<!-- 		WHERE TEAM = ${team} AND DELFLAG = 'N' -->
+<!-- 		ORDER BY NO DESC -->
+<!-- 	</select> -->
 	
 	
 	<select id="detailBoard" parameterType="java.lang.Integer" resultType="com.itsuda.community.vo.CommunityVO">
@@ -135,5 +131,21 @@
 		,DESCRIPTION = #{description }
 	WHERE SEQ = #{seq }
 	</update>
+	
+	<select id ="lastestPageNum" resultType="com.itsuda.community.vo.CommunityVO">
+	SELECT 
+		a.ID as TEAM_CODE
+		, IFNULL(count(b.team),0) as lastestPageNum
+	from 
+		TB_CODE a
+	Left join 
+		TB_COMMUNITY b on b.TEAM = a.ID and 
+		b.LAST_DT > date_sub(now(),interval 7 day)
+	Where 
+		a.CATEGORY ='TEAM' AND a.ID != "10"
+	Group by 
+		b.TEAM, a.ID
+	ORDER BY TEAM_CODE ASC
+	</select>
 	
 </mapper>
