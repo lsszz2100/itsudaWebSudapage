@@ -18,8 +18,9 @@
 		FROM TB_COMMUNITY A
 		, (SELECT @ROWNUM:=0) B
 		WHERE
-		TEAM = ${team} AND DELFLAG = 'N' AND (
-        title LIKE CONCAT('%', #{keyword}, '%') 
+		TEAM = ${team} AND DELFLAG = 'N'
+		ORDER BY NO DESC,
+		(title LIKE CONCAT('%', #{keyword}, '%') 
 		OR writer LIKE CONCAT('%', #{keyword}, '%')
 		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
 		LIMIT #{pageStart}, #{perPageNum}

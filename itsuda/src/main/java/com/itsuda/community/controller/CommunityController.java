@@ -105,6 +105,11 @@ public class CommunityController extends UriMap {
 //		List<CommunityVO> list = dao.getList(team);
 //		model.addAttribute("list", list);
 		
+		searchCriteria.setPage(1);
+		pageMaker.setCriteria(searchCriteria);
+		int aa = dao.countPage(searchCriteria);
+		pageMaker.setTotalCount(dao.countPage(searchCriteria));
+		
 		model.addAttribute("list", dao.listSearch(searchCriteria));
 		model.addAttribute("pageMaker",pageMaker);
 		model.addAttribute("team",team);

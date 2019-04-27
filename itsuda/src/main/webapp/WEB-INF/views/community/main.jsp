@@ -105,7 +105,7 @@
                 </div>
                 <div class="mr-5">26 NEW DISIGN</div>											<!-- DISIGN 새로운 글목록 수 기능 구현 예정 -->
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="../community/main?team=1">
+              <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=1">
                 <span class="float-left">DISIGN BOARD</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="mr-5">11 NEW MOBILE</div>											<!-- MOBILE 새로운 글목록 수 기능 구현 예정 -->
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="../community/main?team=2">
+              <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=2">
                 <span class="float-left">MOBILE BOARD</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="mr-5">123 New PLAN</div>											<!-- PLAN 새로운 글목록 수 기능 구현 예정 -->
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="../community/main?team=3">
+              <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=3">
                 <span class="float-left">PLAN BOARD</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -153,7 +153,7 @@
                 </div>
                 <div class="mr-5">13 New WEB</div>												<!-- WEB 새로운 글목록 수 기능 구현 예정 -->
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="../community/main?team=4">
+              <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=4">
                 <span class="float-left">WEB BOARD</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -199,42 +199,40 @@
 	</div>
 
 	<!-- 페이지 이동  -->
-<!-- 					<div class="box-footer"> -->
-<!-- 						<div class="text-center"> -->
-<!-- 						<ul class="pagination"> -->
-<%-- 							<c:if test="${pageMaker.prev }"> --%>
-<%-- 								<li><a href="../community/main${pageMaker.makeSearch(pageMaker.startPage - 1)}">Previous</a></li> --%>
-<%-- 							</c:if> --%>
-<%-- 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx"> --%>
-<%-- 										<li <c:out value="${searchCriteria.page == idx? 'class=active':''}"/>> --%>
-<%-- 											<a href="../community/main${pageMaker.makeSearch(idx)}">${idx}</a> --%>
-<!-- 										</li> -->
-<%-- 							</c:forEach> --%>
-<%-- 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}"> --%>
-<%-- 									<li><a href="../community/main${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li> --%>
-<%-- 							</c:if> --%>
-<!-- 							</ul> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-
 					<nav aria-label="...">
 						<ul class="pagination">
 							<c:if test="${pageMaker.prev }">
 								<li class="page-item"><a class="page-link"
-									href="../community/main${pageMaker.makeSearch(pageMaker.startPage - 1)}&team=${param.team}">Next</a>
+									href="../community/main${pageMaker.makeSearch(1)}&team=${param.team}"><<</a>
+								</li>
+								<li class="page-item"><a class="page-link"
+									href="../community/main${pageMaker.makeSearch(pageMaker.startPage - 1)}&team=${param.team}"><</a>
 								</li>
 							</c:if>
-							<c:forEach begin="${pageMaker.startPage}"
-								end="${pageMaker.endPage}" var="idx">
-								<li
-									<c:out value="${searchCriteria.page == idx? 'class=page-item active':''}"/>>
-									<span class="page-link"> ${idx} <span class="sr-only">${idx}</span>
-								</span>
-								</li>
+							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+								<c:choose>
+									<c:when test="${searchCriteria.page == idx }">
+										<li class="page-item active" >
+										<a href="../community/main${pageMaker.makeSearch(idx)}&team=${param.team}">
+											<span class="page-link"> ${idx} </span>
+										</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item">
+										<a href="../community/main${pageMaker.makeSearch(idx)}&team=${param.team}">
+											<span class="page-link"> ${idx} </span>
+										</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li class="page-item"><a class="page-link"
-									href="../community/main${pageMaker.makeSearch(pageMaker.endPage + 1)}&team=${param.team}">Next</a>
+									href="../community/main${pageMaker.makeSearch(pageMaker.endPage + 1)}&team=${param.team}">></a>
+								</li>
+									<li class="page-item"><a class="page-link"
+									href="../community/main${pageMaker.makeSearch(pageMaker.end)}&team=${param.team}">>></a>
 								</li>
 							</c:if>
 						</ul>
@@ -244,7 +242,7 @@
 
 					<!-- 글쓰기 버튼 -->
 		<button type="button" class="btn btn-outline-secondary" 
-			style="float: right; text-align: right;" onclick="location.href='../community/insert?team='+${param.team}" >글쓰기</button>
+			style="float: right; text-align: right;" onclick="location.href='../community/insert${pageMaker.makeSearch(1)}&team=${param.team}'" >글쓰기</button>
 	</div>
           
 

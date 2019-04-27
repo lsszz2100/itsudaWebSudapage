@@ -9,31 +9,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>insertPage</title>
 
-<!-- <script type="text/javascript">
-function check(){
-	var title = ${"#title"}.val();
-	var writer = ${"#writer"}.val();
-	
-	 if(title.length == ''){
-	        alert("제목을 입력해주세요."); 
-	        $("#title").focus();
-	        return false;
-	    }
-	 
-	 if(writer.length == ''){
-	        alert("작성자를 입력해주세요".); 
-	        $("#writer").focus();
-	        return false;
-	    }
-}
-	 
-	 
-</script>  -->
 </head>
 <body>
 
     <form action= "<c:url value='/community/insertAction'/>" method="post">
-    <input name = "team" type="hidden" value="${param.team}"/>											<!-- jsp에서 컨트롤러는 input, 컨트롤러에서 jsp 는 model -->
+    <input name = "team" type="hidden" value="${param.team}"/>	
+    
+    									
     <div style="padding-top: 100px;
     padding-right: 150px;
     padding-left: 150px;
@@ -54,7 +36,7 @@ function check(){
           
 <!--         <button type="submit" class="btn btn-info" onclick="check();" >등록하기</button> -->
         <button type="submit" class="btn btn-info" onclick="#" >등록하기</button>
-        <button type="button" class="btn btn-secondary" onclick="location.href='../community/main?team='+${param.team}">목록으로</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='../community/main?page=1&perPageNum=10&keyword=&team=${param.team}'">목록으로</button>
         </div>
     </form>
     
