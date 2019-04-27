@@ -13,9 +13,7 @@
 <body>
 
     <form action= "<c:url value='/community/insertAction'/>" method="post">
-    <input name = "team" type="hidden" value="${param.team}"/>	
-    
-    									
+    <input name = "team" type="hidden" value="${param.team}"/>				
     <div style="padding-top: 100px;
     padding-right: 150px;
     padding-left: 150px;

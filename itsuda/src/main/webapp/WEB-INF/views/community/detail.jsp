@@ -19,11 +19,11 @@
             <p class="card-text">${vo.description }</p>
         </div>
         <div class="card-body">
-            <button type="button"class="btn btn-info" onclick="location.href='../community/modify?seq='+${param.seq}+'&team='+${param.team}">수정</button>
-            <button type="button"class="btn btn-info" onclick="location.href='../community/delete?seq='+${param.seq}+'&team='+${param.team}">삭제</button>
+            <button type="button"class="btn btn-info" onclick="location.href='../community/modify?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&seq=${param.seq}&team=${param.team}'">수정</button>
+            <button type="button"class="btn btn-info" onclick="location.href='../community/delete?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&seq=${param.seq}&team=${param.team}'">삭제</button>
         </div>
         <div class="card-body">
-	           <button type="button"class="btn btn-info" onclick="location.href='../community/main?team='+${param.team}">목록으로 </button>
+	           <button type="button"class="btn btn-info" onclick="location.href='../community/main?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&team=${param.team}'">목록으로 </button>
 
         </div>
     </div>

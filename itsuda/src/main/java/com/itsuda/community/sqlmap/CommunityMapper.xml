@@ -18,11 +18,11 @@
 		FROM TB_COMMUNITY A
 		, (SELECT @ROWNUM:=0) B
 		WHERE
-		TEAM = ${team} AND DELFLAG = 'N'
-		ORDER BY NO DESC,
+		TEAM = ${team} AND DELFLAG = 'N' AND
 		(title LIKE CONCAT('%', #{keyword}, '%') 
 		OR writer LIKE CONCAT('%', #{keyword}, '%')
 		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
+		ORDER BY NO DESC
 		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 	
@@ -132,7 +132,6 @@
 		TB_COMMUNITY
 	SET
 		TITLE = #{title }
-		,WRITER = #{writer }
 		,DESCRIPTION = #{description }
 	WHERE SEQ = #{seq }
 	</update>

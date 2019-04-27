@@ -36,17 +36,6 @@
       <i class="fas fa-bars"></i>
     </button>
 
-<!--     Navbar Search -->
-<!--     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"> -->
-<!--       <div class="input-group"> -->
-<!--         <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"> -->
-<!--         <div class="input-group-append"> -->
-<!--           <button class="btn btn-primary" type="button"> -->
-<!--             <i class="fas fa-search"></i> -->
-<!--           </button> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </form> -->
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
@@ -178,7 +167,7 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${list }" var="item">
-				<tr onclick="location.href='../community/detail?seq='+${item.seq }+'&team='+${param.team}">
+				<tr onclick="location.href='../community/detail${pageMaker.makeSearch(searchCriteria.page) }&seq='+${item.seq }+'&team='+${param.team}">
 					<th scope="row">${item.no }</th>
 					<td>${item.title}</td>
 					<td>${item.writer }</td>
@@ -190,11 +179,11 @@
 	</table>
 
 	<div class="input-group input-group-sm mb-3">
-		<input type="text" class="form-control" placeholder="검색"
+		<input type="text" class="form-control" placeholder="검색" name="keyword" id="keywordInput" value="${searchCriteria.keyword}"
 			aria-label="Recipient's username" aria-describedby="button-addon2">
 		<div class="input-group-append">
-			<button class="btn btn-outline-secondary" type="button"
-				id="button-addon2">검색</button>
+			<button class="btn btn-outline-secondary" type="button" 
+				id="searchBtn">검색</button>
 		</div>
 	</div>
 
@@ -242,30 +231,21 @@
 
 					<!-- 글쓰기 버튼 -->
 		<button type="button" class="btn btn-outline-secondary" 
-			style="float: right; text-align: right;" onclick="location.href='../community/insert${pageMaker.makeSearch(1)}&team=${param.team}'" >글쓰기</button>
+			style="float: right; text-align: right;" onclick="location.href='../community/insert?team=${param.team}'" >글쓰기</button>
 	</div>
-          
+         
 
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="<c:url value="style/js/jquery.min.js" />"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="<c:url value="style/js/jquery.easing.min.js" />"></script>
-
-  <!-- Page level plugin JavaScript-->
-  <script src="<c:url value="style/js/Chart.min.js" />"></script>
-  <script src="<c:url value="style/js/jquery.dataTables.js" />"></script>
-  <script src="<c:url value="style/js/dataTables.bootstrap4.js" />"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="<c:url value="style/js/sb-admin.min.js" />"></script>
-
-  <!-- Demo scripts for this page-->
-  <script src="<c:url value="style/js/demo/datatables-demo.js" />"></script>
-  <script src="<c:url value="style/js/demo/chart-area-demo.js" />"></script>
+<script>
+$(document).ready(function(){
+$("#searchBtn").on("click", function (event) {
+ self.location = 
+ "../community/main${pageMaker.makeQuery(1)}" + "&keyword=" + encodeURIComponent($("#keywordInput").val()) + "&team=" + ${param.team};
+ });
+ });
+</script>
 
 </body>
+
+
 
 </html>
