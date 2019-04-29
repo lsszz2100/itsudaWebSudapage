@@ -134,18 +134,19 @@
 	
 	<select id ="lastestPageNum" resultType="com.itsuda.community.vo.CommunityVO">
 	SELECT 
-		a.ID as TEAM_CODE
+		a.ID as team
 		, IFNULL(count(b.team),0) as lastestPageNum
 	from 
 		TB_CODE a
 	Left join 
 		TB_COMMUNITY b on b.TEAM = a.ID and 
 		b.LAST_DT > date_sub(now(),interval 7 day)
+		AND DELFLAG = 'N'
 	Where 
 		a.CATEGORY ='TEAM' AND a.ID != "10"
 	Group by 
 		b.TEAM, a.ID
-	ORDER BY TEAM_CODE ASC
+	ORDER BY team ASC
 	</select>
 	
 </mapper>

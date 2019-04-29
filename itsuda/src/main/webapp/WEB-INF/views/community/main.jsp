@@ -86,14 +86,13 @@
 
         <!-- Icon Cards-->
         <div class="row" > 
-        <c:forEach items="${list }" var="item">
           <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-primary o-hidden h-100">
               <div class="card-body">
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-comments"></i>
                 </div>
-                <div class="mr-5">${item.lastestPageNum} NEW DISIGN</div>											<!-- DISIGN 새로운 글목록 수 기능 구현 예정 -->
+                <div class="mr-5">${newDesign} NEW DISIGN</div>											<!-- DISIGN 새로운 글목록 수 기능 구현 예정 -->
               </div>
               <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=1">
                 <span class="float-left">DISIGN BOARD</span>
@@ -110,7 +109,7 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-list"></i>
                 </div>
-                <div class="mr-5">${item.lastestPageNum} NEW MOBILE</div>											<!-- MOBILE 새로운 글목록 수 기능 구현 예정 -->
+                <div class="mr-5">${newMobile} NEW MOBILE</div>											<!-- MOBILE 새로운 글목록 수 기능 구현 예정 -->
               </div>
               <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=2">
                 <span class="float-left">MOBILE BOARD</span>
@@ -127,7 +126,7 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-shopping-cart"></i>
                 </div>
-                <div class="mr-5">${item.lastestPageNum} New PLAN</div>											<!-- PLAN 새로운 글목록 수 기능 구현 예정 -->
+                <div class="mr-5">${newPlan} New PLAN</div>											<!-- PLAN 새로운 글목록 수 기능 구현 예정 -->
               </div>
               <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=3">
                 <span class="float-left">PLAN BOARD</span>
@@ -144,7 +143,7 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-life-ring"></i>
                 </div>
-                <div class="mr-5">${item.lastestPageNum} New WEB</div>												<!-- WEB 새로운 글목록 수 기능 구현 예정 -->
+                <div class="mr-5">${newWeb} New WEB</div>												<!-- WEB 새로운 글목록 수 기능 구현 예정 -->
               </div>
               <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=4">
                 <span class="float-left">WEB BOARD</span>
@@ -154,7 +153,6 @@
               </a>
             </div>
           </div>
-          </c:forEach>
         </div>
        
 
@@ -237,7 +235,7 @@
 
 					<!-- 글쓰기 버튼 -->
 		<button type="button" class="btn btn-outline-secondary" 
-			style="float: right; text-align: right;" onclick="location.href='../community/insert?team=${param.team}'" >글쓰기</button>
+			style="float: right; text-align: right;" onclick="location.href='../community/insert${pageMaker.makeSearch(searchCriteria.page) }&team=${param.team}'" >글쓰기</button>
 	</div>
          
 

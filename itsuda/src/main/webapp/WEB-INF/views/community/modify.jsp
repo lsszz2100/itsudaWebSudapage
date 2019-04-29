@@ -34,7 +34,7 @@
           </div>
           
         <button type="submit" class="btn btn-info">수정하기</button>
-        <button type="button" class="btn btn-secondary" onclick="location.href='../community/main?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&team=${param.team}'">목록으로</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='../community/detail?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&team=${param.team}&seq=${param.seq }'">이전으로</button>
         </div>
     </form>
 </body>

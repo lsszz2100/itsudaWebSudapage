@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itsuda.common.utility.UriMap;
 import com.itsuda.community.service.CommunityDAOImpl;
+import com.itsuda.community.service.LastestPageNum;
 import com.itsuda.community.service.PageMaker;
 import com.itsuda.community.service.SearchCriteria;
 import com.itsuda.community.vo.CommunityVO;
@@ -35,8 +36,8 @@ public class CommunityController extends UriMap {
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 메인화면 이동
-	 * 최종 수정일 : 2019.04.27
-	 * 수정 이력 : 페이징, 통합검색 복구 완료
+	 * 최종 수정일 : 2019.04.29
+	 * 수정 이력 : 복구 완료
 	 * 
 	 */
 	@RequestMapping(value = "main", method = RequestMethod.GET)
@@ -61,6 +62,8 @@ public class CommunityController extends UriMap {
 		
 		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
 		model.addAttribute("lastestPageNum",lastestPageNum);
+		LastestPageNum LPN = new LastestPageNum();
+		LPN.pageNum(lastestPageNum, model);
 		
 		return URI_COMMUNITY_MAIN;
 	}
@@ -68,8 +71,8 @@ public class CommunityController extends UriMap {
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 등록화면 이동
-	 * 최종 수정일 : 2019.04.27
-	 * 수정 이력 : 페이징, 통합검색 복구 완료
+	 * 최종 수정일 : 2019.04.29
+	 * 수정 이력 : 복구 완료
 	 * 
 	 */
 	@RequestMapping(value = "insert", method = RequestMethod.GET)  //뷰에서의 이름과 같게 해주어야한다.
@@ -82,8 +85,8 @@ public class CommunityController extends UriMap {
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 등록 최종 
-	 * 최종 수정일 : 2019.04.27
-	 * 수정 이력 : 페이징, 통합검색 복구 완료
+	 * 최종 수정일 : 2019.04.29
+	 * 수정 이력 : 복구 완료
 	 * 
 	 */
 	@RequestMapping(value = "insertAction", method = RequestMethod.POST)
@@ -92,7 +95,7 @@ public class CommunityController extends UriMap {
 										  , @RequestParam("description") String description
 										  , @RequestParam("team") String team
 										  , HttpSession session
-										  , SearchCriteria searchCriteria) throws Exception {
+										  , SearchCriteria searchCriteria ) throws Exception {
 		
 		communityVO.setTitle(title);
 		communityVO.setDescription(description);
@@ -115,6 +118,11 @@ public class CommunityController extends UriMap {
 		model.addAttribute("list", dao.listSearch(searchCriteria));
 		model.addAttribute("pageMaker",pageMaker);
 		model.addAttribute("team",team);
+	
+		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
+		model.addAttribute("lastestPageNum",lastestPageNum);
+		LastestPageNum LPN = new LastestPageNum();
+		LPN.pageNum(lastestPageNum, model);
 		
 		return URI_COMMUNITY_MAIN;
 	}
@@ -123,8 +131,8 @@ public class CommunityController extends UriMap {
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 삭제 최종
-	 * 최종 수정일 : 2019.04.27
-	 * 수정 이력 : 페이징, 통합검색 복구 완료
+	 * 최종 수정일 : 2019.04.29
+	 * 수정 이력 : 복구 완료
 	 * 
 	 */
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
@@ -141,6 +149,11 @@ public class CommunityController extends UriMap {
 		model.addAttribute("pageMaker",pageMaker);
 		model.addAttribute("team",team);
 		
+		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
+		model.addAttribute("lastestPageNum",lastestPageNum);
+		LastestPageNum LPN = new LastestPageNum();
+		LPN.pageNum(lastestPageNum, model);
+		
 		return URI_COMMUNITY_MAIN;
 		//UPDATE로 만들 것
 	}
@@ -148,8 +161,8 @@ public class CommunityController extends UriMap {
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 수정화면 이동 
-	 * 최종 수정일 : 2019.04.27
-	 * 수정 이력 : 페이징, 통합검색 복구 완료
+	 * 최종 수정일 : 2019.04.29
+	 * 수정 이력 : 복구 완료
 	 * 
 	 */
 	@RequestMapping(value = "modify", method = RequestMethod.GET)
@@ -169,8 +182,8 @@ public class CommunityController extends UriMap {
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 수정 최종 
-	 * 최종 수정일 : 2019.04.27
-	 * 수정 이력 : 페이징, 통합검색 복구 완료
+	 * 최종 수정일 : 2019.04.29
+	 * 수정 이력 : 복구 완료
 	 * 
 	 */
 	@RequestMapping(value = "modifyAction", method = RequestMethod.POST)
@@ -185,21 +198,31 @@ public class CommunityController extends UriMap {
 		communityVO.setTeam(Integer.parseInt(team));
 		dao.updateBoard(communityVO);
 		
-		pageMaker.setCriteria(searchCriteria);
-		pageMaker.setTotalCount(dao.countPage(searchCriteria));
+//		pageMaker.setCriteria(searchCriteria);
+//		pageMaker.setTotalCount(dao.countPage(searchCriteria));
+//		
+//		model.addAttribute("list", dao.listSearch(searchCriteria));
+//		model.addAttribute("pageMaker",pageMaker);
+//		model.addAttribute("team",team);
 		
-		model.addAttribute("list", dao.listSearch(searchCriteria));
-		model.addAttribute("pageMaker",pageMaker);
-		model.addAttribute("team",team);
+		CommunityVO vo = dao.detailBoard(Integer.parseInt(seq));
+		dao.updateViewCnt(Integer.parseInt(seq));
+		model.addAttribute("vo", vo);
 		
-		return URI_COMMUNITY_MAIN;
+		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
+		model.addAttribute("lastestPageNum",lastestPageNum);
+		LastestPageNum LPN = new LastestPageNum();
+		LPN.pageNum(lastestPageNum, model);
+		 
+		return URI_COMMUNITY_DETAIL;
+		
 	}
 
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 상세정보 확인 
-	 * 최종 수정일 : 2019.04.27
-	 * 수정 이력 : 페이징, 통합검색 복구 완료
+	 * 최종 수정일 : 2019.04.29
+	 * 수정 이력 : 복구 완료
 	 * 
 	 */
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
@@ -207,21 +230,21 @@ public class CommunityController extends UriMap {
 		CommunityVO vo = dao.detailBoard(Integer.parseInt(seq));
 		dao.updateViewCnt(Integer.parseInt(seq));
 		model.addAttribute("vo", vo);
+		
+		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
+		model.addAttribute("lastestPageNum",lastestPageNum);
+		LastestPageNum LPN = new LastestPageNum();
+		LPN.pageNum(lastestPageNum, model);
+		
 		return URI_COMMUNITY_DETAIL;
 	}
 	
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 일주일간 최근 게시물 갯수
-	 * 최종 수정일 : 2019.04.27
-	 * 수정 이력 : 
+	 * 최종 수정일 : 2019.04.29
+	 * 수정 이력 : 복구 완료
 	 * 
 	 */
-//	@RequestMapping(value = "latestPage", method = RequestMethod.GET)
-//	public String delete(Model model, CommunityVO communityVO, @RequestParam("team") String team) throws Exception {
-//		
-//		int lastestPageNum= dao.lastestPageNum(Integer.parseInt(team));
-//		model.addAttribute("lastestPageNum", lastestPageNum);
-//		return URI_COMMUNITY_MAIN;
-//	}
+
 }

@@ -34,7 +34,7 @@
           
 <!--         <button type="submit" class="btn btn-info" onclick="check();" >등록하기</button> -->
         <button type="submit" class="btn btn-info" onclick="#" >등록하기</button>
-        <button type="button" class="btn btn-secondary" onclick="location.href='../community/main?page=1&perPageNum=10&keyword=&team=${param.team}'">목록으로</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='../community/main?page=${param.page }&perPageNum=10&keyword=&team=${param.team}'">목록으로</button>
         </div>
     </form>
     
