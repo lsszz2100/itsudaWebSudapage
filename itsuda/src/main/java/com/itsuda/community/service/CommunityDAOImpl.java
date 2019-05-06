@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itsuda.community.vo.CommunityVO;
 
@@ -31,26 +32,7 @@ public class CommunityDAOImpl implements CommunityDAO{
 	public int countPage(SearchCriteria searchCriteria) throws Exception {
 		return sql.selectOne(namespace+".countPage", searchCriteria);
 	}
-//	@Override
-//	public List<CommunityVO> listPaging(int page) {
-//		
-//		if(page <= 0) {
-//			page = 1;
-//		}
-//		
-//		page = (page - 1) * 10;
-//		
-//		return sql.selectList(namespace+".listPaging", page);
-//	}
-	
-//	//글 목록 
-//	@Override
-//	public List<CommunityVO> getList(String team) {
-//		Map<String, String> map = new HashMap<>();
-//		
-//		map.put("team", team);
-//		return sql.selectList(namespace+".getList", map);
-//	}
+
 	//글 상세 페이지
 	@Override
 	public CommunityVO detailBoard(int seq) {
@@ -65,9 +47,19 @@ public class CommunityDAOImpl implements CommunityDAO{
 	}
 	
 	//글 작성
+//	@Transactional
 	@Override
 	public void insertBoard(CommunityVO communityVO){  
+		
+		// 게시글 입력처리
 		sql.insert(namespace+".insertBoard", communityVO);
+//		String[] files = communityVO.getFiles();
+//		if(files == null)
+//			return;
+//		
+//		//게시글 첨부파일 입력처리
+//		for(String fileName : files)
+//			sql.insert(namespace+".addFile", fileName);
 	}
 	
 	//글 수정 하기 전에 데이터 가져오기
@@ -93,5 +85,11 @@ public class CommunityDAOImpl implements CommunityDAO{
 	public List<CommunityVO> lastestPageNum() {
 		return sql.selectList(namespace+".lastestPageNum");
 	}
+	
+//	//파일 업로드 
+//	@Override
+//	public void addFile(String fullName) throws Exception {
+//		sql.insert(namespace+".addFile", fullName);
+//	}
 	
 }

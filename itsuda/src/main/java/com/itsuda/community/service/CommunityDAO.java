@@ -15,11 +15,6 @@ public interface CommunityDAO {
 	
 	public int countPage(SearchCriteria searchCriteria) throws Exception;
 	
-//	public List<CommunityVO> listPaging(int page);
-	
-//	//글 목록
-//	public List<CommunityVO> getList(String team);
-	
 	//글 상세 목록
 	public CommunityVO detailBoard(int seq);
 	
@@ -27,7 +22,7 @@ public interface CommunityDAO {
 	public void updateViewCnt(int seq);
 	
 	//글 등록
-	public void insertBoard(CommunityVO communityVO) ;
+	public void insertBoard(CommunityVO communityVO);
 	
 	//글 수정 하기 전에 데이터 가져오기
 	public CommunityVO getBoard(int seq);
@@ -40,4 +35,7 @@ public interface CommunityDAO {
 	
 	//최근 게시물 게수
 	public List<CommunityVO> lastestPageNum();
+	
+//	//파일 업로드
+//	public void addFile(String fullName) throws Exception;
 }

@@ -22,4 +22,17 @@ public class CommunityVO {
 	@Getter @Setter private int	    no;	
 //	최근 게시물 갯수 - 갯수 
 	@Getter @Setter private int	lastestPageNum;	
+//  첨부파일 이름 저장
+	@Getter private String[] files;
+//	첨부파일 갯수
+	@Getter private int fileCnt;
+	
+	public void setFile(String[] files) {
+		this.files = files;
+		setFileCnt(files.length);
+	}
+	
+	private void setFileCnt(int fileCnt) {
+		this.fileCnt = fileCnt;
+	}
 }

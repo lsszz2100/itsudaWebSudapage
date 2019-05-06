@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace ="itsuda.community">
+
+
+<!-- <typeAlias type="com.itsuda.community.vo.CommunityVO" alias="CommunityVO"/> -->
+<!--     	<typeAlias type="com.itsuda.community.vo.ReplyVO" alias="ReplyVO"/> -->
+
+
+	<!-- 출력 -->
+	<select id="list" resultType="com.itsuda.community.vo.ReplyVO">
+	SELECT
+		REPLY_NO
+		,SEQ
+		,REPLY_TEXT
+		,REPLY_WRITER
+		,REG_DATE
+		,UPDATE_DATE
+	FROM
+		TB_COMMUNITY_REPLY
+	WHERE
+		seq = #{seq}
+	ORDER BY REPLY_NO
+	</select>
+
+    <!--입력-->
+    <insert id="create">
+        INSERT INTO TB_COMMUNITY_REPLY (
+            SEQ
+            , REPLY_TEXT
+            , REPLY_WRITER
+        ) VALUES (
+            #{seq}
+            , #{replyText}
+            , #{replyWriter}
+        )
+    </insert>
+    
+
+    <!--수정-->
+    <update id="update">
+        UPDATE 
+        	TB_COMMUNITY_REPLY
+        SET 
+        	REPLY_TEXT = #{replyText}
+        WHERE REPLY_NO = #{REPLY_NO}
+    </update>
+
+    <!--삭제-->
+    <delete id="delete">
+        DELETE FROM 
+        	TB_COMMUNITY_REPLY
+        WHERE 
+        	REPLY_NO = #{REPLY_NO}
+    </delete>
+    
+    
+<!--     <resultMap type="ReplyVO" id="ReplyResultMap"> -->
+<!--     	<id property="replyNo" column="REPLY_NO" /> -->
+<!--     	<result property="seq" column="SEQ" /> -->
+<!--     	<result property="replyText" column="REPLY_TEXT" /> -->
+<!--     	<result property="replyWriter" column="REPLY_WRITER" /> -->
+<!--     	<result property="regDate" column="REG_DATE" /> -->
+<!--     	<result property="updateDate" column="UPDATE_DATE" /> -->
+<!--     </resultMap> -->
+    
+<!--        <resultMap type="CommunityVO" id="CommunityResultMap"> -->
+<!--     	<id property="seq" column="seq" /> -->
+<!--     	<result property="writer" column="writer" /> -->
+<!--     	<result property="title" column="title" /> -->
+<!--     	<result property="grade" column="grade" /> -->
+<!--     	<result property="description" column="description" /> -->
+<!--     	<result property="viewCnt" column="viewCnt" /> -->
+<!--     	<result property="team" column="team" /> -->
+<!--     	<result property="crtDt" column="crtDt" /> -->
+<!--     	<result property="lastDt" column="lastDt" /> -->
+<!--     </resultMap> -->
+    
+  
+    
+    <select id="listPaging" resultType="com.itsuda.community.vo.ReplyVO">
+    	SELECT
+    		REPLY_NO
+			,SEQ
+			,REPLY_TEXT
+			,REPLY_WRITER
+			,REG_DATE
+			,UPDATE_DATE
+		FROM
+			TB_COMMUNITY_REPLY
+		WHERE
+			seq = #{seq}
+		ORDER BY REPLY_NO
+		LIMIT #{criteria.pageStart}, #{criteria.perPageNum}
+    </select>
+    
+    <select id="countReplies" resultType="int">
+    	SELECT
+    		COUNT(SEQ)
+    	FROM
+    		TB_COMMUNITY_REPLY
+    	WHERE
+    		SEQ = #{SEQ}
+    </select>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</mapper>

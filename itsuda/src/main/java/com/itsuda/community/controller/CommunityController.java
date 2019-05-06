@@ -2,17 +2,27 @@
 
 package com.itsuda.community.controller;
 
-import java.util.List; 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.itsuda.common.utility.UploadFileUtils;
 import com.itsuda.common.utility.UriMap;
 import com.itsuda.community.service.CommunityDAOImpl;
 import com.itsuda.community.service.LastestPageNum;
@@ -47,9 +57,6 @@ public class CommunityController extends UriMap {
 								  ,	@RequestParam("team") String team
 								  , SearchCriteria searchCriteria) throws Exception {
 		log.info("start community");
-//		List<CommunityVO> list = dao.getList(team);
-//		model.addAttribute("list", list);
-//		model.addAttribute("team", team);
 		pageMaker.setCriteria(searchCriteria);
 		pageMaker.setTotalCount(dao.countPage(searchCriteria));
 		
@@ -104,7 +111,7 @@ public class CommunityController extends UriMap {
 		MemberVO member = (MemberVO) session.getAttribute("userInfo");
 		communityVO.setWriter(member.getName());
 		
-		dao.insertBoard(communityVO);
+		dao.insertBoard(communityVO);  
 		
 //		model.addAttribute("team",team);
 //		List<CommunityVO> list = dao.getList(team);
@@ -198,13 +205,6 @@ public class CommunityController extends UriMap {
 		communityVO.setTeam(Integer.parseInt(team));
 		dao.updateBoard(communityVO);
 		
-//		pageMaker.setCriteria(searchCriteria);
-//		pageMaker.setTotalCount(dao.countPage(searchCriteria));
-//		
-//		model.addAttribute("list", dao.listSearch(searchCriteria));
-//		model.addAttribute("pageMaker",pageMaker);
-//		model.addAttribute("team",team);
-		
 		CommunityVO vo = dao.detailBoard(Integer.parseInt(seq));
 		dao.updateViewCnt(Integer.parseInt(seq));
 		model.addAttribute("vo", vo);
@@ -246,5 +246,5 @@ public class CommunityController extends UriMap {
 	 * 수정 이력 : 복구 완료
 	 * 
 	 */
-
+	
 }
