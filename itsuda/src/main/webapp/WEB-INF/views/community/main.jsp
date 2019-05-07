@@ -32,9 +32,9 @@
 
     <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
 
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-      <i class="fas fa-bars"></i>
-    </button>
+<!--     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#"> -->
+<!--       <i class="fas fa-bars"></i> -->
+<!--     </button> -->
 
 
     <!-- Navbar -->
@@ -78,86 +78,93 @@
 
   </nav>
 
-  <div id="wrapper">
+	<div id="wrapper">
 
-    <div id="content-wrapper">
+		<div id="content-wrapper">
 
-      <div class="container-fluid">
+			<div class="container-fluid">
 
-        <!-- Icon Cards-->
-        <div class="row" > 
-          <div class="col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-primary o-hidden h-100">
-              <div class="card-body">
-                <div class="card-body-icon">
-                  <i class="fas fa-fw fa-comments"></i>
-                </div>
-                <div class="mr-5">${newDesign} NEW DISIGN</div>											<!-- DISIGN 새로운 글목록 수 기능 구현 예정 -->
-              </div>
-              <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-                <span class="float-left">DISIGN BOARD</span>
-                <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
-              </a>
-            </div>
-          </div>
-          
-          <div class="col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-warning o-hidden h-100">
-              <div class="card-body">
-                <div class="card-body-icon">
-                  <i class="fas fa-fw fa-list"></i>
-                </div>
-                <div class="mr-5">${newMobile} NEW MOBILE</div>											<!-- MOBILE 새로운 글목록 수 기능 구현 예정 -->
-              </div>
-              <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-                <span class="float-left">MOBILE BOARD</span>
-                <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
-              </a>
-            </div>
-          </div>
-          
-          <div class="col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-success o-hidden h-100">
-              <div class="card-body">
-                <div class="card-body-icon">
-                  <i class="fas fa-fw fa-shopping-cart"></i>
-                </div>
-                <div class="mr-5">${newPlan} New PLAN</div>											<!-- PLAN 새로운 글목록 수 기능 구현 예정 -->
-              </div>
-              <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-                <span class="float-left">PLAN BOARD</span>
-                <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
-              </a>
-            </div>
-          </div>
-          
-          <div class="col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-danger o-hidden h-100">
-              <div class="card-body">
-                <div class="card-body-icon">
-                  <i class="fas fa-fw fa-life-ring"></i>
-                </div>
-                <div class="mr-5">${newWeb} New WEB</div>												<!-- WEB 새로운 글목록 수 기능 구현 예정 -->
-              </div>
-              <a class="card-footer text-white clearfix small z-1" href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-                <span class="float-left">WEB BOARD</span>
-                <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-       
+				<!-- Icon Cards-->
+				<div class="row">
+					<div class="col-xl-3 col-sm-6 mb-3">
+						<div class="card text-white bg-primary o-hidden h-100">
+							<div class="card-body">
+								<div class="card-body-icon">
+									<i class="fas fa-fw fa-comments"></i>
+								</div>
+								<div class="mr-5">${newDesign}NEW DISIGN</div>
+								<!-- DISIGN 새로운 글목록 수 기능 구현 예정 -->
+							</div>
+							<a class="card-footer text-white clearfix small z-1"
+								href="../community/main?page=1&perPageNum=10&keyword=&team=1">
+								<span class="float-left">DISIGN BOARD</span> <span
+								class="float-right"> <i class="fas fa-angle-right"></i>
+							</span>
+							</a>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 mb-3">
+						<div class="card text-white bg-warning o-hidden h-100">
+							<div class="card-body">
+								<div class="card-body-icon">
+									<i class="fas fa-fw fa-list"></i>
+								</div>
+								<div class="mr-5">${newMobile}NEW MOBILE</div>
+								<!-- MOBILE 새로운 글목록 수 기능 구현 예정 -->
+							</div>
+							<a class="card-footer text-white clearfix small z-1"
+								href="../community/main?page=1&perPageNum=10&keyword=&team=2">
+								<span class="float-left">MOBILE BOARD</span> <span
+								class="float-right"> <i class="fas fa-angle-right"></i>
+							</span>
+							</a>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 mb-3">
+						<div class="card text-white bg-success o-hidden h-100">
+							<div class="card-body">
+								<div class="card-body-icon">
+									<i class="fas fa-fw fa-shopping-cart"></i>
+								</div>
+								<div class="mr-5">${newPlan}New PLAN</div>
+								<!-- PLAN 새로운 글목록 수 기능 구현 예정 -->
+							</div>
+							<a class="card-footer text-white clearfix small z-1"
+								href="../community/main?page=1&perPageNum=10&keyword=&team=3">
+								<span class="float-left">PLAN BOARD</span> <span
+								class="float-right"> <i class="fas fa-angle-right"></i>
+							</span>
+							</a>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 mb-3">
+						<div class="card text-white bg-danger o-hidden h-100">
+							<div class="card-body">
+								<div class="card-body-icon">
+									<i class="fas fa-fw fa-life-ring"></i>
+								</div>
+								<div class="mr-5">${newWeb}New WEB</div>
+								<!-- WEB 새로운 글목록 수 기능 구현 예정 -->
+							</div>
+							<a class="card-footer text-white clearfix small z-1"
+								href="../community/main?page=1&perPageNum=10&keyword=&team=4">
+								<span class="float-left">WEB BOARD</span> <span
+								class="float-right"> <i class="fas fa-angle-right"></i>
+							</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-<div class="container" style="padding-top: 60px;">
+
+	<div class="container" style="padding-top: 60px;">
 	<table class="table table-striped table-hover">
 		<!-- 커스텀 필요 -->
 		<thead class="thead-dark">

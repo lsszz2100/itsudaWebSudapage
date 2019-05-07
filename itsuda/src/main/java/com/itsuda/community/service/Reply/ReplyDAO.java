@@ -2,9 +2,12 @@ package com.itsuda.community.service.Reply;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import com.itsuda.community.service.Criteria;
 import com.itsuda.community.vo.ReplyVO;
 
+@Resource
 public interface ReplyDAO {
 
 	public  List<ReplyVO> list(Integer seq) throws Exception;

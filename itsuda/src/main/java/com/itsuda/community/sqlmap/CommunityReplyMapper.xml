@@ -20,7 +20,7 @@
 		TB_COMMUNITY_REPLY
 	WHERE
 		seq = #{seq}
-	ORDER BY REPLY_NO
+	ORDER BY REPLY_NO DESC
 	</select>
 
     <!--입력-->
@@ -43,7 +43,7 @@
         	TB_COMMUNITY_REPLY
         SET 
         	REPLY_TEXT = #{replyText}
-        WHERE REPLY_NO = #{REPLY_NO}
+        WHERE REPLY_NO = #{replyNo}
     </update>
 
     <!--삭제-->
@@ -51,31 +51,10 @@
         DELETE FROM 
         	TB_COMMUNITY_REPLY
         WHERE 
-        	REPLY_NO = #{REPLY_NO}
+        	REPLY_NO = #{replyNo}
     </delete>
     
-    
-<!--     <resultMap type="ReplyVO" id="ReplyResultMap"> -->
-<!--     	<id property="replyNo" column="REPLY_NO" /> -->
-<!--     	<result property="seq" column="SEQ" /> -->
-<!--     	<result property="replyText" column="REPLY_TEXT" /> -->
-<!--     	<result property="replyWriter" column="REPLY_WRITER" /> -->
-<!--     	<result property="regDate" column="REG_DATE" /> -->
-<!--     	<result property="updateDate" column="UPDATE_DATE" /> -->
-<!--     </resultMap> -->
-    
-<!--        <resultMap type="CommunityVO" id="CommunityResultMap"> -->
-<!--     	<id property="seq" column="seq" /> -->
-<!--     	<result property="writer" column="writer" /> -->
-<!--     	<result property="title" column="title" /> -->
-<!--     	<result property="grade" column="grade" /> -->
-<!--     	<result property="description" column="description" /> -->
-<!--     	<result property="viewCnt" column="viewCnt" /> -->
-<!--     	<result property="team" column="team" /> -->
-<!--     	<result property="crtDt" column="crtDt" /> -->
-<!--     	<result property="lastDt" column="lastDt" /> -->
-<!--     </resultMap> -->
-    
+   
   
     
     <select id="listPaging" resultType="com.itsuda.community.vo.ReplyVO">
@@ -100,7 +79,7 @@
     	FROM
     		TB_COMMUNITY_REPLY
     	WHERE
-    		SEQ = #{SEQ}
+    		SEQ = #{seq}
     </select>
     
     

@@ -22,7 +22,7 @@ import com.itsuda.community.vo.ReplyVO;
 
 
 @RestController
-@RequestMapping("/community/*")
+@RequestMapping("/replies")
 public class ReplyController extends UriMap{
 	
 	private final ReplyService replyService;
@@ -31,12 +31,7 @@ public class ReplyController extends UriMap{
 	public ReplyController(ReplyService replyService) {
 		this.replyService = replyService;
 	}
-	
-	@RequestMapping("/test")
-	public String replyAjaxTest() {
-		return "community.reply_test";
-		
-	}
+
 	
 //	@PathVariable URI의 경로에서 원하는 데이터를 추출하는 용도로 사용한다.
 //	@RequestBody : 전송된 JSON데이터를 객체로 변환해주는 어노테이션으로 @ModelAttribute와 유사한 역을을 하지만 JSON에서 사용한다는 점이 차이점
@@ -47,7 +42,6 @@ public class ReplyController extends UriMap{
 	public ResponseEntity<String> register(@RequestBody ReplyVO replyVO){
 		ResponseEntity<String> entity = null;
 		try {
-//			replyService.addReply(replyVO);
 			replyService.create(replyVO);
 			entity = new ResponseEntity<>("regSuccess", HttpStatus.OK);
 		} catch (Exception e) {
@@ -59,11 +53,11 @@ public class ReplyController extends UriMap{
 	
 //	댓글 목록 
 	@RequestMapping(value = "/all/{seq}", method = RequestMethod.GET)
-	public ResponseEntity<ReplyVO> list(@PathVariable("seq") Integer seq){
-		ResponseEntity<ReplyVO> entity = null;
+	public ResponseEntity<List<ReplyVO>> list(@PathVariable("seq") Integer seq){
+		ResponseEntity<List<ReplyVO>> entity = null;
 
 		try {
-//			entity = new ResponseEntity<>(replyService., HttpStatus.OK);
+			entity = new ResponseEntity<>(replyService.list(seq), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

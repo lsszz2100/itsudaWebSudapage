@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.itsuda.community.service.Criteria;
 import com.itsuda.community.vo.ReplyVO;
 
-@Service
+@Service("ReplyService")
+@Repository
 public class ReplyServiceImpl implements ReplyService{
 	
 	private final ReplyDAO replyDAO;
@@ -20,7 +22,7 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 	
 	@Override
-	public List<ReplyVO> list(Integer seq)throws Exception{
+	public List<ReplyVO> list(Integer seq) throws Exception{
 		return replyDAO.list(seq);
 	}
 	

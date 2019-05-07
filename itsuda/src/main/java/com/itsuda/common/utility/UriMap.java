@@ -16,6 +16,10 @@ public class UriMap {
 	public final static String URI_COMMUNITY_MODIFY		= "community.modify";			// 수정 페이지
 	public final static String URI_COMMUNITY_DETAIL		= "community.detail";			// 상세 페이지
 	
+	public final static String URI_COMMUNITY_REPLY_TEST		= "community/reply_test";			// 댓글 처리 TEST 페이지
+	
+	
+	
 	
 	// 공지사항 
 	public final static String URI_NOTICE_MAIN				= "notice.main";  			// 메인 페이지
