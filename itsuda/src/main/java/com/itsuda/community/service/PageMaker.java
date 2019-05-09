@@ -26,6 +26,11 @@ public class PageMaker {
 		this.searchCriteria = searchCriteria;
 	}
 	
+	public Criteria getCriteria() {
+		return this.searchCriteria;
+	}
+	
+	
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 		calData();

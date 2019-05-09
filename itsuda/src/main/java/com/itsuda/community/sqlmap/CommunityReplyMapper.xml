@@ -69,7 +69,7 @@
 			TB_COMMUNITY_REPLY
 		WHERE
 			seq = #{seq}
-		ORDER BY REPLY_NO
+		ORDER BY REPLY_NO DESC
 		LIMIT #{criteria.pageStart}, #{criteria.perPageNum}
     </select>
     
@@ -81,25 +81,6 @@
     	WHERE
     		SEQ = #{seq}
     </select>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 </mapper>
