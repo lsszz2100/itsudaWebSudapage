@@ -20,7 +20,9 @@ import com.itsuda.community.service.SearchCriteria;
 import com.itsuda.community.service.Reply.ReplyService;
 import com.itsuda.community.vo.ReplyVO;
 
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @RestController
 @RequestMapping("/replies")
 public class ReplyController extends UriMap{
@@ -107,6 +109,7 @@ public class ReplyController extends UriMap{
 			
 			List<ReplyVO> replies = replyService.getRepliesPaging(seq, searchCriteria);
 			int repliesCount = replyService.countReplies(seq);
+			log.info("여기에요 여기" + replies);
 			
 			PageMaker pageMaker = new PageMaker(); 		
 			pageMaker.setCriteria(searchCriteria);

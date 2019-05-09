@@ -14,8 +14,8 @@
 		,SEQ
 		,REPLY_TEXT
 		,REPLY_WRITER
-		,REG_DATE
-		,UPDATE_DATE
+		,date_format(REG_DATE, "%Y-%c-%e %r") AS REG_DATE
+		,date_format(UPDATE_DATE, "%Y-%c-%e %r") AS UPDATE_DATE
 	FROM
 		TB_COMMUNITY_REPLY
 	WHERE
@@ -43,6 +43,7 @@
         	TB_COMMUNITY_REPLY
         SET 
         	REPLY_TEXT = #{replyText}
+        	,UPDATE_DATE = NOW()
         WHERE REPLY_NO = #{replyNo}
     </update>
 
@@ -63,8 +64,8 @@
 			,SEQ
 			,REPLY_TEXT
 			,REPLY_WRITER
-			,REG_DATE
-			,UPDATE_DATE
+			,date_format(REG_DATE, "%Y-%c-%e %r") AS REG_DATE
+			,date_format(UPDATE_DATE, "%Y-%c-%e %r") AS UPDATE_DATE
 		FROM
 			TB_COMMUNITY_REPLY
 		WHERE

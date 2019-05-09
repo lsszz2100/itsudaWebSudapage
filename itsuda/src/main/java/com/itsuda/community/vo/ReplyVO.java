@@ -11,6 +11,6 @@ public class ReplyVO {
 	@Getter@Setter private Integer seq;
 	@Getter@Setter private String replyText;
 	@Getter@Setter private String replyWriter;
-	@Getter@Setter private Date regDate;
-	@Getter@Setter private Date updateDate;
+	@Getter@Setter private String regDate;
+	@Getter@Setter private String updateDate;
 }
