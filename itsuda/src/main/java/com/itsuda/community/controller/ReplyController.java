@@ -109,7 +109,7 @@ public class ReplyController extends UriMap{
 			
 			List<ReplyVO> replies = replyService.getRepliesPaging(seq, searchCriteria);
 			int repliesCount = replyService.countReplies(seq);
-			log.info("여기에요 여기" + replies);
+			
 			
 			PageMaker pageMaker = new PageMaker(); 		
 			pageMaker.setCriteria(searchCriteria);

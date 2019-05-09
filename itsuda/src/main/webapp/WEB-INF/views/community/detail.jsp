@@ -141,7 +141,7 @@
                                     <textarea class="form-control" id="newReplyText" name="replyText" rows="3" placeholder="댓글을 입력해주세요..." style="resize: nonel"></textarea>
                                 </div>	
                                 <div class="col-sm-2" style="float:left; padding : 10px">
-                                    <input class="form-control" id="newReplyWriter" type="text" placeholder="작성자">
+                                    <input class="form-control" id="newReplyWriter" name="replyWriter" placeholder="작성자">
                                 </div>
                                 <hr/>
                                 <div class="col-sm-2" style="float:left">
@@ -194,7 +194,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-				<h4 class="modal-title">댓글 수정창</h4>
+				<h4 class="modal-title">댓글 수정</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					
 				</div>
@@ -212,6 +212,7 @@
 					<div class="form-group">
 							<label for="replyWriter">댓글 작성자</label> <input
 							class="form-control" id="replyWriter" name="replyWriter" readonly>
+							
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -270,7 +271,7 @@ function getRepliesPaging(page) {
 		
 		$(data.replies).each(function (){
 			str += "<li data-replyNo='" + this.replyNo + "' class='replyLi'>"
-				+	"<p class='replyWriter'><h4>☺  " + this.replyWriter + "</h4></p>"
+				+	"<h3><p class='replyWriter' style='color:#28A745'>☺" + this.replyWriter + "</p></h3>"
 				+	"<p class='replyText'>" + this.replyText + "</p>"
  				+	"<p class='updateDate' style='float:left'>" + this.updateDate + "</p>"
 				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right'>댓글 수정</button>"
@@ -338,13 +339,13 @@ $('.replyAddBtn').on("click", function() {
 	//화면으로부터 입력 받은 변수값의 처리
 	var replyText = $('#newReplyText');
 	var replyWriter = $('#newReplyWriter');
-	
 	var replyTextVal = replyText.val();
 	var replyWriterVal = replyWriter.val();
 	
 	// AJAX 통신 :POST
 	if(replyTextVal == '' || replyWriterVal == '')
 		alert("내용 및 작성자를 작성해주세요.");
+	
 	else{
 	$.ajax({
 		type : "post",
@@ -364,6 +365,7 @@ $('.replyAddBtn').on("click", function() {
 			if(result =="regSuccess"){
 				alert("댓글 등록 완료!");
 			}
+			replyPageNum = 1;				//댓글 페이지 초기화;
 			getRepliesPaging(replyPageNum); //댓글 목록 출력 함수 호출
 			replyText.val(""); // 댓글 내용 초기화
 			replyWriter.val(""); // 댓글 작성자 초기화
@@ -372,17 +374,18 @@ $('.replyAddBtn').on("click", function() {
 	}
 });
 
-// 수정 클릭시 이벤트
+// 댓글 수정 클릭시 이벤트
 $("#replies").on("click", ".replyLi button", function() {
 	var reply = $(this).parent();
-	
+	console.log(reply);
 	var replyNo = reply.attr("data-replyNo");
 	var replyText = reply.find(".replyText").text();
-	var replyWriter = reply.find(".replyWriter").text();
-	
+	var replyWriter = reply.find(".replyWriter").text();  //???작성자가 공백으로 나옴
 	$("#replyNo").val(replyNo);
 	$("#replyText").val(replyText);
 	$("#replyWriter").val(replyWriter);
+	console.log(replyText);
+	console.log(replyWriter);
 });
 
 // 댓글 삭제
@@ -419,6 +422,7 @@ $('.modalModBtn').on("click", function() {
 	var replyNo = reply.find("#replyNo").val();
 	// 수정한 댓글 내용
 	var replyText = reply.find("#replyText").val();
+	
 	
 	//AJAX 통신 : PUT
 	$.ajax({

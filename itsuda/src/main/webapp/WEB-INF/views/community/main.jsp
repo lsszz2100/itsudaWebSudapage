@@ -200,7 +200,7 @@
 
 	<!-- 페이지 이동  -->
 					<nav aria-label="...">
-						<ul class="pagination">
+						<ul class="pagination" style="justify-content: center;">
 							<c:if test="${pageMaker.prev }">
 								<li class="page-item"><a class="page-link"
 									href="../community/main${pageMaker.makeSearch(1)}&team=${param.team}"><<</a>
