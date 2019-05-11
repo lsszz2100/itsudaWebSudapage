@@ -1,6 +1,6 @@
 package com.itsuda.community.controller;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itsuda.common.utility.UriMap;
@@ -37,6 +38,7 @@ public class ReplyController extends UriMap{
 	
 //	@PathVariable URI의 경로에서 원하는 데이터를 추출하는 용도로 사용한다.
 //	@RequestBody : 전송된 JSON데이터를 객체로 변환해주는 어노테이션으로 @ModelAttribute와 유사한 역을을 하지만 JSON에서 사용한다는 점이 차이점
+//	@ResponseBody : 페이지 이동이 아닌 데이터만 반환을 하겠다.
 	
 	
 //	댓글 등록처리 
@@ -45,6 +47,7 @@ public class ReplyController extends UriMap{
 		ResponseEntity<String> entity = null;
 		try {
 			replyService.create(replyVO);
+			replyVO.getReplyText().replaceAll("\r\n", "<br>");
 			entity = new ResponseEntity<>("regSuccess", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,6 +55,25 @@ public class ReplyController extends UriMap{
 		}
 		return entity;
 	}
+	
+////	대댓글 등록처리 
+//	@RequestMapping(value = "/{replyNo}", method = RequestMethod.POST)
+//	public ResponseEntity<String> comments(@PathVariable("replyNo") Integer replyNo, @RequestBody ReplyVO replyVO){
+//		ResponseEntity<String> entity = null;
+//		try {
+//			//부모 데이터 가져오기
+//			List<ReplyVO> patentVO = replyService.parentReply(replyNo);
+//			patentVO.set
+//			
+//			//부모 데이터를 이용하여 대댓글 만들기
+//			replyService.commentsReply(patentVO, replyVO);
+//			entity = new ResponseEntity<>("CommentsSuccess", HttpStatus.OK);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+//		}
+//		return entity;
+//	}
 	
 //	댓글 목록 
 	@RequestMapping(value = "/all/{seq}", method = RequestMethod.GET)

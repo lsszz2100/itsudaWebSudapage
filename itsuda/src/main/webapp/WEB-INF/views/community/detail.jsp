@@ -35,101 +35,7 @@
 
  <section class="content container-fluid" style="margin-top:40px;"> 
 
-	
-<%-- 	<%--댓글 목록 영역--%> 
-<!--                 <div class="box box-success collapsed-box"> -->
-<%--                     댓글 유무 / 댓글 갯수 / 댓글 펼치기, 접기 --%>
-<!--                     <div class="box-header with-border"> -->
-<!--                         <a href="" class="link-black text-lg"><i class="fa fa-comments-o margin-r-5 replyCount"></i> </a> -->
-<!--                         <div class="box-tools"> -->
-<!--                             <button type="button" class="btn btn-box-tool" data-widget="collapse"> -->
-<!--                                 <i class="fa fa-plus"></i> -->
-<!--                             </button> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<%--                     댓글 목록 --%>
-<!--                     <div class="box-body repliesDiv"> -->
-
-<!--                     </div> -->
-<%--                     댓글 페이징 --%>
-<!--                     <div class="box-footer"> -->
-<!--                         <div class="text-center"> -->
-<!--                             <ul class="pagination pagination-sm no-margin"> -->
-
-<!--                             </ul> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-                
-                
-                
-                <%--                 댓글 수정을 위한 modal 영역 --%>
-<!--                 <div class="modal fade" id="modModal"> -->
-<!--                     <div class="modal-dialog"> -->
-<!--                         <div class="modal-content"> -->
-<!--                             <div class="modal-header"> -->
-<!--                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!--                                     <span aria-hidden="true">&times;</span></button> -->
-<!--                                 <h4 class="modal-title">댓글수정</h4> -->
-<!--                             </div> -->
-<!--                             <div class="modal-body" data-rno> -->
-<!--                                 <input type="hidden" class="seq"/> -->
-<%--                                 <input type="text" id="replytext" class="form-control"/> --%>
-<!--                                 <textarea class="form-control" id="replyText" rows="3" style="resize: none"></textarea> -->
-<!--                             </div> -->
-<!--                             <div class="modal-footer"> -->
-<!--                                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button> -->
-<!--                                 <button type="button" class="btn btn-primary modalModBtn">수정</button> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-
-<%--                 댓글 삭제를 위한 modal 영역 --%>
-<!--                 <div class="modal fade" id="delModal"> -->
-<!--                     <div class="modal-dialog"> -->
-<!--                         <div class="modal-content"> -->
-<!--                             <div class="modal-header"> -->
-<!--                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!--                                     <span aria-hidden="true">&times;</span></button> -->
-<!--                                 <h4 class="modal-title">댓글 삭제</h4> -->
-<!--                                 <input type="hidden" class="rno"/> -->
-<!--                             </div> -->
-<!--                             <div class="modal-body" data-rno> -->
-<!--                                 <p>댓글을 삭제하시겠습니까?</p> -->
-<!--                                 <input type="hidden" class="rno"/> -->
-<!--                             </div> -->
-<!--                             <div class="modal-footer"> -->
-<!--                                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">아니요.</button> -->
-<!--                                 <button type="button" class="btn btn-primary modalDelBtn">네. 삭제합니다.</button> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-
-<!-- 댓글 처리 -->
 <!-- 댓글 등록 영역 -->
-<!-- 	<div class="col-lg-12">	 -->
-<!-- 		<div class="box box-primary"> -->
-<!-- 			<div class="box-header with-border"> -->
-<!-- 				<h3 class="box-title">댓글 작성</h3> -->
-<!-- 			</div> -->
-<!-- 			<div class="box-body"> -->
-<!-- 				<div class="form-group"> -->
-<!-- 					<label for="newReplyText">댓글 내용</label> <input class="form-control" -->
-<!-- 						id="newReplyText" name="replyText" placeholder="댓글 내용을 입력해주세요" required> -->
-<!-- 				</div> -->
-<!-- 				<div class="form-group"> -->
-<!-- 					<label for="newReplyWriter">댓글 작성자</label> <input -->
-<!-- 						class="form-control" id="newReplyWriter" name="replyWriter" -->
-<!-- 						placeholder="댓글 작성자를 입력해주세요" required> -->
-<!-- 				</div> -->
-<!-- 				<hr/> -->
-<!-- 				<div class="col-sm-3" style="margin:10px; float:right;"> -->
-<!--                     <button type="button" class="btn btn-primary btn-block replyAddBtn"><i class="fa fa-save"></i>  댓글 저장</button> -->
-<!--                 </div> -->
-<!-- 			</div> -->
-			
 			<div class="box box-warning">
                     <div class="box-header with-border">
                         <a class="link-black text-lg"><i class="fa fa-pencil"></i> 댓글작성</a>
@@ -152,6 +58,7 @@
                     </div>
                 </div>
 			
+<!-- 댓글 목록 출력 영역 -->
 			<div class="box-footer" style="margin-top:70px;">
 				<ul id="replies" style='padding-top:50px; padding-left:50px; padding-right:50px'>
 
@@ -190,6 +97,8 @@
 <!--                     </div> -->
 <!--                 </div> -->
 
+
+<!-- 댓글 수정창 -->
 	<div class="modal fade" id="modifyModal" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -199,18 +108,19 @@
 					
 				</div>
 				<div class="modal-boby" style="padding:20px;">
+
+						<input class="form-control" id="replyNo" name="replyNo" type="hidden">
+	
 					<div class="form-group">
-						<label for="replyNo">댓글 번호</label> <input class="form-control"
-							id="replyNo" name="replyNo" readonly>
+					
+<!--  							<input class="form-control" -->
+<!-- 							id="replyText" name="replyText" placeholder="댓글 내용을 입력해주세요" height="48"> -->
+							
+							<textarea class="form-control" id="replyText" name="replyText" rows="7" placeholder="댓글을 입력해주세요." style="resize: nonel"></textarea>
 					</div>
 
 					<div class="form-group">
-						<label for="replyText">댓글 내용</label> <input class="form-control"
-							id="replyText" name="replyText" placeholder="댓글 내용을 입력해주세요">
-					</div>
-
-					<div class="form-group">
-							<label for="replyWriter">댓글 작성자</label> <input
+					<input
 							class="form-control" id="replyWriter" name="replyWriter" readonly>
 							
 					</div>
@@ -224,7 +134,39 @@
 			</div>
 		</div>
 	</div>
-   </section>
+	
+<!-- 대댓글 창 -->
+		<div class="modal fade" id="CommentsModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">대댓글</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+					</div>
+					<div class="modal-boby" style="padding: 20px;">
+						
+						<div class="form-group">
+<!-- 							<textarea rows="" cols=""><label for="replyText">댓글 내용</label> <input class="form-control" -->
+<!-- 								id="replyText" name="replyText" placeholder="댓글 내용을 입력해주세요"></textarea> -->
+								
+								<textarea class="form-control" id="replyText" name="replyText" rows="7" placeholder="대댓글을 입력해주세요..." style="resize: nonel"></textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="replyWriter">댓글 작성자</label> <input
+								class="form-control" id="replyWriter" name="replyWriter">
+
+						</div>
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-success modalAdd">작성</button>
+					<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
    
 <script>
  var seq = ${param.seq};
@@ -275,10 +217,12 @@ function getRepliesPaging(page) {
 				+	"<p class='replyText'>" + this.replyText + "</p>"
  				+	"<p class='updateDate' style='float:left'>" + this.updateDate + "</p>"
 				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right'>댓글 수정</button>"
+				+   "<button type='button' class = 'btn btn-sm btn-success' data-toggle='modal' data-target='#CommentsModal' style='float:left; margin-left:10px; background-color:#007BE1'>댓글</button>"
 				+	"</li>"
 				+	"</p>"
 				+	"</p>"
 				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
+				
 	
 	});
 		
@@ -298,7 +242,7 @@ function printPageNumbers(pageMaker) {
 	// 이전 버튼 활성화
 	if(pageMaker.prev){
 		str += "<li ><a href='" +1+ "' class='page-link'><<</a></li>";
-		str += "<li ><a href='" + (pageMaker.startPage - 1)+ "' class='page-link'>이전</a></li>";
+		str += "<li ><a href='" + (pageMaker.startPage - 1)+ "' class='page-link'><</a></li>";
 	}
 	
 	//페이지 번호 
@@ -317,7 +261,7 @@ function printPageNumbers(pageMaker) {
 
 	// 다음 버튼 활성화
 	if(pageMaker.next){
-		str += "<li><a href='" +(pageMaker.endPage + 1)+ "' class='page-link'>다음</a></li>";
+		str += "<li><a href='" +(pageMaker.endPage + 1)+ "' class='page-link'>></a></li>";
 		str += "<li><a href='" +(pageMaker.end)+ "' class='page-link'>>></a></li>";
 	}
 	
@@ -341,6 +285,8 @@ $('.replyAddBtn').on("click", function() {
 	var replyWriter = $('#newReplyWriter');
 	var replyTextVal = replyText.val();
 	var replyWriterVal = replyWriter.val();
+	
+	replyTextVal = replyTextVal.replace(/(\n|\r\n)/g,"<br>");
 	
 	// AJAX 통신 :POST
 	if(replyTextVal == '' || replyWriterVal == '')
@@ -374,13 +320,14 @@ $('.replyAddBtn').on("click", function() {
 	}
 });
 
-// 댓글 수정 클릭시 이벤트
+// 댓글 수정 클릭시 
 $("#replies").on("click", ".replyLi button", function() {
 	var reply = $(this).parent();
 	console.log(reply);
-	var replyNo = reply.attr("data-replyNo");
-	var replyText = reply.find(".replyText").text();
-	var replyWriter = reply.find(".replyWriter").text();  //???작성자가 공백으로 나옴
+	var replyNo = reply.attr("data-replyNo");				//attr : 데이터 변경
+	var replyText = reply.find(".replyText").html();
+	var replyWriter = reply.find(".replyWriter").text(); 
+	replyText = replyText.replace(/<br>/gi,"\n");
 	$("#replyNo").val(replyNo);
 	$("#replyText").val(replyText);
 	$("#replyWriter").val(replyWriter);
@@ -388,7 +335,8 @@ $("#replies").on("click", ".replyLi button", function() {
 	console.log(replyWriter);
 });
 
-// 댓글 삭제
+
+// 댓글 삭제 버튼 클릭시 이벤트
 $('.modalDelBtn').on("click", function() {
 	//댓글 번호
 	var replyNo = $(this).parent().parent().find("#replyNo").val();
@@ -413,7 +361,7 @@ $('.modalDelBtn').on("click", function() {
 	});
 });
 
-// 댓글 수정
+//수정창의 수정 버튼 클릭시 이벤트
 $('.modalModBtn').on("click", function() {
 	
 	// 댓글 선택자
@@ -422,6 +370,49 @@ $('.modalModBtn').on("click", function() {
 	var replyNo = reply.find("#replyNo").val();
 	// 수정한 댓글 내용
 	var replyText = reply.find("#replyText").val();
+	
+	replyText = replyText.replace(/(\n|\r\n)/g,"<br>");
+	
+	alert(replyNo);
+	
+	//AJAX 통신 : PUT
+	$.ajax({
+		type : "put",
+		url : "../replies/" + replyNo,
+		headers : {
+			"Content-type" : "application/json",
+			"X-HTTP-Method-Override" : "PUT"
+		},
+		data : JSON.stringify(
+				{replyText : replyText}
+		),
+		dateType : "text",
+		success : function (result) {
+			console.log("result : " + result);
+			if(result == "modSuccess"){
+				alert("댓글 수정 완료!");
+			$("#modifyModal").modal("hide");  //modal 닫기
+			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
+			}
+		}
+	});
+});
+
+// 대댓글 작성 버튼 클릭시
+$('.modalAdd').on("click", function() {
+	
+	// 댓글 선택자
+	var reply = $(this).parent().parent();
+	
+	
+	// 대댓글 부모 시퀀스
+	var replyNo = reply.find("#replyNo").val();
+	// 대댓글 작성 내용
+	var replyText = reply.find("#replyText").val();
+	// 대댓글 작성자
+	var replyWriter = reply.find("#replyWriter").val();
+	
+	alert(replyNo);
 	
 	
 	//AJAX 통신 : PUT

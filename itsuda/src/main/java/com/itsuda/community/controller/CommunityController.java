@@ -2,7 +2,7 @@
 
 package com.itsuda.community.controller;
 
-import java.io.FileInputStream; 
+import java.io.FileInputStream;  
 import java.io.InputStream;
 import java.util.List;
 
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.itsuda.common.utility.UploadFileUtils;
 import com.itsuda.common.utility.UriMap;
 import com.itsuda.community.service.CommunityDAOImpl;
 import com.itsuda.community.service.LastestPageNum;

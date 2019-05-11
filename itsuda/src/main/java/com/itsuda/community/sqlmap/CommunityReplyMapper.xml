@@ -19,7 +19,7 @@
 	FROM
 		TB_COMMUNITY_REPLY
 	WHERE
-		seq = #{seq}
+		seq = #{seq} AND REPARENT = 0
 	ORDER BY REPLY_NO DESC
 	</select>
 
@@ -69,7 +69,7 @@
 		FROM
 			TB_COMMUNITY_REPLY
 		WHERE
-			seq = #{seq}
+			seq = #{seq} AND REPARENT = 0
 		ORDER BY REPLY_NO DESC
 		LIMIT #{criteria.pageStart}, #{criteria.perPageNum}
     </select>
@@ -83,5 +83,6 @@
     		SEQ = #{seq}
     </select>
     
+
     
 </mapper>

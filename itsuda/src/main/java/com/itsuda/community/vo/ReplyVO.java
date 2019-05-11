@@ -13,4 +13,10 @@ public class ReplyVO {
 	@Getter@Setter private String replyWriter;
 	@Getter@Setter private String regDate;
 	@Getter@Setter private String updateDate;
+	
+	
+	//대댓글 처리
+	@Getter@Setter private Integer reparent;
+	@Getter@Setter private Integer retoder;
+
 }
