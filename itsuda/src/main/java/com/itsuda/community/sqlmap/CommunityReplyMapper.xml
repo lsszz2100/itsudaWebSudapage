@@ -66,10 +66,12 @@
 			,REPLY_WRITER
 			,date_format(REG_DATE, "%Y-%c-%e %r") AS REG_DATE
 			,date_format(UPDATE_DATE, "%Y-%c-%e %r") AS UPDATE_DATE
+			,REPARENT
+			,REORDER
 		FROM
 			TB_COMMUNITY_REPLY
 		WHERE
-			seq = #{seq} AND REPARENT = 0
+			seq = #{seq} 
 		ORDER BY REPLY_NO DESC
 		LIMIT #{criteria.pageStart}, #{criteria.perPageNum}
     </select>

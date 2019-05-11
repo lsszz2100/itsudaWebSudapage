@@ -212,6 +212,7 @@ function getRepliesPaging(page) {
 		var str = "";
 		
 		$(data.replies).each(function (){
+			if(this.reparent == 0){
 			str += "<li data-replyNo='" + this.replyNo + "' class='replyLi'>"
 				+	"<h3><p class='replyWriter' style='color:#28A745'>☺" + this.replyWriter + "</p></h3>"
 				+	"<p class='replyText'>" + this.replyText + "</p>"
@@ -222,8 +223,18 @@ function getRepliesPaging(page) {
 				+	"</p>"
 				+	"</p>"
 				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
+			} else{
+				str += "<li data-replyNo='" + this.replyNo + "' class='replyLi' style='margin-left:50px'>"
+				+	"<h3 class='replyWriter' style='color:#28A745; font-size:20px;'>☺" + this.replyWriter + "</h3>"
+				+	"<p class='replyText' style='font-size:15px'>" + this.replyText + "</p>"
+ 				+	"<p class='updateDate' style='float:left; font-size:15px; margin-bottom:40px;'>" + this.updateDate + "</p>"
+				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right; background-color:#007BE1; weight:50; height:30; font-size:15px;'>수정</button>"
+				+	"</li>"
+				+	"</p>"
+				+	"</p>"
+				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
 				
-	
+			}
 	});
 		
 		$("#replies").html(str);
@@ -244,13 +255,7 @@ function printPageNumbers(pageMaker) {
 		str += "<li ><a href='" +1+ "' class='page-link'><<</a></li>";
 		str += "<li ><a href='" + (pageMaker.startPage - 1)+ "' class='page-link'><</a></li>";
 	}
-	
-	//페이지 번호 
-// 	for(var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++){
-// 		var strCalss = (pageMaker.page === i ? "class='page-item active'" : "");
-// 		str += "<li " + strCalss + "><a href='" +i+ "' class='page-link'>" +i+ "</a><li>";
-// 	}
-	
+
 	for(var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++){
 		if(pageMaker.criteria.page == i)
 			str += "<li class='page-item active' ><a href='" +i+ "' class='page-link'>" +i+ "</a><li>";
@@ -336,6 +341,7 @@ $("#replies").on("click", ".replyLi button", function() {
 });
 
 
+
 // 댓글 삭제 버튼 클릭시 이벤트
 $('.modalDelBtn').on("click", function() {
 	//댓글 번호
@@ -373,46 +379,6 @@ $('.modalModBtn').on("click", function() {
 	
 	replyText = replyText.replace(/(\n|\r\n)/g,"<br>");
 	
-	alert(replyNo);
-	
-	//AJAX 통신 : PUT
-	$.ajax({
-		type : "put",
-		url : "../replies/" + replyNo,
-		headers : {
-			"Content-type" : "application/json",
-			"X-HTTP-Method-Override" : "PUT"
-		},
-		data : JSON.stringify(
-				{replyText : replyText}
-		),
-		dateType : "text",
-		success : function (result) {
-			console.log("result : " + result);
-			if(result == "modSuccess"){
-				alert("댓글 수정 완료!");
-			$("#modifyModal").modal("hide");  //modal 닫기
-			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
-			}
-		}
-	});
-});
-
-// 대댓글 작성 버튼 클릭시
-$('.modalAdd').on("click", function() {
-	
-	// 댓글 선택자
-	var reply = $(this).parent().parent();
-	
-	
-	// 대댓글 부모 시퀀스
-	var replyNo = reply.find("#replyNo").val();
-	// 대댓글 작성 내용
-	var replyText = reply.find("#replyText").val();
-	// 대댓글 작성자
-	var replyWriter = reply.find("#replyWriter").val();
-	
-	alert(replyNo);
 	
 	
 	//AJAX 통신 : PUT
@@ -435,7 +401,47 @@ $('.modalAdd').on("click", function() {
 			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
 			}
 		}
-	});
+	});                                                                                                   
+});                                                                                                       
+                                                                                                          
+// 대댓글 작성 버튼 클릭시                                                                                          
+$('.modalAdd').on("click", function() {                                                                   
+	                                                                                                      
+	// 댓글 선택자                                                                                             
+	var reply = $(this).parent().parent();                                                                
+	                                                                                                      
+	                                                                                                      
+	// 대댓글 부모 시퀀스                                                                                         
+	var replyNo = reply.find("#replyNo").val();                                                           
+	// 대댓글 작성 내용                                                                                          
+	var replyText = reply.find("#replyText").val();                                                       
+	// 대댓글 작성자                                                                                            
+	var replyWriter = reply.find("#replyWriter").val();                                                   
+	                                                                      
+	alert(replyNo);                                                       
+	                                                                      
+	
+	//AJAX 통신 : PUT
+// 	$.ajax({
+// 		type : "put",
+// 		url : "../replies/" + replyNo,
+// 		headers : {
+// 			"Content-type" : "application/json",
+// 			"X-HTTP-Method-Override" : "PUT"
+// 		},
+// 		data : JSON.stringify(
+// 				{replyText : replyText}
+// 		),
+// 		dateType : "text",
+// 		success : function (result) {
+// 			console.log("result : " + result);
+// 			if(result == "modSuccess"){
+// 				alert("댓글 수정 완료!");
+// 			$("#modifyModal").modal("hide");  //modal 닫기
+// 			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
+// 			}
+// 		}
+// 	});
 });
 
 </script>
