@@ -28,7 +28,12 @@ public class ReplyDAOImpl implements ReplyDAO{
     // 댓글 입력
     @Override
     public void create(ReplyVO replyVO) throws Exception {
-    	sql.insert(NAMESPACE + ".create", replyVO);
+    	if(replyVO.getReparent() == 0) {
+    		sql.insert(NAMESPACE + ".create", replyVO);
+    	} else {
+    		sql.insert(NAMESPACE + ".createSubReply", replyVO);
+    	}
+    	
     }
 
     // 댓글 수정

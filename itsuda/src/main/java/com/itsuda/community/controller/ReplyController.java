@@ -56,24 +56,25 @@ public class ReplyController extends UriMap{
 		return entity;
 	}
 	
-////	대댓글 등록처리 
-//	@RequestMapping(value = "/{replyNo}", method = RequestMethod.POST)
-//	public ResponseEntity<String> comments(@PathVariable("replyNo") Integer replyNo, @RequestBody ReplyVO replyVO){
-//		ResponseEntity<String> entity = null;
-//		try {
-//			//부모 데이터 가져오기
-//			List<ReplyVO> patentVO = replyService.parentReply(replyNo);
-//			patentVO.set
-//			
-//			//부모 데이터를 이용하여 대댓글 만들기
-//			replyService.commentsReply(patentVO, replyVO);
-//			entity = new ResponseEntity<>("CommentsSuccess", HttpStatus.OK);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-//		}
-//		return entity;
-//	}
+//	대댓글 등록처리 
+	@RequestMapping(value = "/insertSubReply", method = RequestMethod.POST)
+	public ResponseEntity<String> comments(String pReplyNo, String pSeq, String cText, String cWriter){
+		ResponseEntity<String> entity = null;
+		ReplyVO vo = new ReplyVO();
+		vo.setReparent(Integer.valueOf(pReplyNo));
+		vo.setSeq(Integer.valueOf(pSeq));
+		vo.setReplyText(cText);
+		vo.setReplyWriter(cWriter);
+		
+		try {
+			replyService.create(vo);
+			entity = new ResponseEntity<>("CommentsSuccess", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 	
 //	댓글 목록 
 	@RequestMapping(value = "/all/{seq}", method = RequestMethod.GET)

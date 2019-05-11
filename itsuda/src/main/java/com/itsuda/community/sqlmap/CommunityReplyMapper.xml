@@ -36,6 +36,30 @@
         )
     </insert>
     
+    <!-- 대댓글 입력-->
+    <insert id="createSubReply">
+        INSERT INTO TB_COMMUNITY_REPLY
+		(
+			SEQ,
+			REPLY_TEXT,
+			REPLY_WRITER,
+			REG_DATE,
+			UPDATE_DATE,
+			REPARENT,
+			REORDER
+		)
+		VALUES
+		(
+			#{seq}
+			, #{replyText}
+			, #{replyWriter}
+			, NOW()
+			, NOW()
+			, #{reparent}
+			, GEN_COMMUNITY_REPLY_ORDER(#{seq},#{reparent})
+		)
+    </insert>
+    
 
     <!--수정-->
     <update id="update">

@@ -145,17 +145,18 @@
 
 					</div>
 					<div class="modal-boby" style="padding: 20px;">
-						
+						<input type="hidden" id = "tempPReplyNo" value="">
+						<input type="hidden" id = "tempPSeq" value="">
 						<div class="form-group">
 <!-- 							<textarea rows="" cols=""><label for="replyText">댓글 내용</label> <input class="form-control" -->
 <!-- 								id="replyText" name="replyText" placeholder="댓글 내용을 입력해주세요"></textarea> -->
 								
-								<textarea class="form-control" id="replyText" name="replyText" rows="7" placeholder="대댓글을 입력해주세요..." style="resize: nonel"></textarea>
+								<textarea class="form-control" id="tempPReplyText" name="tempPReplyText" rows="7" placeholder="대댓글을 입력해주세요..." style="resize: nonel"></textarea>
 						</div>
 
 						<div class="form-group">
 							<label for="replyWriter">댓글 작성자</label> <input
-								class="form-control" id="replyWriter" name="replyWriter">
+								class="form-control" id="tempPReplyWriter" name="tempPReplyWriter">
 
 						</div>
 					</div>
@@ -218,7 +219,7 @@ function getRepliesPaging(page) {
 				+	"<p class='replyText'>" + this.replyText + "</p>"
  				+	"<p class='updateDate' style='float:left'>" + this.updateDate + "</p>"
 				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right'>댓글 수정</button>"
-				+   "<button type='button' class = 'btn btn-sm btn-success' data-toggle='modal' data-target='#CommentsModal' style='float:left; margin-left:10px; background-color:#007BE1'>댓글</button>"
+				+   "<button type='button' class = 'btn btn-sm btn-success' data-toggle='modal' data-target='#CommentsModal' onclick='rereplyBtn("+this.replyNo+","+this.seq+")' style='float:left; margin-left:10px; background-color:#007BE1'>댓글</button>"
 				+	"</li>"
 				+	"</p>"
 				+	"</p>"
@@ -404,45 +405,43 @@ $('.modalModBtn').on("click", function() {
 	});                                                                                                   
 });                                                                                                       
                                                                                                           
-// 대댓글 작성 버튼 클릭시                                                                                          
-$('.modalAdd').on("click", function() {                                                                   
-	                                                                                                      
-	// 댓글 선택자                                                                                             
-	var reply = $(this).parent().parent();                                                                
-	                                                                                                      
-	                                                                                                      
-	// 대댓글 부모 시퀀스                                                                                         
-	var replyNo = reply.find("#replyNo").val();                                                           
-	// 대댓글 작성 내용                                                                                          
-	var replyText = reply.find("#replyText").val();                                                       
-	// 대댓글 작성자                                                                                            
-	var replyWriter = reply.find("#replyWriter").val();                                                   
-	                                                                      
-	alert(replyNo);                                                       
-	                                                                      
+//대댓글 작성 버튼 클릭시
+$('.modalAdd').on("click", function() {
+	
+	// data 셋팅
+	var ReplyNo	= $("#tempPReplyNo").val();
+	var Seq		= $("#tempPSeq").val();
+	var Text		= $("#tempPReplyText").val();
+	var Writer		= $("#tempPReplyWriter").val();
 	
 	//AJAX 통신 : PUT
-// 	$.ajax({
-// 		type : "put",
-// 		url : "../replies/" + replyNo,
-// 		headers : {
-// 			"Content-type" : "application/json",
-// 			"X-HTTP-Method-Override" : "PUT"
-// 		},
-// 		data : JSON.stringify(
-// 				{replyText : replyText}
-// 		),
-// 		dateType : "text",
-// 		success : function (result) {
-// 			console.log("result : " + result);
-// 			if(result == "modSuccess"){
-// 				alert("댓글 수정 완료!");
-// 			$("#modifyModal").modal("hide");  //modal 닫기
-// 			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
-// 			}
-// 		}
-// 	});
+	$.ajax({
+		type : "POST",
+		url : "../replies/insertSubReply",
+		data : {pReplyNo : ReplyNo
+				, pSeq : Seq
+				, cText : Text
+				, cWriter : Writer
+			},
+		dateType : "text",
+		success : function (result) {
+			alert('대댓글 성공! 모달창 닫아야됨');
+			
+			if(result == "CommentsSuccess"){
+				alert("대댓글 등록 완료!");
+			$("#CommentsModal").modal("hide");  //modal 닫기
+			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
+			}
+		} ,error : function(e){
+			$("#CommentsModal").modal("hide");  //modal 닫기
+			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
+		}
+	});
 });
+function rereplyBtn(replyNo, seq){
+	$("#tempPReplyNo").attr("value",replyNo);
+	$("#tempPSeq").attr("value",seq);
+}
 
 </script>
 
