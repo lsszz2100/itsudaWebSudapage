@@ -151,14 +151,13 @@
 <!-- 							<textarea rows="" cols=""><label for="replyText">댓글 내용</label> <input class="form-control" -->
 <!-- 								id="replyText" name="replyText" placeholder="댓글 내용을 입력해주세요"></textarea> -->
 								
-								<textarea class="form-control" id="tempPReplyText" name="tempPReplyText" rows="7" placeholder="대댓글을 입력해주세요..." style="resize: nonel"></textarea>
+								<textarea class="form-control" id="tempPReplyText" name="tempPReplyText" rows="7" placeholder="대댓글을 입력해주세요." style="resize: nonel"></textarea>
 						</div>
 
 						<div class="form-group">
-							<label for="replyWriter">댓글 작성자</label> <input
-								class="form-control" id="tempPReplyWriter" name="tempPReplyWriter">
-
-						</div>
+							<label for="replyWriter">댓글 작성자</label> 
+							<input class="form-control" id="tempPReplyWriter" name="tempPReplyWriter">
+						</div>					
 					</div>
 					<div class="modal-footer">
 					<button type="button" class="btn btn-success modalAdd">작성</button>
@@ -183,28 +182,9 @@
   
   
 
- // 댓글 목록 출력 함수
-// function getReplies(){
-// 	$.getJSON("../replies/all/" + seq, function (data) {
-		
-		
-// 		var str="";
-		
-// 		$(data).each(function (){
-// 			str += "<li data-replyNo='" + this.replyNo + "' class='replyLi'>"
-// 				+	"<p class='replyText'>"+ this.replyText + "</p>"
-// 				+	"<p class='replyWriter'>" + this.replyWriter + "</p>"
-// 				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal'>댓글 수정</button>"
-// 				+	"</li>"
-// 				+	"<hr/>";
-// 		});
-		
-// 		$("#replies").html(str);
-		
-// 	});
-// }
 
-//댓글 목록 페이징 함수
+
+//댓글 목록 호출 함수
 function getRepliesPaging(page) {
 	
 	$.getJSON("../replies/" + seq + "/" + page, function (data) {
@@ -213,29 +193,76 @@ function getRepliesPaging(page) {
 		var str = "";
 		
 		$(data.replies).each(function (){
-			if(this.reparent == 0){
-			str += "<li data-replyNo='" + this.replyNo + "' class='replyLi'>"
-				+	"<h3><p class='replyWriter' style='color:#28A745'>☺" + this.replyWriter + "</p></h3>"
-				+	"<p class='replyText'>" + this.replyText + "</p>"
- 				+	"<p class='updateDate' style='float:left'>" + this.updateDate + "</p>"
-				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right'>댓글 수정</button>"
-				+   "<button type='button' class = 'btn btn-sm btn-success' data-toggle='modal' data-target='#CommentsModal' onclick='rereplyBtn("+this.replyNo+","+this.seq+")' style='float:left; margin-left:10px; background-color:#007BE1'>댓글</button>"
-				+	"</li>"
-				+	"</p>"
-				+	"</p>"
-				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
-			} else{
-				str += "<li data-replyNo='" + this.replyNo + "' class='replyLi' style='margin-left:50px'>"
-				+	"<h3 class='replyWriter' style='color:#28A745; font-size:20px;'>☺" + this.replyWriter + "</h3>"
-				+	"<p class='replyText' style='font-size:15px'>" + this.replyText + "</p>"
- 				+	"<p class='updateDate' style='float:left; font-size:15px; margin-bottom:40px;'>" + this.updateDate + "</p>"
-				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right; background-color:#007BE1; weight:50; height:30; font-size:15px;'>수정</button>"
-				+	"</li>"
-				+	"</p>"
-				+	"</p>"
-				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
+// 			if(this.reparent == 0){
+// 			str += "<li data-replyNo='" + this.replyNo + "' class='replyLi'>"
+// 				+	"<h3><p class='replyWriter' style='color:#28A745'>☺" + this.replyWriter + "</p></h3>"
+// 				+	"<p class='replyText'>" + this.replyText + "</p>"
+//  				+	"<p class='updateDate' style='float:left'>" + this.updateDate + "</p>"
+// 				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right'>댓글 수정</button>"
+// 				+   "<button type='button' class = 'btn btn-sm btn-success' data-toggle='modal' data-target='#CommentsModal' onclick='rereplyBtn("+this.replyNo+","+this.seq+")' style='float:left; margin-left:10px; background-color:#007BE1'>댓글</button>"
+// 				+	"</li>"
+// 				+	"</p>"
+// 				+	"</p>"
+// 				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
+// 			} else{
+// 				str += "<li data-replyNo='" + this.replyNo + "' class='replyLi' style='margin-left:50px'>"
+// 				+	"<h3 class='replyWriter' style='color:#28A745; font-size:20px;'>☺" + this.replyWriter + "</h3>"
+// 				+	"<p class='replyText' style='font-size:15px'>" + this.replyText + "</p>"
+//  				+	"<p class='updateDate' style='float:left; font-size:15px; margin-bottom:40px;'>" + this.updateDate + "</p>"
+// 				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right; background-color:#007BE1; weight:50; height:30; font-size:15px;'>수정</button>"
+// 				+	"</li>"
+// 				+	"</p>"
+// 				+	"</p>"
+// 				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
 				
-			}
+// 			}
+			
+		
+			      if(this.reorder == null || this.reorder == 1){
+			         // 댓글 그리기
+			           str += "<li data-replyNo='" + this.preplyNo + "' class='replyLi'>"
+						   + 	"<h3><p class='replyWriter' style='color:#28A745'>☺" + this.preplyWriter + "</p></h3>"
+						   + 	"<p class='replyText'>" + this.preplyText + "</p>"
+				 		   + 	"<p class='updateDate' style='float:left'>" + this.pupdateDate + "</p>"
+						   + 	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right'>댓글 수정</button>"
+						   +    "<button type='button' class = 'btn btn-sm btn-success' data-toggle='modal' data-target='#CommentsModal' onclick='rereplyBtn("+this.preplyNo+","+this.pseq+")' style='float:left; margin-left:10px; background-color:#007BE1'>댓글</button>"
+						   + 	"</li>"
+						   + 	"</p>"
+						   + 	"</p>"
+						   + 	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
+						   
+						   $("#reply").append(str);
+						   
+			         // 대댓글 그리기
+			       if(this.cseq != null){
+			           str += "<li data-replyNo='" + this.creplyNo + "' class='replyLi' style='margin-left:50px'>"
+			  				+	"<h3 class='replyWriter' style='color:#28A745; font-size:20px;'>☺" + this.creplyWriter + "</h3>"
+			  				+	"<p class='replyText' style='font-size:15px'>" + this.creplyText + "</p>"
+			   				+	"<p class='updateDate' style='float:left; font-size:15px; margin-bottom:40px;'>" + this.cupdateDate + "</p>"
+			  				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right; background-color:#007BE1; weight:50; height:30; font-size:15px;'>수정</button>"
+			  				+	"</li>"
+			  				+	"</p>"
+			  				+	"</p>"
+			  				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
+			  				
+			  				$("#reply").append(str);
+			       }
+			      } else{
+			         // 대댓글 그리기
+			           str += "<li data-replyNo='" + this.creplyNo + "' class='replyLi' style='margin-left:50px'>"
+			  				+	"<h3 class='replyWriter' style='color:#28A745; font-size:20px;'>☺" + this.creplyWriter + "</h3>"
+			  				+	"<p class='replyText' style='font-size:15px'>" + this.creplyText + "</p>"
+			   				+	"<p class='updateDate' style='float:left; font-size:15px; margin-bottom:40px;'>" + this.cupdateDate + "</p>"
+			  				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right; background-color:#007BE1; weight:50; height:30; font-size:15px;'>수정</button>"
+			  				+	"</li>"
+			  				+	"</p>"
+			  				+	"</p>"
+			  				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
+			  				
+			  				$("#reply").append(str);
+			      }
+			      console.log(data.replies);
+			   
 	});
 		
 		$("#replies").html(str);
@@ -293,7 +320,7 @@ $('.replyAddBtn').on("click", function() {
 	var replyWriterVal = replyWriter.val();
 	
 	replyTextVal = replyTextVal.replace(/(\n|\r\n)/g,"<br>");
-	
+		
 	// AJAX 통신 :POST
 	if(replyTextVal == '' || replyWriterVal == '')
 		alert("내용 및 작성자를 작성해주세요.");
@@ -407,7 +434,7 @@ $('.modalModBtn').on("click", function() {
                                                                                                           
 //대댓글 작성 버튼 클릭시
 $('.modalAdd').on("click", function() {
-	
+
 	// data 셋팅
 	var ReplyNo	= $("#tempPReplyNo").val();
 	var Seq		= $("#tempPSeq").val();
@@ -424,17 +451,19 @@ $('.modalAdd').on("click", function() {
 				, cWriter : Writer
 			},
 		dateType : "text",
+		
+		
 		success : function (result) {
-			alert('대댓글 성공! 모달창 닫아야됨');
 			
 			if(result == "CommentsSuccess"){
 				alert("대댓글 등록 완료!");
-			$("#CommentsModal").modal("hide");  //modal 닫기
-			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
 			}
-		} ,error : function(e){
 			$("#CommentsModal").modal("hide");  //modal 닫기
+		
 			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
+// 			Text.val(""); // 댓글 작성자 초기화
+// 			Writer.val(""); // 댓글 작성자 초기화											// 댓글 초기확가 안됨!!!!!!!!!!!!!!!
+			
 		}
 	});
 });

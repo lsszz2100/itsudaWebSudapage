@@ -22,9 +22,8 @@ public interface ReplyService {
 	
 	public int countReplies(Integer seq) throws Exception;
 	
-////	대댓글 목록 출력
-//	public void ReReplyCreate(ReplyVO replyVO) throws Exception;
+	public void CommentsCreate(ReplyVO replyVO) throws Exception;
 	
-	//부모 댓글 정보 가져오기
-	public List<ReplyVO> parentReply(Integer replyNo) throws Exception;
+	
+
 }

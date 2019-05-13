@@ -17,6 +17,23 @@ public class ReplyVO {
 	
 	//대댓글 처리
 	@Getter@Setter private Integer reparent;
-	@Getter@Setter private Integer retoder;
+	@Getter@Setter private Integer reorder;
+	
+	//댓글 data
+	@Getter@Setter private Integer PreplyNo;
+	@Getter@Setter private Integer Pseq;
+	@Getter@Setter private String PreplyText;
+	@Getter@Setter private String PreplyWriter;
+	@Getter@Setter private String PregDate;
+	@Getter@Setter private String PupdateDate;
+	
+//	댓글 data
+	@Getter@Setter private Integer CreplyNo;
+	@Getter@Setter private Integer Cseq;
+	@Getter@Setter private String CreplyText;
+	@Getter@Setter private String CreplyWriter;
+	@Getter@Setter private String CregDate;
+	@Getter@Setter private String CupdateDate;
+	
 
 }

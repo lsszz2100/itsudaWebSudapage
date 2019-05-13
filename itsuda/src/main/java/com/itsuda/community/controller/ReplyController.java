@@ -47,7 +47,6 @@ public class ReplyController extends UriMap{
 		ResponseEntity<String> entity = null;
 		try {
 			replyService.create(replyVO);
-			replyVO.getReplyText().replaceAll("\r\n", "<br>");
 			entity = new ResponseEntity<>("regSuccess", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,7 +66,7 @@ public class ReplyController extends UriMap{
 		vo.setReplyWriter(cWriter);
 		
 		try {
-			replyService.create(vo);
+			replyService.CommentsCreate(vo);
 			entity = new ResponseEntity<>("CommentsSuccess", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,7 +120,7 @@ public class ReplyController extends UriMap{
 		return entity;
 	}
 	
-//	댓글 페이징 처리 
+//	댓글 목록 출력 및 페이징 처리 
 	@RequestMapping(value = "/{seq}/{page}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> listPaging(@PathVariable("seq") Integer seq
 													 , @PathVariable("page") Integer page){
@@ -132,6 +131,7 @@ public class ReplyController extends UriMap{
 			
 			List<ReplyVO> replies = replyService.getRepliesPaging(seq, searchCriteria);
 			int repliesCount = replyService.countReplies(seq);
+			
 			
 			
 			PageMaker pageMaker = new PageMaker(); 		

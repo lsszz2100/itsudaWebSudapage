@@ -7,7 +7,7 @@
 <!--     	<typeAlias type="com.itsuda.community.vo.ReplyVO" alias="ReplyVO"/> -->
 
 
-	<!-- 출력 -->
+<!-- 	출력 -->
 	<select id="list" resultType="com.itsuda.community.vo.ReplyVO">
 	SELECT
 		REPLY_NO
@@ -23,7 +23,7 @@
 	ORDER BY REPLY_NO DESC
 	</select>
 
-    <!--입력-->
+<!--     입력 -->
     <insert id="create">
         INSERT INTO TB_COMMUNITY_REPLY (
             SEQ
@@ -81,24 +81,24 @@
     
    
   
-    
-    <select id="listPaging" resultType="com.itsuda.community.vo.ReplyVO">
-    	SELECT
-    		REPLY_NO
-			,SEQ
-			,REPLY_TEXT
-			,REPLY_WRITER
-			,date_format(REG_DATE, "%Y-%c-%e %r") AS REG_DATE
-			,date_format(UPDATE_DATE, "%Y-%c-%e %r") AS UPDATE_DATE
-			,REPARENT
-			,REORDER
-		FROM
-			TB_COMMUNITY_REPLY
-		WHERE
-			seq = #{seq} 
-		ORDER BY REPLY_NO DESC
-		LIMIT #{criteria.pageStart}, #{criteria.perPageNum}
-    </select>
+<!--     댓글 목록 출력 및 페이징 처리 -->
+<!--     <select id="listPaging" resultType="com.itsuda.community.vo.ReplyVO"> -->
+<!--     	SELECT -->
+<!--     		REPLY_NO -->
+<!-- 			,SEQ -->
+<!-- 			,REPLY_TEXT -->
+<!-- 			,REPLY_WRITER -->
+<!-- 			,date_format(REG_DATE, "%Y-%c-%e %r") AS REG_DATE -->
+<!-- 			,date_format(UPDATE_DATE, "%Y-%c-%e %r") AS UPDATE_DATE -->
+<!-- 			,REPARENT -->
+<!-- 			,REORDER -->
+<!-- 		FROM -->
+<!-- 			TB_COMMUNITY_REPLY -->
+<!-- 		WHERE -->
+<!-- 			seq = #{seq}  -->
+<!-- 		ORDER BY REPLY_NO DESC -->
+<!-- 		LIMIT #{criteria.pageStart}, #{criteria.perPageNum} -->
+<!--     </select> -->
     
     <select id="countReplies" resultType="int">
     	SELECT
@@ -108,7 +108,34 @@
     	WHERE
     		SEQ = #{seq}
     </select>
-    
+
+    <select id="listPaging" resultType="com.itsuda.community.vo.ReplyVO">
+	SELECT
+	A.REPLY_NO AS PreplyNo
+	, A.SEQ AS Pseq
+	, A.REPLY_TEXT AS PreplyText
+	, A.REPLY_WRITER AS PreplyWriter
+	, A.REG_DATE AS PregDate
+	, A.UPDATE_DATE AS PupdateDate
+
+	, B.REPLY_NO AS CreplyNo
+	, B.SEQ AS Cseq
+	, B.REPLY_TEXT AS CreplyText
+	, B.REPLY_WRITER AS CreplyWriter
+	, B.REG_DATE AS CregDate
+	, B.UPDATE_DATE AS CupdateDate
+	, B.REORDER AS reorder
+	FROM (
+	SELECT @rownum:=@rownum+1 NO, A.*
+	FROM TB_COMMUNITY_REPLY A, (SELECT @rownum:=0) R
+	WHERE A.SEQ = #{seq}
+	AND A.REPARENT = 0
+	) A
+	LEFT JOIN TB_COMMUNITY_REPLY B ON B.SEQ = A.SEQ AND B.REPARENT = A.REPLY_NO
+
+	ORDER BY A.NO DESC , B.REORDER
+	LIMIT #{criteria.pageStart}, #{criteria.perPageNum}
+     </select>
 
     
 </mapper>

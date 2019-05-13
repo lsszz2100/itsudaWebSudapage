@@ -51,15 +51,12 @@ public class ReplyServiceImpl implements ReplyService{
 		return replyDAO.countReplies(seq);
 	}
 
-//	@Override
-//	public void ReReplyCreate(ReplyVO replyVO) throws Exception {
-//		replyDAO.ReReplyCreate(replyVO);
-//	}
-	
 	@Override
-	public List<ReplyVO> parentReply(Integer replyNo) throws Exception{
-		return replyDAO.parentReply(replyNo);
+	public void CommentsCreate(ReplyVO replyVO) throws Exception {
+		replyDAO.CommentsCreate(replyVO);
 	}
+
+
 
 	
 }

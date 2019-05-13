@@ -28,13 +28,17 @@ public class ReplyDAOImpl implements ReplyDAO{
     // 댓글 입력
     @Override
     public void create(ReplyVO replyVO) throws Exception {
-    	if(replyVO.getReparent() == 0) {
     		sql.insert(NAMESPACE + ".create", replyVO);
-    	} else {
-    		sql.insert(NAMESPACE + ".createSubReply", replyVO);
-    	}
-    	
     }
+    
+    //대댓글 입력
+    public void CommentsCreate(ReplyVO replyVO) throws Exception {
+ 	if(replyVO.getReparent() == 0) {
+		sql.insert(NAMESPACE + ".create", replyVO);
+	} else {
+		sql.insert(NAMESPACE + ".createSubReply", replyVO);
+	}
+}
 
     // 댓글 수정
     @Override
@@ -63,22 +67,7 @@ public class ReplyDAOImpl implements ReplyDAO{
     	return sql.selectOne(NAMESPACE + ".countReplies", seq);
     }
 
-    
-////  대댓글 추가
-//	@Override
-//	public void ReReplyCreate(Integer replyNo) throws Exception {
-//		sql.insert(NAMESPACE + ".ReReplyCreate", replyNo);
-//	}
-	
-// 부모 댓글 정보 가져오기
-    @Override
-    public  List<ReplyVO> parentReply(Integer replyNo) throws Exception{
-    	return sql.selectList(NAMESPACE + ".parentReply", replyNo);
-    }
+  
 
-	@Override
-	public List<ReplyVO> commentsReply(ReplyVO patentVO) throws Exception {
-		return sql.selectList(NAMESPACE + ".commentsReply", patentVO);
-	}
 
 }
