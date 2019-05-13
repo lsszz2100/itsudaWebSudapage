@@ -26,6 +26,7 @@ public class ReplyVO {
 	@Getter@Setter private String PreplyWriter;
 	@Getter@Setter private String PregDate;
 	@Getter@Setter private String PupdateDate;
+//	@Getter@Setter private String Preorder;
 	
 //	댓글 data
 	@Getter@Setter private Integer CreplyNo;
@@ -34,6 +35,9 @@ public class ReplyVO {
 	@Getter@Setter private String CreplyWriter;
 	@Getter@Setter private String CregDate;
 	@Getter@Setter private String CupdateDate;
+	
+	//ORDER 순서 재정의
+	@Getter@Setter private String ranking;
 	
 
 }

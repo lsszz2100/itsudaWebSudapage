@@ -188,37 +188,14 @@
 function getRepliesPaging(page) {
 	
 	$.getJSON("../replies/" + seq + "/" + page, function (data) {
-		console.log(data);
+		console.log(data.replyCount);
 		
 		var str = "";
 		
-		$(data.replies).each(function (){
-// 			if(this.reparent == 0){
-// 			str += "<li data-replyNo='" + this.replyNo + "' class='replyLi'>"
-// 				+	"<h3><p class='replyWriter' style='color:#28A745'>☺" + this.replyWriter + "</p></h3>"
-// 				+	"<p class='replyText'>" + this.replyText + "</p>"
-//  				+	"<p class='updateDate' style='float:left'>" + this.updateDate + "</p>"
-// 				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right'>댓글 수정</button>"
-// 				+   "<button type='button' class = 'btn btn-sm btn-success' data-toggle='modal' data-target='#CommentsModal' onclick='rereplyBtn("+this.replyNo+","+this.seq+")' style='float:left; margin-left:10px; background-color:#007BE1'>댓글</button>"
-// 				+	"</li>"
-// 				+	"</p>"
-// 				+	"</p>"
-// 				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
-// 			} else{
-// 				str += "<li data-replyNo='" + this.replyNo + "' class='replyLi' style='margin-left:50px'>"
-// 				+	"<h3 class='replyWriter' style='color:#28A745; font-size:20px;'>☺" + this.replyWriter + "</h3>"
-// 				+	"<p class='replyText' style='font-size:15px'>" + this.replyText + "</p>"
-//  				+	"<p class='updateDate' style='float:left; font-size:15px; margin-bottom:40px;'>" + this.updateDate + "</p>"
-// 				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right; background-color:#007BE1; weight:50; height:30; font-size:15px;'>수정</button>"
-// 				+	"</li>"
-// 				+	"</p>"
-// 				+	"</p>"
-// 				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
-				
-// 			}
-			
 		
-			      if(this.reorder == null || this.reorder == 1){
+
+		$(data.replies).each(function (){	
+			      if(this.ranking == 1){
 			         // 댓글 그리기
 			           str += "<li data-replyNo='" + this.preplyNo + "' class='replyLi'>"
 						   + 	"<h3><p class='replyWriter' style='color:#28A745'>☺" + this.preplyWriter + "</p></h3>"
@@ -262,16 +239,14 @@ function getRepliesPaging(page) {
 			  				$("#reply").append(str);
 			      }
 			      console.log(data.replies);
-			   
-	});
-		
+			});
 		$("#replies").html(str);
 		
 		//페이지 번호 출력 호출
 		printPageNumbers(data.pageMaker);
-		
-});
+	});
 }
+
 
 // 댓글 목록 페이지 번호 출력 함수
 function printPageNumbers(pageMaker) {
@@ -441,6 +416,8 @@ $('.modalAdd').on("click", function() {
 	var Text		= $("#tempPReplyText").val();
 	var Writer		= $("#tempPReplyWriter").val();
 	
+	Text = Text.replace(/(\n|\r\n)/g,"<br>");
+	
 	//AJAX 통신 : PUT
 	$.ajax({
 		type : "POST",
@@ -460,9 +437,9 @@ $('.modalAdd').on("click", function() {
 			}
 			$("#CommentsModal").modal("hide");  //modal 닫기
 		
-			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
-// 			Text.val(""); // 댓글 작성자 초기화
-// 			Writer.val(""); // 댓글 작성자 초기화											// 댓글 초기확가 안됨!!!!!!!!!!!!!!!
+			getRepliesPaging(replyPageNum);  // 대댓글 목록 갱신
+			cText.val("");					// 대댓글 내용 초기화
+			cWriter.val("");				// 대댓글 작성자 초기화
 			
 		}
 	});
@@ -470,6 +447,7 @@ $('.modalAdd').on("click", function() {
 function rereplyBtn(replyNo, seq){
 	$("#tempPReplyNo").attr("value",replyNo);
 	$("#tempPSeq").attr("value",seq);
+
 }
 
 </script>

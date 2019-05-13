@@ -75,19 +75,19 @@ public class ReplyController extends UriMap{
 		return entity;
 	}
 	
-//	댓글 목록 
-	@RequestMapping(value = "/all/{seq}", method = RequestMethod.GET)
-	public ResponseEntity<List<ReplyVO>> list(@PathVariable("seq") Integer seq){
-		ResponseEntity<List<ReplyVO>> entity = null;
-
-		try {
-			entity = new ResponseEntity<>(replyService.list(seq), HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		return entity;
-	}
+////	댓글 목록 
+//	@RequestMapping(value = "/all/{seq}", method = RequestMethod.GET)
+//	public ResponseEntity<List<ReplyVO>> list(@PathVariable("seq") Integer seq){
+//		ResponseEntity<List<ReplyVO>> entity = null;
+//
+//		try {
+//			entity = new ResponseEntity<>(replyService.list(seq), HttpStatus.OK);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//		}
+//		return entity;
+//	}
 	
 //	댓글 수정 처리
 	@RequestMapping(value = "/{replyNo}", method = {RequestMethod.PUT, RequestMethod.PATCH})
@@ -141,6 +141,7 @@ public class ReplyController extends UriMap{
 			Map<String, Object> map = new HashMap<>();
 			map.put("replies", replies);
 			map.put("pageMaker", pageMaker);
+			map.put("replyCount", repliesCount);
 			
 			entity = new ResponseEntity<>(map, HttpStatus.OK);
 			
