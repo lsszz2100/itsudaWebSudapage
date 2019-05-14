@@ -9,16 +9,17 @@ public class UriMap {
 	// 달력
 	
 	
+	// 프로젝트 관리
+	public final static String URI_PROJECTMANAGEMENT_MAIN			= "projectManagement.main";  			// 메인 페이지
+	public final static String URI_PROJECTMANAGEMENT_CHARTS 		= "projectManagement.charts";			// 차트 페이지
+	public final static String URI_PROJECTMANAGEMENT_TABLES			= "projectManagement.tables";			// 테이블 페이지
+	
 	
 	// 커뮤니티
 	public final static String URI_COMMUNITY_MAIN		= "community.main";  			// 메인 페이지
 	public final static String URI_COMMUNITY_INSERT		= "community.insert";			// 등록 페이지
 	public final static String URI_COMMUNITY_MODIFY		= "community.modify";			// 수정 페이지
 	public final static String URI_COMMUNITY_DETAIL		= "community.detail";			// 상세 페이지
-	
-	public final static String URI_COMMUNITY_REPLY_TEST		= "community/reply_test";			// 댓글 처리 TEST 페이지
-	
-	
 	
 	
 	// 공지사항 

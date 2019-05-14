@@ -117,7 +117,8 @@ FROM (SELECT @GROUPING := '', @RANK := 0) XX, (
    AND A.REPARENT = 0
 ) A 
 LEFT JOIN TB_COMMUNITY_REPLY B ON B.SEQ = A.SEQ AND B.REPARENT = A.REPLY_NO 
-ORDER BY A.NO DESC , B.REORDER;
+ORDER BY A.NO DESC , B.REORDER
+LIMIT #{criteria.pageStart}, #{criteria.perPageNum}
 </select>
      
 

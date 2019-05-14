@@ -26,13 +26,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
   	<ul class="nav navbar-nav">
-	  <!-- <li class="dropdown">
-	      <a class="nav-link dropdown" href="#" id="navbarNavDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>프로젝트 관리</b></a>
-	      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	        <a class="dropdown-item" href="#">프로젝트1번</a>
-	        <a class="dropdown-item" href="#">프로젝트2번</a>
-	      </div>
-	  </li> -->
+	   <li class="dropdown">
+	      <a class="nav-link" href="<c:url value='/projectManagement/main'/>"><b>프로젝트 관리</b></a>
+	  </li>
 	  <li class="dropdown">
 	      <a class="nav-link dropdown" href="#" id=navbarDropdownMenuLink role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>커뮤니티</b></a>
 	      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

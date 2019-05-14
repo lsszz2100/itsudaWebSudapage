@@ -19,6 +19,23 @@
 	</definition>
 	
 	
+	<!-- 프로젝트 관리 -->
+	
+	<!-- 프로젝트 메인 화면 -->
+	<definition name="projectManagement.main" extends="default.main"> <!-- default.main는 로그인 후 페이지 -->
+		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/main.jsp" />
+	</definition>
+	
+	<!-- 프로젝트 차트 화면 -->
+	<definition name="projectManagement.charts" extends="default.main"> <!-- default.main는 로그인 후 페이지 -->
+		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/charts.jsp" />
+	</definition>
+	
+	<!-- 프로젝트 테이블 화면 -->
+	<definition name="projectManagement.tables" extends="default.main"> <!-- default.main는 로그인 후 페이지 -->
+		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/tables.jsp" />
+	</definition>
+	
 	
 	
 	<!-- 커튜니티 -->
