@@ -201,12 +201,14 @@ public class CommunityController extends UriMap {
 		communityVO.setSeq(Integer.parseInt(seq));
 		communityVO.setTitle(title);
 		communityVO.setDescription(description);
+		log.info("11"+description);
 		communityVO.setTeam(Integer.parseInt(team));
 		dao.updateBoard(communityVO);
 		
 		CommunityVO vo = dao.detailBoard(Integer.parseInt(seq));
 		dao.updateViewCnt(Integer.parseInt(seq));
 		model.addAttribute("vo", vo);
+		log.info(vo);
 		
 		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
 		model.addAttribute("lastestPageNum",lastestPageNum);

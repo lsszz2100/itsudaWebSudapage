@@ -140,16 +140,16 @@
                     <th>Salary</th>
                   </tr>
                 </thead>
-                <tfoot>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                  </tr>
-                </tfoot>
+<!--                 <tfoot> -->
+<!--                   <tr> -->
+<!--                     <th>Name</th> -->
+<!--                     <th>Position</th> -->
+<!--                     <th>Office</th> -->
+<!--                     <th>Age</th> -->
+<!--                     <th>Start date</th> -->
+<!--                     <th>Salary</th> -->
+<!--                   </tr> -->
+<!--                 </tfoot> -->
                 <tbody>
                   <tr>
                     <td>Tiger Nixon</td>
@@ -625,7 +625,7 @@
       <footer class="sticky-footer">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright © Your Website 2019</span>
+            <span>Copyright © 2018. itsuda All rights reserved</span>
           </div>
         </div>
       </footer>

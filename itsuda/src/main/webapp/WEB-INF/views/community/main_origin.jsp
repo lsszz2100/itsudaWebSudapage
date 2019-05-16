@@ -92,8 +92,7 @@
 								<div class="card-body-icon">
 									<i class="fas fa-fw fa-comments"></i>
 								</div>
-								<div class="mr-5">${newDesign}NEW DISIGN</div>
-								<!-- DISIGN 새로운 글목록 수 기능 구현 예정 -->
+								<div class="mr-5">${newDesign}NEW DISIGN Messages!</div>
 							</div>
 							<a class="card-footer text-white clearfix small z-1"
 								href="../community/main?page=1&perPageNum=10&keyword=&team=1">
@@ -110,7 +109,7 @@
 								<div class="card-body-icon">
 									<i class="fas fa-fw fa-list"></i>
 								</div>
-								<div class="mr-5">${newMobile}NEW MOBILE</div>
+								<div class="mr-5">${newMobile}NEW MOBILE Messages!</div>
 								<!-- MOBILE 새로운 글목록 수 기능 구현 예정 -->
 							</div>
 							<a class="card-footer text-white clearfix small z-1"
@@ -128,7 +127,7 @@
 								<div class="card-body-icon">
 									<i class="fas fa-fw fa-shopping-cart"></i>
 								</div>
-								<div class="mr-5">${newPlan}New PLAN</div>
+								<div class="mr-5">${newPlan}New PLAN Messages!</div>
 								<!-- PLAN 새로운 글목록 수 기능 구현 예정 -->
 							</div>
 							<a class="card-footer text-white clearfix small z-1"
@@ -146,7 +145,7 @@
 								<div class="card-body-icon">
 									<i class="fas fa-fw fa-life-ring"></i>
 								</div>
-								<div class="mr-5">${newWeb}New WEB</div>
+								<div class="mr-5">${newWeb}New WEB Messages!</div>
 								<!-- WEB 새로운 글목록 수 기능 구현 예정 -->
 							</div>
 							<a class="card-footer text-white clearfix small z-1"
