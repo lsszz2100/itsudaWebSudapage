@@ -147,4 +147,51 @@
 	ORDER BY team ASC
 	</select>
 	
+<!-- 	팀별 개시물 갯수 -->
+	<select id="CountPosts" resultType="com.itsuda.community.vo.CommunityVO">
+		SELECT 
+			COUNT(SEQ) AS COUNTPOSTS
+			, TEAM
+		FROM 
+			TB_COMMUNITY 
+		GROUP BY
+			TEAM
+	</select>
+	
+<!-- 	팀별 최근 일주일 간 게시물 목록 -->
+	<select id="recentList" resultType="com.itsuda.community.vo.CommunityVO">
+		SELECT
+		@ROWNUM:=@ROWNUM+1 AS NO
+		, A.SEQ
+		, A.TITLE
+		, A.WRITER
+		, A.CRT_DT
+		, A.VIEW_CNT
+        ,TEAM
+		FROM TB_COMMUNITY A
+		, (SELECT @ROWNUM:=0) B
+		WHERE
+		TEAM = ${team} AND DELFLAG = 'N' AND CRT_DT  > date_sub(now(),interval 7 day) AND
+		(title LIKE CONCAT('%', #{keyword}, '%') 
+		OR writer LIKE CONCAT('%', #{keyword}, '%')
+		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
+		ORDER BY NO DESC
+		LIMIT #{pageStart}, #{perPageNum}
+	</select>
+	
+<!-- 	팀별 최근 일주일 간 게시물 목록 갯수 -->
+	<select id ="recentCountPage" resultType="int">
+	SELECT
+	COUNT(SEQ)
+	FROM
+	TB_COMMUNITY
+	WHERE
+	SEQ> 0 AND DELFLAG = 'N' AND TEAM = ${team}  AND CRT_DT  > date_sub(now(),interval 7 day)
+	AND (
+		title LIKE CONCAT('%', #{keyword}, '%') 
+		OR writer LIKE CONCAT('%', #{keyword}, '%')
+		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%')
+		)
+	</select>
+	
 </mapper>

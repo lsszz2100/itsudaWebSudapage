@@ -10,12 +10,7 @@
 
 <head>
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>SB Admin - Dashboard</title>
 
@@ -56,83 +51,92 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<ul class="sidebar navbar-nav">
 		<c:choose>
-		
 					<c:when test="${param.team == 1 }">
+					<ul class="sidebar navbar-nav" style="background-color:#007bff">
 						<li class="nav-item active"><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN</span></strong>
+								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE</span></strong>
+								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN</span></strong>
+								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB</span></strong>
+								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
 						</a></li>
+					</ul>
 					</c:when>
+				
 					<c:when test="${param.team == 2 }">
+					<ul class="sidebar navbar-nav" style="background-color:#ffc107">
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN</span></strong>
+								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item active"><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE</span></strong>
+								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN</span></strong>
+								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB</span></strong>
+								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
 						</a></li>
+					</ul>
 					</c:when>
+					
 					<c:when test="${param.team == 3 }">
+					<ul class="sidebar navbar-nav" style="background-color:#28a745">
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN</span></strong>
+								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE</span></strong>
+								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item active"><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN</span></strong>
+								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB</span></strong>
+								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
 						</a></li>
+					</ul>
 					</c:when>
+				
 					<c:when test="${param.team == 4 }">
+					<ul class="sidebar navbar-nav" style="background-color:#dc3545">
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN</span></strong>
+								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE</span></strong>
+								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item "><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN</span></strong>
+								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
 						</a></li>
 						<li class="nav-item active"><a class="nav-link"
 							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB</span></strong>
+								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
 						</a></li>
+					</ul>
 					</c:when>
 			</c:choose>
-		</ul>
+
 			
 		
 
@@ -153,10 +157,10 @@
 							<div class="card-body">
 								<div class="card-body-icon">
 									<i class="fa fa-paint-brush"></i>
-								</div>
+								</div> 
 								<div class="mr-5">[${newDesign}] NEW DISIGN Messages!</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
+							<a class="card-footer text-white clearfix small z-1" href="<c:url value='/community/recent?page=1&perPageNum=10&keyword=&team=1'/>">
 								<span class="float-left">View Details</span> <span
 								class="float-right"> <i class="fas fa-angle-right"></i>
 							</span>
@@ -171,7 +175,7 @@
 								</div>
 								<div class="mr-5">[${newMobile}] NEW MOBILE Messages!</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
+							<a class="card-footer text-white clearfix small z-1" href="<c:url value='/community/recent?page=1&perPageNum=10&keyword=&team=2'/>">
 								<span class="float-left">View Details</span> <span
 								class="float-right"> <i class="fas fa-angle-right"></i>
 							</span>
@@ -186,7 +190,7 @@
 								</div>
 								<div class="mr-5">[${newPlan}] New PLAN Messages!</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
+							<a class="card-footer text-white clearfix small z-1" href="<c:url value='/community/recent?page=1&perPageNum=10&keyword=&team=3'/>">
 								<span class="float-left">View Details</span> <span
 								class="float-right"> <i class="fas fa-angle-right"></i>
 							</span>
@@ -201,7 +205,7 @@
 								</div>
 								<div class="mr-5">[${newWeb}] New WEB Messages!</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
+							<a class="card-footer text-white clearfix small z-1" href="<c:url value='/community/recent?page=1&perPageNum=10&keyword=&team=4'/>">
 								<span class="float-left">View Details</span> <span
 								class="float-right"> <i class="fas fa-angle-right"></i>
 							</span>
@@ -209,18 +213,6 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- Area Chart Example-->
-<!-- 				<div class="card mb-3"> -->
-<!-- 					<div class="card-header"> -->
-<!-- 						<i class="fas fa-chart-area"></i> Area Chart Example -->
-<!-- 					</div> -->
-<!-- 					<div class="card-body"> -->
-<!-- 						<canvas id="myAreaChart" width="100%" height="30"></canvas> -->
-<!-- 					</div> -->
-<!-- 					<div class="card-footer small text-muted">Updated yesterday -->
-<!-- 						at 11:59 PM</div> -->
-<!-- 				</div> -->
 
 				<!-- DataTables Example -->
 				<div class="card mb-3">
@@ -246,7 +238,7 @@
 							<table class="table table-bordered" id="dataTable" width="100%"
 								cellspacing="0">
 
-								<!-- 								통합 검색 영역 -->
+								<!-- 통합 검색 영역 -->
 								<div class="input-group input-group-sm mb-3">
 									<input type="text" class="form-control" placeholder="검색"
 										name="keyword" id="keywordInput"
@@ -272,6 +264,16 @@
 
 								<tbody>
 									<c:forEach items="${list }" var="item">
+										<tr
+											onclick="location.href='../community/detail${pageMaker.makeSearch(searchCriteria.page) }&seq='+${item.seq }+'&team='+${param.team}">
+											<th scope="row">${item.no }</th>
+											<td>${item.title}</td>
+											<td>${item.writer }</td>
+											<td>${item.crtDt }</td>
+											<td>${item.viewCnt }</td>
+										</tr>
+									</c:forEach>
+									<c:forEach items="${recentList }" var="item">
 										<tr
 											onclick="location.href='../community/detail${pageMaker.makeSearch(searchCriteria.page) }&seq='+${item.seq }+'&team='+${param.team}">
 											<th scope="row">${item.no }</th>

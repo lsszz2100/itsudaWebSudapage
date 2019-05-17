@@ -51,83 +51,91 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<ul class="sidebar navbar-nav">
 			<c:choose>
-
-				<c:when test="${param.team == 1 }">
-					<li class="nav-item active"><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-							<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN</span></strong>
-					</a></li>
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-							<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE</span></strong>
-					</a></li>
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-							<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN</span></strong>
-					</a></li>
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-							<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB</span></strong>
-					</a></li>
-				</c:when>
-				<c:when test="${param.team == 2 }">
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-							<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN</span></strong>
-					</a></li>
-					<li class="nav-item active"><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-							<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE</span></strong>
-					</a></li>
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-							<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN</span></strong>
-					</a></li>
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-							<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB</span></strong>
-					</a></li>
-				</c:when>
-				<c:when test="${param.team == 3 }">
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-							<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN</span></strong>
-					</a></li>
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-							<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE</span></strong>
-					</a></li>
-					<li class="nav-item active"><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-							<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN</span></strong>
-					</a></li>
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-							<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB</span></strong>
-					</a></li>
-				</c:when>
-				<c:when test="${param.team == 4 }">
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-							<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN</span></strong>
-					</a></li>
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-							<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE</span></strong>
-					</a></li>
-					<li class="nav-item "><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-							<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN</span></strong>
-					</a></li>
-					<li class="nav-item active"><a class="nav-link"
-						href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-							<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB</span></strong>
-					</a></li>
-				</c:when>
+					<c:when test="${param.team == 1 }">
+					<ul class="sidebar navbar-nav" style="background-color:#007bff">
+						<li class="nav-item active"><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
+								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
+								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
+								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
+								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
+						</a></li>
+					</ul>
+					</c:when>
+				
+					<c:when test="${param.team == 2 }">
+					<ul class="sidebar navbar-nav" style="background-color:#ffc107">
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
+								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item active"><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
+								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
+								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
+								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
+						</a></li>
+					</ul>
+					</c:when>
+					
+					<c:when test="${param.team == 3 }">
+					<ul class="sidebar navbar-nav" style="background-color:#28a745">
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
+								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
+								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item active"><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
+								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
+								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
+						</a></li>
+					</ul>
+					</c:when>
+				
+					<c:when test="${param.team == 4 }">
+					<ul class="sidebar navbar-nav" style="background-color:#dc3545">
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
+								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
+								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item "><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
+								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
+						</a></li>
+						<li class="nav-item active"><a class="nav-link"
+							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
+								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
+						</a></li>
+					</ul>
+					</c:when>
 			</c:choose>
-		</ul>
 
 
 
@@ -194,7 +202,7 @@
 									<!-- /.box-footer -->
 								</div>
 
-								<!--         <button type="submit" class="btn btn-info" onclick="check();" >등록하기</button> -->
+
 								<button type="submit" class="btn btn-info" onclick="#">등록하기</button>
 								<button type="button" class="btn btn-secondary"
 									onclick="location.href='../community/main?page=${param.page }&perPageNum=10&keyword=&team=${param.team}'">목록으로</button>

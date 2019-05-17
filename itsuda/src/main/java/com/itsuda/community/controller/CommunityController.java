@@ -2,28 +2,20 @@
 
 package com.itsuda.community.controller;
 
-import java.io.FileInputStream;  
-import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.IOUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.itsuda.common.utility.UriMap;
 import com.itsuda.community.service.CommunityDAOImpl;
+import com.itsuda.community.service.CountPosts;
 import com.itsuda.community.service.LastestPageNum;
 import com.itsuda.community.service.PageMaker;
 import com.itsuda.community.service.SearchCriteria;
@@ -34,7 +26,7 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Controller
-@RequestMapping("/community/*")
+@RequestMapping(value="/community/*", produces="text/plain;charset=UTF-8")
 public class CommunityController extends UriMap {
 
 	@Resource
@@ -45,8 +37,8 @@ public class CommunityController extends UriMap {
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 메인화면 이동
-	 * 최종 수정일 : 2019.04.29
-	 * 수정 이력 : 복구 완료
+	 * 최종 수정일 : 2019.05.17
+	 * 수정 이력 : 최근 게시물 갯수 출력 추가
 	 * 
 	 */
 	@RequestMapping(value = "main", method = RequestMethod.GET)
@@ -71,28 +63,79 @@ public class CommunityController extends UriMap {
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
 		
+		List<CommunityVO> countPosts = dao.CountPosts();
+		log.info(countPosts);
+		model.addAttribute("countPosts",countPosts);
+		CountPosts CPS = new CountPosts();
+		CPS.postNum(countPosts, model);
+		
+		return URI_COMMUNITY_MAIN;
+	}
+	
+	/**
+	 * 작성자 : 이건우 
+	 * 기능명 : 커뮤니티 최근 게시물 목록 이동
+	 * 최종 수정일 : 2019.05.17
+	 * 수정 이력 : 
+	 * 
+	 */
+	@RequestMapping(value = "recent", method = RequestMethod.GET)
+	public String Recent(Model model, @RequestParam("page") String page
+								  , @RequestParam("perPageNum") String perPageNum
+								  , @RequestParam("keyword") String keyword
+								  ,	@RequestParam("team") String team
+								  , SearchCriteria searchCriteria) throws Exception {
+		log.info("start recent");
+		pageMaker.setCriteria(searchCriteria);
+		pageMaker.setTotalCount(dao.recentCountPage(searchCriteria));
+		
+		searchCriteria.setKeyword(keyword);
+		searchCriteria.setTeam(team);
+		
+		model.addAttribute("recentList", dao.recentList(searchCriteria));
+		model.addAttribute("pageMaker",pageMaker);
+		model.addAttribute("team",team);
+		
+		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
+		model.addAttribute("lastestPageNum",lastestPageNum);
+		LastestPageNum LPN = new LastestPageNum();
+		LPN.pageNum(lastestPageNum, model);
+		
+		List<CommunityVO> countPosts = dao.CountPosts();
+		log.info(countPosts);
+		model.addAttribute("countPosts",countPosts);
+		CountPosts CPS = new CountPosts();
+		CPS.postNum(countPosts, model);
+		
 		return URI_COMMUNITY_MAIN;
 	}
 
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 등록화면 이동
-	 * 최종 수정일 : 2019.04.29
-	 * 수정 이력 : 복구 완료
+	 * 최종 수정일 : 2019.05.17
+	 * 수정 이력 : 최근 게시물 갯수 출력 추가
 	 * 
 	 */
 	@RequestMapping(value = "insert", method = RequestMethod.GET)  //뷰에서의 이름과 같게 해주어야한다.
 	public String InsertPage(Model model, SearchCriteria searchCriteria) throws Exception {
 		
 		pageMaker.setCriteria(searchCriteria);
+		
+		List<CommunityVO> countPosts = dao.CountPosts();
+		log.info(countPosts);
+		model.addAttribute("countPosts",countPosts);
+		CountPosts CPS = new CountPosts();
+		CPS.postNum(countPosts, model);
+		
 		return URI_COMMUNITY_INSERT;
 	}
 
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 등록 최종 
-	 * 최종 수정일 : 2019.04.29
-	 * 수정 이력 : 복구 완료
+	 * 최종 수정일 : 2019.05.17
+	 * 수정 이력 : 최근 게시물 갯수 출력 추가
 	 * 
 	 */
 	@RequestMapping(value = "insertAction", method = RequestMethod.POST)
@@ -112,10 +155,6 @@ public class CommunityController extends UriMap {
 		
 		dao.insertBoard(communityVO);  
 		
-//		model.addAttribute("team",team);
-//		List<CommunityVO> list = dao.getList(team);
-//		model.addAttribute("list", list);
-		
 		searchCriteria.setPage(1);
 		searchCriteria.setKeyword("");
 		pageMaker.setCriteria(searchCriteria);
@@ -130,6 +169,12 @@ public class CommunityController extends UriMap {
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
 		
+		List<CommunityVO> countPosts = dao.CountPosts();
+		log.info(countPosts);
+		model.addAttribute("countPosts",countPosts);
+		CountPosts CPS = new CountPosts();
+		CPS.postNum(countPosts, model);
+		
 		return URI_COMMUNITY_MAIN;
 	}
 	
@@ -137,8 +182,8 @@ public class CommunityController extends UriMap {
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 삭제 최종
-	 * 최종 수정일 : 2019.04.29
-	 * 수정 이력 : 복구 완료
+	 * 최종 수정일 : 2019.05.17
+	 * 수정 이력 : 최근 게시물 갯수 출력 추가
 	 * 
 	 */
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
@@ -160,6 +205,12 @@ public class CommunityController extends UriMap {
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
 		
+		List<CommunityVO> countPosts = dao.CountPosts();
+		log.info(countPosts);
+		model.addAttribute("countPosts",countPosts);
+		CountPosts CPS = new CountPosts();
+		CPS.postNum(countPosts, model);
+		
 		return URI_COMMUNITY_MAIN;
 		//UPDATE로 만들 것
 	}
@@ -167,8 +218,8 @@ public class CommunityController extends UriMap {
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 수정화면 이동 
-	 * 최종 수정일 : 2019.04.29
-	 * 수정 이력 : 복구 완료
+	 * 최종 수정일 : 2019.05.17
+	 * 수정 이력 : 최근 게시물 갯수 출력 추가
 	 * 
 	 */
 	@RequestMapping(value = "modify", method = RequestMethod.GET)
@@ -182,14 +233,20 @@ public class CommunityController extends UriMap {
 		log.info(vo);
 		model.addAttribute("vo", vo);
 		
+		List<CommunityVO> countPosts = dao.CountPosts();
+		log.info(countPosts);
+		model.addAttribute("countPosts",countPosts);
+		CountPosts CPS = new CountPosts();
+		CPS.postNum(countPosts, model);
+		
 		return URI_COMMUNITY_MODIFY;
 	}
 
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 수정 최종 
-	 * 최종 수정일 : 2019.04.29
-	 * 수정 이력 : 복구 완료
+	 * 최종 수정일 : 2019.05.17
+	 * 수정 이력 : 최근 게시물 갯수 출력 추가
 	 * 
 	 */
 	@RequestMapping(value = "modifyAction", method = RequestMethod.POST)
@@ -214,6 +271,12 @@ public class CommunityController extends UriMap {
 		model.addAttribute("lastestPageNum",lastestPageNum);
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
+		
+		List<CommunityVO> countPosts = dao.CountPosts();
+		log.info(countPosts);
+		model.addAttribute("countPosts",countPosts);
+		CountPosts CPS = new CountPosts();
+		CPS.postNum(countPosts, model);
 		 
 		return URI_COMMUNITY_DETAIL;
 		
@@ -222,8 +285,8 @@ public class CommunityController extends UriMap {
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 글 상세정보 확인 
-	 * 최종 수정일 : 2019.04.29
-	 * 수정 이력 : 복구 완료
+	 * 최종 수정일 : 2019.05.17
+	 * 수정 이력 : 최근 게시물 갯수 출력 추가
 	 * 
 	 */
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
@@ -237,14 +300,20 @@ public class CommunityController extends UriMap {
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
 		
+		List<CommunityVO> countPosts = dao.CountPosts();
+		log.info(countPosts);
+		model.addAttribute("countPosts",countPosts);
+		CountPosts CPS = new CountPosts();
+		CPS.postNum(countPosts, model);
+		
 		return URI_COMMUNITY_DETAIL;
 	}
 	
 	/**
 	 * 작성자 : 이건우 
 	 * 기능명 : 커뮤니티 일주일간 최근 게시물 갯수
-	 * 최종 수정일 : 2019.04.29
-	 * 수정 이력 : 복구 완료
+	 * 최종 수정일 : 2019.05.17
+	 * 수정 이력 : 최근 게시물 갯수 출력 추가
 	 * 
 	 */
 	

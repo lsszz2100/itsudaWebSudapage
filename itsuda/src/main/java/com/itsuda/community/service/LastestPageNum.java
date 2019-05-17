@@ -3,7 +3,7 @@
 	 */
 package com.itsuda.community.service;
 
-import java.util.List;
+import java.util.List; 
 
 import org.springframework.ui.Model;
 

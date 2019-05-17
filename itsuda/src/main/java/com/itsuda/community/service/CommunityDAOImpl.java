@@ -47,20 +47,10 @@ public class CommunityDAOImpl implements CommunityDAO{
 		sql.update(namespace+".updateViewCnt", seq);
 	}
 	
-	//글 작성
-//	@Transactional
+// 글 작성
 	@Override
 	public void insertBoard(CommunityVO communityVO){  
-		
-		// 게시글 입력처리
 		sql.insert(namespace+".insertBoard", communityVO);
-//		String[] files = communityVO.getFiles();
-//		if(files == null)
-//			return;
-//		
-//		//게시글 첨부파일 입력처리
-//		for(String fileName : files)
-//			sql.insert(namespace+".addFile", fileName);
 	}
 	
 	//글 수정 하기 전에 데이터 가져오기
@@ -86,6 +76,26 @@ public class CommunityDAOImpl implements CommunityDAO{
 	public List<CommunityVO> lastestPageNum() {
 		return sql.selectList(namespace+".lastestPageNum");
 	}
+	
+//	팀별 개시물 갯수
+	@Override
+	public List<CommunityVO> CountPosts() {
+		return sql.selectList(namespace+".CountPosts");
+	}
+	
+//	최근 일주일 간 게시물 목록
+	@Override
+	public List<CommunityVO> recentList(SearchCriteria searchCriteria) {
+		return sql.selectList(namespace+".recentList", searchCriteria);
+	}
+	
+//	최근 일주일 간 게시물 목록 갯수
+	@Override
+	public int recentCountPage(SearchCriteria searchCriteria) {
+		return sql.selectOne(namespace+".recentCountPage", searchCriteria);
+	}
+	
+	
 	
 //	//파일 업로드 
 //	@Override
