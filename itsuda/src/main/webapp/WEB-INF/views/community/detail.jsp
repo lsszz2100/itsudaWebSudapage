@@ -48,95 +48,6 @@
 
 	<div id="wrapper">
 
-		<!-- Sidebar -->
-					<c:choose>
-					<c:when test="${param.team == 1 }">
-					<ul class="sidebar navbar-nav" style="background-color:#007bff">
-						<li class="nav-item active"><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
-						</a></li>
-					</ul>
-					</c:when>
-				
-					<c:when test="${param.team == 2 }">
-					<ul class="sidebar navbar-nav" style="background-color:#ffc107">
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
-						</a></li>
-					</ul>
-					</c:when>
-					
-					<c:when test="${param.team == 3 }">
-					<ul class="sidebar navbar-nav" style="background-color:#28a745">
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
-						</a></li>
-					</ul>
-					</c:when>
-				
-					<c:when test="${param.team == 4 }">
-					<ul class="sidebar navbar-nav" style="background-color:#dc3545">
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
-						</a></li>
-					</ul>
-					</c:when>
-			</c:choose>
-
-
-
 		<div id="content-wrapper">
 
 			<div class="container-fluid">
@@ -322,17 +233,6 @@
 				</div>
 			</div>
 		
-		<!-- /.container-fluid -->
-
-			<!-- Sticky Footer -->
-			<footer class="sticky-footer">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>Copyright © 2018. itsuda All rights reserved</span>
-					</div>
-				</div>
-			</footer>
-
 		</div>
 		<!-- /.content-wrapper -->
 
@@ -379,43 +279,43 @@ function getRepliesPaging(page) {
 			      if(this.ranking == 1){
 			         // 댓글 그리기
 			           str += "<li data-replyNo='" + this.preplyNo + "' class='replyLi'>"
-						   + 	"<h3><p class='replyWriter' style='color:#28A745'>☺" + this.preplyWriter + "</p></h3>"
+						   + 	"<h3><p class='replyWriter' style='color:#28A745; font-size:20px;'>☺" + this.preplyWriter + "</p></h3>"
 						   + 	"<p class='replyText'>" + this.preplyText + "</p>"
-				 		   + 	"<p class='updateDate' style='float:left'>" + this.pupdateDate + "</p>"
+				 		   + 	"<p class='updateDate' style='float:left; font-size:15px;'>" + this.pupdateDate + "</p>"
 						   + 	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right'>댓글 수정</button>"
 						   +    "<button type='button' class = 'btn btn-sm btn-success' data-toggle='modal' data-target='#CommentsModal' onclick='rereplyBtn("+this.preplyNo+","+this.pseq+")' style='float:left; margin-left:10px; background-color:#007BE1'>댓글</button>"
 						   + 	"</li>"
 						   + 	"</p>"
 						   + 	"</p>"
-						   + 	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
+						   + 	"<hr style='margin-top: 70px; margin-bottom: 20px;'/>"
 						   
 						   $("#reply").append(str);
 						   
 			         // 대댓글 그리기
 			       if(this.cseq != null){
 			           str += "<li data-replyNo='" + this.creplyNo + "' class='replyLi' style='margin-left:50px'>"
-			  				+	"<h3 class='replyWriter' style='color:#28A745; font-size:20px;'>☺" + this.creplyWriter + "</h3>"
+			  				+	"<h3 class='replyWriter' style='color:#28A745; font-size:15px;'>☺" + this.creplyWriter + "</h3>"
 			  				+	"<p class='replyText' style='font-size:15px'>" + this.creplyText + "</p>"
-			   				+	"<p class='updateDate' style='float:left; font-size:15px; margin-bottom:40px;'>" + this.cupdateDate + "</p>"
+			   				+	"<p class='updateDate' style='float:left; font-size:13px; margin-bottom:40px;'>" + this.cupdateDate + "</p>"
 			  				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right; background-color:#007BE1; weight:50; height:30; font-size:15px;'>수정</button>"
 			  				+	"</li>"
 			  				+	"</p>"
 			  				+	"</p>"
-			  				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
+			  				+	"<hr style='margin-top: 70px; margin-bottom: 20px;'/>"
 			  				
 			  				$("#reply").append(str);
 			       }
 			      } else{
 			         // 대댓글 그리기
 			           str += "<li data-replyNo='" + this.creplyNo + "' class='replyLi' style='margin-left:50px'>"
-			  				+	"<h3 class='replyWriter' style='color:#28A745; font-size:20px;'>☺" + this.creplyWriter + "</h3>"
+			  				+	"<h3 class='replyWriter' style='color:#28A745; font-size:15px;'>☺" + this.creplyWriter + "</h3>"
 			  				+	"<p class='replyText' style='font-size:15px'>" + this.creplyText + "</p>"
-			   				+	"<p class='updateDate' style='float:left; font-size:15px; margin-bottom:40px;'>" + this.cupdateDate + "</p>"
+			   				+	"<p class='updateDate' style='float:left; font-size:13px; margin-bottom:40px;'>" + this.cupdateDate + "</p>"
 			  				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right; background-color:#007BE1; weight:50; height:30; font-size:15px;'>수정</button>"
 			  				+	"</li>"
 			  				+	"</p>"
 			  				+	"</p>"
-			  				+	"<hr style='margin-top: 70px; margin-bottom: 30px;'/>"
+			  				+	"<hr style='margin-top: 70px; margin-bottom: 20px;'/>"
 			  				
 			  				$("#reply").append(str);
 			      }

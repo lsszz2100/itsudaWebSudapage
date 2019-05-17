@@ -35,19 +35,7 @@ public interface CommunityDAO {
 	
 	//최근 게시물 게수
 	public List<CommunityVO> lastestPageNum();
-	
-//	최근 일주일 간 게시물 목록
-	public List<CommunityVO> recentList(SearchCriteria searchCriteria);
-	
-//	최근 일주일 간 게시물 목록 개수
-	public int recentCountPage(SearchCriteria searchCriteria);
-	
-//	팀별 개시물 갯수
-	public List<CommunityVO> CountPosts();
-	
-	
-	
-	
+
 //	//파일 업로드
 //	public void addFile(String fullName) throws Exception;
 }

@@ -63,12 +63,6 @@ public class CommunityController extends UriMap {
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
 		
-		List<CommunityVO> countPosts = dao.CountPosts();
-		log.info(countPosts);
-		model.addAttribute("countPosts",countPosts);
-		CountPosts CPS = new CountPosts();
-		CPS.postNum(countPosts, model);
-		
 		return URI_COMMUNITY_MAIN;
 	}
 	
@@ -101,12 +95,6 @@ public class CommunityController extends UriMap {
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
 		
-		List<CommunityVO> countPosts = dao.CountPosts();
-		log.info(countPosts);
-		model.addAttribute("countPosts",countPosts);
-		CountPosts CPS = new CountPosts();
-		CPS.postNum(countPosts, model);
-		
 		return URI_COMMUNITY_MAIN;
 	}
 
@@ -121,12 +109,6 @@ public class CommunityController extends UriMap {
 	public String InsertPage(Model model, SearchCriteria searchCriteria) throws Exception {
 		
 		pageMaker.setCriteria(searchCriteria);
-		
-		List<CommunityVO> countPosts = dao.CountPosts();
-		log.info(countPosts);
-		model.addAttribute("countPosts",countPosts);
-		CountPosts CPS = new CountPosts();
-		CPS.postNum(countPosts, model);
 		
 		return URI_COMMUNITY_INSERT;
 	}
@@ -169,12 +151,6 @@ public class CommunityController extends UriMap {
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
 		
-		List<CommunityVO> countPosts = dao.CountPosts();
-		log.info(countPosts);
-		model.addAttribute("countPosts",countPosts);
-		CountPosts CPS = new CountPosts();
-		CPS.postNum(countPosts, model);
-		
 		return URI_COMMUNITY_MAIN;
 	}
 	
@@ -205,12 +181,6 @@ public class CommunityController extends UriMap {
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
 		
-		List<CommunityVO> countPosts = dao.CountPosts();
-		log.info(countPosts);
-		model.addAttribute("countPosts",countPosts);
-		CountPosts CPS = new CountPosts();
-		CPS.postNum(countPosts, model);
-		
 		return URI_COMMUNITY_MAIN;
 		//UPDATE로 만들 것
 	}
@@ -233,11 +203,6 @@ public class CommunityController extends UriMap {
 		log.info(vo);
 		model.addAttribute("vo", vo);
 		
-		List<CommunityVO> countPosts = dao.CountPosts();
-		log.info(countPosts);
-		model.addAttribute("countPosts",countPosts);
-		CountPosts CPS = new CountPosts();
-		CPS.postNum(countPosts, model);
 		
 		return URI_COMMUNITY_MODIFY;
 	}
@@ -272,11 +237,6 @@ public class CommunityController extends UriMap {
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
 		
-		List<CommunityVO> countPosts = dao.CountPosts();
-		log.info(countPosts);
-		model.addAttribute("countPosts",countPosts);
-		CountPosts CPS = new CountPosts();
-		CPS.postNum(countPosts, model);
 		 
 		return URI_COMMUNITY_DETAIL;
 		
@@ -299,12 +259,6 @@ public class CommunityController extends UriMap {
 		model.addAttribute("lastestPageNum",lastestPageNum);
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
-		
-		List<CommunityVO> countPosts = dao.CountPosts();
-		log.info(countPosts);
-		model.addAttribute("countPosts",countPosts);
-		CountPosts CPS = new CountPosts();
-		CPS.postNum(countPosts, model);
 		
 		return URI_COMMUNITY_DETAIL;
 	}

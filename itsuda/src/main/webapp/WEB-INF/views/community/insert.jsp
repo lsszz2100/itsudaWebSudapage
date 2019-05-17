@@ -50,95 +50,6 @@
 
 	<div id="wrapper">
 
-		<!-- Sidebar -->
-			<c:choose>
-					<c:when test="${param.team == 1 }">
-					<ul class="sidebar navbar-nav" style="background-color:#007bff">
-						<li class="nav-item active"><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
-						</a></li>
-					</ul>
-					</c:when>
-				
-					<c:when test="${param.team == 2 }">
-					<ul class="sidebar navbar-nav" style="background-color:#ffc107">
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
-						</a></li>
-					</ul>
-					</c:when>
-					
-					<c:when test="${param.team == 3 }">
-					<ul class="sidebar navbar-nav" style="background-color:#28a745">
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
-						</a></li>
-					</ul>
-					</c:when>
-				
-					<c:when test="${param.team == 4 }">
-					<ul class="sidebar navbar-nav" style="background-color:#dc3545">
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=1">
-								<strong><i class="fa fa-paint-brush"></i> <span>&nbsp;&nbsp;&nbsp;DISIGN [${DesignCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=2">
-								<strong><i class="fa fa-mobile"></i> <span>&nbsp;&nbsp;&nbsp;MOBILE [${MobileCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item "><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=3">
-								<strong><i class="fa fa-map"></i> <span>&nbsp;&nbsp;&nbsp;PLAN [${PlanCountPosts}]</span></strong>
-						</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							href="../community/main?page=1&perPageNum=10&keyword=&team=4">
-								<strong><i class="fa fa-at"></i> <span>&nbsp;&nbsp;&nbsp;WEB [${WebCountPosts}]</span></strong>
-						</a></li>
-					</ul>
-					</c:when>
-			</c:choose>
-
-
-
 		<div id="content-wrapper">
 
 			<div class="container-fluid">
@@ -228,17 +139,6 @@
 				</div>
 
 			</div>
-			<!-- /.container-fluid -->
-
-			<!-- Sticky Footer -->
-			<footer class="sticky-footer">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>Copyright © 2018. itsuda All rights reserved</span>
-					</div>
-				</div>
-			</footer>
-
 		</div>
 		<!-- /.content-wrapper -->
 
@@ -249,29 +149,6 @@
 	<a class="scroll-to-top rounded" href="#page-top"> <i
 		class="fas fa-angle-up"></i>
 	</a>
-
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready
-					to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<!--     Bootstrap core JavaScript   -->
 	<script

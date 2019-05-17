@@ -77,23 +77,7 @@ public class CommunityDAOImpl implements CommunityDAO{
 		return sql.selectList(namespace+".lastestPageNum");
 	}
 	
-//	팀별 개시물 갯수
-	@Override
-	public List<CommunityVO> CountPosts() {
-		return sql.selectList(namespace+".CountPosts");
-	}
-	
-//	최근 일주일 간 게시물 목록
-	@Override
-	public List<CommunityVO> recentList(SearchCriteria searchCriteria) {
-		return sql.selectList(namespace+".recentList", searchCriteria);
-	}
-	
-//	최근 일주일 간 게시물 목록 갯수
-	@Override
-	public int recentCountPage(SearchCriteria searchCriteria) {
-		return sql.selectOne(namespace+".recentCountPage", searchCriteria);
-	}
+
 	
 	
 	
