@@ -11,47 +11,12 @@
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 
 <title>Detail-page</title>
-
-<!-- Custom fonts for this template-->
-<link
-	href="${pageContext.request.contextPath}/projectManagementResource/vendor/fontawesome-free/css/all.min.css"
-	rel="stylesheet" type="text/css">
-
-<!-- Page level plugin CSS-->
-<link
-	href="${pageContext.request.contextPath}/projectManagementResource/vendor/datatables/dataTables.bootstrap4.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template-->
-<link
-	href="${pageContext.request.contextPath}/projectManagementResource/css/sb-admin.css"
-	rel="stylesheet">
-
 </head>
 
 <body id="page-top">
-
-	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-		<a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
-
-		<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
-			id="sidebarToggle" href="#">
-			<i class="fas fa-bars"></i>
-		</button>
-
-		<!-- Navbar -->
-		<ul class="navbar-nav ml-auto ml-md-0">
-		</ul>
-
-	</nav>
-
 	<div id="wrapper">
-
 		<div id="content-wrapper">
-
-			<div class="container-fluid">
-
+			<div class="container-fluid" style="margin-top:60px">
 				<div class="card mb-3">
 					<div class="card-header">
 						<c:choose>
@@ -164,10 +129,6 @@
 												type="hidden">
 
 											<div class="form-group">
-
-												<!--  							<input class="form-control" -->
-												<!-- 							id="replyText" name="replyText" placeholder="댓글 내용을 입력해주세요" height="48"> -->
-
 												<textarea class="form-control" id="replyText"
 													name="replyText" rows="7" placeholder="댓글을 입력해주세요."
 													style="resize: nonel"></textarea>
@@ -176,7 +137,6 @@
 											<div class="form-group">
 												<input class="form-control" id="replyWriter"
 													name="replyWriter" readonly>
-
 											</div>
 										</div>
 										<div class="modal-footer">
@@ -202,9 +162,6 @@
 											<input type="hidden" id="tempPReplyNo" value=""> <input
 												type="hidden" id="tempPSeq" value="">
 											<div class="form-group">
-												<!-- 							<textarea rows="" cols=""><label for="replyText">댓글 내용</label> <input class="form-control" -->
-												<!-- 								id="replyText" name="replyText" placeholder="댓글 내용을 입력해주세요"></textarea> -->
-
 												<textarea class="form-control" id="tempPReplyText"
 													name="tempPReplyText" rows="7" placeholder="대댓글을 입력해주세요."
 													style="resize: nonel"></textarea>
@@ -225,29 +182,15 @@
 								</div>
 							</div>
 						</section>
-
-
-
 					</div>
 					<div class="card-footer small text-muted"></div>
 				</div>
 			</div>
-		
 		</div>
-		<!-- /.content-wrapper -->
-
 	</div>
-	<!-- /#wrapper -->
-
 	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top"> <i
-		class="fas fa-angle-up"></i>
-	</a>
+	<a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i></a>
 
-	<!--    Custom scripts for all pages   -->
-	<!-- 	위로 가기 버튼  -->
-	<script
-		src="<c:url value='/projectManagementResource/js/sb-admin.min.js'/>"></script>
 
 
 
@@ -271,7 +214,7 @@
 function getRepliesPaging(page) {
 	
 	$.getJSON("../replies/" + seq + "/" + page, function (data) {
-		console.log(data.replyCount);
+		console.log(data);
 		
 		var str = "";
 

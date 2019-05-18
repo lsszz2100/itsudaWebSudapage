@@ -35,9 +35,11 @@ public class ReplyVO {
 	@Getter@Setter private String CreplyWriter;
 	@Getter@Setter private String CregDate;
 	@Getter@Setter private String CupdateDate;
+	@Getter@Setter private String delflag;
 	
 	//ORDER 순서 재정의
 	@Getter@Setter private String ranking;
+	
 	
 
 }

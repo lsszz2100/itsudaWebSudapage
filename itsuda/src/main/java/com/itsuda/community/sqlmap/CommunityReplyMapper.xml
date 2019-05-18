@@ -72,12 +72,14 @@
     </update>
 
     <!--삭제-->
-    <delete id="delete">
-        DELETE FROM 
+    <update id="delete">
+        UPDATE FROM 
         	TB_COMMUNITY_REPLY
-        WHERE 
-        	REPLY_NO = #{replyNo}
-    </delete>
+        SET
+        	DELFLAG = 'Y'
+        WHERE
+        	SEQ = #{seq}
+    </update>
     
     <select id="countReplies" resultType="int">
     	SELECT

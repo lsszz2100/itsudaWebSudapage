@@ -12,54 +12,14 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>SB Admin - Dashboard</title>
-
-<!-- Custom fonts for this template-->
-<link
-	href="${pageContext.request.contextPath}/projectManagementResource/vendor/fontawesome-free/css/all.min.css"
-	rel="stylesheet" type="text/css">
-
-<!-- Page level plugin CSS-->
-<link
-	href="${pageContext.request.contextPath}/projectManagementResource/vendor/datatables/dataTables.bootstrap4.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template-->
-<link
-	href="${pageContext.request.contextPath}/projectManagementResource/css/sb-admin.css"
-	rel="stylesheet">
+<title>mainPage</title>
 
 </head>
 
 <body id="page-top">
-
-	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-		<a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
-
-		<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
-			id="sidebarToggle" href="#">
-			<i class="fas fa-bars"></i>
-		</button>
-
-		<!-- Navbar -->
-		<ul class="navbar-nav ml-auto ml-md-0">
-		</ul>
-
-	</nav>
-
 	<div id="wrapper">
-
 		<div id="content-wrapper">
-
-			<div class="container-fluid">
-
-				<!-- Breadcrumbs-->
-				<ol class="breadcrumb">
-<!-- 					<li class="breadcrumb-item"><a href="#">Dashboard</a></li> -->
-					<li class="breadcrumb-item active">Recent Massages</li>
-				</ol>
-
+			<div class="container-fluid" style="margin-top:60px">
 				<!-- Icon Cards-->
 				<div class="row">
 					<div class="col-xl-3 col-sm-6 mb-3">
@@ -124,6 +84,8 @@
 					</div>
 				</div>
 
+				
+
 				<!-- DataTables Example -->
 				<div class="card mb-3">
 					<div class="card-header">
@@ -183,16 +145,6 @@
 											<td>${item.viewCnt }</td>
 										</tr>
 									</c:forEach>
-<%-- 									<c:forEach items="${recentList }" var="item"> --%>
-<!-- 										<tr -->
-<%-- 											onclick="location.href='../community/detail${pageMaker.makeSearch(searchCriteria.page) }&seq='+${item.seq }+'&team='+${param.team}"> --%>
-<%-- 											<th scope="row">${item.no }</th> --%>
-<%-- 											<td>${item.title}</td> --%>
-<%-- 											<td>${item.writer }</td> --%>
-<%-- 											<td>${item.crtDt }</td> --%>
-<%-- 											<td>${item.viewCnt }</td> --%>
-<!-- 										</tr> -->
-<%-- 									</c:forEach> --%>
 								</tbody>
 							</table>
 							<!-- 페이징 영역 -->
@@ -234,54 +186,16 @@
 								</ul>
 							</nav>
 								<!-- 글쓰기 버튼 -->
-		<button type="button" class="btn btn-outline-secondary"
-			style="float: right; text-align: right; background-color: #007bff; color:white;"
-			onclick="location.href='../community/insert${pageMaker.makeSearch(searchCriteria.page) }&team=${param.team}'">글쓰기</button>
+							<button type="button" class="btn btn-outline-secondary"
+								style="float: right; text-align: right; background-color: #007bff; color: white;"
+								onclick="location.href='../community/insert${pageMaker.makeSearch(searchCriteria.page) }&team=${param.team}'">글쓰기</button>
 						</div>
 					</div>
 					<div class="card-footer small text-muted"></div>
 				</div>
-
 			</div>
 		</div>
-		<!-- /.content-wrapper -->
-
 	</div>
-	<!-- /#wrapper -->
-
-	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top"> <i
-		class="fas fa-angle-up"></i>
-	</a>
-
-	<!--     Bootstrap core JavaScript   -->
-	<script
-		src="<c:url value='/projectManagementResource/vendor/jquery/jquery.min.js' />"></script>
-	<script
-		src="<c:url value='/projectManagementResource/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>
-
-	<!--    Core plugin JavaScript   -->
-	<script
-		src="<c:url value='/projectManagementResource/vendor/jquery-easing/jquery.easing.min.js' />"></script>
-
-	<!--    Page level plugin JavaScript   -->
-	<script
-		src="<c:url value='/projectManagementResource/vendor/chart.js/Chart.min.js'/>"></script>
-<!-- 	<script -->
-<!-- 엔티티, 검색, 페이징 부트 스트랩 -->
-<%-- 		src="<c:url value='/projectManagementResource/vendor/datatables/jquery.dataTables.js'/>"></script> --%>
-	<script
-		src="<c:url value='/projectManagementResource/vendor/datatables/dataTables.bootstrap4.js'/>"></script>
-
-	<!--    Custom scripts for all pages   -->
-	<script
-		src="<c:url value='/projectManagementResource/js/sb-admin.min.js'/>"></script>
-
-	<!--    Demo scripts for this page   -->
-	<script
-		src="<c:url value='/projectManagementResource/js/demo/datatables-demo.js'/>"></script>
-	<script
-		src="<c:url value='/projectManagementResource/js/demo/chart-area-demo.js'/>"></script>
 
 <!-- 검색 버튼 클릭시 이벤트 -->
 <script>

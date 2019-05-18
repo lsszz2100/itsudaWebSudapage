@@ -49,7 +49,7 @@ public class ReplyDAOImpl implements ReplyDAO{
     // 댓글 삭제
     @Override
     public void delete(Integer seq) throws Exception {
-    	sql.delete(NAMESPACE + ".delete", seq);
+    	sql.update(NAMESPACE + ".delete", seq);
     }
     
     @Override

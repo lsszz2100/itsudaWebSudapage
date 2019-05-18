@@ -57,6 +57,13 @@ if(request.getProtocol().equals("HTTP/1.1"))
 		<script type="text/javascript" src="/itsuda/js/datepicker/jquery.datetimepicker.js"></script>
 		<script type="text/javascript" src="/itsuda/js/build/datepicker/jquery.datetimepicker.full.min.js"></script>
 		
+		<!-- 커뮤니티 Top Button -->
+		<!-- Scroll to Top Button css -->
+		<link href="${pageContext.request.contextPath}/projectManagementResource/css/sb-admin.css" rel="stylesheet">
+	
+		<!-- Scroll to Top Button js -->
+		<script src="<c:url value='/projectManagementResource/js/sb-admin.min.js'/>"></script>
+		
 		
 		<title>ItSuda</title>
 	</head>
