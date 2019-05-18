@@ -519,8 +519,8 @@ $('.modalAdd').on("click", function() {
 			$("#CommentsModal").modal("hide");  //modal 닫기
 		
 			getRepliesPaging(replyPageNum);  // 대댓글 목록 갱신
-			cText.val("");					// 대댓글 내용 초기화
-			cWriter.val("");				// 대댓글 작성자 초기화
+			$("#tempPReplyText").val("");					// 대댓글 내용 초기화
+			$("#tempPReplyWriter").val("");			// 대댓글 작성자 초기화
 			
 		}
 	});
