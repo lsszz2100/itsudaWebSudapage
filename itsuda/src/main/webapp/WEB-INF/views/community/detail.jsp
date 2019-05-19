@@ -199,9 +199,9 @@
 //목록페이지 번호 변수 선언, 1로 초기화(첫번째 페이지)
  var replyPageNum = 1;
 
- $.getJSON("../replies/all/" + seq, function(data) {
- 	console.log(data);
- });
+//  $.getJSON("../replies/all/" + seq, function(data) {
+//  	console.log(data);
+//  });
 
 //댓글 목록 호출
   getRepliesPaging(replyPageNum);
@@ -215,11 +215,12 @@ function getRepliesPaging(page) {
 	
 	$.getJSON("../replies/" + seq + "/" + page, function (data) {
 		console.log(data);
-		
 		var str = "";
 
 		$(data.replies).each(function (){	
-			      if(this.ranking == 1){
+			console.log(data.replies);
+			      if(this.pdelflag == 'N' ){
+			    	  if(this.reorder == 1 || this.reorder == null){
 			         // 댓글 그리기
 			           str += "<li data-replyNo='" + this.preplyNo + "' class='replyLi'>"
 						   + 	"<h3><p class='replyWriter' style='color:#28A745; font-size:20px;'>☺" + this.preplyWriter + "</p></h3>"
@@ -233,22 +234,23 @@ function getRepliesPaging(page) {
 						   + 	"<hr style='margin-top: 70px; margin-bottom: 20px;'/>"
 						   
 						   $("#reply").append(str);
-						   
+			    	  
 			         // 대댓글 그리기
-			       if(this.cseq != null){
-			           str += "<li data-replyNo='" + this.creplyNo + "' class='replyLi' style='margin-left:50px'>"
-			  				+	"<h3 class='replyWriter' style='color:#28A745; font-size:15px;'>☺" + this.creplyWriter + "</h3>"
-			  				+	"<p class='replyText' style='font-size:15px'>" + this.creplyText + "</p>"
-			   				+	"<p class='updateDate' style='float:left; font-size:13px; margin-bottom:40px;'>" + this.cupdateDate + "</p>"
-			  				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right; background-color:#007BE1; weight:50; height:30; font-size:15px;'>수정</button>"
-			  				+	"</li>"
-			  				+	"</p>"
-			  				+	"</p>"
-			  				+	"<hr style='margin-top: 70px; margin-bottom: 20px;'/>"
+// 			       if(this.cseq != null && this.cdelflag == 'N'){
+// 			           str += "<li data-replyNo='" + this.creplyNo + "' class='replyLi' style='margin-left:50px'>"
+// 			  				+	"<h3 class='replyWriter' style='color:#28A745; font-size:15px;'>☺" + this.creplyWriter + "</h3>"
+// 			  				+	"<p class='replyText' style='font-size:15px'>" + this.creplyText + "</p>"
+// 			   				+	"<p class='updateDate' style='float:left; font-size:13px; margin-bottom:40px;'>" + this.cupdateDate + "</p>"
+// 			  				+	"<button type='button' class = 'btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal' style='float:right; background-color:#007BE1; weight:50; height:30; font-size:15px;'>수정</button>"
+// 			  				+	"</li>"
+// 			  				+	"</p>"
+// 			  				+	"</p>"
+// 			  				+	"<hr style='margin-top: 70px; margin-bottom: 20px;'/>"
 			  				
-			  				$("#reply").append(str);
-			       }
-			      } else{
+// 			  				$("#reply").append(str);
+// 			       		}
+			    	  }
+			      } if(this.pdelflag == 'N' && this.cdelflag == 'N'){
 			         // 대댓글 그리기
 			           str += "<li data-replyNo='" + this.creplyNo + "' class='replyLi' style='margin-left:50px'>"
 			  				+	"<h3 class='replyWriter' style='color:#28A745; font-size:15px;'>☺" + this.creplyWriter + "</h3>"
@@ -376,7 +378,7 @@ $('.modalDelBtn').on("click", function() {
 	
 	//AJAX 통신 : DELETE
 	$.ajax({
-		type : "delete",
+		type : "get",
 		url : "../replies/" + replyNo,
 		headers : {
 			"Content-type" : "application/json",

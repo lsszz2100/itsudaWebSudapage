@@ -6,23 +6,6 @@
 <!-- <typeAlias type="com.itsuda.community.vo.CommunityVO" alias="CommunityVO"/> -->
 <!--     	<typeAlias type="com.itsuda.community.vo.ReplyVO" alias="ReplyVO"/> -->
 
-
-<!-- 	출력 --> 
-<!-- 	<select id="list" resultType="com.itsuda.community.vo.ReplyVO"> -->
-<!-- 	SELECT -->
-<!-- 		REPLY_NO -->
-<!-- 		,SEQ -->
-<!-- 		,REPLY_TEXT -->
-<!-- 		,REPLY_WRITER -->
-<!-- 		,date_format(REG_DATE, "%Y-%c-%e %r") AS REG_DATE -->
-<!-- 		,date_format(UPDATE_DATE, "%Y-%c-%e %r") AS UPDATE_DATE -->
-<!-- 	FROM -->
-<!-- 		TB_COMMUNITY_REPLY -->
-<!-- 	WHERE -->
-<!-- 		seq = #{seq} AND REPARENT = 0 -->
-<!-- 	ORDER BY REPLY_NO DESC -->
-<!-- 	</select> -->
-
 <!--     입력 -->
     <insert id="create">
         INSERT INTO TB_COMMUNITY_REPLY (
@@ -73,12 +56,12 @@
 
     <!--삭제-->
     <update id="delete">
-        UPDATE FROM 
+        UPDATE 
         	TB_COMMUNITY_REPLY
         SET
         	DELFLAG = 'Y'
         WHERE
-        	SEQ = #{seq}
+        	REPLY_NO = #{replyNo}
     </update>
     
     <select id="countReplies" resultType="int">
@@ -87,41 +70,47 @@
     	FROM
     		TB_COMMUNITY_REPLY
     	WHERE
-    		SEQ = #{seq}
+    		SEQ = #{seq} AND REORDER = 0 AND DELFLAG = 'N'
     </select>
 
 
-     
      <select id="listPaging" resultType="com.itsuda.community.vo.ReplyVO">
-     SELECT 
-   -- PARENT
-   A.REPLY_NO AS P_REPLY_NO
-   , A.SEQ AS P_SEQ
-    , A.REPLY_TEXT AS P_REPLY_TEXT
-    , A.REPLY_WRITER AS P_REPLY_WRITER
-    , A.REG_DATE AS P_REG_DATE
-    , A.UPDATE_DATE AS P_UPDATE_DATE
-    -- CHILD
-    , B.REPLY_NO AS C_REPLY_NO
-   , B.SEQ AS C_SEQ
-    , B.REPLY_TEXT AS C_REPLY_TEXT
-    , B.REPLY_WRITER AS C_REPLY_WRITER
-    , B.REG_DATE AS C_REG_DATE
-    , B.UPDATE_DATE AS CupdateDate
-    , B.REORDER
-    ,CASE @GROUPING WHEN B.REPARENT THEN @RANK := @RANK +1 ELSE @RANK :=1 END AS RANKING
-    ,@GROUPING := B.REPARENT
-    , B.REPARENT
-FROM (SELECT @GROUPING := '', @RANK := 0) XX, (
-   SELECT @rownum:=@rownum+1 NO, A.*
-   FROM TB_COMMUNITY_REPLY A, (SELECT @rownum:=0) R
-   WHERE A.SEQ = #{seq}
-   AND A.REPARENT = 0
-) A 
-LEFT JOIN TB_COMMUNITY_REPLY B ON B.SEQ = A.SEQ AND B.REPARENT = A.REPLY_NO 
-ORDER BY A.NO DESC , B.REORDER
-LIMIT #{criteria.pageStart}, #{criteria.perPageNum}
-</select>
+     <![CDATA[
+			SELECT 
+						CASE
+					          WHEN @prev_value = A.REPLY_NO THEN @vRank
+					          WHEN @prev_value := A.REPLY_NO THEN @vRank := @vRank + 1
+					          END AS rank
+						,A.REPLY_NO AS P_REPLY_NO
+						, A.SEQ AS P_SEQ
+					    , A.REPLY_TEXT AS P_REPLY_TEXT
+					    , A.REPLY_WRITER AS P_REPLY_WRITER
+					    , A.REG_DATE AS P_REG_DATE
+					    , A.UPDATE_DATE AS P_UPDATE_DATE
+					    , A.DELFLAG AS P_DELFLAG
+					
+					    , B.REPLY_NO AS C_REPLY_NO
+					    , B.SEQ AS C_SEQ
+					    , B.REPLY_TEXT AS C_REPLY_TEXT
+					    , B.REPLY_WRITER AS C_REPLY_WRITER
+					    , B.REG_DATE AS C_REG_DATE
+					    , B.UPDATE_DATE AS C_UPDATE_DATE
+					    , B.REORDER
+					    , B.DELFLAG AS C_DELFLAG
+					FROM 
+					(SELECT @vRank := 0, @prev_value := NULL) AS r,
+					(
+					   SELECT @rownum:=@rownum+1 NO, A.*
+					   FROM TB_COMMUNITY_REPLY A, (SELECT @rownum:=0) R
+					   WHERE A.SEQ = #{seq}
+					   AND A.REPARENT = 0 AND A.DELFLAG = 'N'
+					   ORDER BY REPLY_NO DESC
+					) A 
+					LEFT JOIN TB_COMMUNITY_REPLY B ON B.SEQ = A.SEQ AND B.REPARENT = A.REPLY_NO 
+					HAVING rank > #{criteria.pageStart} AND rank <= (#{criteria.pageStart} +10)
+					ORDER BY A.REPLY_NO DESC,B.REORDER;
+			]]>
+		</select>
      
 
     

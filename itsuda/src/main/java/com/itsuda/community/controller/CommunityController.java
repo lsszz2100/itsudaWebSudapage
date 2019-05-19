@@ -73,30 +73,30 @@ public class CommunityController extends UriMap {
 	 * 수정 이력 : 
 	 * 
 	 */
-	@RequestMapping(value = "recent", method = RequestMethod.GET)
-	public String Recent(Model model, @RequestParam("page") String page
-								  , @RequestParam("perPageNum") String perPageNum
-								  , @RequestParam("keyword") String keyword
-								  ,	@RequestParam("team") String team
-								  , SearchCriteria searchCriteria) throws Exception {
-		log.info("start recent");
-		pageMaker.setCriteria(searchCriteria);
-		pageMaker.setTotalCount(dao.countPage(searchCriteria));
-		
-		searchCriteria.setKeyword(keyword);
-		searchCriteria.setTeam(team);
-		
-		model.addAttribute("recentList", dao.listSearch(searchCriteria));
-		model.addAttribute("pageMaker",pageMaker);
-		model.addAttribute("team",team);
-		
-		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
-		model.addAttribute("lastestPageNum",lastestPageNum);
-		LastestPageNum LPN = new LastestPageNum();
-		LPN.pageNum(lastestPageNum, model);
-		
-		return URI_COMMUNITY_MAIN;
-	}
+//	@RequestMapping(value = "recent", method = RequestMethod.GET)
+//	public String Recent(Model model, @RequestParam("page") String page
+//								  , @RequestParam("perPageNum") String perPageNum
+//								  , @RequestParam("keyword") String keyword
+//								  ,	@RequestParam("team") String team
+//								  , SearchCriteria searchCriteria) throws Exception {
+//		log.info("start recent");
+//		pageMaker.setCriteria(searchCriteria);
+//		pageMaker.setTotalCount(dao.countPage(searchCriteria));
+//		
+//		searchCriteria.setKeyword(keyword);
+//		searchCriteria.setTeam(team);
+//		
+//		model.addAttribute("recentList", dao.listSearch(searchCriteria));
+//		model.addAttribute("pageMaker",pageMaker);
+//		model.addAttribute("team",team);
+//		
+//		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
+//		model.addAttribute("lastestPageNum",lastestPageNum);
+//		LastestPageNum LPN = new LastestPageNum();
+//		LPN.pageNum(lastestPageNum, model);
+//		
+//		return URI_COMMUNITY_MAIN;
+//	}
 
 	/**
 	 * 작성자 : 이건우 

@@ -48,8 +48,8 @@ public class ReplyDAOImpl implements ReplyDAO{
 
     // 댓글 삭제
     @Override
-    public void delete(Integer seq) throws Exception {
-    	sql.update(NAMESPACE + ".delete", seq);
+    public void delete(Integer replyNo) throws Exception {
+    	sql.update(NAMESPACE + ".delete", replyNo);
     }
     
     @Override

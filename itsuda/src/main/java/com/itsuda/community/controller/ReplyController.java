@@ -106,7 +106,7 @@ public class ReplyController extends UriMap{
 	}
 	
 //	댓글 삭제 처리 
-	@RequestMapping(value = "/{replyNo}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{replyNo}", method = RequestMethod.GET)
 	public ResponseEntity<String> delete(@PathVariable("replyNo") Integer replyNo){
 		ResponseEntity<String> entity = null;
 		try {
@@ -129,10 +129,8 @@ public class ReplyController extends UriMap{
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setPage(page);
 			
-			List<ReplyVO> replies = replyService.getRepliesPaging(seq, searchCriteria);
 			int repliesCount = replyService.countReplies(seq);
-			
-			
+			List<ReplyVO> replies = replyService.getRepliesPaging(seq, searchCriteria);
 			
 			PageMaker pageMaker = new PageMaker(); 		
 			pageMaker.setCriteria(searchCriteria);

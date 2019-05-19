@@ -16,7 +16,7 @@ public interface ReplyDAO {
 	
 	public void update(ReplyVO replyVO) throws Exception;
 
-	public void delete(Integer replyVO) throws Exception;
+	public void delete(Integer replyNo) throws Exception;
 	
 	List<ReplyVO> listPaging(Integer seq, Criteria criteria) throws Exception;
 	
