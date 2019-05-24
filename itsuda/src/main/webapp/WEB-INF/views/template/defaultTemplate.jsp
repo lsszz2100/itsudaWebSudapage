@@ -64,6 +64,17 @@ if(request.getProtocol().equals("HTTP/1.1"))
 		<!-- Scroll to Top Button js -->
 		<script src="<c:url value='/projectManagementResource/js/sb-admin.min.js'/>"></script>
 		
+		<!-- 프로젝트 관리 페이지  -->
+		<!-- 캘린더 -->
+		<link href='${pageContext.request.contextPath}/projectManagementResource/scheduler/css/fullcalendar.css' rel='stylesheet' />
+		<link href='${pageContext.request.contextPath}/projectManagementResource/scheduler/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+		<script src='${pageContext.request.contextPath}/projectManagementResource/scheduler/js/jquery-1.10.2.js' type="text/javascript"></script>
+		<script src='${pageContext.request.contextPath}/projectManagementResource/scheduler/js/jquery-ui.custom.min.js' type="text/javascript"></script>
+		<script src='${pageContext.request.contextPath}/projectManagementResource/scheduler/js/fullcalendar.js' type="text/javascript"></script>
+		<!-- 사이드 바 드롭다운 -->
+		<script
+		src="<c:url value='/projectManagementResource/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>
+		
 		
 		<title>ItSuda</title>
 	</head>

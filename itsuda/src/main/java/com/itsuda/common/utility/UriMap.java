@@ -11,9 +11,14 @@ public class UriMap {
 	
 	// 프로젝트 관리
 	public final static String URI_PROJECTMANAGEMENT_MAIN			= "projectManagement.main";  			// 메인 페이지
-	public final static String URI_PROJECTMANAGEMENT_CHARTS 		= "projectManagement.charts";			// 차트 페이지
-	public final static String URI_PROJECTMANAGEMENT_TABLES			= "projectManagement.tables";			// 테이블 페이지
-	public final static String URI_PROJECTMANAGEMENT_TEST			= "projectManagement.test";			// 테이블 페이지
+	public final static String URI_PROJECTMANAGEMENT_SUBMAIN 		= "projectManagement.subMain";			// 서브 메인 페이지
+	public final static String URI_PROJECTMANAGEMENT_BASICINFO 		= "projectManagement.basicInfo";		// 기본정보 수정 페이지
+	public final static String URI_PROJECTMANAGEMENT_DOCUMENT		= "projectManagement.document";		// 테이블 페이지
+	public final static String URI_PROJECTMANAGEMENT_SOURCE			= "projectManagement.source";			// 테이블 페이지
+	public final static String URI_PROJECTMANAGEMENT_LIBRARY		= "projectManagement.library";		// 테이블 페이지
+	public final static String URI_PROJECTMANAGEMENT_DBOBJECT		= "projectManagement.dbOject";		// 테이블 페이지
+	public final static String URI_PROJECTMANAGEMENT_ISSUEMANAGE	= "projectManagement.issueManage";	// 테이블 페이지
+	public final static String URI_PROJECTMANAGEMENT_PROJECTMANAGE	= "projectManagement.projectManage";		// 테이블 페이지
 	
 	
 	// 커뮤니티

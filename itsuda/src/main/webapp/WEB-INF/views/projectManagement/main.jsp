@@ -17,13 +17,6 @@
 
 <title>SB Admin - Dashboard</title>
 
-<!-- 스케쥴러 영역입니다. -->
-<link href='${pageContext.request.contextPath}/projectManagementResource/scheduler/css/fullcalendar.css' rel='stylesheet' />
-<link href='${pageContext.request.contextPath}/projectManagementResource/scheduler/css/fullcalendar.print.css' rel='stylesheet' media='print' />
-<script src='${pageContext.request.contextPath}/projectManagementResource/scheduler/js/jquery-1.10.2.js' type="text/javascript"></script>
-<script src='${pageContext.request.contextPath}/projectManagementResource/scheduler/js/jquery-ui.custom.min.js' type="text/javascript"></script>
-<script src='${pageContext.request.contextPath}/projectManagementResource/scheduler/js/fullcalendar.js' type="text/javascript"></script>
-
 </head>
 
 <body id="page-top" style="margin-top:50px">
@@ -89,9 +82,9 @@
 								<div class="card-body-icon">
 									<i class="fas fa-fw fa-comments"></i>
 								</div>
-								<div class="mr-5">26 New Messages!</div>
+								<div class="mr-5">ITSU PAGE</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
+							<a class="card-footer text-white clearfix small z-1" href="../projectManagement/subMain">
 								<span class="float-left">View Details</span> <span
 								class="float-right"> <i class="fas fa-angle-right"></i>
 							</span>
@@ -330,11 +323,6 @@
                 <thead>
                   <tr>
                     <th>comments</th>
-<!--                     <th>contents</th> -->
-<!--                     <th>Office</th> -->
-<!--                     <th>Age</th> -->
-<!--                     <th>Start date</th> -->
-<!--                     <th>Salary</th> -->
                   </tr>
                 </thead>
               </table>
@@ -512,11 +500,6 @@
 	});
 
 </script>
-
-<!-- 메인 부트 스트랩 스크립트 -->
-	<script
-		src="<c:url value='/projectManagementResource/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>
-		
 		
 </body>
 
