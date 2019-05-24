@@ -13,6 +13,7 @@ public class UriMap {
 	public final static String URI_PROJECTMANAGEMENT_MAIN			= "projectManagement.main";  			// 메인 페이지
 	public final static String URI_PROJECTMANAGEMENT_CHARTS 		= "projectManagement.charts";			// 차트 페이지
 	public final static String URI_PROJECTMANAGEMENT_TABLES			= "projectManagement.tables";			// 테이블 페이지
+	public final static String URI_PROJECTMANAGEMENT_TEST			= "projectManagement.test";			// 테이블 페이지
 	
 	
 	// 커뮤니티

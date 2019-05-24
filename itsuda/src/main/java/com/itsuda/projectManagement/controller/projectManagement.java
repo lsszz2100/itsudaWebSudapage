@@ -30,6 +30,15 @@ public class projectManagement extends UriMap {
 		return URI_PROJECTMANAGEMENT_MAIN;
 	}
 	
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	public String Test() throws Exception {
+		
+		log.info("start projectManagement");
+
+
+		return URI_PROJECTMANAGEMENT_TEST;
+	}
+	
 	// 차트
 	@RequestMapping(value = "charts", method = RequestMethod.GET)
 	public String Charts() throws Exception {

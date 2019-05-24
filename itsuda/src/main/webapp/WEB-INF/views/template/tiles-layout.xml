@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE tiles-definitions PUBLIC
         "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
@@ -34,6 +34,10 @@
 	<!-- 프로젝트 테이블 화면 -->
 	<definition name="projectManagement.tables" extends="default.main"> <!-- default.main는 로그인 후 페이지 -->
 		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/tables.jsp" />
+	</definition>
+	
+	<definition name="projectManagement.test" extends="default.main"> <!-- default.main는 로그인 후 페이지 -->
+		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/test.jsp" />
 	</definition>
 	
 	
