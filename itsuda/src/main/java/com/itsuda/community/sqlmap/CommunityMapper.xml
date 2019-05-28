@@ -6,19 +6,6 @@
 		SELECT SYSDATE()
 	</select>
 	
-	
-<!-- 	파일 업로드 -->
-<!-- 	<insert id="addFile"> -->
-<!-- 	INSERT INTO TB_COMMUNITY_FILE ( -->
-<!-- 		file_name -->
-<!-- 		,seq -->
-<!-- 		) -->
-<!-- 	VALUES ( -->
-<!-- 		#{fileName} -->
-<!-- 		, LAST_INSERT-ID() -->
-<!-- 		) -->
-<!-- 	</insert> -->
-	
 	<select id ="listSearch" resultType="com.itsuda.community.vo.CommunityVO">
 	SELECT
 		@ROWNUM:=@ROWNUM+1 AS NO
@@ -82,9 +69,10 @@
 		 	 	SEQ = #{seq}
 	</update>
 	
-	<insert id="insertBoard" parameterType="com.itsuda.community.vo.CommunityVO">
+	<insert id="insertBoard" parameterType="com.itsuda.community.vo.CommunityVO" useGeneratedKeys="true" keyProperty="seq" >
 		INSERT INTO TB_COMMUNITY (
-				WRITER
+				SEQ
+				,WRITER
 				,TITLE
 				,GRADE
 				,DESCRIPTION
@@ -92,7 +80,8 @@
 				,LAST_DT
 		)
 		VALUES(
-		#{writer}
+		#{seq}
+		,#{writer}
 		,#{title}
 		,'1'				
 		,#{description}
@@ -100,6 +89,16 @@
 		,now()
 		)	
 	</insert>
+	
+	<insert id="fileInsert" parameterType="com.itsuda.community.vo.FileVO">
+		INSERT INTO
+		TB_COMMUNITY_FILE (UP_SEQ, FILE_NAME, FILE_REAL_NAME, FILE_PATH)
+		VALUES (#{seq},#{fileName},#{fileRealName},#{filePath})
+	</insert>
+	
+	<select id="fileDetail" parameterType="int" resultType="com.itsuda.community.vo.FileVO">
+		SELECT * FROM TB_COMMUNITY_FILE WHERE UP_SEQ=#{seq};
+	</select>
 	
 
 	<delete id="deleteBoard" parameterType="java.lang.Integer" >

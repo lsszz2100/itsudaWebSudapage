@@ -1,11 +1,11 @@
 package com.itsuda.community.service;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
 import com.itsuda.community.vo.CommunityVO;
+import com.itsuda.community.vo.FileVO;
 
 @Resource
 public interface CommunityDAO {
@@ -36,6 +36,10 @@ public interface CommunityDAO {
 	//최근 게시물 게수
 	public List<CommunityVO> lastestPageNum();
 
-//	//파일 업로드
-//	public void addFile(String fullName) throws Exception;
+	//파일 업로드
+	public void fileInsert(FileVO file) throws Exception;
+	
+	//파일 다운로드
+	public FileVO fileDetail(int seq) throws Exception;
+
 }

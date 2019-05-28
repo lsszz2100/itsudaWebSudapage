@@ -65,6 +65,16 @@
 							</div>
 						</div>
 
+						<div class="form-group">
+							<!-- 첨부파일 다운로드 -->
+							<label>첨부파일</label>
+							<p>
+								<a href="/fileDown/${files.seq}">${files.fileRealName}</a>
+							</p>
+						</div>
+
+
+
 						<section class="content container-fluid" style="margin-top: 40px;">
 
 							<!-- 댓글 등록 영역 -->

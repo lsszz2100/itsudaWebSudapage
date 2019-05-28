@@ -6,19 +6,6 @@
 		SELECT SYSDATE()
 	</select>
 	
-	
-<!-- 	파일 업로드 -->
-<!-- 	<insert id="addFile"> -->
-<!-- 	INSERT INTO TB_COMMUNITY_FILE ( -->
-<!-- 		file_name -->
-<!-- 		,seq -->
-<!-- 		) -->
-<!-- 	VALUES ( -->
-<!-- 		#{fileName} -->
-<!-- 		, LAST_INSERT-ID() -->
-<!-- 		) -->
-<!-- 	</insert> -->
-	
 	<select id ="listSearch" resultType="com.itsuda.community.vo.CommunityVO">
 	SELECT
 		@ROWNUM:=@ROWNUM+1 AS NO
@@ -38,9 +25,6 @@
 		ORDER BY NO DESC
 		LIMIT #{pageStart}, #{perPageNum}
 	</select>
-	
-	
-	
 	
 	<select id ="countPage" resultType="int">
 	SELECT
@@ -82,7 +66,7 @@
 		 	 	SEQ = #{seq}
 	</update>
 	
-	<insert id="insertBoard" parameterType="com.itsuda.community.vo.CommunityVO">
+	<insert id="insertBoard" parameterType="com.itsuda.community.vo.CommunityVO" >
 		INSERT INTO TB_COMMUNITY (
 				WRITER
 				,TITLE
@@ -100,7 +84,6 @@
 		,now()
 		)	
 	</insert>
-	
 
 	<delete id="deleteBoard" parameterType="java.lang.Integer" >
 		UPDATE

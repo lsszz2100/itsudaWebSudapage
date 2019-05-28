@@ -1,16 +1,14 @@
 package com.itsuda.community.service;
 
-import java.util.HashMap;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.itsuda.community.vo.CommunityVO;
+import com.itsuda.community.vo.FileVO;
 
 @Repository
 public class CommunityDAOImpl implements CommunityDAO{
@@ -47,7 +45,7 @@ public class CommunityDAOImpl implements CommunityDAO{
 		sql.update(namespace+".updateViewCnt", seq);
 	}
 	
-// 글 작성
+	// 글 작성
 	@Override
 	public void insertBoard(CommunityVO communityVO){  
 		sql.insert(namespace+".insertBoard", communityVO);
@@ -77,14 +75,18 @@ public class CommunityDAOImpl implements CommunityDAO{
 		return sql.selectList(namespace+".lastestPageNum");
 	}
 	
-
+	//파일 업로드 
+	@Override
+	public void fileInsert(FileVO file) throws Exception {
+		 sql.insert(namespace+".fileInsert", file);
+	}
+	
+	//파일 다은로드
+	@Override
+	public FileVO fileDetail(int seq) throws Exception {
+		return sql.selectOne(namespace+".fileDetail", seq);
+	}
 	
 	
-	
-//	//파일 업로드 
-//	@Override
-//	public void addFile(String fullName) throws Exception {
-//		sql.insert(namespace+".addFile", fullName);
-//	}
 	
 }
