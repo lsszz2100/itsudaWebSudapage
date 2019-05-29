@@ -67,7 +67,7 @@
 								<div class="form-group">
 									<label for="description">내용</label>
 									<textarea class="form-control" id="description"
-										name="description" rows="10"></textarea>
+										name="description" rows="10" required></textarea>
 								</div>
 
 								<div class="col-lg-13">

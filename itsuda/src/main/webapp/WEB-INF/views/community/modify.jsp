@@ -64,16 +64,17 @@
 										<div class="card-body">
 											<h4 class="card-title">첨부파일 수정</h4>
 											<div class="basic-form">
-												<div id="fileDiv">
+												<div id="fileDiv" >
 													<div class="form-group">
 														<input type="file" multiple="multiple" name="files" class="form-control-file">
 													</div>
 													<c:choose>
 														<c:when test="${!empty files}">
 															<div class="card-body">
+															<div class="card" style="padding:1rem;">
 																<div class="form-group">
 																	<!-- 첨부파일 다운로드 -->
-																	<label>삭제하기</label>
+																	<label>첨부파일 삭제 </label>
 																	<c:forEach var="files" varStatus="i" items="${files }">
 																		<p>
 																			<a
@@ -81,6 +82,7 @@
 																		</p> 
 																	</c:forEach>
 																</div>
+															</div>
 															</div>
 														</c:when>
 													</c:choose>

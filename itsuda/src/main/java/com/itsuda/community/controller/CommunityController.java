@@ -125,6 +125,7 @@ public class CommunityController extends UriMap {
 		dao.insertBoard(communityVO); 
 
 		for(int i=0; i < files.length; i++) {
+			if(files[i].getOriginalFilename() != "") {
 			
 		String fileName = files[i].getOriginalFilename();
 		String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
@@ -147,7 +148,7 @@ public class CommunityController extends UriMap {
            file.setFilePath(fileUrl);
 
            dao.fileInsert(file); //file insert
-
+			}
 		}
 		
 		 
@@ -266,7 +267,7 @@ public class CommunityController extends UriMap {
 		
 		
 		for(int i=0; i < files.length; i++) {
-			
+			if(files[i].getOriginalFilename() != "") {
 			String fileName = files[i].getOriginalFilename();
 			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
 			File destinationFile;
@@ -288,7 +289,7 @@ public class CommunityController extends UriMap {
 	           file.setFilePath(fileUrl);
 
 	           dao.fileInsert(file); //file insert
-
+			}
 			}
 		
 		List<FileVO> filesList = dao.fileDetail(Integer.parseInt(seq));
