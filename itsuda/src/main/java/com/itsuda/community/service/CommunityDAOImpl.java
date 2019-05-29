@@ -82,17 +82,31 @@ public class CommunityDAOImpl implements CommunityDAO{
 		 sql.insert(namespace+".fileInsert", file);
 	}
 	
-	//파일 다은로드
+	//파일 리스트
 	@Override
 	public List<FileVO> fileDetail(int seq) throws Exception {
 		return sql.selectList(namespace+".fileDetail", seq);
 	}
+	//파일 다운로드
 	@Override
 	public FileVO fileDownload(int upSeq, int seq) throws Exception {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("upSeq", upSeq);
 		map.put("seq", seq);
 		return sql.selectOne(namespace+".fileDownload", map);
+	}
+	//파일 삭제
+	@Override
+	public void fileDelete(int upSeq, int seq) throws Exception {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("upSeq", upSeq);
+		map.put("seq", seq);
+		sql.update(namespace+".fileDelete", map);
+	}
+	//게시글 삭제시 파일 모두 삭제
+	@Override
+	public void fileDeleteAll(int seq) throws Exception {
+		sql.update(namespace+".fileDeleteAll", seq);
 	}
 	
 	

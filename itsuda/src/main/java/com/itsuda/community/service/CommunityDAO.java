@@ -44,5 +44,11 @@ public interface CommunityDAO {
 	
 	//파일 다운로드
 	public FileVO fileDownload(int upSeq, int seq) throws Exception;
+	
+	//파일 삭제
+	public void fileDelete(int upSeq, int seq) throws Exception;
+	
+	//게시글 삭제시 파일 모두 삭제
+	public void fileDeleteAll(int seq) throws Exception;
 
 }

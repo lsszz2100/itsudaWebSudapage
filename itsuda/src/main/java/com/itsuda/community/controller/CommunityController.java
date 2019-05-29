@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itsuda.common.utility.UriMap;
 import com.itsuda.community.service.CommunityDAOImpl;
@@ -125,28 +125,6 @@ public class CommunityController extends UriMap {
 		dao.insertBoard(communityVO); 
 
 		for(int i=0; i < files.length; i++) {
-//		if(files[i].isEmpty()) {
-//			 MemberVO member = (MemberVO) session.getAttribute("userInfo");
-//				communityVO.setWriter(member.getName());
-				
-//				dao.insertBoard(communityVO);  
-				
-//				searchCriteria.setPage(1);
-//				searchCriteria.setKeyword("");
-//				pageMaker.setCriteria(searchCriteria);
-//				pageMaker.setTotalCount(dao.countPage(searchCriteria));
-//				
-//				model.addAttribute("list", dao.listSearch(searchCriteria));
-//				model.addAttribute("pageMaker",pageMaker);
-//				model.addAttribute("team",team);
-//			
-//				List<CommunityVO> lastestPageNum = dao.lastestPageNum();
-//				model.addAttribute("lastestPageNum",lastestPageNum);
-//				LastestPageNum LPN = new LastestPageNum();
-//				LPN.pageNum(lastestPageNum, model);
-				
-				
-//		}else {
 			
 		String fileName = files[i].getOriginalFilename();
 		String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
@@ -208,6 +186,8 @@ public class CommunityController extends UriMap {
 		
 		dao.deleteBoard(Integer.parseInt(seq));
 		
+		dao.fileDeleteAll(Integer.parseInt(seq));
+		
 		pageMaker.setCriteria(searchCriteria);
 		pageMaker.setTotalCount(dao.countPage(searchCriteria));
 		
@@ -236,11 +216,12 @@ public class CommunityController extends UriMap {
 										, @RequestParam("seq") String seq
 										, @RequestParam("team") String team
 										, SearchCriteria searChCriteria) throws Exception{
-		log.info(seq);
-		log.info(team);
+		
 		CommunityVO vo = dao.getBoard(Integer.parseInt(seq));
-		log.info(vo);
 		model.addAttribute("vo", vo);
+		
+		List<FileVO> files = dao.fileDetail(Integer.parseInt(seq));
+		model.addAttribute("files", files);
 		
 		
 		return URI_COMMUNITY_MODIFY;
@@ -258,7 +239,11 @@ public class CommunityController extends UriMap {
 																		@RequestParam("title") String title,
 																		@RequestParam("description") String description,
 																		@RequestParam("team") String team
-																		,SearchCriteria searchCriteria) throws Exception{
+																		, SearchCriteria searchCriteria
+																		, FileVO file
+																		, HttpSession session
+																		, MultipartHttpServletRequest request
+																		, @RequestParam("files") MultipartFile[] files) throws Exception{
 		description = description.replace("\r\n", "<br>"); // 줄바꿈 처리
 		
 		communityVO.setSeq(Integer.parseInt(seq));
@@ -277,6 +262,37 @@ public class CommunityController extends UriMap {
 		model.addAttribute("lastestPageNum",lastestPageNum);
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
+		
+		
+		
+		for(int i=0; i < files.length; i++) {
+			
+			String fileName = files[i].getOriginalFilename();
+			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
+			File destinationFile;
+			String destinationFileName;
+			String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/WEB-INF/uploadFiles/";
+			
+			
+			do {
+				destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
+				destinationFile = new File(fileUrl + destinationFileName);
+			} while (destinationFile.exists());
+
+			destinationFile.getParentFile().mkdirs();
+			files[i].transferTo(destinationFile);
+			
+	           file.setSeq(communityVO.getSeq());
+	           file.setFileName(destinationFileName);
+	           file.setFileRealName(fileName);
+	           file.setFilePath(fileUrl);
+
+	           dao.fileInsert(file); //file insert
+
+			}
+		
+		List<FileVO> filesList = dao.fileDetail(Integer.parseInt(seq));
+		model.addAttribute("files", filesList);
 		
 		 
 		return URI_COMMUNITY_DETAIL;
@@ -378,4 +394,19 @@ public class CommunityController extends UriMap {
         }
         
     }
+	
+	
+
+		//파일 삭제
+//		@ResponseBody
+		@RequestMapping("/fileDelete/{upSeq}/{seq}/{team}")
+	    private String fileDelete(@PathVariable String upSeq , @PathVariable String seq, @PathVariable String team, RedirectAttributes redirectAttributes) throws Exception{
+		
+	        dao.fileDelete(Integer.parseInt(upSeq), Integer.parseInt(seq));
+	        redirectAttributes.addAttribute("seq", upSeq);
+	        redirectAttributes.addAttribute("team", team);
+	        
+	        return "redirect:/community/modify";
+	    }
+
 }

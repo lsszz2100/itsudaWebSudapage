@@ -97,12 +97,33 @@
 	</insert>
 	
 	<select id="fileDetail" parameterType="int" resultType="com.itsuda.community.vo.FileVO">
-		SELECT * FROM TB_COMMUNITY_FILE WHERE UP_SEQ=#{seq};
+		SELECT * FROM TB_COMMUNITY_FILE WHERE UP_SEQ=#{seq} AND DELFLAG = 'N';
 	</select>
 	
 	<select id="fileDownload" parameterType="map" resultType="com.itsuda.community.vo.FileVO">
-		SELECT * FROM TB_COMMUNITY_FILE WHERE UP_SEQ=#{upSeq} AND SEQ=#{seq};
+		SELECT * FROM TB_COMMUNITY_FILE WHERE UP_SEQ=#{upSeq} AND SEQ=#{seq} AND DELFLAG = 'N';
 	</select>
+	
+	<update id="fileDelete" parameterType="map" >
+		UPDATE
+			TB_COMMUNITY_FILE
+		SET
+			DELFLAG = 'Y'
+			,LAST_DT = now()
+		WHERE 
+			UP_SEQ=#{upSeq} 
+			AND SEQ=#{seq};
+	</update>
+	
+	<update id="fileDeleteAll" parameterType="Integer" >
+		UPDATE
+			TB_COMMUNITY_FILE
+		SET
+			DELFLAG = 'Y'
+			,LAST_DT = now()
+		WHERE 
+			UP_SEQ=#{seq}
+	</update>
 	
 
 	<delete id="deleteBoard" parameterType="java.lang.Integer" >

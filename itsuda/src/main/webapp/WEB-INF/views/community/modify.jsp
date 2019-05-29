@@ -37,7 +37,7 @@
 					
 					<div class="card-body">
 
-						<form action="../community/modifyAction" method="post">
+						<form action="../community/modifyAction" method="post" enctype="multipart/form-data">
 							<input name="team" type="hidden" value="${param.team}" /> 
 							<input name="seq" type="hidden" value="${param.seq}" /> 
 							<input name="page" type="hidden" value="${searchCriteria.page}" /> 
@@ -62,18 +62,33 @@
 								<div class="col-lg-13" style="margin-bottom: 1rem;">
 									<div class="card">
 										<div class="card-body">
-											<h4 class="card-title">첨부파일 추가</h4>
+											<h4 class="card-title">첨부파일 수정</h4>
 											<div class="basic-form">
 												<div id="fileDiv">
 													<div class="form-group">
-														<input type="file" name="files" class="form-control-file">
+														<input type="file" multiple="multiple" name="files" class="form-control-file">
 													</div>
+													<c:choose>
+														<c:when test="${!empty files}">
+															<div class="card-body">
+																<div class="form-group">
+																	<!-- 첨부파일 다운로드 -->
+																	<label>삭제하기</label>
+																	<c:forEach var="files" varStatus="i" items="${files }">
+																		<p>
+																			<a
+																				href="../community/fileDelete/${files.upSeq}/${files.seq}/${param.team}">${files.fileRealName}</a>
+																		</p> 
+																	</c:forEach>
+																</div>
+															</div>
+														</c:when>
+													</c:choose>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-
 
 								<button type="submit" class="btn btn-info">수정하기</button>
 								<button type="button" class="btn btn-secondary"
