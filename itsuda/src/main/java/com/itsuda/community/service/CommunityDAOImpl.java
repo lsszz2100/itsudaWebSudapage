@@ -1,6 +1,7 @@
 package com.itsuda.community.service;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -83,8 +84,15 @@ public class CommunityDAOImpl implements CommunityDAO{
 	
 	//파일 다은로드
 	@Override
-	public FileVO fileDetail(int seq) throws Exception {
-		return sql.selectOne(namespace+".fileDetail", seq);
+	public List<FileVO> fileDetail(int seq) throws Exception {
+		return sql.selectList(namespace+".fileDetail", seq);
+	}
+	@Override
+	public FileVO fileDownload(int upSeq, int seq) throws Exception {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("upSeq", upSeq);
+		map.put("seq", seq);
+		return sql.selectOne(namespace+".fileDownload", map);
 	}
 	
 	

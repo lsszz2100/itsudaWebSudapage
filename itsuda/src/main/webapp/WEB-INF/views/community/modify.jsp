@@ -59,6 +59,22 @@
 										name="description" rows="10">${vo.description }</textarea>
 								</div>
 
+								<div class="col-lg-13" style="margin-bottom: 1rem;">
+									<div class="card">
+										<div class="card-body">
+											<h4 class="card-title">첨부파일 추가</h4>
+											<div class="basic-form">
+												<div id="fileDiv">
+													<div class="form-group">
+														<input type="file" name="files" class="form-control-file">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
 								<button type="submit" class="btn btn-info">수정하기</button>
 								<button type="button" class="btn btn-secondary"
 									onclick="location.href='../community/detail?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&team=${param.team}&seq=${param.seq }'">이전으로</button>

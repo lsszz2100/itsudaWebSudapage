@@ -39,7 +39,10 @@ public interface CommunityDAO {
 	//파일 업로드
 	public void fileInsert(FileVO file) throws Exception;
 	
+	//파일 리스트
+	public List<FileVO> fileDetail(int seq) throws Exception;
+	
 	//파일 다운로드
-	public FileVO fileDetail(int seq) throws Exception;
+	public FileVO fileDownload(int upSeq, int seq) throws Exception;
 
 }

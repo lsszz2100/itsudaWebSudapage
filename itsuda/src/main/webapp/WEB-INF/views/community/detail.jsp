@@ -55,26 +55,28 @@
 										onclick="location.href='../community/modify?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&seq=${param.seq}&team=${param.team}'">수정</button>
 									<button type="button" class="btn btn-info"
 										onclick="location.href='../community/delete?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&seq=${param.seq}&team=${param.team}'">삭제</button>
-								</div>
-								<div class="card-body">
 									<button type="button" class="btn btn-info"
-										onclick="location.href='../community/main?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&team=${param.team}'">목록으로
-									</button>
-
+										onclick="location.href='../community/main?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&team=${param.team}'">목록으로</button>
 								</div>
+								
+								<c:choose>
+								<c:when test="${!empty files}">
+								<div class="card-body">
+									<div class="form-group">
+									<!-- 첨부파일 다운로드 -->
+									<label>첨부파일</label>
+									<c:forEach var="files" varStatus="i" items="${files }">
+									<p>
+										<a href="../community/fileDown/${files.upSeq}/${files.seq}">${files.fileRealName}</a>
+									</p>
+									</c:forEach>
+									</div>
+								</div>
+								</c:when>
+								</c:choose>
 							</div>
 						</div>
-
-						<div class="form-group">
-							<!-- 첨부파일 다운로드 -->
-							<label>첨부파일</label>
-							<p>
-								<a href="/fileDown/${files.seq}">${files.fileRealName}</a>
-							</p>
-						</div>
-
-
-
+						
 						<section class="content container-fluid" style="margin-top: 40px;">
 
 							<!-- 댓글 등록 영역 -->

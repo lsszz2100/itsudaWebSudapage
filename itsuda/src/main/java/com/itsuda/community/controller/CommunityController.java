@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.itsuda.common.utility.UriMap;
 import com.itsuda.community.service.CommunityDAOImpl;
@@ -108,36 +109,46 @@ public class CommunityController extends UriMap {
 										  , @RequestParam("team") String team
 										  , HttpSession session
 										  , SearchCriteria searchCriteria
-										  , HttpServletRequest request
-										  , @RequestPart MultipartFile files) throws Exception {
+										  , MultipartHttpServletRequest request
+										  , @RequestParam("files") MultipartFile[] files) throws Exception {
 		
+		description = description.replace("\r\n", "<br>"); // 줄바꿈 처리
+			
+			
 		communityVO.setTitle(title);
 		communityVO.setDescription(description);
 		communityVO.setTeam(Integer.parseInt(team));
 		
+		MemberVO member = (MemberVO) session.getAttribute("userInfo");
+		communityVO.setWriter(member.getName());
 		
-		if(files.isEmpty()) {
-			 MemberVO member = (MemberVO) session.getAttribute("userInfo");
-				communityVO.setWriter(member.getName());
+		dao.insertBoard(communityVO); 
+
+		for(int i=0; i < files.length; i++) {
+//		if(files[i].isEmpty()) {
+//			 MemberVO member = (MemberVO) session.getAttribute("userInfo");
+//				communityVO.setWriter(member.getName());
 				
-				dao.insertBoard(communityVO);  
+//				dao.insertBoard(communityVO);  
 				
-				searchCriteria.setPage(1);
-				searchCriteria.setKeyword("");
-				pageMaker.setCriteria(searchCriteria);
-				pageMaker.setTotalCount(dao.countPage(searchCriteria));
+//				searchCriteria.setPage(1);
+//				searchCriteria.setKeyword("");
+//				pageMaker.setCriteria(searchCriteria);
+//				pageMaker.setTotalCount(dao.countPage(searchCriteria));
+//				
+//				model.addAttribute("list", dao.listSearch(searchCriteria));
+//				model.addAttribute("pageMaker",pageMaker);
+//				model.addAttribute("team",team);
+//			
+//				List<CommunityVO> lastestPageNum = dao.lastestPageNum();
+//				model.addAttribute("lastestPageNum",lastestPageNum);
+//				LastestPageNum LPN = new LastestPageNum();
+//				LPN.pageNum(lastestPageNum, model);
 				
-				model.addAttribute("list", dao.listSearch(searchCriteria));
-				model.addAttribute("pageMaker",pageMaker);
-				model.addAttribute("team",team);
+				
+//		}else {
 			
-				List<CommunityVO> lastestPageNum = dao.lastestPageNum();
-				model.addAttribute("lastestPageNum",lastestPageNum);
-				LastestPageNum LPN = new LastestPageNum();
-				LPN.pageNum(lastestPageNum, model);
-				
-		}else {
-		String fileName = files.getOriginalFilename();
+		String fileName = files[i].getOriginalFilename();
 		String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
 		File destinationFile;
 		String destinationFileName;
@@ -150,23 +161,20 @@ public class CommunityController extends UriMap {
 		} while (destinationFile.exists());
 
 		destinationFile.getParentFile().mkdirs();
-		files.transferTo(destinationFile);
-		
-	    MemberVO member = (MemberVO) session.getAttribute("userInfo");
-		communityVO.setWriter(member.getName());
-		
-		dao.insertBoard(communityVO);  
+		files[i].transferTo(destinationFile);
 		
            file.setSeq(communityVO.getSeq());
            file.setFileName(destinationFileName);
            file.setFileRealName(fileName);
            file.setFilePath(fileUrl);
 
-           
            dao.fileInsert(file); //file insert
 
-
-	
+		}
+		
+		 
+		
+		
 		
 		searchCriteria.setPage(1);
 		searchCriteria.setKeyword("");
@@ -181,7 +189,7 @@ public class CommunityController extends UriMap {
 		model.addAttribute("lastestPageNum",lastestPageNum);
 		LastestPageNum LPN = new LastestPageNum();
 		LPN.pageNum(lastestPageNum, model);
-		}
+		
 		return URI_COMMUNITY_MAIN;
 	}
 	
@@ -251,6 +259,8 @@ public class CommunityController extends UriMap {
 																		@RequestParam("description") String description,
 																		@RequestParam("team") String team
 																		,SearchCriteria searchCriteria) throws Exception{
+		description = description.replace("\r\n", "<br>"); // 줄바꿈 처리
+		
 		communityVO.setSeq(Integer.parseInt(seq));
 		communityVO.setTitle(title);
 		communityVO.setDescription(description);
@@ -285,7 +295,7 @@ public class CommunityController extends UriMap {
 		CommunityVO vo = dao.detailBoard(Integer.parseInt(seq));
 		dao.updateViewCnt(Integer.parseInt(seq));
 		model.addAttribute("vo", vo);
-		FileVO files = dao.fileDetail(Integer.parseInt(seq));
+		List<FileVO> files = dao.fileDetail(Integer.parseInt(seq));
 		model.addAttribute("files", files);
 		
 		List<CommunityVO> lastestPageNum = dao.lastestPageNum();
@@ -298,12 +308,13 @@ public class CommunityController extends UriMap {
 	}
 	
 	//파일 다운로드
-	@RequestMapping("/fileDown/{seq}")
-    private void fileDown(@PathVariable int seq, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@RequestMapping("/fileDown/{upSeq}/{seq}")
+    private void fileDown(@PathVariable String upSeq, @PathVariable String seq, HttpServletRequest request, HttpServletResponse response) throws Exception{
         
         request.setCharacterEncoding("UTF-8");
-        FileVO fileVO = dao.fileDetail(seq);
+        FileVO fileVO = dao.fileDownload(Integer.parseInt(upSeq), Integer.parseInt(seq));
         
+     
         //파일 업로드된 경로 
         try{
             String filePath = fileVO.getFilePath();
