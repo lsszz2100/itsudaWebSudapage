@@ -14,6 +14,17 @@
 </head>
 
 <body id="page-top">
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	var description = '${vo.description }';
+	result = description.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+        $('#description').val(result);
+    });
+</script>
+
 	<div id="wrapper">
 		<div id="content-wrapper">
 			<div class="container-fluid" style="margin-top:50px">
@@ -56,7 +67,7 @@
 									<label for="description">내용</label>
 
 									<textarea class="form-control" id="description"
-										name="description" rows="10">${vo.description }</textarea>
+										name="description" rows="10"></textarea>
 								</div>
 
 								<div class="col-lg-13" style="margin-bottom: 1rem;">
