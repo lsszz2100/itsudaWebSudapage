@@ -125,6 +125,16 @@
 			UP_SEQ=#{seq}
 	</update>
 	
+	<update id="fileDownloadCnt" parameterType="Integer" >
+		UPDATE
+			TB_COMMUNITY_FILE
+		SET
+			DOWN_CNT = DOWN_CNT + 1
+		WHERE 
+			UP_SEQ=#{upSeq} 
+			AND SEQ=#{seq};
+	</update>
+	
 
 	<delete id="deleteBoard" parameterType="java.lang.Integer" >
 		UPDATE

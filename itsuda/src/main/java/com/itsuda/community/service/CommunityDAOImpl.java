@@ -103,12 +103,17 @@ public class CommunityDAOImpl implements CommunityDAO{
 		map.put("seq", seq);
 		sql.update(namespace+".fileDelete", map);
 	}
+	//파일 다운로드 회수 증가
+	@Override
+	public void fileDownloadCnt(int upSeq, int seq) throws Exception {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("upSeq", upSeq);
+		map.put("seq", seq);
+		sql.update(namespace + ".fileDownloadCnt", map);
+	}
 	//게시글 삭제시 파일 모두 삭제
 	@Override
 	public void fileDeleteAll(int seq) throws Exception {
 		sql.update(namespace+".fileDeleteAll", seq);
 	}
-	
-	
-	
 }

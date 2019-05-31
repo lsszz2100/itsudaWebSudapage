@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace ="itsuda.notice">
+
+
+
+<!--     입력 -->
+    <insert id="create">
+        INSERT INTO TB_NOTICE_REPLY (
+            SEQ
+            , REPLY_TEXT
+            , REPLY_WRITER
+        ) VALUES (
+            #{seq}
+            , #{replyText}
+            , #{replyWriter}
+        )
+    </insert>
+    
+    <!-- 대댓글 입력-->
+    <insert id="createSubReply">
+        INSERT INTO TB_NOTICE_REPLY
+		(
+			SEQ,
+			REPLY_TEXT,
+			REPLY_WRITER,
+			REG_DATE,
+			UPDATE_DATE,
+			REPARENT,
+			REORDER
+		)
+		VALUES
+		(
+			#{seq}
+			, #{replyText}
+			, #{replyWriter}
+			, NOW()
+			, NOW()
+			, #{reparent}
+			, GEN_NOTICE_REPLY_ORDER(#{seq},#{reparent})
+		)
+    </insert>
+    
+
+    <!--수정-->
+    <update id="update">
+        UPDATE 
+        	TB_NOTICE_REPLY
+        SET 
+        	REPLY_TEXT = #{replyText}
+        	,UPDATE_DATE = NOW()
+        WHERE REPLY_NO = #{replyNo}
+    </update>
+
+    <!--삭제-->
+    <update id="delete">
+        UPDATE 
+        	TB_NOTICE_REPLY
+        SET
+        	DELFLAG = 'Y'
+        WHERE
+        	REPLY_NO = #{replyNo}
+    </update>
+    
+    <select id="countReplies" resultType="int">
+    	SELECT
+    		COUNT(SEQ)
+    	FROM
+    		TB_NOTICE_REPLY
+    	WHERE
+    		SEQ = #{seq} AND REORDER = 0 AND DELFLAG = 'N'
+    </select>
+
+
+     <select id="listPaging" resultType="com.itsuda.notice.vo.NoticeReplyVO">
+     <![CDATA[
+			SELECT 
+						CASE
+					          WHEN @prev_value = A.REPLY_NO THEN @vRank
+					          WHEN @prev_value := A.REPLY_NO THEN @vRank := @vRank + 1
+					          END AS rank
+						,A.REPLY_NO AS P_REPLY_NO
+						, A.SEQ AS P_SEQ
+					    , A.REPLY_TEXT AS P_REPLY_TEXT
+					    , A.REPLY_WRITER AS P_REPLY_WRITER
+					    , A.REG_DATE AS P_REG_DATE
+					    , A.UPDATE_DATE AS P_UPDATE_DATE
+					    , A.DELFLAG AS P_DELFLAG
+					
+					    , B.REPLY_NO AS C_REPLY_NO
+					    , B.SEQ AS C_SEQ
+					    , B.REPLY_TEXT AS C_REPLY_TEXT
+					    , B.REPLY_WRITER AS C_REPLY_WRITER
+					    , B.REG_DATE AS C_REG_DATE
+					    , B.UPDATE_DATE AS C_UPDATE_DATE
+					    , B.REORDER
+					    , B.DELFLAG AS C_DELFLAG
+					FROM 
+					(SELECT @vRank := 0, @prev_value := NULL) AS r,
+					(
+					   SELECT @rownum:=@rownum+1 NO, A.*
+					   FROM TB_NOTICE_REPLY A, (SELECT @rownum:=0) R
+					   WHERE A.SEQ = #{seq}
+					   AND A.REPARENT = 0 AND A.DELFLAG = 'N'
+					   ORDER BY REPLY_NO DESC
+					) A 
+					LEFT JOIN TB_NOTICE_REPLY B ON B.SEQ = A.SEQ AND B.REPARENT = A.REPLY_NO 
+					HAVING rank > #{criteria.pageStart} AND rank <= (#{criteria.pageStart} +10)
+					ORDER BY A.REPLY_NO DESC,B.REORDER;
+			]]>
+		</select>
+     
+
+    
+</mapper>

@@ -48,7 +48,10 @@ public interface CommunityDAO {
 	//파일 삭제
 	public void fileDelete(int upSeq, int seq) throws Exception;
 	
-	//게시글 삭제시 파일 모두 삭제
+	//파일 다운로드 회수 증가
+	public void fileDownloadCnt(int upSeq, int seq) throws Exception;
+	
+	//게시글 삭제 시 파일 모두 삭제
 	public void fileDeleteAll(int seq) throws Exception;
 
 }

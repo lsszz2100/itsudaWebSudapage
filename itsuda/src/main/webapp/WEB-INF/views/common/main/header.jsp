@@ -44,7 +44,7 @@
 	  </li>
 	  
 	  <li class="dropdown">
-	      <a class="nav-link" href="<c:url value='/notice/main'/>"><b>공지사항</b></a>
+	      <a class="nav-link" href="<c:url value='/notice/main?page=1&perPageNum=10&keyword='/>"><b>공지사항</b></a>
 	  </li>
 	  <li class="dropdown">
 	      <a class="nav-link" href="<c:url value='/member/mypage'/>"><b>내정보</b></a>

@@ -1,4 +1,3 @@
-// itsuda
 
 package com.itsuda.community.controller;
 
@@ -131,7 +130,7 @@ public class CommunityController extends UriMap {
 		String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
 		File destinationFile;
 		String destinationFileName;
-		String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/WEB-INF/uploadFiles/";
+		String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/WEB-INF/Community_uploadFiles/";
 		
 		
 		do {
@@ -330,7 +329,7 @@ public class CommunityController extends UriMap {
         
         request.setCharacterEncoding("UTF-8");
         FileVO fileVO = dao.fileDownload(Integer.parseInt(upSeq), Integer.parseInt(seq));
-        
+        dao.fileDownloadCnt(Integer.parseInt(upSeq), Integer.parseInt(seq));
      
         //파일 업로드된 경로 
         try{
