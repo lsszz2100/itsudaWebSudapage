@@ -88,8 +88,10 @@ $(document).ready(function() {
 																	<label>첨부파일 삭제 </label>
 																	<c:forEach var="files" varStatus="i" items="${files }">
 																		<p>
-																			<a
-																				href="../community/fileDelete/${files.upSeq}/${files.seq}/${param.team}">${files.fileRealName}</a>
+																				${files.fileRealName}&nbsp;&nbsp;&nbsp;&nbsp;
+																				<button type="button" class="btn btn-danger btn-sm" id="modigyBtn" onclick="modifyBtn_click(${files.upSeq},${files.seq},${param.team });">
+																				 x
+																				</button>
 																		</p> 
 																	</c:forEach>
 																</div>
@@ -116,6 +118,15 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
+	
+<script>
+function modifyBtn_click(upSeq, seq, team) {
+	if(confirm("첨부파일을 삭제하겠습니까?")){
+		location.href='../community/fileDelete/'+ upSeq + '/' +seq+ '/' +team;
+	}else{
+	}
+}
+</script>
 </body>
 
 </html>

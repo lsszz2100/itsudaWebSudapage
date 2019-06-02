@@ -27,7 +27,7 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
   	<ul class="nav navbar-nav">
 	   <li class="dropdown">
-	      <a class="nav-link" href="<c:url value='/projectManagement/main'/>"><b>프로젝트 관리</b></a>
+	      <a class="nav-link" href="<c:url value='/projectManagement/main?proYear=2019&proStatus=P'/>"><b>프로젝트 관리</b></a>
 	  </li>
 <!-- 	  <li class="dropdown"> -->
 <!-- 	      <a class="nav-link dropdown" href="#" id=navbarDropdownMenuLink role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>커뮤니티</b></a> -->

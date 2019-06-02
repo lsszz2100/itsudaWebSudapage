@@ -386,6 +386,7 @@ $('.modalDelBtn').on("click", function() {
 			if(result == "delSuccess"){
 				alert("댓글 삭제 완료!");
 			$("#modifyModal").modal("hide");  //modal 닫기
+			$(".modal-backdrop").remove();
 			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
 			}
 		}
@@ -423,6 +424,7 @@ $('.modalModBtn').on("click", function() {
 			if(result == "modSuccess"){
 				alert("댓글 수정 완료!");
 			$("#modifyModal").modal("hide");  //modal 닫기
+			$(".modal-backdrop").remove();
 			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
 			}
 		}
@@ -458,7 +460,7 @@ $('.modalAdd').on("click", function() {
 				alert("대댓글 등록 완료!");
 			}
 			$("#CommentsModal").modal("hide");  //modal 닫기
-		
+			$(".modal-backdrop").remove();
 			getRepliesPaging(replyPageNum);  // 대댓글 목록 갱신
 			$("#tempPReplyText").val("");					// 대댓글 내용 초기화
 			$("#tempPReplyWriter").val("");			// 대댓글 작성자 초기화

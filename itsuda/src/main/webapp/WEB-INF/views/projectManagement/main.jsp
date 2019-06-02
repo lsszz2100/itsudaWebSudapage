@@ -16,323 +16,235 @@
 <meta name="author" content="">
 
 <title>SB Admin - Dashboard</title>
-
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-
-<body id="page-top" style="margin-top:50px">
+<body id="page-top" style="margin-top: 50px">
 
 	<div id="wrapper">
-	
-		<!-- Sidebar -->
-		<ul class="sidebar navbar-nav">
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#" id="pagesDropdown"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> <i class="fas fa-fw fa-folder"></i> <span>2019</span>
-			</a>
-				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-					<a class="dropdown-item" href="login.html">진행중</a> <a
-						class="dropdown-item" href="register.html">진행 완료</a> 
+		<div>
+			<!-- Sidebar -->
+<!-- 			<button type="button" class="btn btn-success modalAdd" -->
+<!-- 				style="margin-top: 10px; width: 100%; border-radius: 0;" -->
+<%-- 				onclick="location.href='../notice/main?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}'">프로젝트 --%>
+<!-- 				등록</button> -->
 
-				</div></li>
+			<button type='button' class='btn btn-success'
+				data-toggle='modal' data-target='#projectCreateModal'
+				style="margin-top: 10px; width: 100%; border-radius: 0;">프로젝트 등록</button>
 				
-				<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#" id="pagesDropdown"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> <i class="fas fa-fw fa-folder"></i> <span>2018</span>
-			</a>
-				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-					<a class="dropdown-item" href="login.html">진행중</a> <a
-						class="dropdown-item" href="register.html">진행 완료</a> 
+			<ul class="sidebar navbar-nav">
+				<c:choose>
+					<c:when test="${!empty year}">
+						<c:forEach var="year" varStatus="i" items="${year }">
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#" id="pagesDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> <i class="fas fa-fw fa-folder"></i> <span>${year.proYear}</span>
+							</a>
+								<div class="dropdown-menu" aria-labelledby="pagesDropdown">
+								<c:if test="${year.pcount > 0 }">
+									<a class="dropdown-item"
+										href="../projectManagement/main?proYear=${year.proYear}&proStatus=P">진행중</a>
+								</c:if>
+								<c:if test="${year.ecount > 0 }">
+									<a class="dropdown-item"
+										href="../projectManagement/main?proYear=${year.proYear}&proStatus=E">진행
+										완료</a>
+								</c:if>
+								</div></li>
+						</c:forEach>
+					</c:when>
+				</c:choose>
 
-				</div></li>
-				
-				<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#" id="pagesDropdown"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> <i class="fas fa-fw fa-folder"></i> <span>test</span>
-			</a>
-				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-					<a class="dropdown-item" href="../projectManagement/test">test</a> <a
-						class="dropdown-item" href="register.html">진행 완료</a> 
-
-				</div></li>
-		</ul>
-		
-		
+			</ul>
+		</div>
 
 		<div id="content-wrapper">
 
 			<div class="container-fluid">
+				<!-- 프로젝트 목록 영역 -->
+				<div
+					style="height: 1400px; width: 25%; float: left; margin-right: 10px; overflow: scroll;">
 
-				<div style="height:1400px; width:25%; float:left; margin-right:10px;  overflow: scroll;">
-				<!-- Breadcrumbs-->
-				<ul class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#"><strong>진행중인 프로젝트</strong></a></li>
-					 
-<!-- 					 <li class="breadcrumb-item active">Overview</li> -->
-				</ul>
-				
+					<!-- 	Breadcrumbs -->
+					<c:if test="${status == 'P'}">
+						<ul class="breadcrumb">
+							<li class="breadcrumb-item"><strong>Proceeding Project</strong></li>
+						</ul>
+					</c:if>
+					<c:if test="${status == 'E'}">
+						<ul class="breadcrumb">
+							<li class="breadcrumb-item"><strong>Ended Project</strong></li>
+						</ul>
+					</c:if>
 
-				<!-- Icon Cards-->
-				<div>
-					<div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-primary o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-comments"></i>
+
+					<c:forEach items="${proList }" var="item">
+						<c:if test="${item.proStatus == 'P'}">
+							<!-- Icon Cards -->
+							<div>
+								<div class="col-xl-12 col-sm-6 mb-3">
+									<div class="card text-white bg-primary o-hidden h-100">
+										<div class="card-body">
+											<div class="card-body-icon">
+												<i class="fas fa-fw fa-walking"></i>
+											</div>
+											<div class="mr-5">${item.proTitle}</div>
+										</div>
+										<a class="card-footer text-white clearfix small z-1"
+											href="../projectManagement/subMain"> <span
+											class="float-left">View Details</span> <span
+											class="float-right"> <i class="fas fa-angle-right"></i>
+										</span>
+										</a>
+									</div>
 								</div>
-								<div class="mr-5">ITSU PAGE</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1" href="../projectManagement/subMain">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div>
-					<div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-warning o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-list"></i>
+						</c:if>
+						<c:if test="${item.proStatus == 'E'}">
+							<!-- Icon Cards -->
+							<div>
+								<div class="col-xl-12 col-sm-6 mb-3">
+									<div class="card text-white bg-danger o-hidden h-100">
+										<div class="card-body">
+											<div class="card-body-icon">
+												<i class="fas fa-fw fa-user-graduate"></i>
+											</div>
+											<div class="mr-5">${item.proTitle}</div>
+										</div>
+										<a class="card-footer text-white clearfix small z-1"
+											href="../projectManagement/subMain"> <span
+											class="float-left">View Details</span> <span
+											class="float-right"> <i class="fas fa-angle-right"></i>
+										</span>
+										</a>
+									</div>
 								</div>
-								<div class="mr-5">11 New Tasks!</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div>
-					<div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-success o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-shopping-cart"></i>
-								</div>
-								<div class="mr-5">123 New Orders!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div>
-					<div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-danger o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-life-ring"></i>
-								</div>
-								<div class="mr-5">13 New Tickets!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div>
-					
-					<div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-danger o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-life-ring"></i>
-								</div>
-								<div class="mr-5">13 New Tickets!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div>
-					
-					<div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-danger o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-life-ring"></i>
-								</div>
-								<div class="mr-5">13 New Tickets!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div>
-					
-					<div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-danger o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-life-ring"></i>
-								</div>
-								<div class="mr-5">13 New Tickets!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div><div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-danger o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-life-ring"></i>
-								</div>
-								<div class="mr-5">13 New Tickets!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div><div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-danger o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-life-ring"></i>
-								</div>
-								<div class="mr-5">13 New Tickets!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div><div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-danger o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-life-ring"></i>
-								</div>
-								<div class="mr-5">13 New Tickets!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div><div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-danger o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-life-ring"></i>
-								</div>
-								<div class="mr-5">13 New Tickets!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div><div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-danger o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-life-ring"></i>
-								</div>
-								<div class="mr-5">13 New Tickets!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div><div class="col-xl-12 col-sm-6 mb-3">
-						<div class="card text-white bg-danger o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-fw fa-life-ring"></i>
-								</div>
-								<div class="mr-5">13 New Tickets!</div>
-							</div>
-							<a class="card-footer text-white clearfix small z-1" href="#">
-								<span class="float-left">View Details</span> <span
-								class="float-right"> <i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div>
-				</div>
+						</c:if>
+					</c:forEach>
 				</div>
 
-<div>
+				<!-- 스케쥴러 영역 -->
 				<div class="card mb-3">
 					<div class="card-header">
-<!-- 						<i class="fas fa-chart-area"></i> -->
-						 <strong>Schduler</strong>
+						<!-- 						<i class="fas fa-chart-area"></i> -->
+						<strong>Schduler</strong>
 					</div>
-			      
-<!-- 			      스케쥴러 영역입니다      -->
-			           <div id='calendar'></div>
-			           
+
+					<!-- 			      스케쥴러 영역입니다      -->
+					<div id='calendar'></div>
+
 				</div>
-				
-		<div class="card mb-3">
-          <div class="card-header">
-<!--             <i class="fas fa-table"></i> -->
-           <strong>Object</strong></div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>작업중인 object</th>
-                    <th>0</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>작업 끝난 object</th>
-                    <th>0</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr>
-                    <td>작업 대기중인 object</td>
-                    <td>0</td>
-                  </tr>
-                  </tbody>
-              </table>
-            </div>
-            </div>
-		</div>
-		
-		  <div class="card mb-3">
-          <div class="card-header">
-<!--             <i class="fas fa-table"></i> -->
-            <strong>Comments</strong></div>
-            <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>comments</th>
-                  </tr>
-                </thead>
-              </table>
-            </div>
-            </div>
+
+				<!-- object 영역 -->
+				<div class="card mb-3">
+					<div class="card-header">
+						<!--             <i class="fas fa-table"></i> -->
+						<strong>Object</strong>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0">
+								<thead>
+									<tr>
+										<th>작업중인 object</th>
+										<th>0</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>작업 끝난 object</th>
+										<th>0</th>
+									</tr>
+								</tfoot>
+								<tbody>
+									<tr>
+										<td>작업 대기중인 object</td>
+										<td>0</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<!-- 코멘트 영역 -->
+				<div class="card mb-3">
+					<div class="card-header">
+						<!--             <i class="fas fa-table"></i> -->
+						<strong>Comments</strong>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0">
+								<thead>
+									<tr>
+										<th>comments</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-	</div>
+
+	<section>
+		<!-- 프로젝트 등록 영역 -->
+		<div class="modal fade" id="projectCreateModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<h4 class="modal-title">프로젝트 등록</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+					</div>
+					<div class="modal-boby" style="padding: 20px;">
+						<div class="form-group">
+							<label for="ctrProTitle">프로젝트 이름</label> 
+							<input type="text"
+								class="form-control" id="ctrProTitle"
+								name="ctrProTitle" required>
+						</div>
+						<div class="form-group">
+							<label for="ctrProYear">프로젝트 시작 년도</label> 
+							<input  type="number"
+								class="form-control" id="ctrProYear" min="2015" max="2020"
+								name="ctrProYear" required>
+						</div>
+						<div class="form-group">
+							<label for="ctrProRegistrant">프로젝트 등록자</label> 
+							<input  type="text"
+								class="form-control" id="ctrProRegistrant"
+								name="ctrProRegistrant" required>
+						</div>
+						<div class="form-group">
+							<label for="ctrProStatus">프로젝트 상태&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+							<input type="radio"
+								id="ctrProStatus"
+								name="ctrProStatus" value="P" >&nbsp;&nbsp;진행중&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="radio"
+								id="ctrProStatus"
+								name="ctrProStatus" value="E" >&nbsp;&nbsp;진행 완료
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success modalAdd">등록하기</button>
+						<button type="button" class="btn btn-default pull-left"
+							data-dismiss="modal"
+							style="background-color: #BDBDBD; color: #ffffff;">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 
 
 	<!-- Scroll to Top Button-->
@@ -340,167 +252,195 @@
 		class="fas fa-angle-up"></i>
 	</a>
 
-<!--         스케쥴러 영역입니다 -->
-<script>
-
-	$(document).ready(function() {
-	    var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-
-		/*  className colors
-
-		className: default(transparent), important(red), chill(pink), success(green), info(blue)
-
-		*/
+<!-- 체크박스 하나만 걸어주기 -->
+	<script type="text/javascript">
+		function oneCheckbox(a) {
+			var obj = document.getElementsByName("ctrProStatus");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != a) {
+					obj[i].checked = false;
+				}
+			}
+		}
+	</script>
 
 
-		/* initialize the external events
-		-----------------------------------------------------------------*/
+	<script type="text/javascript">
+		//프로젝트 등록 버튼 클릭시 이벤트
+		$('.modalAdd').on("click", function() {
 
-		$('#external-events div.external-event').each(function() {
-
-			// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-			// it doesn't need to have a start or end
-			var eventObject = {
-				title: $.trim($(this).text()) // use the element's text as the event title
-			};
-
-			// store the Event Object in the DOM element so we can get to it later
-			$(this).data('eventObject', eventObject);
-
-			// make the event draggable using jQuery UI
-			$(this).draggable({
-				zIndex: 999,
-				revert: true,      // will cause the event to go back to its
-				revertDuration: 0  //  original position after the drag
-			});
-
+			// data 셋팅
+			var title = $("#ctrProTitle").val();
+			var year = $("#ctrProYear").val();
+			var registrant = $("#ctrProRegistrant").val();
+			var status = $('input[name="ctrProStatus"]:checked').val();
+// 			alert(title);
+ 			if(title == null || title == ""){
+ 				alert("프로젝트 이름을 입력해주세요.");
+ 			}else if(year == null || year == "" || 2015 > year || 2020 < year){
+ 				alert("프로젝트 시작 년도를 입력해주세요.(범위 : 2015년 ~2020년)");
+ 			}else if(registrant == null || registrant == ""){
+ 				alert("프로젝트 등록자를 입력해주세요.");
+ 			}else if(status == null || status == ""){
+ 				alert("프로젝트 상태를 체크해주세요.");
+ 			}else{
+ 				self.location = 
+ 					 "../projectManagement/addProject?proYear=" +year+ "&proTitle=" +title+ "&registrant=" +registrant+ "&proStatus=" +status;
+ 			}
 		});
+	</script>
+	<!--         스케쥴러 영역입니다 -->
+	<script>
+		$(document).ready(
+				function() {
+					var date = new Date();
+					var d = date.getDate();
+					var m = date.getMonth();
+					var y = date.getFullYear();
 
+					/*  className colors
 
-		/* initialize the calendar
-		-----------------------------------------------------------------*/
+					className: default(transparent), important(red), chill(pink), success(green), info(blue)
 
-		var calendar =  $('#calendar').fullCalendar({
-			header: {
-				left: 'title',
-				center: 'agendaDay,agendaWeek,month',
-				right: 'prev,next today'
-			},
-			editable: true,
-			firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
-			selectable: true,
-			defaultView: 'month',
+					 */
 
-			axisFormat: 'h:mm',
-			columnFormat: {
-                month: 'ddd',    // Mon
-                week: 'ddd d', // Mon 7
-                day: 'dddd M/d',  // Monday 9/7
-                agendaDay: 'dddd d'
-            },
-            titleFormat: {
-                month: 'MMMM yyyy', // September 2009
-                week: "MMMM yyyy", // September 2009
-                day: 'MMMM yyyy'                  // Tuesday, Sep 8, 2009
-            },
-			allDaySlot: false,
-			selectHelper: true,
-			select: function(start, end, allDay) {
-				var title = prompt('Event Title:');
-				if (title) {
-					calendar.fullCalendar('renderEvent',
-						{
-							title: title,
-							start: start,
-							end: end,
-							allDay: allDay
-						},
-						true // make the event "stick"
-					);
-				}
-				calendar.fullCalendar('unselect');
-			},
-			droppable: true, // this allows things to be dropped onto the calendar !!!
-			drop: function(date, allDay) { // this function is called when something is dropped
+					/* initialize the external events
+					-----------------------------------------------------------------*/
 
-				// retrieve the dropped element's stored Event Object
-				var originalEventObject = $(this).data('eventObject');
+					$('#external-events div.external-event').each(function() {
 
-				// we need to copy it, so that multiple events don't have a reference to the same object
-				var copiedEventObject = $.extend({}, originalEventObject);
+						// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+						// it doesn't need to have a start or end
+						var eventObject = {
+							title : $.trim($(this).text())
+						// use the element's text as the event title
+						};
 
-				// assign it the date that was reported
-				copiedEventObject.start = date;
-				copiedEventObject.allDay = allDay;
+						// store the Event Object in the DOM element so we can get to it later
+						$(this).data('eventObject', eventObject);
 
-				// render the event on the calendar
-				// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-				$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+						// make the event draggable using jQuery UI
+						$(this).draggable({
+							zIndex : 999,
+							revert : true, // will cause the event to go back to its
+							revertDuration : 0
+						//  original position after the drag
+						});
 
-				// is the "remove after drop" checkbox checked?
-				if ($('#drop-remove').is(':checked')) {
-					// if so, remove the element from the "Draggable Events" list
-					$(this).remove();
-				}
+					});
 
-			},
+					/* initialize the calendar
+					-----------------------------------------------------------------*/
 
-			events: [
-				{
-					title: 'All Day Event',
-					start: new Date(y, m, 1)
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d-3, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d+4, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					title: 'Meeting',
-					start: new Date(y, m, d, 10, 30),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'Lunch',
-					start: new Date(y, m, d, 12, 0),
-					end: new Date(y, m, d, 14, 0),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'Birthday Party',
-					start: new Date(y, m, d+1, 19, 0),
-					end: new Date(y, m, d+1, 22, 30),
-					allDay: false,
-				},
-				{
-					title: 'Click for Google',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 29),
-					url: 'http://google.com/',
-					className: 'success'
-				}
-			],
-		});
+					var calendar = $('#calendar').fullCalendar(
+							{
+								header : {
+									left : 'title',
+									center : 'agendaDay,agendaWeek,month',
+									right : 'prev,next today'
+								},
+								editable : true,
+								firstDay : 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+								selectable : true,
+								defaultView : 'month',
 
+								axisFormat : 'h:mm',
+								columnFormat : {
+									month : 'ddd', // Mon
+									week : 'ddd d', // Mon 7
+									day : 'dddd M/d', // Monday 9/7
+									agendaDay : 'dddd d'
+								},
+								titleFormat : {
+									month : 'MMMM yyyy', // September 2009
+									week : "MMMM yyyy", // September 2009
+									day : 'MMMM yyyy' // Tuesday, Sep 8, 2009
+								},
+								allDaySlot : false,
+								selectHelper : true,
+								select : function(start, end, allDay) {
+									var title = prompt('Event Title:');
+									if (title) {
+										calendar.fullCalendar('renderEvent', {
+											title : title,
+											start : start,
+											end : end,
+											allDay : allDay
+										}, true // make the event "stick"
+										);
+									}
+									calendar.fullCalendar('unselect');
+								},
+								droppable : true, // this allows things to be dropped onto the calendar !!!
+								drop : function(date, allDay) { // this function is called when something is dropped
 
-	});
+									// retrieve the dropped element's stored Event Object
+									var originalEventObject = $(this).data(
+											'eventObject');
 
-</script>
-		
+									// we need to copy it, so that multiple events don't have a reference to the same object
+									var copiedEventObject = $.extend({},
+											originalEventObject);
+
+									// assign it the date that was reported
+									copiedEventObject.start = date;
+									copiedEventObject.allDay = allDay;
+
+									// render the event on the calendar
+									// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+									$('#calendar').fullCalendar('renderEvent',
+											copiedEventObject, true);
+
+									// is the "remove after drop" checkbox checked?
+									if ($('#drop-remove').is(':checked')) {
+										// if so, remove the element from the "Draggable Events" list
+										$(this).remove();
+									}
+
+								},
+
+								events : [ {
+									title : 'All Day Event',
+									start : new Date(y, m, 1)
+								}, {
+									id : 999,
+									title : 'Repeating Event',
+									start : new Date(y, m, d - 3, 16, 0),
+									allDay : false,
+									className : 'info'
+								}, {
+									id : 999,
+									title : 'Repeating Event',
+									start : new Date(y, m, d + 4, 16, 0),
+									allDay : false,
+									className : 'info'
+								}, {
+									title : 'Meeting',
+									start : new Date(y, m, d, 10, 30),
+									allDay : false,
+									className : 'important'
+								}, {
+									title : 'Lunch',
+									start : new Date(y, m, d, 12, 0),
+									end : new Date(y, m, d, 14, 0),
+									allDay : false,
+									className : 'important'
+								}, {
+									title : 'Birthday Party',
+									start : new Date(y, m, d + 1, 19, 0),
+									end : new Date(y, m, d + 1, 22, 30),
+									allDay : false,
+								}, {
+									title : 'Click for Google',
+									start : new Date(y, m, 28),
+									end : new Date(y, m, 29),
+									url : 'http://google.com/',
+									className : 'success'
+								} ],
+							});
+
+				});
+	</script>
 </body>
 
 </html>

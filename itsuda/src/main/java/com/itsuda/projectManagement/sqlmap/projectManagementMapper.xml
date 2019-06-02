@@ -6,128 +6,47 @@
 		SELECT SYSDATE()
 	</select>
 	
-	<select id ="listSearch" resultType="com.itsuda.community.vo.CommunityVO">
-	SELECT
-		@ROWNUM:=@ROWNUM+1 AS NO
-		, A.SEQ
-		, A.TITLE
-		, A.WRITER
-		, A.CRT_DT
-		, A.VIEW_CNT
-        ,TEAM
-		FROM TB_COMMUNITY A
-		, (SELECT @ROWNUM:=0) B
-		WHERE
-		TEAM = ${team} AND DELFLAG = 'N' AND
-		(title LIKE CONCAT('%', #{keyword}, '%') 
-		OR writer LIKE CONCAT('%', #{keyword}, '%')
-		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
-		ORDER BY NO DESC
-		LIMIT #{pageStart}, #{perPageNum}
+	<select id ="projectYear" resultType="com.itsuda.projectManagement.vo.projectVO">
+<!-- 	SELECT  -->
+<!--     	DISTINCT PRO_YEAR -->
+<!-- 	FROM  -->
+<!-- 		TB_PROJECT -->
+<!-- 	ORDER BY PRO_YEAR DESC -->
+	SELECT 
+		DISTINCT PRO_YEAR
+		,count(if(PRO_STATUS='P', PRO_STATUS, null)) as PCOUNT
+        ,count(if(PRO_STATUS='E', PRO_STATUS, null)) as ECOUNT
+	FROM 
+		TB_PROJECT
+	GROUP BY PRO_YEAR
+	ORDER BY PRO_YEAR DESC;
 	</select>
 	
-	<select id ="countPage" resultType="int">
-	SELECT
-	COUNT(SEQ)
-	FROM
-	TB_COMMUNITY
+	<select id ="projectList" resultType="com.itsuda.projectManagement.vo.projectVO"> 
+	SELECT 
+    	PRO_TITLE
+   	 	,PRO_STATUS
+	FROM 
+		TB_PROJECT
 	WHERE
-	SEQ> 0 AND DELFLAG = 'N' AND TEAM = ${team}
-	AND (
-		title LIKE CONCAT('%', #{keyword}, '%') 
-		OR writer LIKE CONCAT('%', #{keyword}, '%')
-		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%')
-		)
-	</select>
+		PRO_YEAR = #{proYear} AND PRO_STATUS = #{proStatus} AND DELFLAG = 'N'
 
-	
-	<select id="detailBoard" parameterType="java.lang.Integer" resultType="com.itsuda.community.vo.CommunityVO">
-			SELECT 
-				SEQ
-				,TITLE
-				,WRITER
-				,DESCRIPTION
-				,CRT_DT
-				,VIEW_CNT
-				,LAST_DT
-            FROM
-                TB_COMMUNITY
-            WHERE
-                SEQ = #{seq}
+ 
 	</select>
 	
-
-	<update id="updateViewCnt" parameterType="java.lang.Integer">
-		 	UPDATE
-		 		TB_COMMUNITY
-		 	SET
-		 	 	VIEW_CNT = VIEW_CNT + 1
-		 	 WHERE
-		 	 	SEQ = #{seq}
-	</update>
-	
-	<insert id="insertBoard" parameterType="com.itsuda.community.vo.CommunityVO" >
-		INSERT INTO TB_COMMUNITY (
-				WRITER
-				,TITLE
-				,GRADE
-				,DESCRIPTION
-				,TEAM
-				,LAST_DT
-		)
-		VALUES(
-		#{writer}
-		,#{title}
-		,'1'				
-		,#{description}
-		,#{team}
-		,now()
-		)	
+	<insert id="createProject">
+	 INSERT INTO TB_PROJECT(
+		PRO_YEAR
+        ,PRO_TITLE
+        ,PRO_STATUS
+        ,REGISTRANT
+        )
+        VALUES(
+        #{proYear}
+        ,#{proTitle}
+        ,#{proStatus}
+        ,#{registrant}
+        )
 	</insert>
-
-	<delete id="deleteBoard" parameterType="java.lang.Integer" >
-		UPDATE
-			TB_COMMUNITY
-		SET
-		DELFLAG = 'Y'
-		,LAST_DT = now()
-		WHERE SEQ = #{seq}
-	</delete>
-	
-	<select id="getBoard" parameterType="java.lang.Integer" resultType="com.itsuda.community.vo.CommunityVO">
-	SELECT 
-		TITLE
-		,WRITER
-		,DESCRIPTION
-	FROM
-		TB_COMMUNITY
-	WHERE SEQ = #{seq }
-	</select>
-	
-	<update id="updateBoard" parameterType="com.itsuda.community.vo.CommunityVO">
-	UPDATE 
-		TB_COMMUNITY
-	SET
-		TITLE = #{title }
-		,DESCRIPTION = #{description }
-	WHERE SEQ = #{seq }
-	</update>
-	
-	<select id ="lastestPageNum" resultType="com.itsuda.community.vo.CommunityVO">
-	SELECT 
-		a.ID as team
-		, IFNULL(count(b.team),0) as lastestPageNum
-	from 
-		TB_CODE a
-	Left join 
-		TB_COMMUNITY b on b.TEAM = a.ID and 
-		b.LAST_DT > date_sub(now(),interval 7 day)
-		AND DELFLAG = 'N'
-	Where 
-		a.CATEGORY ='TEAM' AND a.ID != "10"
-	Group by 
-		b.TEAM, a.ID
-	ORDER BY team ASC
-	</select>
 	
 </mapper>

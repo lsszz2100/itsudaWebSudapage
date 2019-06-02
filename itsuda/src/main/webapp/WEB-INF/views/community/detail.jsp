@@ -127,7 +127,7 @@
 							</div>
 
 							<!-- 댓글 수정창 -->
-							<div class="modal fade" id="modifyModal" role="dialog">
+							<div class="modal fade" id="modifyModal" role="dialog" >
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -402,6 +402,7 @@ $('.modalDelBtn').on("click", function() {
 			if(result == "delSuccess"){
 				alert("댓글 삭제 완료!");
 			$("#modifyModal").modal("hide");  //modal 닫기
+			$(".modal-backdrop").remove();
 			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
 			}
 		}
@@ -421,7 +422,6 @@ $('.modalModBtn').on("click", function() {
 	replyText = replyText.replace(/(\n|\r\n)/g,"<br>");
 	
 	
-	
 	//AJAX 통신 : PUT
 	$.ajax({
 		type : "put",
@@ -438,11 +438,14 @@ $('.modalModBtn').on("click", function() {
 			console.log("result : " + result);
 			if(result == "modSuccess"){
 				alert("댓글 수정 완료!");
-			$("#modifyModal").modal("hide");  //modal 닫기
+				
+			 $("#modifyModal").modal("hide");  //modal 닫기
+			 $(".modal-backdrop").remove();
+			  
 			getRepliesPaging(replyPageNum);  // 댓글 목록 갱신
 			}
 		}
-	});                                                                                                   
+	}); 
 });                                                                                                       
                                                                                                           
 //대댓글 작성 버튼 클릭시
@@ -473,10 +476,11 @@ $('.modalAdd').on("click", function() {
 			if(result == "CommentsSuccess"){
 				alert("대댓글 등록 완료!");
 			}
-			$("#CommentsModal").modal("hide");  //modal 닫기
-		
+			 $("#CommentsModal").modal("hide");  //modal 닫기
+			 $(".modal-backdrop").remove();
+			 
 			getRepliesPaging(replyPageNum);  // 대댓글 목록 갱신
-			$("#tempPReplyText").val("");					// 대댓글 내용 초기화
+			$("#tempPReplyText").val("");			// 대댓글 내용 초기화
 			$("#tempPReplyWriter").val("");			// 대댓글 작성자 초기화
 			
 		}

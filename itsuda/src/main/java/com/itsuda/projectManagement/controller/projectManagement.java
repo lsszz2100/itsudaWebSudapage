@@ -1,14 +1,21 @@
 package com.itsuda.projectManagement.controller;
 
+import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itsuda.common.utility.UriMap;
+import com.itsuda.notice.vo.NoticeReplyVO;
 import com.itsuda.projectManagement.service.projectManagementDAOImpl;
+import com.itsuda.projectManagement.vo.projectVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -19,17 +26,46 @@ public class projectManagement extends UriMap {
 
 	@Resource
 	private projectManagementDAOImpl dao;
-	
+
 	// 프로젝트 관리 메인
 	@RequestMapping(value = "main", method = RequestMethod.GET)
-	public String Main() throws Exception {
-		
+	public String Main(projectVO projectVO, Model model) throws Exception {
+
 		log.info("start projectManagement");
 
-
+		List<projectVO> year = dao.projectYear();
+		model.addAttribute("year", dao.projectYear());
+		model.addAttribute("proList", dao.projectList(projectVO));
+		List<projectVO> list= dao.projectList(projectVO);
+//		model.addAttribute("title", list.get(0).getProTitle());
+		model.addAttribute("status", list.get(0).getProStatus());
+		
+		log.info(year);
+		
+		 
 		return URI_PROJECTMANAGEMENT_MAIN;
 	}
-	
+
+	// 프로젝트 등록 
+		@RequestMapping(value = "addProject", method = RequestMethod.GET)
+		public String AddProject(projectVO projectVO, Model model) throws Exception {
+
+			log.info("start projectManagement-addProject");
+			log.info(projectVO);
+			
+			dao.createProject(projectVO);
+			
+			model.addAttribute("year", dao.projectYear());
+			
+			model.addAttribute("proList", dao.projectList(projectVO));
+			List<projectVO> list= dao.projectList(projectVO);
+			model.addAttribute("status", list.get(0).getProStatus());
+
+			return URI_PROJECTMANAGEMENT_MAIN;
+		}
+		
+		
+		
 	// 프로젝트 세부 메인 페이지
 	@RequestMapping(value = "subMain", method = RequestMethod.GET)
 	public String SubMain() throws Exception {
@@ -38,7 +74,7 @@ public class projectManagement extends UriMap {
 
 		return URI_PROJECTMANAGEMENT_SUBMAIN;
 	}
-	
+
 	// 기본 정보 수정 페이지
 	@RequestMapping(value = "basicInfo", method = RequestMethod.GET)
 	public String BasicInfo() throws Exception {
@@ -56,49 +92,49 @@ public class projectManagement extends UriMap {
 
 		return URI_PROJECTMANAGEMENT_DOCUMENT;
 	}
-	
+
 	// 버전 별 소스 페이지
-		@RequestMapping(value = "source", method = RequestMethod.GET)
-		public String Source() throws Exception {
+	@RequestMapping(value = "source", method = RequestMethod.GET)
+	public String Source() throws Exception {
 
-			log.info("start projectManagement-source");
+		log.info("start projectManagement-source");
 
-			return URI_PROJECTMANAGEMENT_SOURCE;
-		}
-		
-		// 라이브러리 페이지
-		@RequestMapping(value = "library", method = RequestMethod.GET)
-		public String Library() throws Exception {
+		return URI_PROJECTMANAGEMENT_SOURCE;
+	}
 
-			log.info("start projectManagement-library");
+	// 라이브러리 페이지
+	@RequestMapping(value = "library", method = RequestMethod.GET)
+	public String Library() throws Exception {
 
-			return URI_PROJECTMANAGEMENT_LIBRARY;
-		}
-		
-		// DB Object 페이지
-		@RequestMapping(value = "dbOject", method = RequestMethod.GET)
-		public String DbOject() throws Exception {
+		log.info("start projectManagement-library");
 
-			log.info("start projectManagement-dbOject");
+		return URI_PROJECTMANAGEMENT_LIBRARY;
+	}
 
-			return URI_PROJECTMANAGEMENT_DBOBJECT;
-		}
-		
-		// 이슈 관리 페이지
-		@RequestMapping(value = "issueManage", method = RequestMethod.GET)
-		public String IssueManage() throws Exception {
+	// DB Object 페이지
+	@RequestMapping(value = "dbOject", method = RequestMethod.GET)
+	public String DbOject() throws Exception {
 
-			log.info("start projectManagement-issueManage");
+		log.info("start projectManagement-dbOject");
 
-			return URI_PROJECTMANAGEMENT_ISSUEMANAGE;
-		}
-		
-		// 프로젝트 관리 페이지
-		@RequestMapping(value = "projectManage", method = RequestMethod.GET)
-		public String ProjectManage() throws Exception {
+		return URI_PROJECTMANAGEMENT_DBOBJECT;
+	}
 
-			log.info("start projectManagement-projectManage");
+	// 이슈 관리 페이지
+	@RequestMapping(value = "issueManage", method = RequestMethod.GET)
+	public String IssueManage() throws Exception {
 
-			return URI_PROJECTMANAGEMENT_PROJECTMANAGE;
-		}
+		log.info("start projectManagement-issueManage");
+
+		return URI_PROJECTMANAGEMENT_ISSUEMANAGE;
+	}
+
+	// 프로젝트 관리 페이지
+	@RequestMapping(value = "projectManage", method = RequestMethod.GET)
+	public String ProjectManage() throws Exception {
+
+		log.info("start projectManagement-projectManage");
+
+		return URI_PROJECTMANAGEMENT_PROJECTMANAGE;
+	}
 }
