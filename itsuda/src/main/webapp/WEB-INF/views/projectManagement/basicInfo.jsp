@@ -29,7 +29,7 @@
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav">
 			<li class="nav-item active"><a class="nav-link"
-				href="../projectManagement/basicInfo"> <i class="fas fa-fw fa-folder"></i> <span>기본정보 수정</span>
+				href="../projectManagement/basicInfo?seq=${info.seq }"> <i class="fas fa-fw fa-folder"></i> <span>기본정보 수정</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
 				href="../projectManagement/document"> <i class="fas fa-fw fa-folder"></i> <span>산출 문서</span>
@@ -49,6 +49,12 @@
 			<li class="nav-item "><a class="nav-link"
 				href="../projectManagement/projectManage"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
 			</a></li>
+			<li class="nav-item "><a class="nav-link"
+				href="../projectManagement/main?proYear=2019&proStatus=P"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 목록 이동</span>
+			</a></li>
+			<li class="nav-item "><a class="nav-link" 
+				href="../projectManagement/subMain?seq=${info.seq}"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 메인 이동</span>
+			</a></li>
 		</ul>
 
 		<div id="content-wrapper">
@@ -58,137 +64,59 @@
 				<div class="card mb-3">
 					<div class="card-header">
 <!-- 						<i class="fas fa-chart-area"></i>  -->
-					산출 문서
+					기본정보 수정
 					</div>
 					<div class="card-body">
-<!-- 						<canvas id="myAreaChart" width="100%" height="30"> -->
-						
-<!-- 						<div class="container-fluid" style="margin-top:40px"> -->
-<!--                 <div class="row justify-content-center"> -->
-<!--                     <div class="col-lg-12"> -->
                         <div class="card"style="border-top:none;border-right:none;border-left:none;border-bottom:none;">
                             <div class="card-body">
                                 <div class="form-validation">
-                                    <form class="form-valide" action="#" method="post">
+                                    <form class="form-valide" action="../projectManagement/basicInfoModity" method="post" enctype="multipart/form-data">
+                                    <input name="seq" type="hidden" value="${info.seq}" /> 
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Username <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" for="proTitle"><strong>프로젝트 이름</strong>
                                             </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Enter a username..">
+                                            <br>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="proTitle" name="proTitle" value="${info.proTitle }" autocomplete=off required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-email">Email <span class="text-danger">*</span>
+                                            <label class="col-lg-10 col-form-label" for="description"><strong>프로젝트 설명</strong>
                                             </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-email" name="val-email" placeholder="Your valid email..">
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="description" name="description" value="${info.description }" autocomplete=off>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-password">Password <span class="text-danger">*</span>
+                                            <label class="col-lg-10 col-form-label" for="term"><strong>프로젝트 기간 </strong>
                                             </label>
-                                            <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="val-password" name="val-password" placeholder="Choose a safe one..">
+                                            <div class="col-lg-5">
+                                            	<p style="float:left; margin-top:5px;">시작 날짜</p>
+                                                <input type="text" class="form-control" id="startDt" name="startDt" 
+                                                value="${info.startDt }" autocomplete=off style="float:right; width:80%;">
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <p style="float:left; margin-top:5px;">마감 날짜</p>
+                                                <input type="text" class="form-control" id="endDt" name="endDt" 
+                                                value="${info.endDt }" autocomplete=off style="float:right; width:80%;">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-confirm-password">Confirm Password <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="..and confirm it!">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-suggestions">Suggestions <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <textarea class="form-control" id="val-suggestions" name="val-suggestions" rows="5" placeholder="What would you like to see?"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-skill">Best Skill <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <select class="form-control" id="val-skill" name="val-skill">
-                                                    <option value="">Please select</option>
-                                                    <option value="html">HTML</option>
-                                                    <option value="css">CSS</option>
-                                                    <option value="javascript">JavaScript</option>
-                                                    <option value="angular">Angular</option>
-                                                    <option value="angular">React</option>
-                                                    <option value="vuejs">Vue.js</option>
-                                                    <option value="ruby">Ruby</option>
-                                                    <option value="php">PHP</option>
-                                                    <option value="asp">ASP.NET</option>
-                                                    <option value="python">Python</option>
-                                                    <option value="mysql">MySQL</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-currency">Currency <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-currency" name="val-currency" placeholder="$21.60">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-website">Website <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-website" name="val-website" placeholder="http://example.com">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-phoneus">Phone (US) <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-phoneus" name="val-phoneus" placeholder="212-999-0000">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-digits">Digits <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-digits" name="val-digits" placeholder="5">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-number">Number <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-number" name="val-number" placeholder="5.0">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-range">Range [1, 5] <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-range" name="val-range" placeholder="4">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label"><a href="#">Terms &amp; Conditions</a>  <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-8">
-                                                <label class="css-control css-control-primary css-checkbox" for="val-terms">
-                                                    <input type="checkbox" class="css-control-input" id="val-terms" name="val-terms" value="1"> <span class="css-control-indicator"></span> I agree to the terms</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-lg-8 ml-auto">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        
+<!--                                         아이콘 등록 영역 -->
+
+										<div class="form-group row">
+											<label class="col-lg-10 col-form-label" for="description"><strong>프로젝트 아이콘 변경 </strong></label>
+											<div id="fileDiv">
+												<div class="form-group">
+													<input type="file" name="file" class="form-control-file" style="margin-left:15px;">
+												</div>
+											</div>
+										</div>
+											<button type="submit" class="btn btn-success" style="float: right;">수정하기</button>
+									</form>
                                 </div>
                             </div>
                         </div>
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-						
-<!-- 						</canvas> -->
 					</div>
 				</div>
 

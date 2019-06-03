@@ -19,4 +19,8 @@ public class projectVO {
 	@Getter@Setter private int pcount;
 	@Getter@Setter private int ecount;
 	
+	@Getter@Setter private String description;
+	@Getter@Setter private String startDt;
+	@Getter@Setter private String endDt;
+	
 }

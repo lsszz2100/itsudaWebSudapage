@@ -33,7 +33,7 @@ $(document).ready(function() {
 						<i class="fas fa-table"></i>   공지사항
 					</div>
 					
-					<div class="card-body" style="background-color:#EDEDED;>
+					<div class="card-body" style="background-color:#EDEDED;">
 
 						<form action="../notice/NoModifyAction" method="post" enctype="multipart/form-data">
 							<input name="team" type="hidden" value="${param.team}" /> 
@@ -58,7 +58,7 @@ $(document).ready(function() {
 
 								<div class="col-lg-13" style="margin-bottom: 1rem;">
 									<div class="card" >
-										<div class="card-body" ">
+										<div class="card-body">
 											<h4 class="card-title">첨부파일 수정</h4>
 											<div class="basic-form">
 												<div id="fileDiv" >

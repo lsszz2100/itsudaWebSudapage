@@ -87,7 +87,6 @@ public class NoticeController extends UriMap {
 	public String InsertAction(Model model, NoticeVO NoticeVO, NoticeFileVO file
 										  , @RequestParam("title") String title
 										  , @RequestParam("description") String description
-//										  , @RequestParam("team") String team
 										  , HttpSession session
 										  , SearchCriteria searchCriteria
 										  , MultipartHttpServletRequest request

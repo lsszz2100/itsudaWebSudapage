@@ -18,22 +18,17 @@
 <title>SB Admin - Dashboard</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
 </head>
 <body id="page-top" style="margin-top: 50px">
 
 	<div id="wrapper">
 		<div>
-			<!-- Sidebar -->
-<!-- 			<button type="button" class="btn btn-success modalAdd" -->
-<!-- 				style="margin-top: 10px; width: 100%; border-radius: 0;" -->
-<%-- 				onclick="location.href='../notice/main?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}'">프로젝트 --%>
-<!-- 				등록</button> -->
-
 			<button type='button' class='btn btn-success'
 				data-toggle='modal' data-target='#projectCreateModal'
-				style="margin-top: 10px; width: 100%; border-radius: 0;">프로젝트 등록</button>
+				style="margin-top: 10px; width: 100%; border-radius: 0; ">프로젝트 등록</button>
 				
-			<ul class="sidebar navbar-nav">
+			<ul class="sidebar navbar-nav" style="height:100%;">
 				<c:choose>
 					<c:when test="${!empty year}">
 						<c:forEach var="year" varStatus="i" items="${year }">
@@ -64,8 +59,8 @@
 
 			<div class="container-fluid">
 				<!-- 프로젝트 목록 영역 -->
-				<div
-					style="height: 1400px; width: 25%; float: left; margin-right: 10px; overflow: scroll;">
+				<div 
+					style="height: 1400px; width: 25%; float: left; margin-right: 10px;">
 
 					<!-- 	Breadcrumbs -->
 					<c:if test="${status == 'P'}">
@@ -93,7 +88,7 @@
 											<div class="mr-5">${item.proTitle}</div>
 										</div>
 										<a class="card-footer text-white clearfix small z-1"
-											href="../projectManagement/subMain"> <span
+											href="../projectManagement/subMain?seq=${item.seq}"> <span
 											class="float-left">View Details</span> <span
 											class="float-right"> <i class="fas fa-angle-right"></i>
 										</span>

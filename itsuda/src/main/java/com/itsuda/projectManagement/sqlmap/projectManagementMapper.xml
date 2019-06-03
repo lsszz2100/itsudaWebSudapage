@@ -24,14 +24,13 @@
 	
 	<select id ="projectList" resultType="com.itsuda.projectManagement.vo.projectVO"> 
 	SELECT 
-    	PRO_TITLE
+		SEQ
+    	,PRO_TITLE
    	 	,PRO_STATUS
 	FROM 
 		TB_PROJECT
 	WHERE
 		PRO_YEAR = #{proYear} AND PRO_STATUS = #{proStatus} AND DELFLAG = 'N'
-
- 
 	</select>
 	
 	<insert id="createProject">
@@ -48,5 +47,55 @@
         ,#{registrant}
         )
 	</insert>
+	
+	<select id ="subMainList" resultType="com.itsuda.projectManagement.vo.projectVO"> 
+	SELECT 
+		SEQ
+		,PRO_TITLE
+		,DESCRIPTION
+		,START_DT
+		,END_DT
+	FROM 
+		TB_PROJECT
+	WHERE
+		SEQ=#{seq} AND DELFLAG = 'N'
+	</select>
+	
+	<update id="subMainModify">
+	UPDATE 
+		TB_PROJECT  
+	SET 
+		PRO_TITLE 		= #{proTitle}
+		,DESCRIPTION 	= #{description}
+		,START_DT		= #{startDt}
+		,END_DT			= #{endDt}
+	WHERE 
+		SEQ = #{seq}
+	</update>
+	
+	<insert id="iconFileInsert">
+		INSERT INTO
+		TB_PROJECT_FILE (UP_SEQ, FILE_NAME, FILE_REAL_NAME, FILE_PATH)
+		VALUES (#{seq},#{fileName},#{fileRealName},#{filePath})
+	</insert>
+	
+	
+	<select id ="iconFileLoad" resultType="String"> 
+	SELECT 
+		FILE_NAME
+	FROM 
+		TB_PROJECT_FILE
+	WHERE
+		UP_SEQ=#{seq} AND DELFLAG = 'N'
+	</select>
+	
+	<update id="iconDelete">
+	UPDATE 
+		TB_PROJECT_FILE 
+	SET 
+		DELFLAG = 'Y'
+	WHERE 
+		UP_SEQ = #{seq}
+	</update>
 	
 </mapper>

@@ -41,7 +41,7 @@
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav">
 			<li class="nav-item "><a class="nav-link"
-				href="../projectManagement/basicInfo"> <i class="fas fa-fw fa-folder"></i> <span>기본정보 수정</span>
+				href="../projectManagement/basicInfo?seq=${info.seq }"> <i class="fas fa-fw fa-folder"></i> <span>기본정보 수정</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
 				href="../projectManagement/document"> <i class="fas fa-fw fa-folder"></i> <span>산출 문서</span>
@@ -61,6 +61,9 @@
 			<li class="nav-item "><a class="nav-link"
 				href="../projectManagement/projectManage"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
 			</a></li>
+			<li class="nav-item "><a class="nav-link"
+				href="../projectManagement/main?proYear=2019&proStatus=P"> <i class="fas fa-fw fa-undo-alt"></i> <span>메인 페이지로 이동</span>
+			</a></li>
 		</ul>
 
 		<div id="content-wrapper">
@@ -69,10 +72,21 @@
 
 				<!-- Breadcrumbs-->
 				<ol class="breadcrumb">
-					<i class="fas fa-fw fa-folder fa-3x"></i>
-					<li class="breadcrumb-item" style="margin-top: 10px">
-						&nbsp;&nbsp;&nbsp;SUDA PAGE</li>
+					<li class="breadcrumb-item">
+					<c:if test="${iconVO != null}">
+						<img src="/itsuda/projectIconFile/${iconVO}" width="48">
+						</c:if>
+						&nbsp;&nbsp;&nbsp;<strong>${info.proTitle }</strong></li>
+						
 				</ol>
+<!-- 				프로젝트 설명 영역 -->
+				<c:if test="${info.description != null}">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item" >
+						${info.description }</li>
+				</ol>
+				</c:if>
+				
 
 				<div class="card mb-3">
 					<div class="card-header">
