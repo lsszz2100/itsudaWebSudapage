@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itsuda.common.utility.UriMap;
-import com.itsuda.notice.vo.NoticeVO;
 import com.itsuda.projectManagement.service.projectManagementDAOImpl;
 import com.itsuda.projectManagement.vo.iconFileVO;
 import com.itsuda.projectManagement.vo.projectVO;
@@ -73,6 +72,7 @@ public class projectManagement extends UriMap {
 		model.addAttribute("info",dao.subMainList(projectVO));
 		model.addAttribute("iconVO",dao.iconFileLoad(projectVO));
 		
+		
 		String icon = dao.iconFileLoad(projectVO);
 		
 		log.info("여긴 세부 메인 페이지 아이콘 주소"+icon);
@@ -126,15 +126,13 @@ public class projectManagement extends UriMap {
 
 	        dao.iconFileInsert(iconFileVO); 
 			}
-	           
+			
 			model.addAttribute("info",dao.subMainList(projectVO));
-			model.addAttribute("iconVO",dao.iconFileLoad(projectVO));
 			
-			String icon = dao.iconFileLoad(projectVO);
 			
-			log.info("프로젝트 기본 정보 수정 아이콘 주소"+icon);
 			
-			return URI_PROJECTMANAGEMENT_SUBMAIN;
+			
+			return "redirect:/projectManagement/subMain?seq="+ projectVO.getSeq();
 		}
 
 	// 산출 문서 페이지

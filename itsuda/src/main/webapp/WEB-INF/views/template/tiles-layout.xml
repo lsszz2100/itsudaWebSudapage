@@ -36,42 +36,123 @@
 		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/basicInfo.jsp" />
 	</definition>
 	
-	<!-- 프로젝트 document -->
-	<definition name="projectManagement.document" extends="default.main">
-		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/document.jsp" />
-	</definition>
 	
-	<!-- 프로젝트 source -->
-	<definition name="projectManagement.source" extends="default.main">
-		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/source.jsp" />
-	</definition>
-	
-	<!-- 프로젝트 library -->
-	<definition name="projectManagement.library" extends="default.main">
-		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/library.jsp" />
-	</definition>
-	
-	<!-- 프로젝트 library -->
-	<definition name="projectManagement.dbOject" extends="default.main">
-		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/dbOject.jsp" />
-	</definition>
-	
-	<!-- 프로젝트 library -->
-	<definition name="projectManagement.issueManage" extends="default.main">
-		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/issueManage.jsp" />
-	</definition>
-	
-	<!-- 프로젝트 library -->
+	<!-- 프로젝트 projectManage -->
 	<definition name="projectManagement.projectManage" extends="default.main">
 		<put-attribute name="body"			value="/WEB-INF/views/projectManagement/projectManage.jsp" />
 	</definition>
 	
-	
-	
+			<!--   산출 문서 게시판 -->
+			<!--   산출 문서 글 목록 화면 -->
+			<definition name="projectManagement.document.main" extends="default.main">
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/documentBoard/main.jsp" />
+			</definition>
+			<!--   산출 문서 글 목록 상세 페이지 -->
+			<definition name="projectManagement.document.detail" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/documentBoard/detail.jsp" />
+			</definition>
+			<!--   산출 문서 글 수정 페이지-->
+			<definition name="projectManagement.document.modify" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/documentBoard/modify.jsp" />
+			</definition>
+			<!--   산출 문서 글 등록 페이지-->
+			<definition name="projectManagement.document.insert" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/documentBoard/insert.jsp" />
+			</definition>
+			
+			
+			<!--   버전별 소스 게시판 -->
+			<!--   버전별 소스 게시판 글 목록 화면 -->
+			<definition name="projectManagement.source.main" extends="default.main"> 
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/sourceBoard/main.jsp" />
+			</definition>
+			<!--   버전별 소스 게시판 글 목록 상세 페이지 -->
+			<definition name="projectManagement.source.detail" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/sourceBoard/detail.jsp" />
+			</definition>
+			<!--   버전별 소스 게시판 글 수정 페이지-->
+			<definition name="projectManagement.source.modify" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/sourceBoard/modify.jsp" />
+			</definition>
+			<!--   버전별 소스 게시판 글 등록 페이지-->
+			<definition name="projectManagement.source.insert" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/sourceBoard/insert.jsp" />
+			</definition>
+			
+			
+			<!--   라이브러리 게시판 -->
+			<!--   라이브러리 게시판 글 목록 화면 -->
+			<definition name="projectManagement.library.main" extends="default.main"> 
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/libraryBoard/main.jsp" />
+			</definition>
+			<!--   라이브러리 게시판 글 목록 상세 페이지 -->
+			<definition name="projectManagement.library.detail" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/libraryBoard/detail.jsp" />
+			</definition>
+			<!--   라이브러리 게시판 글 수정 페이지-->
+			<definition name="projectManagement.library.modify" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/libraryBoard/modify.jsp" />
+			</definition>
+			<!--   라이브러리 게시판 글 등록 페이지-->
+			<definition name="projectManagement.library.insert" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/libraryBoard/insert.jsp" />
+			</definition>
+			
+			
+			<!--   DB Oject 게시판 -->
+			<!--   DB Oject 글 목록 화면 -->
+			<definition name="projectManagement.dbOject.main" extends="default.main">
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/dbOjectBoard/main.jsp" />
+			</definition>
+			<!--   DB Oject 글 목록 상세 페이지 -->
+			<definition name="projectManagement.dbOject.detail" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/dbOjectBoard/detail.jsp" />
+			</definition>
+			<!--   DB Oject 글 수정 페이지-->
+			<definition name="projectManagement.dbOject.modify" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/dbOjectBoard/modify.jsp" />
+			</definition>
+			<!--   DB Oject 글 등록 페이지-->
+			<definition name="projectManagement.dbOject.insert" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/dbOjectBoard/insert.jsp" />
+			</definition>
+			
+			
+			<!--   이슈 관리 게시판 -->
+			<!--   이슈 관리 글 목록 화면 -->
+			<definition name="projectManagement.issueManage.main" extends="default.main"> <!-- default.main는 로그인 후 페이지 -->
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/issueManageBoard/main.jsp" />
+			</definition>
+			<!--   이슈 관리 글 목록 상세 페이지 -->
+			<definition name="projectManagement.issueManage.detail" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/issueManageBoard/detail.jsp" />
+			</definition>
+			<!--   이슈 관리 글 수정 페이지-->
+			<definition name="projectManagement.issueManage.modify" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/issueManageBoard/modify.jsp" />
+			</definition>
+			<!-- 이슈 관리 글 등록 페이지-->
+			<definition name="projectManagement.issueManage.insert" extends="default.main"> 
+				<put-attribute name="header"		value="/WEB-INF/views/common/main/header.jsp" />
+				<put-attribute name="body"			value="/WEB-INF/views/projectManagement/issueManageBoard/insert.jsp" />
+			</definition>
 	
 	
 	<!-- 커튜니티 -->
-	
 	<!-- 커뮤니티 글 목록 화면 -->
 	<definition name="community.main" extends="default.main"> <!-- default.main는 로그인 후 페이지 -->
 		<put-attribute name="body"			value="/WEB-INF/views/community/main.jsp" />
@@ -95,9 +176,7 @@
 		<put-attribute name="body"			value="/WEB-INF/views/community/insert.jsp" />
 	</definition>
 	
-<!-- 	notice -->
-
-	
+	<!-- notice -->
     <!-- notice main -->
     <definition name="notice.main" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/notice/main.jsp" />

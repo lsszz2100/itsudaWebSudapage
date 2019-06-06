@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding ="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace ="itsuda.libraryBoard">
+
+	<select id ="getTime" resultType="string">
+		SELECT SYSDATE()
+	</select>
+	
+	<select id ="listSearch" resultType="com.itsuda.libraryBoard.vo.LiBoardVO">
+	SELECT
+		@ROWNUM:=@ROWNUM+1 AS NO
+		, A.SEQ
+		, A.TITLE
+		, A.WRITER
+		, A.CRT_DT
+		, A.VIEW_CNT
+		FROM TB_NOTICE A
+		, (SELECT @ROWNUM:=0) B
+		WHERE
+		DELFLAG = 'N' AND
+		(title LIKE CONCAT('%', #{keyword}, '%') 
+		OR writer LIKE CONCAT('%', #{keyword}, '%')
+		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
+		ORDER BY NO DESC
+		LIMIT #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id ="countPage" resultType="int">
+	SELECT
+	COUNT(SEQ)
+	FROM
+	TB_NOTICE
+	WHERE
+	SEQ> 0 AND DELFLAG = 'N' 
+	AND (
+		title LIKE CONCAT('%', #{keyword}, '%') 
+		OR writer LIKE CONCAT('%', #{keyword}, '%')
+		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%')
+		)
+	</select>
+
+	
+	<select id="detailBoard" parameterType="java.lang.Integer" resultType="com.itsuda.libraryBoard.vo.LiBoardVO">
+			SELECT 
+				SEQ
+				,TITLE
+				,WRITER
+				,DESCRIPTION
+				,CRT_DT
+				,VIEW_CNT
+				,LAST_DT
+            FROM
+                TB_NOTICE
+            WHERE
+                SEQ = #{seq}
+	</select>
+	
+
+	<update id="updateViewCnt" parameterType="java.lang.Integer">
+		 	UPDATE
+		 		TB_NOTICE
+		 	SET
+		 	 	VIEW_CNT = VIEW_CNT + 1
+		 	 WHERE
+		 	 	SEQ = #{seq}
+	</update>
+	
+	<insert id="insertBoard" parameterType="com.itsuda.libraryBoard.vo.LiBoardVO" useGeneratedKeys="true" keyProperty="seq" >
+		INSERT INTO TB_NOTICE (
+				SEQ
+				,WRITER
+				,TITLE
+				,GRADE
+				,DESCRIPTION
+				,LAST_DT
+		)
+		VALUES(
+		#{seq}
+		,#{writer}
+		,#{title}
+		,'0'				
+		,#{description}
+		,now()
+		)	
+	</insert>
+	
+	<insert id="fileInsert" parameterType="com.itsuda.libraryBoard.vo.LiBoardFileVO">
+		INSERT INTO
+		TB_NOTICE_FILE (UP_SEQ, FILE_NAME, FILE_REAL_NAME, FILE_PATH)
+		VALUES (#{seq},#{fileName},#{fileRealName},#{filePath})
+	</insert>
+	
+	<select id="fileDetail" parameterType="int" resultType="com.itsuda.libraryBoard.vo.LiBoardFileVO">
+		SELECT * FROM TB_NOTICE_FILE WHERE UP_SEQ=#{seq} AND DELFLAG = 'N';
+	</select>
+	
+	<select id="fileDownload" parameterType="map" resultType="com.itsuda.libraryBoard.vo.LiBoardFileVO">
+		SELECT * FROM TB_NOTICE_FILE WHERE UP_SEQ=#{upSeq} AND SEQ=#{seq} AND DELFLAG = 'N';
+	</select>
+	
+	<update id="fileDelete" parameterType="map" >
+		UPDATE
+			TB_NOTICE_FILE
+		SET
+			DELFLAG = 'Y'
+			,LAST_DT = now()
+		WHERE 
+			UP_SEQ=#{upSeq} 
+			AND SEQ=#{seq};
+	</update>
+	
+	<update id="fileDeleteAll" parameterType="Integer" >
+		UPDATE
+			TB_NOTICE_FILE
+		SET
+			DELFLAG = 'Y'
+			,LAST_DT = now()
+		WHERE 
+			UP_SEQ=#{seq}
+	</update>
+	
+	<update id="fileDownloadCnt" parameterType="Integer" >
+		UPDATE
+			TB_NOTICE_FILE
+		SET
+			DOWN_CNT = DOWN_CNT + 1
+		WHERE 
+			UP_SEQ=#{upSeq} 
+			AND SEQ=#{seq};
+	</update>
+	
+
+	<delete id="deleteBoard" parameterType="java.lang.Integer" >
+		UPDATE
+			TB_NOTICE
+		SET
+		DELFLAG = 'Y'
+		,LAST_DT = now()
+		WHERE SEQ = #{seq}
+	</delete>
+	
+	<select id="getBoard" parameterType="java.lang.Integer" resultType="com.itsuda.libraryBoard.vo.LiBoardVO">
+	SELECT 
+		TITLE
+		,WRITER
+		,DESCRIPTION
+	FROM
+		TB_NOTICE
+	WHERE SEQ = #{seq }
+	</select>
+	
+	<update id="updateBoard" parameterType="com.itsuda.libraryBoard.vo.LiBoardVO">
+	UPDATE 
+		TB_NOTICE
+	SET
+		TITLE = #{title }
+		,DESCRIPTION = #{description }
+	WHERE SEQ = #{seq }
+	</update>
+	
+</mapper>
