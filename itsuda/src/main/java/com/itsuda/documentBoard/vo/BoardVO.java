@@ -26,6 +26,9 @@ public class BoardVO {
 //	첨부파일 갯수
 	@Getter private int fileCnt;
 	
+//	프로젝트 시퀀스
+	@Getter @Setter private int proSeq;
+	
 	public void setFile(String[] files) {
 		this.files = files;
 		setFileCnt(files.length);

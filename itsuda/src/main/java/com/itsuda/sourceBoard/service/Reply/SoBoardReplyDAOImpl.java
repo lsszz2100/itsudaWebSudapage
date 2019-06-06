@@ -1,6 +1,6 @@
 package com.itsuda.sourceBoard.service.Reply;
 
-import java.util.HashMap;  
+import java.util.HashMap;   
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +16,7 @@ import com.itsuda.sourceBoard.vo.SoBoardReplyVO;
 @Repository
 public class SoBoardReplyDAOImpl implements SoBoardReplyDAO{
 
-	private static String NAMESPACE ="itsuda.Board";
+	private static String NAMESPACE ="itsuda.sourceBoard";
 	
 	@Autowired
 	private SqlSession sql;

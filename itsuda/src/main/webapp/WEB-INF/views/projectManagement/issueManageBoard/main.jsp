@@ -23,31 +23,31 @@
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav">
 			<li class="nav-item "><a class="nav-link"
-				href="../projectManagement/basicInfo?seq=${info.seq }"> <i class="fas fa-fw fa-folder"></i> <span>기본정보 수정</span>
+				href="../projectManagement/basicInfo?seq=${proSeq}"> <i class="fas fa-fw fa-folder"></i> <span>기본정보 수정</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>산출 문서</span>
+				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>산출 문서</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../sourceBoard/SoMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>버젼 별 소스</span>
+				href="../sourceBoard/SoMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>버젼 별 소스</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../libraryBoard/LiMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>라이브러리</span>
+				href="../libraryBoard/LiMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>라이브러리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../dbOjectBoard/DBMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>DB Object</span>
+				href="../dbOjectBoard/DBMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>DB Object</span>
 			</a></li>
 			<li class="nav-item active"><a class="nav-link"
-				href="../issueManageBoard/IsMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>이슈 관리</span>
+				href="../issueManageBoard/IsMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>이슈 관리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
+				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
 				href="../projectManagement/main?proYear=2019&proStatus=P"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 목록</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link" 
-				href="../projectManagement/subMain?seq=${info.seq}"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 세부 목록</span>
+				href="../projectManagement/subMain?seq=${proSeq}"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 세부 목록</span>
 			</a></li>
 		</ul>
 
@@ -92,7 +92,7 @@
 								<tbody style="background-color:white;">
 									<c:forEach items="${list }" var="item">
 										<tr
-											onclick="location.href='../issueManageBoard/IsDetail${pageMaker.makeSearch(searchCriteria.page) }&seq='+${item.seq }">
+											onclick="location.href='../issueManageBoard/IsDetail${pageMaker.makeSearch(searchCriteria.page) }&seq=${item.seq }&proSeq=${proSeq }'">
 											<th scope="row">${item.no }</th>
 											<td>${item.title}</td>
 											<td>${item.writer }</td>
@@ -107,10 +107,10 @@
 								<ul class="pagination" style="float:left">
 									<c:if test="${pageMaker.prev }">
 										<li class="page-item"><a class="page-link"
-											href="../issueManageBoard/IsMain${pageMaker.makeSearch(1)}"><<</a>
+											href="../issueManageBoard/IsMain${pageMaker.makeSearch(1)}&proSeq=${proSeq }"><<</a>
 										</li>
 										<li class="page-item"><a class="page-link"
-											href="../issueManageBoard/IsMain${pageMaker.makeSearch(pageMaker.startPage - 1)}"><</a>
+											href="../issueManageBoard/IsMain${pageMaker.makeSearch(pageMaker.startPage - 1)}&proSeq=${proSeq }"><</a>
 										</li>
 									</c:if>
 									<c:forEach begin="${pageMaker.startPage}"
@@ -118,13 +118,13 @@
 										<c:choose>
 											<c:when test="${searchCriteria.page == idx }">
 												<li class="page-item active"><a
-													href="../issueManageBoard/IsMain${pageMaker.makeSearch(idx)}">
+													href="../issueManageBoard/IsMain${pageMaker.makeSearch(idx)}&proSeq=${proSeq }">
 														<span class="page-link"> ${idx} </span>
 												</a></li>
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a
-													href="../issueManageBoard/IsMain${pageMaker.makeSearch(idx)}">
+													href="../issueManageBoard/IsMain${pageMaker.makeSearch(idx)}&proSeq=${proSeq }">
 														<span class="page-link"> ${idx} </span>
 												</a></li>
 											</c:otherwise>
@@ -132,10 +132,10 @@
 									</c:forEach>
 									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 										<li class="page-item"><a class="page-link"
-											href="../issueManageBoard/IsMain${pageMaker.makeSearch(pageMaker.endPage + 1)}">></a>
+											href="../issueManageBoard/IsMain${pageMaker.makeSearch(pageMaker.endPage + 1)}&proSeq=${proSeq }">></a>
 										</li>
 										<li class="page-item"><a class="page-link"
-											href="../issueManageBoard/IsMain${pageMaker.makeSearch(pageMaker.end)}">>></a>
+											href="../issueManageBoard/IsMain${pageMaker.makeSearch(pageMaker.end)}&proSeq=${proSeq }">>></a>
 										</li>
 									</c:if>
 								</ul>
@@ -143,7 +143,7 @@
 								<!-- 글쓰기 버튼 -->
 							<button type="button" class="btn btn-outline-secondary" 
 								style="float: right; text-align: right; background-color: #007bff; color: white;"
-								onclick="location.href='../issueManageBoard/IsInsert${pageMaker.makeSearch(searchCriteria.page) }'">글쓰기</button>
+								onclick="location.href='../issueManageBoard/IsInsert${pageMaker.makeSearch(searchCriteria.page) }&proSeq=${proSeq }'">글쓰기</button>
 						</div>
 					</div>
 					<div class="card-footer small text-muted"></div>
@@ -163,7 +163,7 @@
 $(document).ready(function(){
 $("#searchBtn").on("click", function (event) {
  self.location = 
- "../issueManageBoard/IsMain${pageMaker.makeQuery(1)}" + "&keyword=" + encodeURIComponent($("#keywordInput").val());
+ "../issueManageBoard/IsMain${pageMaker.makeQuery(1)}" + "&keyword=" + encodeURIComponent($("#keywordInput").val()) + "&proSeq=" + ${proSeq};
  });
  });
 </script>

@@ -23,31 +23,31 @@
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav">
 			<li class="nav-item "><a class="nav-link"
-				href="../projectManagement/basicInfo?seq=${info.seq }"> <i class="fas fa-fw fa-folder"></i> <span>기본정보 수정</span>
+				href="../projectManagement/basicInfo?seq=${proSeq}"> <i class="fas fa-fw fa-folder"></i> <span>기본정보 수정</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>산출 문서</span>
+				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>산출 문서</span>
 			</a></li>
 			<li class="nav-item active"><a class="nav-link"
-				href="../sourceBoard/SoMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>버젼 별 소스</span>
+				href="../sourceBoard/SoMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>버젼 별 소스</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../libraryBoard/LiMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>라이브러리</span>
+				href="../libraryBoard/LiMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>라이브러리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../dbOjectBoard/DBMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>DB Object</span>
+				href="../dbOjectBoard/DBMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>DB Object</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../issueManageBoard/IsMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>이슈 관리</span>
+				href="../issueManageBoard/IsMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>이슈 관리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword="> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
+				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
 				href="../projectManagement/main?proYear=2019&proStatus=P"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 목록</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link" 
-				href="../projectManagement/subMain?seq=${info.seq}"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 세부 목록</span>
+				href="../projectManagement/subMain?seq=${proSeq}"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 세부 목록</span>
 			</a></li>
 		</ul>
 
@@ -72,11 +72,11 @@
 								</div>
 								<div class="card-body">
 									<button type="button" class="btn btn-info" 
-										onclick="location.href='../sourceBoard/SoModify?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&seq=${param.seq}'">수정</button>
+										onclick="location.href='../sourceBoard/SoModify?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&seq=${param.seq}&proSeq=${proSeq }'">수정</button>
 									<button type="button" class="btn btn-info" 
-										onclick="location.href='../sourceBoard/SoDelete?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&seq=${param.seq}'">삭제</button>
+										onclick="location.href='../sourceBoard/SoDelete?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&seq=${param.seq}&proSeq=${proSeq }'">삭제</button>
 									<button type="button" class="btn btn-info"
-										onclick="location.href='../sourceBoard/SoMain?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}'">목록으로</button>
+										onclick="location.href='../sourceBoard/SoMain?page=${param.page}&perPageNum=${param.perPageNum}&keyword=${param.keyword}&proSeq=${proSeq }'">목록으로</button>
 								</div>
 								
 								<c:choose>

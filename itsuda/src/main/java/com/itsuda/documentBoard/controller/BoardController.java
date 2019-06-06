@@ -49,6 +49,7 @@ public class BoardController extends UriMap {
 	public String Main(Model model, @RequestParam("page") String page
 								  , @RequestParam("perPageNum") String perPageNum
 								  , @RequestParam("keyword") String keyword
+								  , @RequestParam("proSeq") int proSeq
 								  , SearchCriteria searchCriteria) throws Exception {
 		log.info("start Board main");
 		pageMaker.setCriteria(searchCriteria);
@@ -61,16 +62,20 @@ public class BoardController extends UriMap {
 		model.addAttribute("pageMaker",pageMaker);
 		log.info(list);
 		
+		model.addAttribute("proSeq",proSeq);
+		
 		return URI_PROJECTMANAGEMENT_DOCUMENT_MAIN;
 	}
 
 
 	
 	@RequestMapping(value = "DoInsert", method = RequestMethod.GET)  //뷰에서의 이름과 같게 해주어야한다.
-	public String InsertPage(SearchCriteria searchCriteria) throws Exception {
+	public String InsertPage(Model model, SearchCriteria searchCriteria, @RequestParam("proSeq") int proSeq) throws Exception {
 		
 		log.info("start Board insert");
 		pageMaker.setCriteria(searchCriteria);
+		model.addAttribute("proSeq",proSeq);
+		
 		
 		return URI_PROJECTMANAGEMENT_DOCUMENT_INSERT;
 	}
@@ -83,7 +88,8 @@ public class BoardController extends UriMap {
 										  , HttpSession session
 										  , SearchCriteria searchCriteria
 										  , MultipartHttpServletRequest request
-										  , @RequestParam("files") MultipartFile[] files) throws Exception {
+										  , @RequestParam("files") MultipartFile[] files
+										  , @RequestParam("proSeq") int proSeq) throws Exception {
 		
 		log.info("start Board insertAction");
 		
@@ -92,7 +98,6 @@ public class BoardController extends UriMap {
 			
 		BoardVO.setTitle(title);
 		BoardVO.setDescription(description);
-//		BoardVO.setTeam(Integer.parseInt(team));
 		
 		MemberVO member = (MemberVO) session.getAttribute("userInfo");
 		BoardVO.setWriter(member.getName());
@@ -134,14 +139,17 @@ public class BoardController extends UriMap {
 		model.addAttribute("list", dao.listSearch(searchCriteria));
 		model.addAttribute("pageMaker",pageMaker);
 		
+		model.addAttribute("proSeq",proSeq);
+		
+		
 		return URI_PROJECTMANAGEMENT_DOCUMENT_MAIN;
 	}
 	
 
 	@RequestMapping(value = "DoDelete", method = RequestMethod.GET)
 	public String delete(Model model, @RequestParam("seq") String seq
-//									, @RequestParam("team") String team
-									, SearchCriteria searchCriteria) throws Exception {
+									, SearchCriteria searchCriteria
+									, @RequestParam("proSeq") int proSeq) throws Exception {
 		
 		log.info("start Board delete");
 		
@@ -154,10 +162,8 @@ public class BoardController extends UriMap {
 		
 		model.addAttribute("list", dao.listSearch(searchCriteria));
 		model.addAttribute("pageMaker",pageMaker);
-//		model.addAttribute("team",team);
 		
-//		List<BoardVO> lastestPageNum = dao.lastestPageNum();
-//		model.addAttribute("lastestPageNum",lastestPageNum);
+		model.addAttribute("proSeq",proSeq);
 		
 		return URI_PROJECTMANAGEMENT_DOCUMENT_MAIN;
 		//UPDATE로 만들 것
@@ -167,8 +173,8 @@ public class BoardController extends UriMap {
 	@RequestMapping(value = "DoModify", method = RequestMethod.GET)
 	public String modifyPage(Model model, BoardVO BoardVO
 										, @RequestParam("seq") String seq
-//										, @RequestParam("team") String team
-										, SearchCriteria searChCriteria) throws Exception{
+										, SearchCriteria searChCriteria
+										, @RequestParam("proSeq") int proSeq) throws Exception{
 		
 		log.info("start Board modify");
 		
@@ -177,6 +183,8 @@ public class BoardController extends UriMap {
 		
 		List<BoardFileVO> files = dao.fileDetail(Integer.parseInt(seq));
 		model.addAttribute("files", files);
+		
+		model.addAttribute("proSeq",proSeq);
 		
 		
 		return URI_PROJECTMANAGEMENT_DOCUMENT_MODIFY;
@@ -187,12 +195,12 @@ public class BoardController extends UriMap {
 	public String modifyAction(Model model, BoardVO BoardVO, @RequestParam("seq") String seq
 																		, @RequestParam("title") String title
 																		, @RequestParam("description") String description
-//																		@RequestParam("team") String team
 																		, SearchCriteria searchCriteria
 																		, BoardFileVO file
 																		, HttpSession session
 																		, MultipartHttpServletRequest request
-																		, @RequestParam("files") MultipartFile[] files) throws Exception{
+																		, @RequestParam("files") MultipartFile[] files
+																		, @RequestParam("proSeq") int proSeq) throws Exception{
 		
 		log.info("start Board modifyAction");
 		description = description.replace("\r\n", "<br>"); // 줄바꿈 처리
@@ -236,13 +244,15 @@ public class BoardController extends UriMap {
 		List<BoardFileVO> filesList = dao.fileDetail(Integer.parseInt(seq));
 		model.addAttribute("files", filesList);
 		
+		model.addAttribute("proSeq",proSeq);
+		
 		 
 		return URI_PROJECTMANAGEMENT_DOCUMENT_DETAIL;
 		
 	}
 
 	@RequestMapping(value = "DoDetail", method = RequestMethod.GET)
-	public String detail(Model model, BoardVO BoardVO, @RequestParam("seq") String seq) throws Exception{ 
+	public String detail(Model model, BoardVO BoardVO, @RequestParam("seq") String seq, @RequestParam("proSeq") int proSeq) throws Exception{ 
 		
 		log.info("start Board detail");
 		BoardVO vo = dao.detailBoard(Integer.parseInt(seq));
@@ -251,8 +261,8 @@ public class BoardController extends UriMap {
 		List<BoardFileVO> files = dao.fileDetail(Integer.parseInt(seq));
 		model.addAttribute("files", files);
 		
-//		List<BoardVO> lastestPageNum = dao.lastestPageNum();
-//		model.addAttribute("lastestPageNum",lastestPageNum);
+		model.addAttribute("proSeq",proSeq);
+		
 		
 		
 		return URI_PROJECTMANAGEMENT_DOCUMENT_DETAIL;

@@ -16,7 +16,7 @@ import com.itsuda.issueManageBoard.vo.IsBoardReplyVO;
 @Repository
 public class IsBoardReplyDAOImpl implements IsBoardReplyDAO{
 
-	private static String NAMESPACE ="itsuda.Board";
+	private static String NAMESPACE ="itsuda.issueManageBoard";
 	
 	@Autowired
 	private SqlSession sql;

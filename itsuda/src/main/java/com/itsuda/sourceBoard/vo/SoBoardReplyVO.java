@@ -1,6 +1,6 @@
 package com.itsuda.sourceBoard.vo;
 
-import lombok.Getter;   
+import lombok.Getter;    
 import lombok.Setter;
 
 public class SoBoardReplyVO {

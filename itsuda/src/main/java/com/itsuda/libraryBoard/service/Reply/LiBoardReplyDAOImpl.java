@@ -16,7 +16,7 @@ import com.itsuda.libraryBoard.vo.LiBoardReplyVO;
 @Repository
 public class LiBoardReplyDAOImpl implements LiBoardReplyDAO{
 
-	private static String NAMESPACE ="itsuda.Board";
+	private static String NAMESPACE ="itsuda.libraryBoard";
 	
 	@Autowired
 	private SqlSession sql;
