@@ -38,6 +38,9 @@ public class IsBoardReplyVO {
 	//댓글 순서 RANKING
 	@Getter@Setter private String rank;
 	
+	//프로젝트 시퀀스
+	@Getter@Setter private String proSeq;
+	
 	
 
 }

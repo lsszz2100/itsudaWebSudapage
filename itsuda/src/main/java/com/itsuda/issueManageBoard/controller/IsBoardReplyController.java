@@ -59,7 +59,7 @@ public class IsBoardReplyController extends UriMap{
 	
 //	대댓글 등록처리 
 	@RequestMapping(value = "/insertSubReply", method = RequestMethod.POST)
-	public ResponseEntity<String> comments(String pReplyNo, String pSeq, String cText, String cWriter){
+	public ResponseEntity<String> comments(String pReplyNo, String pSeq, String cText, String cWriter, String proSeq){
 		log.info("대댓글 등록처리");
 		ResponseEntity<String> entity = null;
 		IsBoardReplyVO vo = new IsBoardReplyVO();
@@ -67,6 +67,7 @@ public class IsBoardReplyController extends UriMap{
 		vo.setSeq(Integer.valueOf(pSeq));
 		vo.setReplyText(cText);
 		vo.setReplyWriter(cWriter);
+		vo.setProSeq(proSeq);
 		
 		try {
 			replyService.CommentsCreate(vo);

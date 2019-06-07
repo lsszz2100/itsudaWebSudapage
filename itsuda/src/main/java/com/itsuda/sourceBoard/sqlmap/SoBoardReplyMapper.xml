@@ -6,12 +6,14 @@
 
 <!--     입력 -->
     <insert id="create">
-        INSERT INTO TB_NOTICE_REPLY (
+        INSERT INTO TB_PROJECT_SOURCE_REPLY (
             SEQ
+            ,PRO_SEQ
             , REPLY_TEXT
             , REPLY_WRITER
         ) VALUES (
             #{seq}
+            , #{proSeq}
             , #{replyText}
             , #{replyWriter}
         )
@@ -19,9 +21,10 @@
     
     <!-- 대댓글 입력-->
     <insert id="createSubReply">
-        INSERT INTO TB_NOTICE_REPLY
+        INSERT INTO TB_PROJECT_SOURCE_REPLY
 		(
 			SEQ,
+			PRO_SEQ,
 			REPLY_TEXT,
 			REPLY_WRITER,
 			REG_DATE,
@@ -32,12 +35,13 @@
 		VALUES
 		(
 			#{seq}
+			, #{proSeq}
 			, #{replyText}
 			, #{replyWriter}
 			, NOW()
 			, NOW()
 			, #{reparent}
-			, GEN_NOTICE_REPLY_ORDER(#{seq},#{reparent})
+			, GEN_PROJECT_SOURCE_REPLY_ORDER(#{seq},#{reparent})
 		)
     </insert>
     
@@ -45,7 +49,7 @@
     <!--수정-->
     <update id="update">
         UPDATE 
-        	TB_NOTICE_REPLY
+        	TB_PROJECT_SOURCE_REPLY
         SET 
         	REPLY_TEXT = #{replyText}
         	,UPDATE_DATE = NOW()
@@ -55,7 +59,7 @@
     <!--삭제-->
     <update id="delete">
         UPDATE 
-        	TB_NOTICE_REPLY
+        	TB_PROJECT_SOURCE_REPLY
         SET
         	DELFLAG = 'Y'
         WHERE
@@ -66,7 +70,7 @@
     	SELECT
     		COUNT(SEQ)
     	FROM
-    		TB_NOTICE_REPLY
+    		TB_PROJECT_SOURCE_REPLY
     	WHERE
     		SEQ = #{seq} AND REORDER = 0 AND DELFLAG = 'N'
     </select>
@@ -99,12 +103,12 @@
 					(SELECT @vRank := 0, @prev_value := NULL) AS r,
 					(
 					   SELECT @rownum:=@rownum+1 NO, A.*
-					   FROM TB_NOTICE_REPLY A, (SELECT @rownum:=0) R
+					   FROM TB_PROJECT_SOURCE_REPLY A, (SELECT @rownum:=0) R
 					   WHERE A.SEQ = #{seq}
 					   AND A.REPARENT = 0 AND A.DELFLAG = 'N'
 					   ORDER BY REPLY_NO DESC
 					) A 
-					LEFT JOIN TB_NOTICE_REPLY B ON B.SEQ = A.SEQ AND B.REPARENT = A.REPLY_NO 
+					LEFT JOIN TB_PROJECT_SOURCE_REPLY B ON B.SEQ = A.SEQ AND B.REPARENT = A.REPLY_NO 
 					HAVING rank > #{criteria.pageStart} AND rank <= (#{criteria.pageStart} +10)
 					ORDER BY A.REPLY_NO DESC,B.REORDER;
 			]]>

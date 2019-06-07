@@ -107,6 +107,7 @@
 								</div>
 								<div class="box-body">
 									<form class="form-horizontal">
+									<input name="proSeq" type="hidden" value="${proSeq}" id="proSeq" />
 										<div class="form-group margin">
 											<div class="col-sm-10" style="float: left; padding: 10px">
 												<textarea class="form-control" id="newReplyText"
@@ -330,6 +331,7 @@ $('.replyAddBtn').on("click", function() {
 	var replyWriter = $('#newReplyWriter');
 	var replyTextVal = replyText.val();
 	var replyWriterVal = replyWriter.val();
+	var proSeq		= $("#proSeq").val();
 	
 	replyTextVal = replyTextVal.replace(/(\n|\r\n)/g,"<br>");
 		
@@ -349,7 +351,8 @@ $('.replyAddBtn').on("click", function() {
 		data : JSON.stringify({
 			seq : seq,
 			replyText : replyTextVal,
-			replyWriter : replyWriterVal
+			replyWriter : replyWriterVal,
+			proSeq : proSeq
 		}),
 		success : function (result) {
 			//성공적인 댓글 등록 처리 알림
@@ -454,6 +457,7 @@ $('.modalAdd').on("click", function() {
 	var Seq		= $("#tempPSeq").val();
 	var Text		= $("#tempPReplyText").val();
 	var Writer		= $("#tempPReplyWriter").val();
+	var proSeq		= $("#proSeq").val();
 	
 	Text = Text.replace(/(\n|\r\n)/g,"<br>");
 	
@@ -465,6 +469,7 @@ $('.modalAdd').on("click", function() {
 				, pSeq : Seq
 				, cText : Text
 				, cWriter : Writer
+				, proSeq : proSeq
 			},
 		dateType : "text",
 		

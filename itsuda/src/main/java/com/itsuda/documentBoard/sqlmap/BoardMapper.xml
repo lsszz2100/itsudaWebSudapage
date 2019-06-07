@@ -14,10 +14,10 @@
 		, A.WRITER
 		, A.CRT_DT
 		, A.VIEW_CNT
-		FROM TB_NOTICE A
+		FROM TB_PROJECT_DOCUMENT A
 		, (SELECT @ROWNUM:=0) B
 		WHERE
-		DELFLAG = 'N' AND
+		DELFLAG = 'N' AND PRO_SEQ = ${proSeq} AND
 		(title LIKE CONCAT('%', #{keyword}, '%') 
 		OR writer LIKE CONCAT('%', #{keyword}, '%')
 		OR DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
@@ -29,9 +29,9 @@
 	SELECT
 	COUNT(SEQ)
 	FROM
-	TB_NOTICE
+	TB_PROJECT_DOCUMENT
 	WHERE
-	SEQ> 0 AND DELFLAG = 'N' 
+	SEQ> 0 AND DELFLAG = 'N' AND PRO_SEQ=#{proSeq}
 	AND (
 		title LIKE CONCAT('%', #{keyword}, '%') 
 		OR writer LIKE CONCAT('%', #{keyword}, '%')
@@ -50,7 +50,7 @@
 				,VIEW_CNT
 				,LAST_DT
             FROM
-                TB_NOTICE
+                TB_PROJECT_DOCUMENT
             WHERE
                 SEQ = #{seq}
 	</select>
@@ -58,7 +58,7 @@
 
 	<update id="updateViewCnt" parameterType="java.lang.Integer">
 		 	UPDATE
-		 		TB_NOTICE
+		 		TB_PROJECT_DOCUMENT
 		 	SET
 		 	 	VIEW_CNT = VIEW_CNT + 1
 		 	 WHERE
@@ -66,8 +66,9 @@
 	</update>
 	
 	<insert id="insertBoard" parameterType="com.itsuda.documentBoard.vo.BoardVO" useGeneratedKeys="true" keyProperty="seq" >
-		INSERT INTO TB_NOTICE (
+		INSERT INTO TB_PROJECT_DOCUMENT (
 				SEQ
+				,PRO_SEQ
 				,WRITER
 				,TITLE
 				,GRADE
@@ -76,9 +77,10 @@
 		)
 		VALUES(
 		#{seq}
+		,#{proSeq}
 		,#{writer}
 		,#{title}
-		,'0'				
+		,'1'				
 		,#{description}
 		,now()
 		)	
@@ -86,21 +88,21 @@
 	
 	<insert id="fileInsert" parameterType="com.itsuda.documentBoard.vo.BoardFileVO">
 		INSERT INTO
-		TB_NOTICE_FILE (UP_SEQ, FILE_NAME, FILE_REAL_NAME, FILE_PATH)
-		VALUES (#{seq},#{fileName},#{fileRealName},#{filePath})
+		TB_PROJECT_DOCUMENT_FILE (UP_SEQ, PRO_SEQ, FILE_NAME, FILE_REAL_NAME, FILE_PATH)
+		VALUES (#{seq}, #{proSeq}, #{fileName},#{fileRealName},#{filePath})
 	</insert>
 	
 	<select id="fileDetail" parameterType="int" resultType="com.itsuda.documentBoard.vo.BoardFileVO">
-		SELECT * FROM TB_NOTICE_FILE WHERE UP_SEQ=#{seq} AND DELFLAG = 'N';
+		SELECT * FROM TB_PROJECT_DOCUMENT_FILE WHERE UP_SEQ=#{seq} AND DELFLAG = 'N';
 	</select>
 	
 	<select id="fileDownload" parameterType="map" resultType="com.itsuda.documentBoard.vo.BoardFileVO">
-		SELECT * FROM TB_NOTICE_FILE WHERE UP_SEQ=#{upSeq} AND SEQ=#{seq} AND DELFLAG = 'N';
+		SELECT * FROM TB_PROJECT_DOCUMENT_FILE WHERE UP_SEQ=#{upSeq} AND SEQ=#{seq} AND DELFLAG = 'N';
 	</select>
 	
 	<update id="fileDelete" parameterType="map" >
 		UPDATE
-			TB_NOTICE_FILE
+			TB_PROJECT_DOCUMENT_FILE
 		SET
 			DELFLAG = 'Y'
 			,LAST_DT = now()
@@ -111,7 +113,7 @@
 	
 	<update id="fileDeleteAll" parameterType="Integer" >
 		UPDATE
-			TB_NOTICE_FILE
+			TB_PROJECT_DOCUMENT_FILE
 		SET
 			DELFLAG = 'Y'
 			,LAST_DT = now()
@@ -121,7 +123,7 @@
 	
 	<update id="fileDownloadCnt" parameterType="Integer" >
 		UPDATE
-			TB_NOTICE_FILE
+			TB_PROJECT_DOCUMENT_FILE
 		SET
 			DOWN_CNT = DOWN_CNT + 1
 		WHERE 
@@ -132,7 +134,7 @@
 
 	<delete id="deleteBoard" parameterType="java.lang.Integer" >
 		UPDATE
-			TB_NOTICE
+			TB_PROJECT_DOCUMENT
 		SET
 		DELFLAG = 'Y'
 		,LAST_DT = now()
@@ -145,13 +147,13 @@
 		,WRITER
 		,DESCRIPTION
 	FROM
-		TB_NOTICE
+		TB_PROJECT_DOCUMENT
 	WHERE SEQ = #{seq }
 	</select>
 	
 	<update id="updateBoard" parameterType="com.itsuda.documentBoard.vo.BoardVO">
 	UPDATE 
-		TB_NOTICE
+		TB_PROJECT_DOCUMENT
 	SET
 		TITLE = #{title }
 		,DESCRIPTION = #{description }

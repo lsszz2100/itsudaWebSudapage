@@ -16,4 +16,5 @@ public class BoardFileVO {
 	@Getter @Setter private Date lastDt;
 	@Getter @Setter private  String delFlag;
 	
+	@Getter @Setter private  int proSeq;
 }

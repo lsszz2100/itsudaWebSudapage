@@ -57,6 +57,7 @@ public class BoardController extends UriMap {
 		
 		
 		searchCriteria.setKeyword(keyword);
+		searchCriteria.setProSeq(proSeq);
 		List<BoardVO> list = dao.listSearch(searchCriteria);
 		model.addAttribute("list", dao.listSearch(searchCriteria));
 		model.addAttribute("pageMaker",pageMaker);
@@ -98,6 +99,7 @@ public class BoardController extends UriMap {
 			
 		BoardVO.setTitle(title);
 		BoardVO.setDescription(description);
+		BoardVO.setProSeq(proSeq);
 		
 		MemberVO member = (MemberVO) session.getAttribute("userInfo");
 		BoardVO.setWriter(member.getName());
@@ -111,7 +113,7 @@ public class BoardController extends UriMap {
 		String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
 		File destinationFile;
 		String destinationFileName;
-		String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/WEB-INF/Board_uploadFiles/";
+		String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/projectFiles/documentBoardFiles/";
 		
 		
 		do {
@@ -126,6 +128,7 @@ public class BoardController extends UriMap {
            file.setFileName(destinationFileName);
            file.setFileRealName(fileName);
            file.setFilePath(fileUrl);
+           file.setProSeq(proSeq);
 
            dao.fileInsert(file); //file insert
 			}
@@ -133,6 +136,7 @@ public class BoardController extends UriMap {
 		
 		searchCriteria.setPage(1);
 		searchCriteria.setKeyword("");
+		searchCriteria.setProSeq(proSeq);
 		pageMaker.setCriteria(searchCriteria);
 		pageMaker.setTotalCount(dao.countPage(searchCriteria));
 		
@@ -152,6 +156,7 @@ public class BoardController extends UriMap {
 									, @RequestParam("proSeq") int proSeq) throws Exception {
 		
 		log.info("start Board delete");
+		searchCriteria.setProSeq(proSeq);
 		
 		dao.deleteBoard(Integer.parseInt(seq));
 		
@@ -221,7 +226,7 @@ public class BoardController extends UriMap {
 			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
 			File destinationFile;
 			String destinationFileName;
-			String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/WEB-INF/uploadFiles/";
+			String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/projectFiles/documentBoardFiles/";
 			
 			
 			do {
@@ -236,6 +241,7 @@ public class BoardController extends UriMap {
 	           file.setFileName(destinationFileName);
 	           file.setFileRealName(fileName);
 	           file.setFilePath(fileUrl);
+	           file.setProSeq(proSeq);
 
 	           dao.fileInsert(file); //file insert
 			}
@@ -345,13 +351,14 @@ public class BoardController extends UriMap {
 	
 
 		//파일 삭제
-		@RequestMapping("/fileDelete/{upSeq}/{seq}")
-	    private String fileDelete(@PathVariable String upSeq , @PathVariable String seq, RedirectAttributes redirectAttributes) throws Exception{
+		@RequestMapping("/fileDelete/{upSeq}/{seq}/{proSeq}")
+	    private String fileDelete(@PathVariable String upSeq , @PathVariable String seq, RedirectAttributes redirectAttributes, @PathVariable int proSeq) throws Exception{
 		
 			log.info("start Board fileDelete");
 			
 	        dao.fileDelete(Integer.parseInt(upSeq), Integer.parseInt(seq));
 	        redirectAttributes.addAttribute("seq", upSeq);
+	        redirectAttributes.addAttribute("proSeq", proSeq);
 	        
 	        return "redirect:/documentBoard/DoModify";
 	    }

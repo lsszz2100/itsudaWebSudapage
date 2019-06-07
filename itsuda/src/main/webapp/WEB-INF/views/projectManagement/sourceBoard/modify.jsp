@@ -99,7 +99,7 @@
 																	<c:forEach var="files" varStatus="i" items="${files }">
 																		<p>
 																				${files.fileRealName}&nbsp;&nbsp;&nbsp;&nbsp;
-																				<button type="button" class="btn btn-danger btn-sm" id="modigyBtn" onclick="modifyBtn_click(${files.upSeq},${files.seq});">
+																				<button type="button" class="btn btn-danger btn-sm" id="modigyBtn" onclick="modifyBtn_click(${files.upSeq},${files.seq},${proSeq});">
 																				 x
 																				</button>
 																		</p> 
@@ -142,10 +142,9 @@ $(document).ready(function() {
         $('#description').val(result);
     });
     
-function modifyBtn_click(upSeq, seq) {
+function modifyBtn_click(upSeq, seq, proSeq) {
 	if(confirm("첨부파일을 삭제하겠습니까?")){
-		location.href='../sourceBoard/fileDelete/'+ upSeq + '/' +seq;
-	}else{
+		location.href='../sourceBoard/fileDelete/'+ upSeq + '/' +seq + '/' +proSeq;
 	}
 }
 </script>

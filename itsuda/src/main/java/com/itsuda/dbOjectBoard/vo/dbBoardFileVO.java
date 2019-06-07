@@ -16,4 +16,6 @@ public class dbBoardFileVO {
 	@Getter @Setter private Date lastDt;
 	@Getter @Setter private  String delFlag;
 	
+	@Getter @Setter private  int proSeq;
+	
 }

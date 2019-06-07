@@ -15,6 +15,9 @@ public class SoBoardVO {
 	@Getter @Setter private int		viewCnt;
 	@Getter @Setter private Date	crtDt;
 	@Getter @Setter private Date	lastDt;
+	
+//	프로젝트 시퀀스
+	@Getter @Setter private int	proSeq;
 //	재정의한 팀 시퀀스
 	@Getter @Setter private int	    no;	
 //	최근 게시물 갯수 - 갯수 

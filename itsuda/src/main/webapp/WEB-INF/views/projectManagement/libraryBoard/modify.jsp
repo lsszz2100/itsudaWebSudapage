@@ -99,7 +99,7 @@
 																	<c:forEach var="files" varStatus="i" items="${files }">
 																		<p>
 																				${files.fileRealName}&nbsp;&nbsp;&nbsp;&nbsp;
-																				<button type="button" class="btn btn-danger btn-sm" id="modigyBtn" onclick="modifyBtn_click(${files.upSeq},${files.seq});">
+																				<button type="button" class="btn btn-danger btn-sm" id="modifyBtn" onclick="modifyBtn_click(${files.upSeq},${files.seq},${proSeq});">
 																				 x
 																				</button>
 																		</p> 
@@ -133,7 +133,6 @@
 		class="fas fa-angle-up"></i>
 	</a>
 	
-<!-- 검색 버튼 클릭시 이벤트 -->
 <script>
 $(document).ready(function() {
 	
@@ -142,10 +141,9 @@ $(document).ready(function() {
         $('#description').val(result);
     });
     
-function modifyBtn_click(upSeq, seq) {
+function modifyBtn_click(upSeq, seq, proSeq) {
 	if(confirm("첨부파일을 삭제하겠습니까?")){
-		location.href='../libraryBoard/fileDelete/'+ upSeq + '/' +seq;
-	}else{
+		location.href='../libraryBoard/fileDelete/'+ upSeq + '/' +seq+ '/' +proSeq;
 	}
 }
 </script>

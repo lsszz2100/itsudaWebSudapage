@@ -50,13 +50,14 @@ public class IsBoardController extends UriMap {
 								  , @RequestParam("perPageNum") String perPageNum
 								  , @RequestParam("keyword") String keyword
 								  , SearchCriteria searchCriteria
-								  , @RequestParam("proSeq") String proSeq) throws Exception {
+								  , @RequestParam("proSeq") int proSeq) throws Exception {
 		log.info("start Board main");
 		pageMaker.setCriteria(searchCriteria);
 		pageMaker.setTotalCount(dao.countPage(searchCriteria));
 		
 		
 		searchCriteria.setKeyword(keyword);
+		searchCriteria.setProSeq(proSeq);
 		List<IsBoardVO> list = dao.listSearch(searchCriteria);
 		model.addAttribute("list", dao.listSearch(searchCriteria));
 		model.addAttribute("pageMaker",pageMaker);
@@ -70,7 +71,7 @@ public class IsBoardController extends UriMap {
 
 	
 	@RequestMapping(value = "IsInsert", method = RequestMethod.GET)  //뷰에서의 이름과 같게 해주어야한다.
-	public String InsertPage(Model model, SearchCriteria searchCriteria, @RequestParam("proSeq") String proSeq) throws Exception {
+	public String InsertPage(Model model, SearchCriteria searchCriteria, @RequestParam("proSeq") int proSeq) throws Exception {
 		
 		log.info("start Board insert");
 		pageMaker.setCriteria(searchCriteria);
@@ -89,7 +90,7 @@ public class IsBoardController extends UriMap {
 										  , SearchCriteria searchCriteria
 										  , MultipartHttpServletRequest request
 										  , @RequestParam("files") MultipartFile[] files
-										  , @RequestParam("proSeq") String proSeq) throws Exception {
+										  , @RequestParam("proSeq") int proSeq) throws Exception {
 		
 		log.info("start Board insertAction");
 		
@@ -98,6 +99,7 @@ public class IsBoardController extends UriMap {
 			
 		BoardVO.setTitle(title);
 		BoardVO.setDescription(description);
+		BoardVO.setProSeq(proSeq);
 		
 		MemberVO member = (MemberVO) session.getAttribute("userInfo");
 		BoardVO.setWriter(member.getName());
@@ -111,7 +113,7 @@ public class IsBoardController extends UriMap {
 		String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
 		File destinationFile;
 		String destinationFileName;
-		String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/WEB-INF/Board_uploadFiles/";
+		String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/projectFiles/issueManageBoardFiles/";
 		
 		
 		do {
@@ -126,6 +128,7 @@ public class IsBoardController extends UriMap {
            file.setFileName(destinationFileName);
            file.setFileRealName(fileName);
            file.setFilePath(fileUrl);
+           file.setProSeq(proSeq);
 
            dao.fileInsert(file); //file insert
 			}
@@ -133,6 +136,7 @@ public class IsBoardController extends UriMap {
 		
 		searchCriteria.setPage(1);
 		searchCriteria.setKeyword("");
+		searchCriteria.setProSeq(proSeq);
 		pageMaker.setCriteria(searchCriteria);
 		pageMaker.setTotalCount(dao.countPage(searchCriteria));
 		
@@ -148,7 +152,7 @@ public class IsBoardController extends UriMap {
 	@RequestMapping(value = "IsDelete", method = RequestMethod.GET)
 	public String delete(Model model, @RequestParam("seq") String seq
 									, SearchCriteria searchCriteria
-									, @RequestParam("proSeq") String proSeq) throws Exception {
+									, @RequestParam("proSeq") int proSeq) throws Exception {
 		
 		log.info("start Board delete");
 		
@@ -172,7 +176,7 @@ public class IsBoardController extends UriMap {
 	public String modifyPage(Model model, IsBoardVO BoardVO
 										, @RequestParam("seq") String seq
 										, SearchCriteria searChCriteria
-										, @RequestParam("proSeq") String proSeq) throws Exception{
+										, @RequestParam("proSeq") int proSeq) throws Exception{
 		
 		log.info("start Board modify");
 		
@@ -199,7 +203,7 @@ public class IsBoardController extends UriMap {
 																		, HttpSession session
 																		, MultipartHttpServletRequest request
 																		, @RequestParam("files") MultipartFile[] files
-																		, @RequestParam("proSeq") String proSeq) throws Exception{
+																		, @RequestParam("proSeq") int proSeq) throws Exception{
 		
 		log.info("start Board modifyAction");
 		description = description.replace("\r\n", "<br>"); // 줄바꿈 처리
@@ -220,7 +224,7 @@ public class IsBoardController extends UriMap {
 			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
 			File destinationFile;
 			String destinationFileName;
-			String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/WEB-INF/uploadFiles/";
+			String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/projectFiles/issueManageBoardFiles/";
 			
 			
 			do {
@@ -235,6 +239,7 @@ public class IsBoardController extends UriMap {
 	           file.setFileName(destinationFileName);
 	           file.setFileRealName(fileName);
 	           file.setFilePath(fileUrl);
+	           file.setProSeq(proSeq);
 
 	           dao.fileInsert(file); //file insert
 			}
@@ -251,7 +256,7 @@ public class IsBoardController extends UriMap {
 	}
 
 	@RequestMapping(value = "IsDetail", method = RequestMethod.GET)
-	public String detail(Model model, IsBoardVO BoardVO, @RequestParam("seq") String seq, @RequestParam("proSeq") String proSeq) throws Exception{ 
+	public String detail(Model model, IsBoardVO BoardVO, @RequestParam("seq") String seq, @RequestParam("proSeq") int proSeq) throws Exception{ 
 		
 		log.info("start Board detail");
 		IsBoardVO vo = dao.detailBoard(Integer.parseInt(seq));
@@ -344,13 +349,14 @@ public class IsBoardController extends UriMap {
 	
 
 		//파일 삭제
-		@RequestMapping("/fileDelete/{upSeq}/{seq}")
-	    private String fileDelete(@PathVariable String upSeq , @PathVariable String seq, RedirectAttributes redirectAttributes) throws Exception{
+		@RequestMapping("/fileDelete/{upSeq}/{seq}/{proSeq}")
+	    private String fileDelete(@PathVariable String upSeq , @PathVariable String seq, RedirectAttributes redirectAttributes, @PathVariable int proSeq) throws Exception{
 		
 			log.info("start Board fileDelete");
 			
 	        dao.fileDelete(Integer.parseInt(upSeq), Integer.parseInt(seq));
 	        redirectAttributes.addAttribute("seq", upSeq);
+	        redirectAttributes.addAttribute("proSeq", proSeq);
 	        
 	        return "redirect:/issueManageBoard/IsModify";
 	    }

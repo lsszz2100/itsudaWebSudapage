@@ -70,7 +70,7 @@
     	FROM
     		TB_COMMUNITY_REPLY
     	WHERE
-    		SEQ = #{seq} AND REORDER = 0 AND DELFLAG = 'N'
+    		SEQ = #{seq} AND REORDER = 1 AND DELFLAG = 'N'
     </select>
 
 

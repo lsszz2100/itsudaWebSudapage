@@ -57,7 +57,7 @@
 				<div class="card-header">
 						<i class="fas fa-table"></i> 버전 별 소스
 					</div>
-					<div class="card-body" ">
+					<div class="card-body">
 						<!-- 글 상세 목록 세부 사항 -->
 						<div class="container col-md-12">
 							<div class="card">
@@ -107,14 +107,15 @@
 								</div>
 								<div class="box-body">
 									<form class="form-horizontal">
+									<input name="proSeq" type="hidden" value="${proSeq}" id="proSeq" />
 										<div class="form-group margin">
 											<div class="col-sm-10" style="float: left; padding: 10px">
-												<textarea class="form-control" id="newReplyText"
+												<textarea class="form-control" id="newReplyText" autocomplete=off
 													name="replyText" rows="3" placeholder="댓글을 입력해주세요..."
 													style="resize: nonel"></textarea>
 											</div>
 											<div class="col-sm-2" style="float: left; padding: 10px">
-												<input class="form-control" id="newReplyWriter"
+												<input class="form-control" id="newReplyWriter" autocomplete=off
 													name="replyWriter" placeholder="작성자">
 											</div>
 											<hr />
@@ -334,6 +335,7 @@ $('.replyAddBtn').on("click", function() {
 	var replyWriter = $('#newReplyWriter');
 	var replyTextVal = replyText.val();
 	var replyWriterVal = replyWriter.val();
+	var proSeq		= $("#proSeq").val();
 	
 	replyTextVal = replyTextVal.replace(/(\n|\r\n)/g,"<br>");
 		
@@ -353,7 +355,8 @@ $('.replyAddBtn').on("click", function() {
 		data : JSON.stringify({
 			seq : seq,
 			replyText : replyTextVal,
-			replyWriter : replyWriterVal
+			replyWriter : replyWriterVal,
+			proSeq : proSeq
 		}),
 		success : function (result) {
 			//성공적인 댓글 등록 처리 알림
@@ -458,6 +461,7 @@ $('.modalAdd').on("click", function() {
 	var Seq		= $("#tempPSeq").val();
 	var Text		= $("#tempPReplyText").val();
 	var Writer		= $("#tempPReplyWriter").val();
+	var proSeq		= $("#proSeq").val();
 	
 	Text = Text.replace(/(\n|\r\n)/g,"<br>");
 	
@@ -469,6 +473,7 @@ $('.modalAdd').on("click", function() {
 				, pSeq : Seq
 				, cText : Text
 				, cWriter : Writer
+				, proSeq : proSeq
 			},
 		dateType : "text",
 		
