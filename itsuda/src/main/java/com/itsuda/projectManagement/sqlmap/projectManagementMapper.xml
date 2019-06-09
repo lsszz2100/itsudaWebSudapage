@@ -55,6 +55,7 @@
 		,DESCRIPTION
 		,START_DT
 		,END_DT
+		,QUARTER
 	FROM 
 		TB_PROJECT
 	WHERE
@@ -97,5 +98,86 @@
 	WHERE 
 		UP_SEQ = #{seq}
 	</update>
+	
+	
+	<select id ="projectTerm" resultType="com.itsuda.projectManagement.vo.projectVO"> 
+	SELECT 
+		START_DT
+		, END_DT 
+	FROM 
+		TB_PROJECT 
+	WHERE 
+		SEQ = #{proSeq} AND DELFLAG = 'N'
+	</select>
+	
+	
+	<update id="quarterUpdate">
+	UPDATE 
+		TB_PROJECT  
+	SET 
+		QUARTER 	= #{quarter}
+	WHERE 
+		SEQ = #{seq}
+	</update>
+	
+	<select id="proQuarterCnt" resultType="Integer">
+	SELECT 
+		QUARTER 
+	FROM 
+		TB_PROJECT 
+	WHERE 
+		SEQ = #{proSeq}
+	</select>
+	
+	<update id="insertQuarterProgress">
+	UPDATE
+		QUARTER_PROGRESS 
+	SET 
+		1_QUARTER = #{quarter1} 
+		,2_QUARTER = #{quarter2} 
+		,3_QUARTER = #{quarter3} 
+		,4_QUARTER = #{quarter4} 
+		,5_QUARTER = #{quarter5} 
+		,6_QUARTER = #{quarter6} 
+		,7_QUARTER = #{quarter7} 
+		,8_QUARTER = #{quarter8} 
+		,9_QUARTER = #{quarter9} 
+		,10_QUARTER = #{quarter10} 
+		,11_QUARTER = #{quarter11} 
+		,12_QUARTER = #{quarter12} 
+	WHERE 
+		UP_SEQ = #{proSeq}
+	</update>
+	
+	<select id="quarterList" resultType="com.itsuda.projectManagement.vo.projectVO">
+	SELECT
+		UP_SEQ AS proSeq
+		,1_QUARTER as quarter1
+		,2_QUARTER as quarter2
+		,3_QUARTER as quarter3
+		,4_QUARTER as quarter4
+		,5_QUARTER as quarter5
+		,6_QUARTER as quarter6
+		,7_QUARTER as quarter7
+		,8_QUARTER as quarter8 
+		,9_QUARTER	as quarter9
+		,10_QUARTER as quarter10
+		,11_QUARTER as quarter11
+		,12_QUARTER as quarter12
+	 FROM QUARTER_PROGRESS WHERE UP_SEQ = #{proSeq}
+	</select>
+	
+	
+	<insert id="creatQuarter" >
+	   INSERT INTO QUARTER_PROGRESS (
+           UP_SEQ
+        ) VALUES (
+           #{seq}
+        )
+	</insert>
+	
+	<select id="createdProjectSeq" resultType="Integer">
+	SELECT SEQ FROM TB_PROJECT WHERE PRO_TITLE = #{proTitle}
+	</select>
 	
 </mapper>

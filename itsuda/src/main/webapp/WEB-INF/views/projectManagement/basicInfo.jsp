@@ -47,7 +47,7 @@
 				href="../issueManageBoard/IsMain?page=1&perPageNum=10&keyword=&proSeq=${info.seq }"> <i class="fas fa-fw fa-folder"></i> <span>이슈 관리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword=&proSeq=${info.seq }"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
+				href="../projectManagement/projectManage?proSeq=${info.seq }"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
 				href="../projectManagement/main?proYear=2019&proStatus=P"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 목록</span>
@@ -102,6 +102,15 @@
                                             </div>
                                         </div>
                                         
+                                        <div class="form-group row">
+                                            <label class="col-lg-2 col-form-label" for="quarter"><strong>프로젝트 분기</strong>
+                                            </label>
+                                            <br>
+                                            <div class="col-lg-2">
+                                                <input type="number" class="form-control" id="quarter" name="quarter" value="${info.quarter }" autocomplete=off min="3" max="12">
+                                            </div>
+                                        </div>
+                                        
 <!--                                         아이콘 등록 영역 -->
 
 										<div class="form-group row">
@@ -151,6 +160,19 @@
 		$('.infoModify').on("click", function() {
 			 var fileNm = $("#file").val();
 			 
+			 var startDate = ($("#startDt").val()).substring(3);
+ 			 var start = startDate*1
+ 			 var endDate = ($("#endDt").val()).substring(3);
+ 			 var end = endDate*1
+ 			 var quarter = $("#quarter").val();
+			 
+			 if(start >= end){
+				 alert("프로젝트 시작일이 마감일보다 늦습니다.");
+			 }else if(quarter <3 || quarter > 12){
+				 alert("프로젝트 분기 범위 : 3 ~ 12");
+			 }
+			 else{
+			 
 			        var ext = fileNm.slice(fileNm.lastIndexOf(".") + 1).toLowerCase();
 			     
 			        if(fileNm == ""){
@@ -162,7 +184,9 @@
 				        	$("#infoForm").submit();
 				        }
 			        }
+			 }
 		});
+
 	</script>
 	
 	

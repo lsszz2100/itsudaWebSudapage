@@ -8,7 +8,7 @@
     <insert id="create">
         INSERT INTO TB_PROJECT_DOCUMENT_REPLY (
             SEQ
-            ,PRO_SEQ
+            , PRO_SEQ
             , REPLY_TEXT
             , REPLY_WRITER
         ) VALUES (

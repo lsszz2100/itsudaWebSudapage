@@ -41,7 +41,7 @@
 				href="../issueManageBoard/IsMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>이슈 관리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword=&proSeq=${proSeq }"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
+				href="../projectManagement/projectManage?proSeq=${proSeq}"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
 				href="../projectManagement/main?proYear=2019&proStatus=P"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 목록</span>

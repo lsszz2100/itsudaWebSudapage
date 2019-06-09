@@ -23,4 +23,22 @@ public class projectVO {
 	@Getter@Setter private String startDt;
 	@Getter@Setter private String endDt;
 	
+	@Getter@Setter private int  quarter;
+	
+	@Getter@Setter private String  proSeq;
+	
+	@Getter@Setter private String  quarter1;
+	@Getter@Setter private String  quarter2;
+	@Getter@Setter private String  quarter3;
+	@Getter@Setter private String  quarter4;
+	@Getter@Setter private String  quarter5;
+	@Getter@Setter private String  quarter6;
+	@Getter@Setter private String  quarter7;
+	@Getter@Setter private String  quarter8;
+	@Getter@Setter private String  quarter9;
+	@Getter@Setter private String  quarter10;
+	@Getter@Setter private String  quarter11;
+	@Getter@Setter private String  quarter12;
+	
+	
 }

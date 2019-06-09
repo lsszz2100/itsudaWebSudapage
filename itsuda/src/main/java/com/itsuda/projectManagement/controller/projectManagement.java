@@ -1,6 +1,7 @@
 package com.itsuda.projectManagement.controller;
 
 import java.io.File;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -52,6 +53,9 @@ public class projectManagement extends UriMap {
 			log.info(projectVO);
 			
 			dao.createProject(projectVO);
+			int seq = dao.createdProjectSeq(projectVO);
+			//프로젝트 진행률 테이블 생성
+			dao.creatQuarter(seq);
 			
 			model.addAttribute("year", dao.projectYear());
 			
@@ -69,13 +73,18 @@ public class projectManagement extends UriMap {
 	public String SubMain(Model model, projectVO projectVO) throws Exception {
 
 		log.info("start projectManagement-subMain");
+		
+		
+		projectVO.setProSeq(projectVO.getSeq()+"");
+		
 		model.addAttribute("info",dao.subMainList(projectVO));
 		model.addAttribute("iconVO",dao.iconFileLoad(projectVO));
+		model.addAttribute("proQuarterCnt", dao.proQuarterCnt(projectVO));
+		model.addAttribute("proQuarterList", dao.quarterList(projectVO));
 		
+		log.info("카운트" + dao.proQuarterCnt(projectVO));
+		log.info("진행률" + dao.quarterList(projectVO));
 		
-		String icon = dao.iconFileLoad(projectVO);
-		
-		log.info("여긴 세부 메인 페이지 아이콘 주소"+icon);
 		
 		return URI_PROJECTMANAGEMENT_SUBMAIN;
 	}
@@ -101,6 +110,8 @@ public class projectManagement extends UriMap {
 			log.info("start projectManagement-basicInfoModity");
 			
 			dao.subMainModify(projectVO);
+			dao.quarterUpdate(projectVO);
+//			dao.creatQuarter(projectVO);
 			
 			
 			if(file.getOriginalFilename() != "") {
@@ -128,9 +139,6 @@ public class projectManagement extends UriMap {
 			}
 			
 			model.addAttribute("info",dao.subMainList(projectVO));
-			
-			
-			
 			
 			return "redirect:/projectManagement/subMain?seq="+ projectVO.getSeq();
 		}
@@ -182,10 +190,34 @@ public class projectManagement extends UriMap {
 
 	// 프로젝트 관리 페이지
 	@RequestMapping(value = "projectManage", method = RequestMethod.GET)
-	public String ProjectManage() throws Exception {
+	public String ProjectManage(Model model, projectVO projectVO) throws Exception {
 
 		log.info("start projectManagement-projectManage");
+		
+		log.info(projectVO);
+		model.addAttribute("proQuarterList", dao.quarterList(projectVO));
+		log.info(dao.quarterList(projectVO));
+		model.addAttribute("proQuarterCnt", dao.proQuarterCnt(projectVO));
+		model.addAttribute("projectTerm", dao.projectTerm(projectVO));
+		model.addAttribute("proSeq", projectVO.getProSeq());
 
 		return URI_PROJECTMANAGEMENT_PROJECTMANAGE;
 	}
+	
+	// 프로젝트 관리 저장 버튼 클릭시
+		@RequestMapping(value = "projectManageAction", method = RequestMethod.POST)
+		public String ProjectManageAction(Model model, projectVO projectVO) throws Exception {
+
+			log.info("start projectManagement-projectManageAction");
+			
+			dao.insertQuarterProgress(projectVO);
+			
+			model.addAttribute("proQuarterCnt", dao.proQuarterCnt(projectVO));
+			model.addAttribute("projectTerm", dao.projectTerm(projectVO));
+			model.addAttribute("proSeq", projectVO.getProSeq());
+
+			return "redirect:/projectManagement/subMain?seq="+ projectVO.getProSeq();
+		}
+	
+
 }

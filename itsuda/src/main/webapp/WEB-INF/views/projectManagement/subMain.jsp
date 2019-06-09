@@ -59,7 +59,7 @@
 				href="../issueManageBoard/IsMain?page=1&perPageNum=10&keyword=&proSeq=${info.seq }"> <i class="fas fa-fw fa-folder"></i> <span>이슈 관리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
-				href="../documentBoard/DoMain?page=1&perPageNum=10&keyword=&proSeq=${info.seq }"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
+				href="../projectManagement/projectManage?proSeq=${info.seq}"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
 			</a></li>
 			<li class="nav-item "><a class="nav-link"
 				href="../projectManagement/main?proYear=2019&proStatus=P"> <i class="fas fa-fw fa-undo-alt"></i> <span>프로젝트 목록</span>
@@ -297,9 +297,87 @@
 							});
 
 				});
+		
+		var quarterArry = new Array();
+		var quarterProArry = new Array();
+		var quarter0 = 0;
+		var quarter1 = ${proQuarterList.quarter1};
+		var quarter2 = ${proQuarterList.quarter2};
+		var quarter3 = ${proQuarterList.quarter3};
+		var quarter4 = ${proQuarterList.quarter4};
+		var quarter5 = ${proQuarterList.quarter5};
+		var quarter6 = ${proQuarterList.quarter6};
+		var quarter7 = ${proQuarterList.quarter7};
+		var quarter8 = ${proQuarterList.quarter8};
+		var quarter9 = ${proQuarterList.quarter9};
+		var quarter10 = ${proQuarterList.quarter10};
+		var quarter11 = ${proQuarterList.quarter11};
+		var quarter12 = ${proQuarterList.quarter12};
+		var quarterPro = "";
+		
+		
+		for(var i=1; i <= ${proQuarterCnt}; i++){
+			quarterArry[i] = 'Q'+i;
+		}
+		
+		for(var i=0; i <= ${proQuarterCnt}; i++){
+			quarterPro = eval("quarter"+i);
+			quarterProArry[i] = quarterPro;
+		}
+		
+		var ctx = document.getElementById("myAreaChart");
+		var myLineChart = new Chart(ctx, {
+		  type: 'line',
+		  data: {
+			labels: quarterArry,
+		    datasets: [{
+		      label: "Sessions",
+		      lineTension: 0.3,
+		      backgroundColor: "rgba(2,117,216,0.2)",
+		      borderColor: "rgba(2,117,216,1)",
+		      pointRadius: 5,
+		      pointBackgroundColor: "rgba(2,117,216,1)",
+		      pointBorderColor: "rgba(255,255,255,0.8)",
+		      pointHoverRadius: 5,
+		      pointHoverBackgroundColor: "rgba(2,117,216,1)",
+		      pointHitRadius: 50,
+		      pointBorderWidth: 2,
+		      data: quarterProArry,
+		    }],
+		  },
+		  options: {
+		    scales: {
+		      xAxes: [{
+		        time: {
+		          unit: 'date'
+		        },
+		        gridLines: {
+		          display: false
+		        },
+		        ticks: {
+		          maxTicksLimit: 7
+		        }
+		      }],
+		      yAxes: [{
+		        ticks: {
+		          min: 0,
+		          max: 100,
+		          maxTicksLimit: 5
+		        },
+		        gridLines: {
+		          color: "rgba(0, 0, 0, .125)",
+		        }
+		      }],
+		    },
+		    legend: {
+		      display: false
+		    }
+		  }
+		});
+		
 	</script>
 
-	<script src="<c:url value='/projectManagementResource/js/demo/chart-area-demo.js'/>"></script>
+<%-- 	<script src="<c:url value='/projectManagementResource/js/demo/chart-area-demo.js'/>"></script> --%>
 
 </body>
 

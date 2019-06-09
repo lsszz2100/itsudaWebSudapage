@@ -88,7 +88,7 @@
 											<div class="mr-5">${item.proTitle}</div>
 										</div>
 										<a class="card-footer text-white clearfix small z-1"
-											href="../projectManagement/subMain?seq=${item.seq}"> <span
+											href="../projectManagement/subMain?seq=${item.seq}&proSeq=${item.seq}"> <span
 											class="float-left">View Details</span> <span
 											class="float-right"> <i class="fas fa-angle-right"></i>
 										</span>
@@ -109,7 +109,7 @@
 											<div class="mr-5">${item.proTitle}</div>
 										</div>
 										<a class="card-footer text-white clearfix small z-1"
-											href="../projectManagement/subMain?seq=${item.seq}"> <span
+											href="../projectManagement/subMain?seq=${item.seq}&proSeq=${item.seq}"> <span
 											class="float-left">View Details</span> <span
 											class="float-right"> <i class="fas fa-angle-right"></i>
 										</span>

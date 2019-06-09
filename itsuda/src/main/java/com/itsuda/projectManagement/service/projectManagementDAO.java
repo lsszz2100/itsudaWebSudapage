@@ -29,4 +29,18 @@ public interface projectManagementDAO {
 	public String iconFileLoad(projectVO projectVO) throws Exception;
 	//아이콘 데이터 삭제
 	public void iconDelete(projectVO projectVO) throws Exception;
+	// 기간 가져오기
+	public projectVO projectTerm(projectVO projectVO) throws Exception;
+	//분기 수정
+	public void quarterUpdate(projectVO projectVO) throws Exception;
+	//분기 조회
+	public int proQuarterCnt(projectVO projectVO) throws Exception;
+	//분기 테이블 생성
+	public void creatQuarter(int seq) throws Exception;
+	//분기 진행률 저장
+	public void insertQuarterProgress(projectVO projectVO) throws Exception;
+	//분기 진행률 조회
+	public projectVO quarterList(projectVO projectVO) throws Exception;
+	//생성된 프로젝트 seq 조회
+	public int createdProjectSeq(projectVO projectVO) throws Exception;
 }
