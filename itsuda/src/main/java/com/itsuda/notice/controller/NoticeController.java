@@ -113,7 +113,7 @@ public class NoticeController extends UriMap {
 		String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
 		File destinationFile;
 		String destinationFileName;
-		String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/WEB-INF/Notice_uploadFiles/";
+		String fileUrl= "/var/lib/tomcat8/webapps/file/";
 		
 		
 		do {
@@ -229,7 +229,7 @@ public class NoticeController extends UriMap {
 			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
 			File destinationFile;
 			String destinationFileName;
-			String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/WEB-INF/uploadFiles/";
+			String fileUrl= "/var/lib/tomcat8/webapps/file/";
 			
 			
 			do {

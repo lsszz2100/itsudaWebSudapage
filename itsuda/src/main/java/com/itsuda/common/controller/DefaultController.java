@@ -18,7 +18,9 @@ import com.itsuda.member.service.MemberDAO;
 import com.itsuda.common.utility.CommonUtil;
 import com.itsuda.common.utility.MemberUtil;
 import com.itsuda.common.utility.UriMap;
+import com.itsuda.community.service.CommunityDAOImpl;
 import com.itsuda.member.vo.MemberVO;
+import com.itsuda.notice.service.NoticeDAOImpl;
 
 import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
@@ -29,6 +31,13 @@ public class DefaultController extends UriMap {
 	
 	@Resource
 	private MemberDAO memberDao;
+
+	@Resource
+	private CommunityDAOImpl community;
+
+	@Resource
+	private NoticeDAOImpl notice;
+	
 	
 	
 	/**
@@ -41,11 +50,16 @@ public class DefaultController extends UriMap {
 	public String root(Model model,HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception
 	{
 		// TODO : 사용자 세션 확인 부분 인터럽트 등록(
-		log.info("start_pjt");
+//		log.info("start_pjt");
 		if(session.getAttribute("userInfo") == null) {
 			return URI_DEFAULT_INDEX;
 		}
 		else {
+			model.addAttribute("designTop",community.selectTopFiveDesign());
+			model.addAttribute("mobileTop",community.selectTopFiveMobile());
+			model.addAttribute("planTop",community.selectTopFivePlan());
+			model.addAttribute("webTop",community.selectTopFiveWeb());
+			model.addAttribute("noticTop",notice.selectTopFive());
 			return URI_DEFAULT_MAIN;
 		}
 		

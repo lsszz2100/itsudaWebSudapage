@@ -54,4 +54,13 @@ public interface CommunityDAO {
 	//게시글 삭제 시 파일 모두 삭제
 	public void fileDeleteAll(int seq) throws Exception;
 
+	//디자인 최신5개글
+	public List<CommunityVO> selectTopFiveDesign();
+	//모바일 최신5개글
+	public List<CommunityVO> selectTopFiveMobile();
+	//기획 최신5개글
+	public List<CommunityVO> selectTopFivePlan();
+	//웹 최신5개글
+	public List<CommunityVO> selectTopFiveWeb();
+
 }

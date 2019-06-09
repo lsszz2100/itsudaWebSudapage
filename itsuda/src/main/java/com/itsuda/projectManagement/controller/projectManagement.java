@@ -136,7 +136,7 @@ public class projectManagement extends UriMap {
 			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
 			File destinationFile;
 			String destinationFileName;
-			String fileUrl= "/Users/이건우/itsuda_git/itsudaWebSudapage/itsuda/src/main/webapp/projectIconFile/";
+			String fileUrl= "/var/lib/tomcat8/webapps/ROOT/projectIconFile/";
 			
 			do {
 				destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;

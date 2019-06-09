@@ -105,7 +105,7 @@ $(function() {
 
 </script>
 <!-- TODO : CSS 통합 -->
-<style type="text/css">
+<!-- <style type="text/css">
 	/* 달력,공지사항 그리드 */
 	.main-grid-1{ width: 100%; height: 100%; float: left;}
 	/* 달력 css */
@@ -153,14 +153,14 @@ $(function() {
 	
 
 	
-</style>
+</style> -->
 
 <div class="container" style="padding-top: 60px;">
 	<div class="main-grid-1">
 		<!-- 달력 -->
-		<div id="calendar"></div>
+		<!-- <div id="calendar"></div> -->
 		<!-- 달력 일정 입력 -->
-		<div id="calender-input-form" style="display:none;">
+		<!-- <div id="calender-input-form" style="display:none;">
 			<form method="POST" action="/itsuda/calendar/insertInd">
 			  <div class="form-group">
 			    <input type="text" class="form-control" id="title" name="title" placeholder="일정을 입력하세요." autocomplete="off">
@@ -186,16 +186,16 @@ $(function() {
 			  </div>
 			  <button type="submit" class="btn btn-warning">일정 추가하기</button>
 			</form>
-		</div>
+		</div> -->
 		<!-- 달력 일정 컨트롤-->
-		<div id="calender-remove-form" style="display:none;">
+		<!-- <div id="calender-remove-form" style="display:none;">
 			<nav class="nav-notice">
 			  <div class="nav nav-tabs nav-tabs-notice" id="nav-tab" role="tablist">
 			    <a class="nav-item nav-link active" id="nav-modify-tab" data-toggle="tab" href="#nav-modify" role="tab" aria-controls="nav-modify" aria-selected="true">일정 수정</a>
 			    <a class="nav-item nav-link" onclick="AppendID()" id="nav-remove-tab" data-toggle="tab" href="#nav-remove" role="tab" aria-controls="nav-remove" aria-selected="false">일정 삭제</a>
 			  </div>
 			</nav>
-			<!-- 일정 수정 란 -->
+			일정 수정 란
 			<div class="tab-content tab-content-notice" id="nav-tabContent">
 			  <div class="tab-pane fade show active" id="nav-modify" role="tabpanel" aria-labelledby="nav-home-tab">
 			    <p><b id="modify-words"></b>일정에 대한 수정사항을 입력해주세요.</p>
@@ -228,7 +228,7 @@ $(function() {
 				</form>
 			  </div>
 			  
-			  <!-- 일정 삭제 란 -->
+			  일정 삭제 란
 			  <div class="tab-pane fade" id="nav-remove" role="tabpanel" aria-labelledby="nav-profile-tab">
 			  	<form action="../calendar/deleteInd" method="POST">
 				  	<input type="hidden" id="schedule-id2" name="scheduleID" value="null">
@@ -240,24 +240,20 @@ $(function() {
 			  	 </form>
 			  </div>
 			</div>
-		</div>
+		</div> -->
 		<!-- 공지사항 시작 -->
 		<div class="notice-grid">
 			<nav class="nav-notice">
 			  <div class="nav nav-tabs nav-tabs-notice" id="nav-tab" role="tablist">
-			    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">공통공지</a>
-			    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">추가공지</a>
-		
+			    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">공지사항</a>
 			  </div>
 			</nav>
 			<div class="tab-content tab-content-notice" id="nav-tabContent">
 			  <div class="tab-pane fade show active tab-pane-notice" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 			  	<ul class="list-group list-group-flush">
-				  <li class="list-group-item"><a href="#" class="list-notice-front">최근 공지</a><span class="list-notice-back">2019-01-10</span></li>
-				  <li class="list-group-item"><a href="#" class="list-notice-front">2번 공지</a><span class="list-notice-back">2019-01-09</span></li>
-				  <li class="list-group-item"><a href="#" class="list-notice-front">3번 공지</a><span class="list-notice-back">2019-01-08</span></li>		  
-				  <li class="list-group-item"><a href="#" class="list-notice-front">4번 공지</a><span class="list-notice-back">2018-12-25</span></li>		  
-				  <li class="list-group-item"><a href="#" class="list-notice-front">길이테스트테스트테스트테...</a><span class="list-notice-back">2019-01-10</span></li>		  
+			  		<c:forEach items="${noticTop}" var="item">
+			  			<li class="list-group-item"><a href="<c:url value='/notice/NoDetail?seq=${item.seq }&page=1&perPageNum=10'/>" class="list-notice-front">${item.title }</a><span style="float:right; text-align: right;" class="list-notice-back">${item.lastDt }</span></li>
+			  		</c:forEach>
 				</ul>
 			  </div>
 			  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">추가 내용</div>
@@ -270,7 +266,7 @@ $(function() {
 	
 	<div class="main-grid-2">
 		<!-- 달력(리스트) -->
-		<div id="calendar-list"></div>
+		<!-- <div id="calendar-list"></div> -->
 		<!-- 커뮤니티 시작 -->
 		<div class="community-grid">
 			<nav class="nav-community">
@@ -284,39 +280,31 @@ $(function() {
 			
 			<div class="tab-content tab-content-community" id="nav-tabContent">
 			  <div class="tab-pane fade show active tab-pane-community" id="nav-design" role="tabpanel" aria-labelledby="nav-design-tab">
-			  	<ul class="list-group list-group-flush">
-				  <li class="list-group-item"><a href="#" class="list-community-front">디자인 1</a><span class="list-community-back">2019-01-10</span></li>
-				  <li class="list-group-item"><a href="#" class="list-community-front">디자인 2</a><span class="list-community-back">2019-01-09</span></li>
-				  <li class="list-group-item"><a href="#" class="list-community-front">디자인 3</a><span class="list-community-back">2019-01-08</span></li>		  
-				  <li class="list-group-item"><a href="#" class="list-community-front">디자인 4</a><span class="list-community-back">2018-12-25</span></li>		  
-				  <li class="list-group-item"><a href="#" class="list-community-front">디자인 5</a><span class="list-community-back">2018-12-25</span></li>		  
+			  	<ul class="list-group list-group-flush" id="lastDesign">
+			  		<c:forEach items="${designTop}" var="item">
+			  			<li class="list-group-item"><a href="<c:url value='/community/detail?seq=${item.seq }&page=1&perPageNum=10&team=1'/>" class="list-notice-front">${item.title }</a><span style="float:right; text-align: right;" class="list-notice-back">${item.lastDt }</span></li>
+			  		</c:forEach>
 				</ul>
 			  </div>
 			  <div class="tab-pane fade show tab-pane-community" id="nav-mobile" role="tabpanel" aria-labelledby="nav-mobile-tab">
-			  	<ul class="list-group list-group-flush">
-				  <li class="list-group-item"><a href="#" class="list-community-front">모바일 1</a><span class="list-community-back">2019-01-10</span></li>
-				  <li class="list-group-item"><a href="#" class="list-community-front">모바일 2</a><span class="list-community-back">2019-01-09</span></li>
-				  <li class="list-group-item"><a href="#" class="list-community-front">모바일 3</a><span class="list-community-back">2019-01-08</span></li>		  
-				  <li class="list-group-item"><a href="#" class="list-community-front">모바일 4</a><span class="list-community-back">2018-12-25</span></li> 		  
-				  <li class="list-group-item"><a href="#" class="list-community-front">&nbsp</a><span class="list-community-back">&nbsp</span></li> 		  
+			  	<ul class="list-group list-group-flush" id="lastMobile">
+				  	<c:forEach items="${mobileTop}" var="item">
+			  			<li class="list-group-item"><a href="<c:url value='/community/detail?seq=${item.seq }&page=1&perPageNum=10&team=2'/>" class="list-notice-front">${item.title }</a><span style="float:right; text-align: right;" class="list-notice-back">${item.lastDt }</span></li>
+			  		</c:forEach> 		  
 				</ul>
 			  </div>
 			  <div class="tab-pane fade show tab-pane-community" id="nav-plan" role="tabpanel" aria-labelledby="nav-plan-tab">
-			  	<ul class="list-group list-group-flush">
-				  <li class="list-group-item"><a href="#" class="list-community-front">기획 1</a><span class="list-community-back">2019-01-10</span></li>
-				  <li class="list-group-item"><a href="#" class="list-community-front">기획 2</a><span class="list-community-back">2019-01-09</span></li>
-				  <li class="list-group-item"><a href="#" class="list-community-front">기획 3</a><span class="list-community-back">2019-01-08</span></li>		  
-				  <li class="list-group-item"><a href="#" class="list-community-front">기획 4</a><span class="list-community-back">2018-12-25</span></li> 		  
-				  <li class="list-group-item"><a href="#" class="list-community-front">&nbsp</a><span class="list-community-back">&nbsp</span></li> 		  
+			  	<ul class="list-group list-group-flush" id="lastPlan">
+				  	<c:forEach items="${planTop}" var="item">
+			  			<li class="list-group-item"><a href="<c:url value='/community/detail?seq=${item.seq }&page=1&perPageNum=10&team=3'/>" class="list-notice-front">${item.title }</a><span style="float:right; text-align: right;" class="list-notice-back">${item.lastDt }</span></li>
+			  		</c:forEach>	  
 				</ul>
 			  </div>
 			  <div class="tab-pane fade show tab-pane-community" id="nav-web" role="tabpanel" aria-labelledby="nav-web-tab">
-			  	<ul class="list-group list-group-flush">
-				  <li class="list-group-item"><a href="#" class="list-community-front">웹 1</a><span class="list-community-back">2019-01-10</span></li>
-				  <li class="list-group-item"><a href="#" class="list-community-front">웹 2</a><span class="list-community-back">2019-01-09</span></li>
-				  <li class="list-group-item"><a href="#" class="list-community-front">웹 3</a><span class="list-community-back">2019-01-08</span></li>		  
-				  <li class="list-group-item"><a href="#" class="list-community-front">웹 4</a><span class="list-community-back">2018-12-25</span></li> 		  
-				  <li class="list-group-item"><a href="#" class="list-community-front">&nbsp</a><span class="list-community-back">&nbsp</span></li> 		  
+			  	<ul class="list-group list-group-flush" id="lastWeb">
+				 	<c:forEach items="${webTop}" var="item">
+			  			<li class="list-group-item"><a href="<c:url value='/community/detail?seq=${item.seq }&page=1&perPageNum=10&team=4'/>" class="list-notice-front">${item.title }</a><span style="float:right; text-align: right;" class="list-notice-back">${item.lastDt }</span></li>
+			  		</c:forEach>	  
 				</ul>
 			  </div>
 			</div>
@@ -324,7 +312,7 @@ $(function() {
 		<!-- 커뮤니티 끝 -->
 	</div>
 	
-	<div class="main-grid-3">
+	<!-- <div class="main-grid-3">
 		<div class="reply-grid">
 			<nav class="nav-reply">
 			  <div class="nav nav-tabs nav-tabs-reply" id="nav-tab" role="tablist">
@@ -354,7 +342,7 @@ $(function() {
 			  </div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
 	
 </div>

@@ -221,6 +221,11 @@
 		<put-attribute name="body"			value="/WEB-INF/views/admin/manageMember.jsp" />
     </definition> 
 
+	<!-- 에러 페이지 -->
+    <definition name="error.main" extends="default.main">
+		<put-attribute name="body"			value="/WEB-INF/views/common/error/main.jsp" />
+    </definition> 
+    
 	<!-- 조회 -->
 	<!-- <definition name="showLinks" extends="default.main"> 
 		<put-attribute name="body"			value="/WEB-INF/views/library/showLinks.jsp" />

@@ -116,4 +116,28 @@ public class CommunityDAOImpl implements CommunityDAO{
 	public void fileDeleteAll(int seq) throws Exception {
 		sql.update(namespace+".fileDeleteAll", seq);
 	}
+	
+	
+	//디자인 최신5개글
+	@Override
+	public List<CommunityVO> selectTopFiveDesign(){
+		return sql.selectList(namespace+".selectTopFiveDesign");
+	}
+	
+	//모바일 최신5개글
+	@Override
+	public List<CommunityVO> selectTopFiveMobile(){
+		return sql.selectList(namespace+".selectTopFiveMobile");
+	}
+	//기획 최신5개글
+	@Override
+	public List<CommunityVO> selectTopFivePlan(){
+		return sql.selectList(namespace+".selectTopFivePlan");
+	}
+	//웹 최신5개글
+	@Override
+	public List<CommunityVO> selectTopFiveWeb(){
+		return sql.selectList(namespace+".selectTopFiveWeb");
+	}
+	
 }

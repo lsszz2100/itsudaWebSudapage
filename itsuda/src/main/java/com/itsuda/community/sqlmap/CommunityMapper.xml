@@ -180,5 +180,55 @@
 		b.TEAM, a.ID
 	ORDER BY team ASC
 	</select>
+
+	<select id ="selectTopFiveDesign" resultType="com.itsuda.community.vo.CommunityVO">
+	SELECT * 
+	FROM(
+		SELECT * 
+		FROM TB_COMMUNITY
+		WHERE 1=1
+		AND DELFLAG = 'N'
+		AND TEAM = 1
+		ORDER BY SEQ DESC
+	) AS A
+	WHERE 1 LIMIT 5;
+	</select>
+	<select id ="selectTopFiveMobile" resultType="com.itsuda.community.vo.CommunityVO">
+	SELECT * 
+	FROM(
+		SELECT * 
+		FROM TB_COMMUNITY
+		WHERE 1=1
+		AND DELFLAG = 'N'
+		AND TEAM = 2
+		ORDER BY SEQ DESC
+	) AS A
+	WHERE 1 LIMIT 5;
+	</select>
+	<select id ="selectTopFivePlan" resultType="com.itsuda.community.vo.CommunityVO">
+	SELECT * 
+	FROM(
+		SELECT * 
+		FROM TB_COMMUNITY
+		WHERE 1=1
+		AND DELFLAG = 'N'
+		AND TEAM = 3
+		ORDER BY SEQ DESC
+	) AS A
+	WHERE 1 LIMIT 5;
+	</select>
+	<select id ="selectTopFiveWeb" resultType="com.itsuda.community.vo.CommunityVO">
+	SELECT * 
+	FROM(
+		SELECT * 
+		FROM TB_COMMUNITY
+		WHERE 1=1
+		AND DELFLAG = 'N'
+		AND TEAM = 4
+		ORDER BY SEQ DESC
+	) AS A
+	WHERE 1 LIMIT 5;
+	</select>
+	
 	
 </mapper>

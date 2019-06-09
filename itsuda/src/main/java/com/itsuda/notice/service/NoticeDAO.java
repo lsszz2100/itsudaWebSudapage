@@ -56,4 +56,7 @@ public interface NoticeDAO {
 	//게시글 삭제 시 파일 모두 삭제
 	public void fileDeleteAll(int seq) throws Exception;
 
+	//최근 5개 개시물
+	public List<NoticeVO> selectTopFive();
+
 }

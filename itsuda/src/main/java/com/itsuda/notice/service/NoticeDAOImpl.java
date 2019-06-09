@@ -117,4 +117,11 @@ public class NoticeDAOImpl implements NoticeDAO{
 	public void fileDeleteAll(int seq) throws Exception {
 		sql.update(namespace+".fileDeleteAll", seq);
 	}
+
+	// 최근 5개 개시물
+	@Override
+	public List<NoticeVO> selectTopFive(){
+		return sql.selectList(namespace+".selectTopFive");
+	}
+	
 }

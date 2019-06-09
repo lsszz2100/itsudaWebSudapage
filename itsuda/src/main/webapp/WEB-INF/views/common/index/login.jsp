@@ -55,16 +55,17 @@
 						<input name = "clientAgent" type="hidden" value="<%=getClientAgent(request) %>"/>
 				 		<div class="form-group">
 				 			<label for="email">이메일</label>
-				 			<input type="email" class="form-control" id="email" name="email" placeholder="이메일주소를 입력해주세요" value="hjo0045@naver.com"/>
+				 			<input type="email" class="form-control" id="email" name="email" placeholder="이메일주소를 입력해주세요" />
 				 		</div>
 					 	<div class="form-group">
 						 	<label for="password">비밀번호</label>
-					 		<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력해주세요" value="3373e@!jy"/>
+					 		<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력해주세요" />
 					 	</div>
-					 	<div class="checkbox">
+					 	<!-- <div class="checkbox">
 					 		<label><input type="checkbox" id="loginAutoBox" name="loginAutoBox" />로그인 상태 유지</label>
 					 		<input type="hidden" id="loginAuto" name="loginAuto" value="N" />
-					 	</div>
+					 	</div> -->
+					 	<input type="hidden" id="loginAuto" name="loginAuto" value="N" />
 					 	<div class="form-group">
 					 		<button type="submit" class="col-md btn btn-success" onclick="login()" style="margin-bottom: 10px;">로그인&nbsp;<i class="fa fa-check spaceLeft"></i></button>
 						</div>

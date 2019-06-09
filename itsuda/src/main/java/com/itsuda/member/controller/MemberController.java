@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itsuda.common.utility.MemberUtil;
 import com.itsuda.common.utility.UriMap;
+import com.itsuda.community.service.CommunityDAOImpl;
 import com.itsuda.member.service.MemberDAO;
 import com.itsuda.member.vo.MemberVO;
+import com.itsuda.notice.service.NoticeDAOImpl;
 
 import lombok.extern.log4j.Log4j;
 
@@ -31,6 +33,12 @@ public class MemberController extends UriMap {
 	
 	@Resource
 	private MemberDAO dao;
+
+	@Resource
+	private NoticeDAOImpl notice;
+	
+	@Resource
+	private CommunityDAOImpl community;
 	
 	/**
 	 * 로그인 - 기능 동작
@@ -51,6 +59,9 @@ public class MemberController extends UriMap {
 	{
 		log.info("start_login");
 		
+		
+		
+		
 		if(session.getAttribute("userInfo") == null) {
 			MemberVO vo = new MemberVO();
 			vo.setEmail(email);
@@ -64,6 +75,11 @@ public class MemberController extends UriMap {
 			if(vo.getErrorStr() == null) {
 				model.addAttribute("user",vo);
 				session.setAttribute("userInfo", vo);
+				model.addAttribute("designTop",community.selectTopFiveDesign());
+				model.addAttribute("mobileTop",community.selectTopFiveMobile());
+				model.addAttribute("planTop",community.selectTopFivePlan());
+				model.addAttribute("webTop",community.selectTopFiveWeb());
+				model.addAttribute("noticTop",notice.selectTopFive());
 				return URI_DEFAULT_MAIN;
 			}
 			// 로그인 실패
@@ -73,6 +89,11 @@ public class MemberController extends UriMap {
 			}
 		}
 		else {
+			model.addAttribute("designTop",community.selectTopFiveDesign());
+			model.addAttribute("mobileTop",community.selectTopFiveMobile());
+			model.addAttribute("planTop",community.selectTopFivePlan());
+			model.addAttribute("webTop",community.selectTopFiveWeb());
+			model.addAttribute("noticTop",notice.selectTopFive());
 			return URI_DEFAULT_MAIN;
 		}
 
