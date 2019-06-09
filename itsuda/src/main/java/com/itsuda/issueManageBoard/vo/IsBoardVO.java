@@ -15,6 +15,7 @@ public class IsBoardVO {
 	@Getter @Setter private int		viewCnt;
 	@Getter @Setter private Date	crtDt;
 	@Getter @Setter private Date	lastDt;
+	@Getter @Setter private String	status;
 	
 //	프로젝트 시퀀스
 	@Getter @Setter private int	proSeq;

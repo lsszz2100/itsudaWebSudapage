@@ -40,5 +40,12 @@ public class projectVO {
 	@Getter@Setter private String  quarter11;
 	@Getter@Setter private String  quarter12;
 	
+	@Getter@Setter private String  userName;
+	
+	@Getter@Setter private String  commentTitle;
+	@Getter@Setter private String  commentCnt;
+	
+	@Getter@Setter private String  teamMember;
+	
 	
 }

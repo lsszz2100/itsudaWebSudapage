@@ -14,6 +14,7 @@
 		, A.WRITER
 		, A.CRT_DT
 		, A.VIEW_CNT
+		, A.STATUS
 		FROM TB_PROJECT_ISSUEMANAGE A
 		, (SELECT @ROWNUM:=0) B
 		WHERE
@@ -49,6 +50,7 @@
 				,CRT_DT
 				,VIEW_CNT
 				,LAST_DT
+				,STATUS
             FROM
                 TB_PROJECT_ISSUEMANAGE
             WHERE
@@ -157,6 +159,14 @@
 	SET
 		TITLE = #{title }
 		,DESCRIPTION = #{description }
+	WHERE SEQ = #{seq }
+	</update>
+	
+	<update id="updateStatus" parameterType="com.itsuda.issueManageBoard.vo.IsBoardVO">
+	UPDATE 
+		TB_PROJECT_ISSUEMANAGE
+	SET
+		STATUS = #{status }
 	WHERE SEQ = #{seq }
 	</update>
 	

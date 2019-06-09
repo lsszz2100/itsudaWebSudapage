@@ -80,12 +80,12 @@
 							<!-- Icon Cards -->
 							<div>
 								<div class="col-xl-12 col-sm-6 mb-3">
-									<div class="card text-white bg-primary o-hidden h-100">
+									<div class="card text-white bg-primary o-hidden h-100" onclick="location.href='../projectManagement/main?proYear=${item.proYear}&proStatus=${item.proStatus}&seq=${item.seq}&proSeq=${item.seq}'">
 										<div class="card-body">
 											<div class="card-body-icon">
 												<i class="fas fa-fw fa-walking"></i>
 											</div>
-											<div class="mr-5">${item.proTitle}</div>
+											<div class="mr-5" >${item.proTitle}</div>
 										</div>
 										<a class="card-footer text-white clearfix small z-1"
 											href="../projectManagement/subMain?seq=${item.seq}&proSeq=${item.seq}"> <span
@@ -101,7 +101,7 @@
 							<!-- Icon Cards -->
 							<div>
 								<div class="col-xl-12 col-sm-6 mb-3">
-									<div class="card text-white bg-danger o-hidden h-100">
+									<div class="card text-white bg-danger o-hidden h-100" onclick="location.href='../projectManagement/main?proYear=${item.proYear}&proStatus=${item.proStatus}&seq=${item.seq}&proSeq=${item.seq}'">
 										<div class="card-body">
 											<div class="card-body-icon">
 												<i class="fas fa-fw fa-user-graduate"></i>
@@ -120,19 +120,46 @@
 						</c:if>
 					</c:forEach>
 				</div>
-
-				<!-- 스케쥴러 영역 -->
+				
+				<!-- 프로젝트 이름과 아이콘-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+					<c:if test="${iconVO != null}">
+						<img src="/itsuda/projectIconFile/${iconVO}" width="48">
+						</c:if>
+						&nbsp;&nbsp;&nbsp;<strong>${proInfo.proTitle }</strong></li>
+						
+				</ol>
+				
+				<!-- 프로젝트 설명 영역 -->
+				<c:if test="${proInfo.description != null}">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item" >
+						${proInfo.description }</li>
+				</ol>
+				</c:if>
+				
 				<div class="card mb-3">
 					<div class="card-header">
-						<!-- 						<i class="fas fa-chart-area"></i> -->
-						<strong>Schduler</strong>
+						<!--             <i class="fas fa-table"></i> -->
+						<strong>TeamMember</strong>
 					</div>
-
-					<!-- 			      스케쥴러 영역입니다      -->
-					<div id='calendar'></div>
-
+					<c:if test="${!empty TeamMember }">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0">
+								<tbody>
+									<tr>
+										<td>${ TeamMember.teamMember}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					</c:if>
 				</div>
-
+				
 				<!-- object 영역 -->
 				<div class="card mb-3">
 					<div class="card-header">
@@ -143,22 +170,22 @@
 						<div class="table-responsive">
 							<table class="table table-bordered" id="dataTable" width="100%"
 								cellspacing="0">
-								<thead>
-									<tr>
-										<th>작업중인 object</th>
-										<th>0</th>
-									</tr>
-								</thead>
-								<tfoot>
-									<tr>
-										<th>작업 끝난 object</th>
-										<th>0</th>
-									</tr>
-								</tfoot>
 								<tbody>
 									<tr>
-										<td>작업 대기중인 object</td>
-										<td>0</td>
+										<td>작업 중 object</td>
+										<td>${cntGo }</td>
+									</tr>
+								</tbody>
+								<tbody>
+									<tr>
+										<td>버그 수정 object</td>
+										<td>${cntBug }</td>
+									</tr>
+								</tbody>
+								<tbody>
+									<tr>
+										<td>작업 완료 object</td>
+										<td>${cntEnd }</td>
 									</tr>
 								</tbody>
 							</table>
@@ -178,13 +205,38 @@
 								cellspacing="0">
 								<thead>
 									<tr>
-										<th>comments</th>
+										<td><strong>글제목</strong></td>
+										<td><strong>개수</strong></td>
 									</tr>
 								</thead>
+								<c:forEach var="commentList" varStatus="i" items="${commentList }">
+								<c:if test="${!empty commentList }">
+								<tbody>
+									<tr>
+										<td>${commentList.commentTitle }</td>
+										<td>${commentList.commentCnt }</td>
+									</tr>
+								</tbody>
+								</c:if>
+								</c:forEach>
 							</table>
 						</div>
 					</div>
 				</div>
+
+				<!-- 스케쥴러 영역 -->
+				<div class="card mb-3">
+					<div class="card-header">
+						<!-- 						<i class="fas fa-chart-area"></i> -->
+						<strong>Schduler</strong>
+					</div>
+
+					<!-- 			      스케쥴러 영역입니다      -->
+					<div id='calendar'></div>
+
+				</div>
+
+
 			</div>
 		</div>
 	</div>

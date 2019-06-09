@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itsuda.common.utility.UriMap;
+import com.itsuda.member.vo.MemberVO;
 import com.itsuda.projectManagement.service.projectManagementDAOImpl;
 import com.itsuda.projectManagement.vo.iconFileVO;
 import com.itsuda.projectManagement.vo.projectVO;
@@ -33,14 +34,27 @@ public class projectManagement extends UriMap {
 
 	// 프로젝트 관리 메인
 	@RequestMapping(value = "main", method = RequestMethod.GET)
-	public String Main(projectVO projectVO, Model model) throws Exception {
+	public String Main(projectVO projectVO, Model model, HttpSession session) throws Exception {
 
 		log.info("start projectManagement");
+		
+		MemberVO member = (MemberVO) session.getAttribute("userInfo");
+		projectVO.setUserName(member.getName());
 
 		model.addAttribute("year", dao.projectYear());
 		model.addAttribute("proList", dao.projectList(projectVO));
 		List<projectVO> list= dao.projectList(projectVO);
 		model.addAttribute("status", list.get(0).getProStatus());
+		
+		model.addAttribute("proInfo", dao.projectInfo(projectVO));
+		model.addAttribute("iconVO", dao.iconFileLoad(projectVO));
+		
+		model.addAttribute("cntGo", dao.cntGO(projectVO));
+		model.addAttribute("cntBug", dao.cntBUG(projectVO));
+		model.addAttribute("cntEnd", dao.cntEND(projectVO));
+		
+		model.addAttribute("commentList", dao.commentList(projectVO));
+		model.addAttribute("TeamMember", dao.getTeamMember(projectVO));
 		 
 		return URI_PROJECTMANAGEMENT_MAIN;
 	}
@@ -70,9 +84,12 @@ public class projectManagement extends UriMap {
 		
 	// 프로젝트 세부 메인 페이지
 	@RequestMapping(value = "subMain", method = RequestMethod.GET)
-	public String SubMain(Model model, projectVO projectVO) throws Exception {
+	public String SubMain(Model model, projectVO projectVO, HttpSession session) throws Exception {
 
 		log.info("start projectManagement-subMain");
+		
+		MemberVO member = (MemberVO) session.getAttribute("userInfo");
+		projectVO.setUserName(member.getName());
 		
 		
 		projectVO.setProSeq(projectVO.getSeq()+"");
@@ -82,8 +99,7 @@ public class projectManagement extends UriMap {
 		model.addAttribute("proQuarterCnt", dao.proQuarterCnt(projectVO));
 		model.addAttribute("proQuarterList", dao.quarterList(projectVO));
 		
-		log.info("카운트" + dao.proQuarterCnt(projectVO));
-		log.info("진행률" + dao.quarterList(projectVO));
+		model.addAttribute("commentList", dao.commentList(projectVO));
 		
 		
 		return URI_PROJECTMANAGEMENT_SUBMAIN;
@@ -200,6 +216,7 @@ public class projectManagement extends UriMap {
 		model.addAttribute("proQuarterCnt", dao.proQuarterCnt(projectVO));
 		model.addAttribute("projectTerm", dao.projectTerm(projectVO));
 		model.addAttribute("proSeq", projectVO.getProSeq());
+		model.addAttribute("TeamMember", dao.getTeamMember(projectVO).getTeamMember());
 
 		return URI_PROJECTMANAGEMENT_PROJECTMANAGE;
 	}
@@ -211,6 +228,7 @@ public class projectManagement extends UriMap {
 			log.info("start projectManagement-projectManageAction");
 			
 			dao.insertQuarterProgress(projectVO);
+			dao.insertTeamMember(projectVO);
 			
 			model.addAttribute("proQuarterCnt", dao.proQuarterCnt(projectVO));
 			model.addAttribute("projectTerm", dao.projectTerm(projectVO));

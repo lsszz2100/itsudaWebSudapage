@@ -27,11 +27,25 @@
 		SEQ
     	,PRO_TITLE
    	 	,PRO_STATUS
+   	 	,PRO_YEAR
+   	 	,PRO_STATUS
+   	 	,DESCRIPTION
 	FROM 
 		TB_PROJECT
 	WHERE
 		PRO_YEAR = #{proYear} AND PRO_STATUS = #{proStatus} AND DELFLAG = 'N'
 	</select>
+	
+	<select id ="projectInfo" resultType="com.itsuda.projectManagement.vo.projectVO"> 
+	SELECT 
+    	PRO_TITLE
+   	 	,DESCRIPTION
+	FROM 
+		TB_PROJECT
+	WHERE
+		SEQ = #{seq} AND DELFLAG = 'N';
+	</select>
+	
 	
 	<insert id="createProject">
 	 INSERT INTO TB_PROJECT(
@@ -178,6 +192,45 @@
 	
 	<select id="createdProjectSeq" resultType="Integer">
 	SELECT SEQ FROM TB_PROJECT WHERE PRO_TITLE = #{proTitle}
+	</select>
+	      
+	      <select id="cntGO" resultType="Integer">
+	      SELECT COUNT(*) from TB_PROJECT_ISSUEMANAGE where STATUS='GO' AND DELFLAG = 'N' AND PRO_SEQ = #{proSeq}
+	      </select>
+	      
+	      <select id="cntBUG" resultType="Integer">
+	      SELECT COUNT(*) from TB_PROJECT_ISSUEMANAGE where STATUS='BUG' AND DELFLAG = 'N' AND PRO_SEQ = #{proSeq}
+	      </select>
+	      
+	      <select id="cntEND" resultType="Integer">
+	      SELECT COUNT(*) from TB_PROJECT_ISSUEMANAGE where STATUS='END' AND DELFLAG = 'N' AND PRO_SEQ = #{proSeq}
+	      </select>
+	      
+	<select id="commentList" resultType="com.itsuda.projectManagement.vo.projectVO">
+		SELECT A.TITLE as commentTitle, COUNT(B.SEQ) as commentCnt
+		FROM TB_PROJECT_ISSUEMANAGE A
+		LEFT JOIN TB_PROJECT_ISSUEMANAGE_REPLY B ON B.SEQ = A.SEQ AND B.DELFLAG = 'N'
+		WHERE A.WRITER = #{userName} AND A.DELFLAG = 'N' AND B.PRO_SEQ = #{proSeq}
+		GROUP BY A.SEQ
+	</select>
+	
+	<update id="insertTeamMember" >
+	  UPDATE
+		TB_PROJECT
+	SET 
+		TEAMMEMBER = #{teamMember}
+	WHERE 
+		SEQ = #{proSeq};
+	</update>
+	
+	<select id="getTeamMember" resultType="com.itsuda.projectManagement.vo.projectVO">
+	SELECT
+		TEAMMEMBER
+	FROM 
+		TB_PROJECT
+	WHERE 
+		SEQ = #{proSeq}
+		AND DELFLAG ='N'
 	</select>
 	
 </mapper>

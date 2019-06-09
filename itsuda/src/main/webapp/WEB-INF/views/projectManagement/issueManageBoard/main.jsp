@@ -86,6 +86,7 @@
 										<th><strong>WRITER</strong></th>
 										<th><strong>DATE</strong></th>
 										<th><strong>VIEWS</strong></th>
+										<th><strong>STATUS</strong></th>
 									</tr>
 								</thead>
 
@@ -98,6 +99,7 @@
 											<td>${item.writer }</td>
 											<td>${item.crtDt }</td>
 											<td>${item.viewCnt }</td>
+											<td>${item.status }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

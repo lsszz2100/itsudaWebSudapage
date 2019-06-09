@@ -55,5 +55,8 @@ public interface IsBoardDAO {
 	
 	//게시글 삭제 시 파일 모두 삭제
 	public void fileDeleteAll(int seq) throws Exception;
+	
+	//게시글 상태 수정
+	public void updateStatus(IsBoardVO BoardVO) throws Exception;
 
 }

@@ -66,7 +66,8 @@
 									<h6 class="card-subtitle text-muted mb-4">
 										<i class="far fa-user"></i> ${vo.writer } · <i
 											class="far fa-clock"></i> ${vo.crtDt } · <i
-											class="fas fa-align-justify"></i> ${vo.viewCnt }
+											class="fas fa-align-justify"></i> ${vo.viewCnt } · <i
+											class="fas fa-question-circle"></i> ${vo.status }
 									</h6>
 									<p class="card-text">${vo.description }</p>
 								</div>

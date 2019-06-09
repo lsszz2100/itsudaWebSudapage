@@ -67,6 +67,19 @@
 							<input name="keyword" type="hidden" value="${searchCriteria.keyword}" />
 							
 							<div>
+							<div class="form-group">
+							<label for="status">이슈 상태&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+							<input type="radio"
+								id="status"
+								name="status" value="GO" >&nbsp;&nbsp;진행중&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="radio"
+								id="status"
+								name="status" value="BUG" >&nbsp;&nbsp;버그 수정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="radio"
+								id="status"
+								name="status" value="END" >&nbsp;&nbsp;진행 완료
+							</div>
+							
 								<div class="form-group">
 									<label for="title">제목</label> <input type="text"
 										class="form-control" id="title" name="title"

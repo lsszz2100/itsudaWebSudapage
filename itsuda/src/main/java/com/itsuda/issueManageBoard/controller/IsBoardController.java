@@ -203,7 +203,8 @@ public class IsBoardController extends UriMap {
 																		, HttpSession session
 																		, MultipartHttpServletRequest request
 																		, @RequestParam("files") MultipartFile[] files
-																		, @RequestParam("proSeq") int proSeq) throws Exception{
+																		, @RequestParam("proSeq") int proSeq
+																		, @RequestParam("status") String status) throws Exception{
 		
 		log.info("start Board modifyAction");
 		description = description.replace("\r\n", "<br>"); // 줄바꿈 처리
@@ -211,7 +212,9 @@ public class IsBoardController extends UriMap {
 		BoardVO.setSeq(Integer.parseInt(seq));
 		BoardVO.setTitle(title);
 		BoardVO.setDescription(description);
+		BoardVO.setStatus(status);
 		dao.updateBoard(BoardVO);
+		dao.updateStatus(BoardVO);
 		
 		IsBoardVO vo = dao.detailBoard(Integer.parseInt(seq));
 		dao.updateViewCnt(Integer.parseInt(seq));

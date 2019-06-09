@@ -107,4 +107,9 @@ public class IsBoardDAOImpl implements IsBoardDAO{
 	public void fileDeleteAll(int seq) throws Exception {
 		sql.update(namespace+".fileDeleteAll", seq);
 	}
+	//게시글 상태 수정
+	@Override
+	public void updateStatus(IsBoardVO BoardVO) throws Exception {
+		sql.update(namespace+".updateStatus", BoardVO);
+	}
 }

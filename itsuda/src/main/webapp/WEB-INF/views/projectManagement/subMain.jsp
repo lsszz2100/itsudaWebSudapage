@@ -70,7 +70,7 @@
 
 			<div class="container-fluid">
 
-				<!-- Breadcrumbs-->
+				<!-- 프로젝트 이름과 아이콘-->
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">
 					<c:if test="${iconVO != null}">
@@ -116,9 +116,20 @@
 								cellspacing="0">
 								<thead>
 									<tr>
-										<th>issue tracker</th>
+										<td><strong>글제목</strong></td>
+										<td><strong>개수</strong></td>
 									</tr>
 								</thead>
+								<c:forEach var="commentList" varStatus="i" items="${commentList }">
+								<c:if test="${!empty commentList }">
+								<tbody>
+									<tr>
+										<td>${commentList.commentTitle }</td>
+										<td>${commentList.commentCnt }</td>
+									</tr>
+								</tbody>
+								</c:if>
+								</c:forEach>
 							</table>
 						</div>
 					</div>

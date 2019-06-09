@@ -79,20 +79,14 @@
                                             </div>
                                             </c:forEach>
                                         </div>
-<!--                                         <div class="form-group row"> -->
-<!--                                             <label class="col-lg-10 col-form-label" for="term"><strong>팀원 등록 </strong> -->
-<!--                                             </label> -->
-<!--                                             <div class="col-lg-5"> -->
-<!--                                             	<p style="float:left; margin-top:5px;">시작 날짜</p> -->
-<!--                                                 <input type="text" class="form-control" id="startDt" name="startDt"  -->
-<!--                                                 value="$" autocomplete=off style="float:right; width:80%;"> -->
-<!--                                             </div> -->
-<!--                                             <div class="col-lg-5"> -->
-<!--                                                 <p style="float:left; margin-top:5px;">마감 날짜</p> -->
-<!--                                                 <input type="text" class="form-control" id="endDt" name="endDt"  -->
-<!--                                                 value="" autocomplete=off style="float:right; width:80%;"> -->
-<!--                                             </div> -->
-<!--                                         </div> -->
+                                        <div class="form-group row">
+                                            <label class="col-lg-2 col-form-label" for="teamMember"><strong>팀원 등록 </strong>
+                                            </label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="teamMember" name="teamMember" 
+                                                value="${ TeamMember}" autocomplete=off >
+                                            </div>
+                                        </div>
 										<button type="submit" class="btn btn-success infoModify" style="float: right;">저장하기</button>
 									</form>
                                 </div>

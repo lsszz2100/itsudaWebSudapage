@@ -35,6 +35,12 @@ public class projectManagementDAOImpl implements projectManagementDAO {
 	public List<projectVO> projectList(projectVO projectVO) throws Exception {
 		return sql.selectList(namespace + ".projectList", projectVO);
 	}
+	
+	//프로젝트 정보 가져오기
+	@Override
+	public projectVO projectInfo(projectVO projectVO) throws Exception {
+		return sql.selectOne(namespace + ".projectInfo", projectVO);
+	}
 
 	//프로젝트 등록
 	@Override
@@ -131,5 +137,35 @@ public class projectManagementDAOImpl implements projectManagementDAO {
 	@Override
 	public int createdProjectSeq(projectVO projectVO) throws Exception {
 		return sql.selectOne(namespace + ".createdProjectSeq", projectVO);
+	}
+
+	@Override
+	public int cntGO(projectVO projectVO) throws Exception {
+		return sql.selectOne(namespace + ".cntGO", projectVO);
+	}
+
+	@Override
+	public int cntBUG(projectVO projectVO) throws Exception {
+		return sql.selectOne(namespace + ".cntBUG", projectVO);
+	}
+	
+	@Override
+	public int cntEND(projectVO projectVO) throws Exception {
+		return sql.selectOne(namespace + ".cntEND", projectVO);
+	}
+
+	@Override
+	public List<projectVO> commentList(projectVO projectVO) throws Exception {
+		return sql.selectList(namespace + ".commentList", projectVO);
+	}
+
+	@Override
+	public void insertTeamMember(projectVO projectVO) throws Exception {
+		sql.update(namespace + ".insertTeamMember", projectVO);
+	}
+
+	@Override
+	public projectVO getTeamMember(projectVO projectVO) throws Exception {
+		return sql.selectOne(namespace + ".getTeamMember", projectVO);
 	}
 }
