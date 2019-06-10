@@ -125,7 +125,7 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">
 					<c:if test="${iconVO != null}">
-						<img src="/itsuda/projectIconFile/${iconVO}" width="48">
+						<img src="/projectIconFile/${iconVO}" width="48">
 						</c:if>
 						&nbsp;&nbsp;&nbsp;<strong>${proInfo.proTitle }</strong></li>
 						

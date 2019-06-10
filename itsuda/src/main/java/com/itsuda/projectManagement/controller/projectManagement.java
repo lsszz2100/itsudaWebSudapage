@@ -55,6 +55,7 @@ public class projectManagement extends UriMap {
 		
 		model.addAttribute("commentList", dao.commentList(projectVO));
 		model.addAttribute("TeamMember", dao.getTeamMember(projectVO));
+		model.addAttribute("iconVO",dao.iconFileLoad(projectVO));
 		 
 		return URI_PROJECTMANAGEMENT_MAIN;
 	}
@@ -216,7 +217,7 @@ public class projectManagement extends UriMap {
 		model.addAttribute("proQuarterCnt", dao.proQuarterCnt(projectVO));
 		model.addAttribute("projectTerm", dao.projectTerm(projectVO));
 		model.addAttribute("proSeq", projectVO.getProSeq());
-		model.addAttribute("TeamMember", dao.getTeamMember(projectVO).getTeamMember());
+		model.addAttribute("TeamMember", dao.getTeamMember(projectVO));
 
 		return URI_PROJECTMANAGEMENT_PROJECTMANAGE;
 	}

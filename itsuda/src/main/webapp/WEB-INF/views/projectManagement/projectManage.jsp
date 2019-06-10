@@ -84,7 +84,7 @@
                                             </label>
                                             <div class="col-lg-10">
                                                 <input type="text" class="form-control" id="teamMember" name="teamMember" 
-                                                value="${ TeamMember}" autocomplete=off >
+                                                value="${ TeamMember.teamMember}" autocomplete=off >
                                             </div>
                                         </div>
 										<button type="submit" class="btn btn-success infoModify" style="float: right;">저장하기</button>
